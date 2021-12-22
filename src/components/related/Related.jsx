@@ -1,8 +1,7 @@
-
 import React from "react";
-import { hot } from 'react-hot-loader/root';
 
-class App extends React.Component {
+
+class Related extends React.Component {
   render() {
     const { name } = this.props;
     return (
@@ -15,4 +14,4 @@ class App extends React.Component {
   }
 }
 
-export default hot(App);
+export default Related;
