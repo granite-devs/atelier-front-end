@@ -21,7 +21,7 @@ class App extends React.Component {
   render() {
     const { productId } = this.state;
     return (
-      <div id="app">
+      <div>
         <Overview productId={productId} />
         <Reviews productId={productId} />
         <Questions productId={productId} />
