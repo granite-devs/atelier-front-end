@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 11, // TODO - find out what this should actually be.
+      productId: null
     };
     this.updatedProductId = this.updatedProductId.bind(this);
   }
@@ -21,7 +21,7 @@ class App extends React.Component {
 
   componentDidMount() {
 
-    const config = {
+    const intializationConfig = {
       method: "get",
       url: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333",
       headers: {
@@ -29,7 +29,7 @@ class App extends React.Component {
       },
     };
 
-    axios(config)
+    axios(intializationConfig)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
         this.setState({ productId: response.data.id });
