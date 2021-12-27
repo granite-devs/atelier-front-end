@@ -30,12 +30,11 @@ class App extends React.Component {
     };
 
     axios(intializationConfig)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
+      .then((response) => {
         this.setState({ productId: response.data.id });
       })
 
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   }
