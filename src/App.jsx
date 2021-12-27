@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       productId: null
     };
-    this.updatedProductId = this.updatedProductId.bind(this);
+    this.updateAppProductId = this.updateAppProductId.bind(this);
   }
 
   updateAppProductId(productId) {
