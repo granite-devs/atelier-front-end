@@ -17,9 +17,7 @@ Second rename:
 `src/config.ex.js`
 to
 `src/config.js`
-
-Third change in "src/config.js":
-'your_key' to your authorization token
+and change 'your_key' to your auth token
 
 Then you can get started locally with:
 `npm run start`
