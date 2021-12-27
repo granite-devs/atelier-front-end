@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="wm55HPN1U-g9LiwkY5EH" name="Page-1">
-        <mxGraphModel dx="1011" dy="579" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1222" dy="755" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -56,13 +56,13 @@
                     <mxGeometry x="1080" y="280" width="110" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="16" value="Will be able to change the current product_id" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#2D7600;fillColor=#60a917;fontColor=#ffffff;" parent="1" vertex="1">
-                    <mxGeometry x="1087.5" y="440" width="250" height="20" as="geometry"/>
+                    <mxGeometry x="1100" y="445" width="250" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="17" value="Product_ID&lt;br&gt;questionsList" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="925" y="280" width="110" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="20" value="- On mounting our app should load&amp;nbsp; a relevant product list&lt;br&gt;- Also request current product information&lt;br&gt;- Set state to the retrieved list, and information" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#2D7600;fillColor=#60a917;fontColor=#ffffff;" parent="1" vertex="1">
-                    <mxGeometry x="510" y="110" width="320" height="50" as="geometry"/>
+                    <mxGeometry x="480" y="80" width="320" height="50" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
