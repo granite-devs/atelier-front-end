@@ -1,10 +1,10 @@
-import React from "react";
-import axios from "axios";
-import Overview from "./components/overview/Overview.jsx";
-import Reviews from "./components/reviews/Reviews.jsx";
-import Questions from "./components/questions/Questions.jsx";
-import Related from "./components/related/Related.jsx";
-import API_KEY from "./config.js";
+import React from 'react';
+import axios from 'axios';
+import Overview from './components/overview/Overview.jsx';
+import Reviews from './components/reviews/Reviews.jsx';
+import Questions from './components/questions/Questions.jsx';
+import Related from './components/related/Related.jsx';
+import API_KEY from './config.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,8 +22,8 @@ class App extends React.Component {
   componentDidMount() {
 
     const intializationConfig = {
-      method: "get",
-      url: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333",
+      method: 'get',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products',
       headers: {
         Authorization: API_KEY,
       },
@@ -31,9 +31,8 @@ class App extends React.Component {
 
     axios(intializationConfig)
       .then((response) => {
-        this.setState({ productId: response.data.id });
+        this.setState({ productId: response.data[0].id }); // sets the id of the first prodcut in the list as the init id
       })
-
       .catch((error) => {
         console.log(error);
       });
@@ -43,10 +42,11 @@ class App extends React.Component {
     const { productId } = this.state;
     return (
       <div>
-        <Overview productId={productId} />
-        <Reviews productId={productId} />
-        <Questions productId={productId} />
+        <Overview key={`${productId}-1`} productId={productId} />
+        <Reviews key={`${productId}-2`} productId={productId} />
+        <Questions key={`${productId}-3`} productId={productId} />
         <Related
+          key={`${productId}-4`}
           productId={productId}
           updateAppProductId={this.updateAppProductId}
         />
