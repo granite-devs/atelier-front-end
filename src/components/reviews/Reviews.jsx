@@ -23,7 +23,7 @@ class Reviews extends React.Component {
     this.fetchReviews(1, this.state.reviewsPerLoad);
   }
 
-  fetchReviews(page, count, reviewsList = []) {
+  fetchReviews(page, count, reviewsList = [], callback = null) {
     const { productId } = this.props;
     const { isLoading } = this.state;
     if (productId && !isLoading) {
@@ -47,7 +47,7 @@ class Reviews extends React.Component {
       axios(intializationConfig)
         .then((response) => {
           console.log(response.data);
-          this.setAndFilterReviews(reviewsList, response.data.results);
+          this.setAndFilterReviews(reviewsList, response.data.results, callback);
         })
         .catch((error) => {
           console.log(error);
@@ -55,22 +55,22 @@ class Reviews extends React.Component {
     }
   }
 
-  loadMoreReviews() {
+  loadMoreReviews(callback = null) {
     const { reviewCount, reviewsList, reviewsPerLoad } = this.state;
     const page = (reviewCount + reviewsPerLoad) / reviewsPerLoad;
     console.log(page);
-    this.fetchReviews(page, reviewsPerLoad, reviewsList);
+    this.fetchReviews(page, reviewsPerLoad, reviewsList, callback);
   }
 
   // setFilter ( function `filter` )
   // sets the review filter to the input function, then refreshes the displayed reviews
-  setFilter(filter) {
+  setFilter(filter, callback = null) {
     this.setState({ filter }, () => {
-      this.setAndFilterReviews(this.state.reviewsList);
+      this.setAndFilterReviews(this.state.reviewsList, [], callback);
     });
   }
 
-  setAndFilterReviews(oldReviews, newReviews) {
+  setAndFilterReviews(oldReviews, newReviews, callback = null) {
     const reviewIds = {}; // keep track of IDs already in the list to eliminte duplicates
     const reviewsList = [];
     for (let review of oldReviews) {
@@ -91,7 +91,11 @@ class Reviews extends React.Component {
         filteredReviewsList.push(review);
       }
     }
-    this.setState({ reviewsList, filteredReviewsList, reviewCount, moreToLoad, isLoading: false });
+    this.setState({ reviewsList, filteredReviewsList, reviewCount, moreToLoad, isLoading: false }, () => {
+      if (callback) {
+        callback();
+      }
+    });
   }
 
   render() {
