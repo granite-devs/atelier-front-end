@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import API_KEY from '../../config.js';
 
 
 class RelatedProductsList extends React.Component {
@@ -8,14 +10,15 @@ class RelatedProductsList extends React.Component {
     this.state = {
       relatedIds: []
     }
+
+    this.getRelatedIds = this.getRelatedIds.bind(this);
   }
 
   componentDidMount() {
-    getRelatedIds(this.props.productId)
+    this.getRelatedIds(this.props.productId)
   }
 
   getRelatedIds(productId) {
-
     var relatedIdsRequestConfig = {
       method: 'get',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productId}/related`,
@@ -36,7 +39,7 @@ class RelatedProductsList extends React.Component {
   render() {
     return (
       <div className=''>
-        {relatedIds.map(relatedId => {
+        {this.state.relatedIds.map(relatedId => {
           return <ProductCard />
         })}
       </div>
@@ -44,4 +47,4 @@ class RelatedProductsList extends React.Component {
   }
 }
 
-export default Related;
+export default RelatedProductsList;

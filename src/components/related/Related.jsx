@@ -1,7 +1,6 @@
 import RelatedProductsList from './RelatedProductsList.jsx';
 
-const Related = (props) => {
-  const { productId, updateAppProductId } = this.props;
+const Related = ({ productId, updateAppProductId }) => {
 
   return (
     <div>
