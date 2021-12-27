@@ -1,10 +1,10 @@
-import React from "react";
-import axios from "axios";
-import Overview from "./components/overview/Overview.jsx";
-import Reviews from "./components/reviews/Reviews.jsx";
-import Questions from "./components/questions/Questions.jsx";
-import Related from "./components/related/Related.jsx";
-import API_KEY from "./config.js";
+import React from 'react';
+import axios from 'axios';
+import Overview from './components/overview/Overview.jsx';
+import Reviews from './components/reviews/Reviews.jsx';
+import Questions from './components/questions/Questions.jsx';
+import Related from './components/related/Related.jsx';
+import API_KEY from './config.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,20 +22,18 @@ class App extends React.Component {
   componentDidMount() {
 
     const intializationConfig = {
-      method: "get",
-      url: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333",
+      method: 'get',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products',
       headers: {
         Authorization: API_KEY,
       },
     };
 
     axios(intializationConfig)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        this.setState({ productId: response.data.id });
+      .then((response) => {
+        this.setState({ productId: response.data[0].id }); // sets the id of the first prodcut in the list as the init id
       })
-
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   }
