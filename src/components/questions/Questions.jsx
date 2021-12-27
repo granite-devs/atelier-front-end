@@ -6,7 +6,7 @@ class Questions extends React.Component {
     return (
       <>
         <h1>
-          Hello {name}
+          This man {name}
         </h1>
       </>
     );
