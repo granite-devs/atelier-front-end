@@ -15,7 +15,7 @@ class App extends React.Component {
     this.updatedProductId = this.updatedProductId.bind(this);
   }
 
-  updatedProductId(productId) {
+  updateAppProductId(productId) {
     this.setState({ productId });
   }
 
@@ -49,7 +49,7 @@ class App extends React.Component {
         <Questions productId={productId} />
         <Related
           productId={productId}
-          updatedProductId={this.updatedProductId}
+          updateAppProductId={this.updateAppProductId}
         />
       </div>
     );
