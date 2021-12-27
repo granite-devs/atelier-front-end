@@ -1,17 +1,16 @@
 import React from 'react';
+import RelatedProductsList from './RelatedProductsList.jsx';
 
+const Related = (props) {
+  const { productId, updateAppProductId } = this.props;
 
-class Related extends React.Component {
-  render() {
-    const { name } = this.props;
-    return (
-      <>
-        <h1>
-          Hello {name}
-        </h1>
-      </>
-    );
-  }
+  return (
+    <div>
+      <RelatedProductsList
+        productId={productId}
+        updateAppProductId={updateAppProductId} />
+    </div>
+  );
 }
 
 export default Related;
