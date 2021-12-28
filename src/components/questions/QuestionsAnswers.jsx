@@ -1,5 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar.jsx';
+import axios from 'axios';
+import API_KEY from '../../config.js';
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {
@@ -14,18 +16,20 @@ class QuestionsAnswers extends React.Component {
 
   componentDidMount() {
     const { productId } = this.props;
+
+    //TODO: make an axios request
+
     this.setState({
       productId: productId,
-      questionsList: []
+      questionsList: [],
+      searchTerm: ''
     })
   }
 
   render() {
     return (
       <>
-        <h3>
-          Questions & Answers
-        </h3>
+        <h3>Questions & Answers</h3>
         {/* TO DO: Add Search Bar */}
         <SearchBar />
         {/* TO DO: Add QuestionsList */}

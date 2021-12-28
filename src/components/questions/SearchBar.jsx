@@ -6,7 +6,7 @@ const SearchBar = (props) => {
   return (
     <>
       <label name='question-search'>Need an answer?</label>
-      <input type='text'></input>
+      <input type='text' placeholder='Search here!'></input>
     </>
   )
 }
