@@ -7,21 +7,20 @@ const DefaultView = ({photos}) => {
   useEffect (() => {
     if (photos) {
       setIsShowing(photos);
-      setMainImage(photos[0].url);
     }
   });
+
 
   const handleMainImage = (event) => {
     event.preventDefault();
     let clickedImg = event.target.src;
-    console.log(clickedImg);
     setMainImage(clickedImg);
   };
 
   return (
     <div>
-      {isShowing.map((element) => {
-        return <img onClick = {handleMainImage} width='100px' src={element.url}/>;
+      {isShowing.map((element, idx) => {
+        return <img id = {idx} onClick = {handleMainImage} width='100px' src={element.url}/>;
       })}
     </div>
   );
