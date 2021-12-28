@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 const DefaultView = ({photos}) => {
-  const [ isShowing, setIsShowing] = useState([]);
+  const [ allStyleImages, setallStyleImages] = useState([]);
   const [ mainImage, setMainImage ] = useState(false);
 
   useEffect (() => {
     if (photos) {
-      setIsShowing(photos);
+      setallStyleImages(photos);
     }
   });
 
@@ -23,7 +23,7 @@ const DefaultView = ({photos}) => {
           display: 'flex',
           flexDirection: 'column'
         }}>
-        {isShowing.map((element, idx) => { //render all style photos
+        {allStyleImages.map((element, idx) => { //render all style photos
           return <img
             id = {idx}
             style = {{
@@ -46,8 +46,8 @@ const DefaultView = ({photos}) => {
           cursor: 'zoom-in',
           objectFit: 'cover'
         }}>
-        {(isShowing[0] !== undefined && mainImage === false) ?
-          <img id = 'main' src = {isShowing[0].url}/> :
+        {(allStyleImages[0] !== undefined && mainImage === false) ?
+          <img id = 'main' src = {allStyleImages[0].url}/> :
           <img id = 'main' src = {mainImage}/>
         }
       </div>
