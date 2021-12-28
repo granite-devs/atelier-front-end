@@ -3,18 +3,18 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 configure({ adapter: new Adapter() });
 
 import React from 'react';
-import Overview from '../src/components/overview/Overview';
 import DefaultView from '../src/components/overview/ImageGallery/DefaultView.jsx';
 
 
-describe('DefaultView component get style photos from Overview component', () => {
-  let wrapper;
-
-  beforeEach(() => {
-    wrapper = shallow(<DefaultView/>);
+describe('DefaultView component', () => {
+  it('should render a page successfully', () => {
+    let wrapper = shallow(<DefaultView/>);
+    expect(wrapper.length).toBe(1);
   });
 
-  it('should show photos url', () => {
-    expect(wrapper.state()).toEqual([]]);
+  it('When the user click one images, it should render a main image', () => {
+    let wrapper = shallow(<DefaultView/>);
+    wrapper.find('img').simulate('click');
+    expect(wrapper.find('#main').length).toBe(1);
   });
 });
