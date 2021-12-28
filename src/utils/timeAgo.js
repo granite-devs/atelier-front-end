@@ -16,8 +16,6 @@ const monthNames = [
 const timeAgo = (dateStr) => {
   const date = new Date(dateStr);
   const curDate = new Date();
-  console.log(curDate.getFullYear());
-  console.log(date.getFullYear());
   if (curDate - date < 60000) {
     return `${Math.floor((curDate - date) / 1000)} seconds ago`;
   } else if (curDate - date < 3600000) {
