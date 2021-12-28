@@ -1,29 +1,42 @@
 import React from 'react';
-import SearchBar from './SearchBar.jsx';
-import axios from 'axios';
-import API_KEY from '../../config.js';
-
+import axios from 'axios'
 class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       productId: null,
-      questionsList: []
+      questionsList: [],
+      term: ''
     }
   }
 
   //TODO: add filter search
 
   componentDidMount() {
+
     const { productId } = this.props;
 
-    //TODO: make an axios request
+    let questionConfig = {
+      method: 'get',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions?product_id=${productId}`,
+      headers: {
+        'Authorization': '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'
+      }
+    };
 
-    this.setState({
-      productId: productId,
-      questionsList: [],
-      searchTerm: ''
-    })
+    if (productId) {
+      axios(questionConfig)
+        .then((res) => {
+          this.setState({
+            productId: productId,
+            questionsList: res.data.results,
+            term: ''
+          })
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+    }
   }
 
   render() {
