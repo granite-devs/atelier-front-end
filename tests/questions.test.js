@@ -20,6 +20,7 @@ test.todo('should have an add questions button')
 test.todo('Should have an input with placeholder text');
 test.todo('Should filter questions list')
 test.todo('Should filter results after three characters')
+test.todo('filterQuestionsList should filter by the input search term')
 
 //questionsListComp
 test.todo('should have an add answer button')

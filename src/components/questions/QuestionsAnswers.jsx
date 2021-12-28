@@ -16,6 +16,14 @@ class QuestionsAnswers extends React.Component {
 
   filterQuestionsList(term) {
     console.log('This was typed ', term)
+    let filteredResults = this.state.questionsList.filter((question)=> {
+      const questionBody = question.question_body.toLowerCase();
+      const search = term.toLowerCase();
+      if (questionBody.includes(search)) {
+        return question.isVisible
+      }
+    })
+    console.log(filteredResults)
   }
 
   componentDidMount() {
@@ -33,12 +41,24 @@ class QuestionsAnswers extends React.Component {
     if (productId) {
       axios(questionConfig)
         .then((res) => {
+          //set all but two to visible
+          const MappedQuestions = res.data.results.map((question, idx) => {
+            if (idx < 3) {
+              question.isVisible = true;
+              return question;
+            } else {
+              question.isVisible = false;
+              return question;
+            }
+          })
+
           this.setState({
             productId: productId,
-            questionsList: res.data.results,
+            questionsList: MappedQuestions,
             term: ''
           })
         })
+
         .catch((error) => {
           console.error(error);
         })
@@ -50,7 +70,7 @@ class QuestionsAnswers extends React.Component {
       <>
         <h3>Questions & Answers</h3>
         {/* TO DO: Add Search Bar */}
-        <SearchBar filterQuestions={this.filterQuestionsList}/>
+        <SearchBar filterQuestionsList={this.filterQuestionsList}/>
         {/* TO DO: Add QuestionsList */}
         {/* TO DO: Load More Questions/Add Querstios */}
         <button type="button"> MORE ANSWERED QUESTIONS </button>
