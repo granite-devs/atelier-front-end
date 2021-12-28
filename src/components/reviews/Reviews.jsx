@@ -41,12 +41,9 @@ class Reviews extends React.Component {
         }
       };
 
-      console.log(intializationConfig);
-
       this.setState({ isLoading: true });
       axios(intializationConfig)
         .then((response) => {
-          console.log(response.data);
           this.setAndFilterReviews(reviewsList, response.data.results, callback);
         })
         .catch((error) => {
@@ -58,7 +55,6 @@ class Reviews extends React.Component {
   loadMoreReviews(callback = null) {
     const { reviewCount, reviewsList, reviewsPerLoad } = this.state;
     const page = (reviewCount + reviewsPerLoad) / reviewsPerLoad;
-    console.log(page);
     this.fetchReviews(page, reviewsPerLoad, reviewsList, callback);
   }
 
@@ -93,7 +89,6 @@ class Reviews extends React.Component {
     }
     this.setState({ reviewsList, filteredReviewsList, reviewCount, moreToLoad, isLoading: false }, () => {
       if (callback) {
-        console.log(callback);
         callback();
       }
     });
