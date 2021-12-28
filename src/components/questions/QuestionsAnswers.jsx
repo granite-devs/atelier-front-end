@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios'
+import SearchBar from './SearchBar.jsx'
+
 class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props)
@@ -8,12 +10,12 @@ class QuestionsAnswers extends React.Component {
       questionsList: [],
       term: ''
     }
-    this.filterQuestions = filterQuestions.bind(this);
+    this.filterQuestionsList = this.filterQuestionsList.bind(this);
   }
 
-  //TODO: add filter search
-  filterQuestions(term) {
 
+  filterQuestionsList(term) {
+    console.log('This was typed ', term)
   }
 
   componentDidMount() {
@@ -48,7 +50,7 @@ class QuestionsAnswers extends React.Component {
       <>
         <h3>Questions & Answers</h3>
         {/* TO DO: Add Search Bar */}
-        <SearchBar filterQuestions={filterQuestions}/>
+        <SearchBar filterQuestions={this.filterQuestionsList}/>
         {/* TO DO: Add QuestionsList */}
         {/* TO DO: Load More Questions/Add Querstios */}
         <button type="button"> MORE ANSWERED QUESTIONS </button>
