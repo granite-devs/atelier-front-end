@@ -42,10 +42,11 @@ class App extends React.Component {
     const { productId } = this.state;
     return (
       <div>
-        <Overview productId={productId} />
-        <Reviews productId={productId} />
-        <Questions productId={productId} />
+        <Overview key={`${productId}-1`} productId={productId} />
+        <Reviews key={`${productId}-2`} productId={productId} />
+        <Questions key={`${productId}-3`} productId={productId} />
         <Related
+          key={`${productId}-4`}
           productId={productId}
           updateAppProductId={this.updateAppProductId}
         />
