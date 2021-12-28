@@ -93,6 +93,7 @@ class Reviews extends React.Component {
     }
     this.setState({ reviewsList, filteredReviewsList, reviewCount, moreToLoad, isLoading: false }, () => {
       if (callback) {
+        console.log(callback);
         callback();
       }
     });

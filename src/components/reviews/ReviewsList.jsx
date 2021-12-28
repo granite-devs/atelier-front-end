@@ -22,7 +22,7 @@ class ReviewsList extends React.Component {
             ))}
           </ul>
         </div>
-        {loadMoreReviews ? <button onClick={loadMoreReviews}>More Reviews</button> : null}
+        {loadMoreReviews ? <button onClick={() => loadMoreReviews()}>More Reviews</button> : null}
       </>
     );
   }
