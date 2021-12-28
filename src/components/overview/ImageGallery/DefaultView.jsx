@@ -1,46 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-class DefaultView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      photos: [],
-      mainImage: []
-    };
+const DefaultView = ({photos}) => {
+  const [ isShowing, setIsShowing] = useState([]);
+  const [ mainImage, setMainImage ] = useState([]);
 
-  }
-
-  componentDidMount () {
-    if (this.props.photos !== undefined) {
-      this.setState({
-        photos: this.props.photos,
-        mainImage: this.props.photos[0]
-      });
+  useEffect (() => {
+    if (photos) {
+      setIsShowing(photos);
+      setMainImage(photos[0].url);
     }
-  }
+  });
 
-  // useEffect (() => {
-  //   if (photos) {
-  //     setIsShowing(photos);
-  //     setMainImage(photos[0].url);
-  //   }
-  // });
+  const handleMainImage = (event) => {
+    event.preventDefault();
+    let clickedImg = event.target.src;
+    console.log(clickedImg);
+    setMainImage(clickedImg);
+  };
 
-  // const handleMainImage = (event) => {
-  //   event.preventDefault();
-  //   let clickedImg = event.target.src;
-  //   console.log(clickedImg);
-  //   setMainImage(clickedImg);
-  // };
-
-  render () {
-    return (
-      <div>
-        hello
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      {isShowing.map((element) => {
+        return <img onClick = {handleMainImage} width='100px' src={element.url}/>;
+      })}
+    </div>
+  );
+};
 
 
 export default DefaultView;

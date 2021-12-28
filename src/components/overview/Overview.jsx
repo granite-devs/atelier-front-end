@@ -1,54 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import App from '../../App.jsx';
 import axios from 'axios';
 import API_KEY from '../../config.js';
 import ImageGallery from './ImageGallery/ImageGallery-index.jsx';
 
-class Overview extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedProductIdInfo: [],
-      selectedStyle: []
-    };
+const Overview = ({productId}) => {
+  const [ selectedProductId, updateProductId ] = useState(productId);
+  const [ allStyleItems, updateStyle ] = useState([]);
+  const [ selectedStyle, updateSelectedStyle ] = useState([]);
 
-    this.handleToLoadProductDetail = this.handleToLoadProductDetail.bind(this);
-  }
+  const apiInstance = axios.create({
+    baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/',
+    headers: { Authorization: API_KEY },
+  });
 
-  componentDidMount() {
-    this.handleToLoadProductDetail();
-  }
-
-  handleToLoadProductDetail () {
-    let apiInstance = axios.create({
-      baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/',
-      headers: { Authorization: API_KEY },
-    });
-
-    if (this.props.productId) {
-      const getAllProductData = () => apiInstance.get(`${this.props.productId}/styles`);
+  useEffect (() => {
+    if (selectedProductId) {
+      const getAllProductData = () => apiInstance.get(`${selectedProductId}/styles`);
       getAllProductData()
         .then((result) => {
           let styleResult = result.data.results;
-          this.setState({
-            selectedProductIdInfo: styleResult,
-            selectedStyle: styleResult[0] //default is the first style
-          });
+          updateStyle(styleResult);
+          updateSelectedStyle(styleResult[0]);
         })
         .catch ((err) => {
           console.log(err);
         });
     }
-  }
+  }, []);
 
-  render() {
-    return (
-      <div>
-        <ImageGallery selectedStyle={this.state.selectedStyle}/>
-      </div>
-    );
-  }
-}
+  return (
+    <>
+      <ImageGallery selectedStyle={selectedStyle}/>
+    </>
+  );
+
+};
 
 
 export default Overview;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import DefaultView from './DefaultView.jsx';
 
 const ImageGallery = ({selectedStyle}) => {
