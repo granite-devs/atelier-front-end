@@ -33,7 +33,7 @@ test('`loadMoreReviews` should load a pre-determined number of reviews and add t
 });
 
 // ReviewsList.jsx
-test('test', () => {
+test('should attempt to load more reviews when the \'More Reviews\' button is clicked', () => {
   const loadMoreReviews = jest.fn();
   const component = shallow(
     <ReviewsList reviews={[]} loadMoreReviews={loadMoreReviews}/>
