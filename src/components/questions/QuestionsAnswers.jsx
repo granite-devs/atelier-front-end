@@ -8,11 +8,16 @@ class QuestionsAnswers extends React.Component {
     super(props)
     this.state = {
       productId: null,
-      questionsList: []
+      questionsList: [],
+      searchTerm: ''
     }
+    this.filterQuestions = filterQuestions.bind(this);
   }
 
   //TODO: add filter search
+  filterQuestions(term) {
+
+  }
 
   componentDidMount() {
     const { productId } = this.props;
@@ -31,7 +36,7 @@ class QuestionsAnswers extends React.Component {
       <>
         <h3>Questions & Answers</h3>
         {/* TO DO: Add Search Bar */}
-        <SearchBar />
+        <SearchBar filterQuestions={filterQuestions}/>
         {/* TO DO: Add QuestionsList */}
         {/* TO DO: Load More Questions/Add Querstios */}
         <button type="button"> MORE ANSWERED QUESTIONS </button>
