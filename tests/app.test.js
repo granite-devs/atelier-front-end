@@ -25,8 +25,5 @@ test('`productId` of the App component should be equal to the first ID loaded fr
     .then((response) => {
       let expectedId = response.data[0].id;
       expect(component.state('productId')).toEqual(expectedId);
-    })
-    .catch((error) => {
-      console.log(error);
     });
 });

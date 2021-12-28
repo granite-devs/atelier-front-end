@@ -4,3 +4,8 @@ h1 {
   color: $primary-color;
   background-color: $bg;
 }
+
+.reviewsList {
+  max-height: 300px;
+  overflow-y: auto;
+}
