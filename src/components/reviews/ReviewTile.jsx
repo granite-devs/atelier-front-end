@@ -5,9 +5,6 @@ import API_KEY from '../../config.js';
 class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
   }
 
   render() {
