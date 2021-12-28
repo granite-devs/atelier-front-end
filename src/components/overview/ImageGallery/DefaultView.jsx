@@ -11,16 +11,29 @@ const DefaultView = ({photos}) => {
   });
 
 
-  const handleMainImage = (event) => {
+  const updateMainImage = (event) => {
     event.preventDefault();
     let clickedImg = event.target.src;
     setMainImage(clickedImg);
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
       {isShowing.map((element, idx) => {
-        return <img id = {idx} onClick = {handleMainImage} width='100px' src={element.url}/>;
+        return <img
+          id = {idx}
+          style = {{
+            width: '9vh',
+            height: '9vh',
+            cursor: 'pointer',
+            objectFit: 'cover'
+          }}
+          onClick = {updateMainImage}
+          src={element.url}/>;
       })}
     </div>
   );
