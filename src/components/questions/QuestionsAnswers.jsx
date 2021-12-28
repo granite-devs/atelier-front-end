@@ -22,6 +22,8 @@ class QuestionsAnswers extends React.Component {
         {/* TO DO: Add Search Bar */}
         {/* TO DO: Add QuestionsList */}
         {/* TO DO: Load More Questions/Add Querstios */}
+        <button type="button"> MORE ANSWERED QUESTIONS </button>
+        <button type="button"> ADD A QUESTION + </button>
       </>
     );
   }
