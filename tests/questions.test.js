@@ -21,7 +21,7 @@ test('Renders a class QuestionsAnswers component', () => {
 test('Should have a search bar', ()=> {
   expect(questionAnswersComponent.find(SearchBar)).toBeDefined();
 });
-
+//TODO
 test.todo('Should have questions list component');
 
 test('should have an load more questions button', () => {
