@@ -5,12 +5,6 @@ import QuestionsAnswers from '../src/components/questions/QuestionsAnswers.jsx';
 
 // Parent componentnt
 
-test('Renders questions and answers with an h3 header', () => {
-  const questionsAnswersComp = renderer.create(<QuestionsAnswers />);
-  const questionTree = questionsAnswersComp.toJSON()
-  expect(questionTree).toMatchSnapshot()
-})
-
 test.todo('Should have a search bar');
 test.todo('Should have questions list component');
 test.todo('Should have a link to load more questions')
