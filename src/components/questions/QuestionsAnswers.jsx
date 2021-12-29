@@ -1,11 +1,7 @@
 import React from 'react';
-<<<<<<< HEAD
-import axios from 'axios'
-import SearchBar from './SearchBar.jsx'
-=======
 import axios from 'axios';
+import SearchBar from './SearchBar.jsx';
 import API_KEY from '../../config';
->>>>>>> b05094aa2f0ddfc6f5261838ba05826f14ec3be2
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {
