@@ -11,7 +11,8 @@ const Overview = ({productId}) => {
     productStyleById: {},
     selectedStyle: {},
     styleImages: [],
-    mainImage: 0
+    mainImage: 0,
+    expanded: false
   });
 
   const apiInstance = axios.create({
@@ -27,7 +28,7 @@ const Overview = ({productId}) => {
           let styleResult = result.data.results;
           updateState((preValues) => {
             return {
-              preValues,
+              ...preValues,
               productStyleById: styleResult,
               selectedStyle: styleResult[0],
               styleImages: styleResult[0].photos
