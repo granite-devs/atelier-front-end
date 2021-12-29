@@ -14,8 +14,8 @@ class QuestionsAnswers extends React.Component {
 
 
   filterQuestionsList(term) {
-    if (term.length >= 3) {
-      let filteredResults = this.state.questionsList.filter((question) => {
+    if (term.length > 2) {
+      const filteredQuestionsList = this.state.questionsList.filter((question) => {
         const questionBody = question.question_body.toLowerCase();
         const search = term.toLowerCase();
         if (questionBody.includes(search)) {
@@ -26,6 +26,7 @@ class QuestionsAnswers extends React.Component {
           return question;
         }
       })
+      this.setState(filteredQuestionsList)
     }
   }
 
@@ -42,7 +43,6 @@ class QuestionsAnswers extends React.Component {
     if (productId) {
       axios(questionConfig)
         .then((res) => {
-          //set all but two to visible
           const MappedQuestions = res.data.results.map((question, idx) => {
             if (idx < 3) {
               question.isVisible = true;
