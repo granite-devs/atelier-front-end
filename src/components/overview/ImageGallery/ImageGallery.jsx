@@ -7,19 +7,19 @@ const ImageGallery = ({state, updateState}) => {
   const handleToExpand = () => {
     let mainImageElement = document.getElementById('main');
 
-    if (!state.expanded) {
+    if (!state.isExpanded) {
       mainImageElement.style.width = '75rem';
       mainImageElement.style.cursor = 'zoom-out';
 
       updateState((preValues) => {
-        return {...preValues, expanded: true};
+        return {...preValues, isExpanded: true};
       });
     } else {
       mainImageElement.style.width = '75vh';
       mainImageElement.style.cursor = 'zoom-in';
 
       updateState((preValues) => {
-        return {...preValues, expanded: false};
+        return {...preValues, isExpanded: false};
       });
     }
   };

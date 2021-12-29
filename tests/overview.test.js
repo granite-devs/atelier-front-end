@@ -5,7 +5,6 @@ configure({ adapter: new Adapter() });
 import React from 'react';
 import DefaultView from '../src/components/overview/ImageGallery/DefaultView.jsx';
 
-
 describe('DefaultView component', () => {
   it('should render a page successfully', () => {
     let wrapper = shallow(<DefaultView/>);

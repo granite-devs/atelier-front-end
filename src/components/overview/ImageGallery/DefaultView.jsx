@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const DefaultView =
-({state, updateState, handleToExpand, handleRightArrow, handleLeftArrow}) => {
+  ({state, updateState, handleToExpand, handleRightArrow, handleLeftArrow}) => {
 
   const updateMainImage = (event) => {
     event.preventDefault();
@@ -23,6 +23,7 @@ const DefaultView =
               cursor: 'pointer'
             }}
             id = {idx}
+            key = {idx}
             onClick = {updateMainImage}
             src={element.url}/>;
         })}

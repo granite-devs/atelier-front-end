@@ -13,7 +13,7 @@ const Overview = ({productId}) => {
     styleImages: [],
     mainImage: 0,
     currentImgIndex: 0,
-    expanded: false
+    isExpanded: false
   });
 
   const apiInstance = axios.create({
