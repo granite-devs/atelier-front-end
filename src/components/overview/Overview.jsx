@@ -27,12 +27,12 @@ const Overview = ({productId}) => {
           let styleResult = result.data.results;
           updateState((preValues) => {
             return {
-              ...preValues,
+              preValues,
               productStyleById: styleResult,
               selectedStyle: styleResult[0],
               styleImages: styleResult[0].photos
-            }
-          })
+            };
+          });
         })
         .catch ((err) => {
           console.log(err);

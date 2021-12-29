@@ -25,6 +25,21 @@ h1 {
 #main {
   cursor: zoom-in;
 }
+
+.btnFloating {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 28%;
+  cursor: pointer;
+  border: white 1px dotted;
+}
+
+#right {
+  display: 'flex';
+  align-items: 'end';
+  margin-left: -22px;
+}
 // Overview
 
 .reviewTile {

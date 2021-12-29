@@ -9,6 +9,11 @@ const DefaultView = ({state, updateState}) => {
     setMainImage(clickedImg);
   };
 
+  const handleToExpand = () => {
+    let mainImageElement = document.getElementById('main');
+    mainImageElement.style.width = '75rem';
+  };
+
   return (
     <div className='defaultView'>
       <div className='styleImages'>
@@ -25,10 +30,12 @@ const DefaultView = ({state, updateState}) => {
         })}
       </div>
       <div className='mainImage'>
+        <img className='btnFloating' id='left' src ="https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png"></img>
         {(state.styleImages[0] !== undefined && mainImage === '') ?
-          <img id = 'main' src = {state.styleImages[0].url} style = {{width: '75vh', height: '54vh'}}/> :
-          <img id = 'main' src = {mainImage} style = {{width: '75vh', height: '54vh'}}/>
+          <img id = 'main' onClick = {handleToExpand} src = {state.styleImages[0].url} style = {{width: '75vh', height: '54vh'}}/> :
+          <img id = 'main' onClick = {handleToExpand} src = {mainImage} style = {{width: '75vh', height: '54vh'}}/>
         }
+        <img className='btnFloating' id='right' src ="https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png"></img>
       </div>
     </div>
   );
