@@ -1,6 +1,6 @@
 import React from 'react';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { configure, shallow, render } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import QuestionsAnswers from '../src/components/questions/QuestionsAnswers.jsx';
 import SearchBar from '../src/components/questions/QuestionsAnswers.jsx';
 
@@ -8,37 +8,52 @@ configure({ adapter: new Adapter() });
 
 const productId = 39333;
 
-const questionAnswersComponent = shallow(<QuestionsAnswers key={`${productId}-3`} productId={productId} />);
-const questionAnswersInstance = questionAnswersComponent.instance();
-const searchBarComponent = shallow(<SearchBar filterQuestionsList={QuestionAnswers.filterQuestionsList} />);
-const searchBarInstance = searchBarComponent.instance();
+const questionsAnswersShallow = shallow(<QuestionsAnswers key={`${productId}-3`} productId={productId} />);
+const questionsAnswersInstance = questionsAnswersShallow.instance();
+
+const searchBarShallow = shallow(<SearchBar filterQuestionsList={QuestionsAnswers.filterQuestionsList} />);
+const searchBarInstance = searchBarShallow.instance();
+
+const initialState = {
+  "questionsList": [
+    "{answers: {…}, asker_name: \"cleopatra\", isVisible: …}",
+    "{answers: {…}, asker_name: \"jbilas\", isVisible: tru…}",
+    "{answers: {…}, asker_name: \"funnygirl\", isVisible: …}",
+    "{answers: {…}, asker_name: \"yankeelover\", isVisible…}"
+  ]
+}
 
 // Parent component
-test('Renders a class QuestionsAnswers component', () => {
-  expect(questionAnswersInstance).toBeInstanceOf(QuestionsAnswers);
+test('questionAnswersComponent is a class of QuestionsAnswers', () => {
+  expect(questionsAnswersInstance).toBeInstanceOf(QuestionsAnswers);
 })
 
-test('Should have a search bar', ()=> {
-  expect(questionAnswersComponent.find(SearchBar)).toBeDefined();
+// test('QuestionAnsers should have a matching initial state to our data ', () => {
+
+// })
+
+test('QuestionAnswers should have a search bar', ()=> {
+  expect(questionsAnswersShallow.contains(<SearchBar />)).toBe(true);
 });
 //TODO
 test.todo('Should have questions list component');
 
 test('should have an load more questions button', () => {
-  expect(questionAnswersComponent.find('#load-question-button').exists()).toBe(true)
+  expect(questionsAnswersShallow.find('#load-question-button').exists()).toBe(true);
 })
 
 test('should have an add a questions button', () => {
-  expect(questionAnswersComponent.find('#add-question-button').exists()).toBe(true)
+  expect(questionsAnswersShallow.find('#add-question-button').exists()).toBe(true);
 })
 
-test.todo('Should have a link to load more questions')
-
 //search bar
-test.todo('Should have an input with placeholder text');
+test('Should have an input with placeholder text', () => {
+  expect(searchBarShallow.find('#search-input').exists()).toBe(true);
+});
+
 test.todo('Should filter questions list')
 test.todo('Should filter results after three characters')
 test.todo('filterQuestionsList should filter by the input search term')
 
-//questionsListComp
+//questionsListCompg
 test.todo('should have an add answer button')

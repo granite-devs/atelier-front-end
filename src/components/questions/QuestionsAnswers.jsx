@@ -1,10 +1,15 @@
 import React from 'react';
+<<<<<<< HEAD
 import axios from 'axios'
 import SearchBar from './SearchBar.jsx'
+=======
+import axios from 'axios';
+import API_KEY from '../../config';
+>>>>>>> b05094aa2f0ddfc6f5261838ba05826f14ec3be2
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       questionsList: [],
     }
@@ -32,7 +37,7 @@ class QuestionsAnswers extends React.Component {
       method: 'get',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions?product_id=${productId}`,
       headers: {
-        'Authorization': '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'
+        Authorization: API_KEY
       }
     };
 
@@ -57,7 +62,7 @@ class QuestionsAnswers extends React.Component {
 
         .catch((error) => {
           console.error(error);
-        })
+        });
     }
   }
 
@@ -72,7 +77,7 @@ class QuestionsAnswers extends React.Component {
         <button id="load-question-button" type="button"> MORE ANSWERED QUESTIONS </button>
         <button id="add-question-button" type="button"> ADD A QUESTION + </button>
       </>
-    )
+    );
   }
 }
 
