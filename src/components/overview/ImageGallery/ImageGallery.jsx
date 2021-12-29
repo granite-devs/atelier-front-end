@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import DefaultView from './DefaultView.jsx';
 
-const ImageGallery = ({selectedStyle}) => {
-
+const ImageGallery = ({state, updateState}) => {
   return (
     <>
-      <DefaultView photos={selectedStyle.photos}/>
+      <DefaultView state={state} updateState={updateState}/>
     </>
   );
 

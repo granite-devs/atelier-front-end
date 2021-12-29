@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const DefaultView = ({photos}) => {
-  const [ allStyleImages, setallStyleImages] = useState([]);
+const DefaultView = ({state, updateState}) => {
   const [ mainImage, setMainImage ] = useState(false);
-
-  useEffect (() => {
-    if (photos) {
-      setallStyleImages(photos);
-    }
-  });
 
   const updateMainImage = (event) => {
     event.preventDefault();
@@ -23,7 +16,7 @@ const DefaultView = ({photos}) => {
           display: 'flex',
           flexDirection: 'column'
         }}>
-        {allStyleImages.map((element, idx) => { //render all style photos
+        {state.styleImages.map((element, idx) => { //render all style photos
           return <img
             id = {idx}
             style = {{
@@ -46,8 +39,8 @@ const DefaultView = ({photos}) => {
           cursor: 'zoom-in',
           objectFit: 'cover'
         }}>
-        {(allStyleImages[0] !== undefined && mainImage === false) ?
-          <img id = 'main' src = {allStyleImages[0].url}/> :
+        {(state.styleImages[0] !== undefined && mainImage === false) ?
+          <img id = 'main' src = {state.styleImages[0].url}/> :
           <img id = 'main' src = {mainImage}/>
         }
       </div>
