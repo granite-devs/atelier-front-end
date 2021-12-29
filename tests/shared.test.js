@@ -24,7 +24,6 @@ describe('Star component', () => {
       <Star fraction={1} />
     );
     expect(component.containsMatchingElement(<stop offset='100%'></stop>)).toBe(true);
-    // expect(component.find('Star')).toHaveLength(5);
   });
 
   test('a Star with with a rating fraction close to 0.75 should fill 75% of the star', () => {
@@ -32,7 +31,6 @@ describe('Star component', () => {
       <Star fraction={0.75} />
     );
     expect(component.containsMatchingElement(<stop offset='75%'></stop>)).toBe(true);
-    // expect(component.find('Star')).toHaveLength(5);
   });
 
   test('a Star with with a rating fraction close to 0.5 should fill 50% of the star', () => {
@@ -40,7 +38,6 @@ describe('Star component', () => {
       <Star fraction={0.5} />
     );
     expect(component.containsMatchingElement(<stop offset='50%'></stop>)).toBe(true);
-    // expect(component.find('Star')).toHaveLength(5);
   });
 
   test('a Star with with a rating fraction close to 0.25 should fill 25% of the star', () => {
@@ -48,7 +45,6 @@ describe('Star component', () => {
       <Star fraction={0.25} />
     );
     expect(component.containsMatchingElement(<stop offset='25%'></stop>)).toBe(true);
-    // expect(component.find('Star')).toHaveLength(5);
   });
 
   test('a Star with with a rating fraction close to 0 should fill 0% of the star', () => {
@@ -56,6 +52,5 @@ describe('Star component', () => {
       <Star fraction={0} />
     );
     expect(component.containsMatchingElement(<stop offset='0%'></stop>)).toBe(true);
-    // expect(component.find('Star')).toHaveLength(5);
   });
 });
