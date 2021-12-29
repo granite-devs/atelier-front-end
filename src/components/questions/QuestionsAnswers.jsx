@@ -14,17 +14,19 @@ class QuestionsAnswers extends React.Component {
 
 
   filterQuestionsList(term) {
-    let filteredResults = this.state.questionsList.filter((question)=> {
-      const questionBody = question.question_body.toLowerCase();
-      const search = term.toLowerCase();
-      if (questionBody.includes(search)) {
-        question.isVisible = true;
-        return question;
-      } else {
-        question.isVisible =false;
-        return question;
-      }
-    })
+    if (term.length >= 3) {
+      let filteredResults = this.state.questionsList.filter((question) => {
+        const questionBody = question.question_body.toLowerCase();
+        const search = term.toLowerCase();
+        if (questionBody.includes(search)) {
+          question.isVisible = true;
+          return question;
+        } else {
+          question.isVisible = false;
+          return question;
+        }
+      })
+    }
   }
 
   componentDidMount() {
@@ -67,7 +69,7 @@ class QuestionsAnswers extends React.Component {
     return (
       <>
         <h3>Questions & Answers</h3>
-        <SearchBar filterQuestionsList={this.filterQuestionsList}/>
+        <SearchBar filterQuestionsList={this.filterQuestionsList} />
         {/* TO DO: Add QuestionsList */}
         {/* TO DO: Load More Questions/Add Querstios */}
         <button id="load-question-button" type="button"> MORE ANSWERED QUESTIONS </button>

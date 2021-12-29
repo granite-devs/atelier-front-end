@@ -17,30 +17,43 @@ const searchBarInstance = searchBarShallow.instance();
 
 
 
-// Parent component
+// QuestionAnswers component
 test('questionsAnswersInstance is a class of QuestionsAnswers', () => {
   expect(questionsAnswersInstance).toBeInstanceOf(QuestionsAnswers);
 })
 
 test('questionAnswers setState should match our initial state ', () => {
   questionsAnswersShallow.setState(initialState)
-  expect(questionsAnswersShallow.state()).toEqual(initialState)
+  expect(questionsAnswersShallow.state()).toEqual(initialState);
 })
 
 test('questionsAnswersShallow should have a search bar', () => {
   expect(questionsAnswersShallow.exists('SearchBar')).toBe(true);
 });
 
-test('questionAnswersInstance.filterQuestions should add isVisible property', () => {
-  questionsAnswersShallow.filterQuestionsList = questionsAnswersInstance.filterQuestionsList;
-  questionsAnswersShallow.filterQuestionsList('how')
+test('questionsAnswersShallow\'s state should each have isVisible property', () => {
   const doesEveryQuestionHaveIsVisible = questionsAnswersShallow.state('questionsList').every((question) => {
-    return (question.isVisible !== undefined) ? true : false
+    return (question.isVisible !== undefined) ? true : false;
   })
   expect(doesEveryQuestionHaveIsVisible).toBe(true);
+})
+
+//Filter questions method
+test('filterQuestionsList should not change isVisible if less than two characters are typed', () => {
+  questionsAnswersShallow.filterQuestionsList = questionsAnswersInstance.filterQuestionsList;
+  questionsAnswersShallow.filterQuestionsList('ho');
+  expect(questionsAnswersShallow.state()).toMatchObject(initialState);
 });
 
-test.todo('Should filter results after three characters');
+test('filterQuestionsList should set only one question to visible with search term "How"', () => {
+  let howManyAreVisible = [];
+  questionsAnswersShallow.filterQuestionsList = questionsAnswersInstance.filterQuestionsList;
+  questionsAnswersShallow.filterQuestionsList('how');
+  questionsAnswersShallow.state('questionsList').forEach((question) => {
+    return (question.isVisible === true) ? howManyAreVisible.push(question) : undefined;
+  })
+  expect(howManyAreVisible.length).toBe(1);
+});
 
 
 //TODO

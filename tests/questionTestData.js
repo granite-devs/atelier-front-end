@@ -48,7 +48,8 @@ const initialState = {
           "helpfulness": 4,
           "photos": []
         }
-      }
+      },
+      "isVisible": true
     },
     {
       "question_id": 319493,
@@ -57,7 +58,8 @@ const initialState = {
       "asker_name": "jbilas",
       "question_helpfulness": 8,
       "reported": false,
-      "answers": {}
+      "answers": {},
+      "isVisible": true
     },
     {
       "question_id": 319494,
@@ -86,7 +88,9 @@ const initialState = {
           "helpfulness": 8,
           "photos": []
         }
-      }
+      },
+      "isVisible": false
+
     },
     {
       "question_id": 319491,
@@ -140,7 +144,8 @@ const initialState = {
           "helpfulness": 3,
           "photos": []
         }
-      }
+      },
+      "isVisible": false
     }
   ]
 }
