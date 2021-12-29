@@ -4,7 +4,6 @@ class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      productId: null,
       questionsList: [],
       term: ''
     }
@@ -28,7 +27,6 @@ class QuestionsAnswers extends React.Component {
       axios(questionConfig)
         .then((res) => {
           this.setState({
-            productId: productId,
             questionsList: res.data.results,
             term: ''
           })
@@ -38,6 +36,7 @@ class QuestionsAnswers extends React.Component {
         })
     }
   }
+
 
   render() {
     return (
@@ -50,7 +49,7 @@ class QuestionsAnswers extends React.Component {
         <button type="button"> MORE ANSWERED QUESTIONS </button>
         <button type="button"> ADD A QUESTION + </button>
       </>
-    );
+    )
   }
 }
 
