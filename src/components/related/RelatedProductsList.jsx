@@ -41,7 +41,10 @@ class RelatedProductsList extends React.Component {
     return (
       <div className='related-list'>
         {this.state.relatedIds.map((relatedId, i) => {
-          return <ProductCard key={i} productCardId={relatedId} />
+          return <ProductCard
+            key={i}
+            productCardId={relatedId}
+            updateAppProductId={this.props.updateAppProductId} />
         })}
       </div>
     );
