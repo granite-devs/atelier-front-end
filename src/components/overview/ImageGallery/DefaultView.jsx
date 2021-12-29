@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const DefaultView = ({state, updateState}) => {
+const DefaultView = ({state, updateState, handleToExpand}) => {
   const [ mainImage, setMainImage ] = useState('');
 
   const updateMainImage = (event) => {
     event.preventDefault();
     let clickedImg = event.target.src;
     setMainImage(clickedImg);
-  };
-
-  const handleToExpand = () => {
-    let mainImageElement = document.getElementById('main');
-    mainImageElement.style.width = '75rem';
   };
 
   return (
