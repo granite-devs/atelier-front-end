@@ -1,11 +1,45 @@
 $primary-color: white;
 $bg: black;
+$link-btn-color: rgb(27, 149, 197);
+
 h1 {
   color: $primary-color;
   background-color: $bg;
 }
 
 .reviewsList {
-  max-height: 300px;
+  max-height: 450px;
   overflow-y: auto;
+}
+
+.reviewTile {
+  margin: 16px 10px;
+  padding: 10px 12px;
+  width: 50%;
+  min-width: 580px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: whitesmoke;
+
+  .name-date {
+    font-size: 14px;
+    color: gray;
+    float: right;
+  }
+
+  h3 {
+    margin: 2px 0px;
+    font-size: 19px;
+  }
+
+  p {
+    word-wrap: break-word;
+  }
+
+  .showMoreBtn {
+    font-size: 15px;
+    color: $link-btn-color;
+    text-decoration: underline;
+  }
+
 }
