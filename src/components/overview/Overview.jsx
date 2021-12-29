@@ -12,6 +12,7 @@ const Overview = ({productId}) => {
     selectedStyle: {},
     styleImages: [],
     mainImage: 0,
+    currentImgIndex: 0,
     expanded: false
   });
 
@@ -31,7 +32,8 @@ const Overview = ({productId}) => {
               ...preValues,
               productStyleById: styleResult,
               selectedStyle: styleResult[0],
-              styleImages: styleResult[0].photos
+              styleImages: styleResult[0].photos,
+              mainImage: styleResult[0].photos[0].url
             };
           });
         })
