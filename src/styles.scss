@@ -12,6 +12,36 @@ h1 {
   overflow-y: auto;
 }
 
+// Overview
+.styleImages {
+  display: flex;
+  flex-direction: column;
+}
+
+.defaultView {
+  display: flex;
+}
+
+#main {
+  cursor: zoom-in;
+}
+
+.btnFloating {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 28%;
+  cursor: pointer;
+  border: white 1px dotted;
+}
+
+#right {
+  display: 'flex';
+  align-items: 'end';
+  margin-left: -22px;
+}
+// Overview
+
 .reviewTile {
   margin: 16px 10px;
   padding: 10px 12px;
@@ -41,5 +71,4 @@ h1 {
     color: $link-btn-color;
     text-decoration: underline;
   }
-
 }
