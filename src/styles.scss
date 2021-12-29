@@ -9,3 +9,16 @@ h1 {
   max-height: 300px;
   overflow-y: auto;
 }
+
+.styleImages {
+  display: flex;
+  flex-direction: column;
+}
+
+.defaultView {
+  display: flex;
+}
+
+#main {
+  cursor: zoom-in;
+}

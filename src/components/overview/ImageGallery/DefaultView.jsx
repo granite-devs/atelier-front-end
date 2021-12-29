@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const DefaultView = ({state, updateState}) => {
-  const [ mainImage, setMainImage ] = useState(false);
+  const [ mainImage, setMainImage ] = useState('');
 
   const updateMainImage = (event) => {
     event.preventDefault();
@@ -10,38 +10,24 @@ const DefaultView = ({state, updateState}) => {
   };
 
   return (
-    <div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column'
-        }}>
+    <div className='defaultView'>
+      <div className='styleImages'>
         {state.styleImages.map((element, idx) => { //render all style photos
           return <img
-            id = {idx}
             style = {{
               width: '9vh',
               height: '9vh',
-              cursor: 'pointer',
-              justifyContent: 'space-around'
+              cursor: 'pointer'
             }}
+            id = {idx}
             onClick = {updateMainImage}
             src={element.url}/>;
         })}
       </div>
-      <div //render the main style photo (default: the first style photo)
-        style={{
-          display: 'flex',
-          backgroundPosition: 'center',
-          backgroundSize: 'contain',
-          width: '100vh',
-          height: '90vh',
-          cursor: 'zoom-in',
-          objectFit: 'cover'
-        }}>
-        {(state.styleImages[0] !== undefined && mainImage === false) ?
-          <img id = 'main' src = {state.styleImages[0].url}/> :
-          <img id = 'main' src = {mainImage}/>
+      <div className='mainImage'>
+        {(state.styleImages[0] !== undefined && mainImage === '') ?
+          <img id = 'main' src = {state.styleImages[0].url} style = {{width: '75vh', height: '54vh'}}/> :
+          <img id = 'main' src = {mainImage} style = {{width: '75vh', height: '54vh'}}/>
         }
       </div>
     </div>
