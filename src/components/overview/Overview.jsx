@@ -14,9 +14,6 @@ const Overview = ({productId}) => {
     mainImage: 0
   });
 
-  // const [ allStyleItems, updateStyle ] = useState([]);
-  // const [ selectedStyle, updateSelectedStyle ] = useState([]);
-
   const apiInstance = axios.create({
     baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/',
     headers: { Authorization: API_KEY },
@@ -36,8 +33,6 @@ const Overview = ({productId}) => {
               styleImages: styleResult[0].photos
             }
           })
-          // updateStyle(styleResult);
-          // updateSelectedStyle(styleResult[0]);
         })
         .catch ((err) => {
           console.log(err);
