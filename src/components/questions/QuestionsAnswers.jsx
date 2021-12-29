@@ -7,28 +7,27 @@ class QuestionsAnswers extends React.Component {
     super(props)
     this.state = {
       questionsList: [],
-      term: ''
     }
     this.filterQuestionsList = this.filterQuestionsList.bind(this);
   }
 
 
   filterQuestionsList(term) {
-    console.log('This was typed ', term)
     let filteredResults = this.state.questionsList.filter((question)=> {
       const questionBody = question.question_body.toLowerCase();
       const search = term.toLowerCase();
       if (questionBody.includes(search)) {
-        return question.isVisible
+        question.isVisible = true;
+        return question;
+      } else {
+        question.isVisible =false;
+        return question;
       }
     })
-    console.log(filteredResults)
   }
 
   componentDidMount() {
-
     const { productId } = this.props;
-
     let questionConfig = {
       method: 'get',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions?product_id=${productId}`,
@@ -52,8 +51,7 @@ class QuestionsAnswers extends React.Component {
           })
 
           this.setState({
-            questionsList: res.data.results,
-            term: ''
+            questionsList: res.data.results
           })
         })
 
@@ -68,7 +66,6 @@ class QuestionsAnswers extends React.Component {
     return (
       <>
         <h3>Questions & Answers</h3>
-        {/* TO DO: Add Search Bar */}
         <SearchBar filterQuestionsList={this.filterQuestionsList}/>
         {/* TO DO: Add QuestionsList */}
         {/* TO DO: Load More Questions/Add Querstios */}
