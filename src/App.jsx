@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Overview from './components/overview/Overview.jsx';
 import Reviews from './components/reviews/Reviews.jsx';
-import Questions from './components/questions/Questions.jsx';
+import QuestionsAnswers from './components/questions/QuestionsAnswers.jsx';
 import Related from './components/related/Related.jsx';
 import API_KEY from './config.js';
 
@@ -44,7 +44,7 @@ class App extends React.Component {
       <div>
         <Overview key={`${productId}-1`} productId={productId} />
         <Reviews key={`${productId}-2`} productId={productId} />
-        <Questions key={`${productId}-3`} productId={productId} />
+        <QuestionsAnswers key={`${productId}-3`} productId={productId} />
         <Related
           key={`${productId}-4`}
           productId={productId}
