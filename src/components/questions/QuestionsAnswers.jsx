@@ -7,7 +7,6 @@ class QuestionsAnswers extends React.Component {
     super(props);
     this.state = {
       questionsList: [],
-      term: ''
     };
   }
 
@@ -30,7 +29,6 @@ class QuestionsAnswers extends React.Component {
         .then((res) => {
           this.setState({
             questionsList: res.data.results,
-            term: ''
           });
         })
         .catch((error) => {
