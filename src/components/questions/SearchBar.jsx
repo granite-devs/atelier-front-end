@@ -3,7 +3,7 @@ import React from 'react';
 const SearchBar = (props) => {
 
   return (
-    <>
+    <div id="search-bar-component">
       <label name='question-search'></label>
       <input
         id="search-input"
@@ -14,7 +14,7 @@ const SearchBar = (props) => {
           props.filterQuestionsList(searchTerm)
         }}
       ></input>
-    </>
+    </div>
   )
 }
 

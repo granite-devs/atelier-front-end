@@ -1,20 +1,38 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { configure, shallow, render } from 'enzyme';
 import QuestionsAnswers from '../src/components/questions/QuestionsAnswers.jsx';
+import SearchBar from '../src/components/questions/QuestionsAnswers.jsx';
 
+configure({ adapter: new Adapter() });
 
-// Parent componentnt
+const productId = 39333;
 
-test('Renders questions and answers with an h3 header', () => {
-  const questionsAnswersComp = renderer.create(<QuestionsAnswers />);
-  const questionTree = questionsAnswersComp.toJSON()
-  expect(questionTree).toMatchSnapshot()
+const questionAnswersComponent = shallow(<QuestionsAnswers key={`${productId}-3`} productId={productId} />);
+const questionAnswersInstance = questionAnswersComponent.instance();
+const searchBarComponent = shallow(<SearchBar filterQuestionsList={QuestionAnswers.filterQuestionsList} />);
+const searchBarInstance = searchBarComponent.instance();
+
+// Parent component
+test('Renders a class QuestionsAnswers component', () => {
+  expect(questionAnswersInstance).toBeInstanceOf(QuestionsAnswers);
 })
 
-test.todo('Should have a search bar');
+test('Should have a search bar', ()=> {
+  expect(questionAnswersComponent.find(SearchBar)).toBeDefined();
+});
+
 test.todo('Should have questions list component');
+
+test('should have an load more questions button', () => {
+  expect(questionAnswersComponent.find('#load-question-button').exists()).toBe(true)
+})
+
+test('should have an add a questions button', () => {
+  expect(questionAnswersComponent.find('#add-question-button').exists()).toBe(true)
+})
+
 test.todo('Should have a link to load more questions')
-test.todo('should have an add questions button')
 
 //search bar
 test.todo('Should have an input with placeholder text');

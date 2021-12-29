@@ -69,8 +69,8 @@ class QuestionsAnswers extends React.Component {
         <SearchBar filterQuestionsList={this.filterQuestionsList}/>
         {/* TO DO: Add QuestionsList */}
         {/* TO DO: Load More Questions/Add Querstios */}
-        <button type="button"> MORE ANSWERED QUESTIONS </button>
-        <button type="button"> ADD A QUESTION + </button>
+        <button id="load-question-button" type="button"> MORE ANSWERED QUESTIONS </button>
+        <button id="add-question-button" type="button"> ADD A QUESTION + </button>
       </>
     )
   }
