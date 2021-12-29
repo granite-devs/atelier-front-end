@@ -54,7 +54,6 @@ describe('Question and answers component', () => {
     expect(howManyAreVisible.length).toBe(1);
   });
 
-
   //TODO
   test.todo('Should have questions list component');
 

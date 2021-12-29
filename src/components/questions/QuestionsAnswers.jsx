@@ -13,6 +13,7 @@ class QuestionsAnswers extends React.Component {
   }
 
 
+  //TODO: add filter search
   filterQuestionsList(term) {
     if (term.length > 2) {
       const filteredQuestionsList = this.state.questionsList.filter((question) => {
