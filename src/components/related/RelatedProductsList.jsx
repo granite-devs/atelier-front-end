@@ -20,6 +20,8 @@ class RelatedProductsList extends React.Component {
   }
 
   fetchRelatedIds(productIdToGet = 39333) {
+    if (productIdToGet === null) productIdToGet = 39333;
+
       const relatedIdsRequestConfig = {
         method: 'get',
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/related`,
@@ -27,12 +29,12 @@ class RelatedProductsList extends React.Component {
       };
 
       axios(relatedIdsRequestConfig)
-      .then((response) => {
-        this.setState({relatedIds: response.data});
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then((response) => {
+          this.setState({relatedIds: response.data});
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   }
 
   render() {
