@@ -9,6 +9,7 @@ const DefaultView = ({state, updateState, handleToExpand, handleRightArrow, hand
     updateState((preValues) => {
       return {...preValues, mainImage: clickedImg};
     });
+    console.log(state.styleImages);
   };
 
   return (
