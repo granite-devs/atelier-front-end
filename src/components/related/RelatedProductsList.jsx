@@ -12,15 +12,15 @@ class RelatedProductsList extends React.Component {
       relatedIds: []
     }
 
-    this.getRelatedIds = this.getRelatedIds.bind(this);
+    this.fetchRelatedIds = this.fetchRelatedIds.bind(this);
   }
 
   componentDidMount() {
-    this.getRelatedIds(this.props.productId);
+    this.fetchRelatedIds(this.props.productId);
   }
 
-  getRelatedIds(productIdToGet) {
-      var relatedIdsRequestConfig = {
+  fetchRelatedIds(productIdToGet = 39333) {
+      const relatedIdsRequestConfig = {
         method: 'get',
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/related`,
         headers: {Authorization: API_KEY}
@@ -37,7 +37,7 @@ class RelatedProductsList extends React.Component {
 
   render() {
     return (
-      <div className=''>
+      <div className='related-list'>
         {this.state.relatedIds.map((relatedId, i) => {
           return <ProductCard key={i} productCardId={relatedId} />
         })}
