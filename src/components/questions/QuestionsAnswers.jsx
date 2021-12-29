@@ -45,7 +45,7 @@ class QuestionsAnswers extends React.Component {
       axios(questionConfig)
         .then((res) => {
           const MappedQuestions = res.data.results.map((question, idx) => {
-            if (idx < 3) {
+            if (idx < 2) {
               question.isVisible = true;
               return question;
             } else {
