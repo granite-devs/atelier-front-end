@@ -67,7 +67,7 @@ const ImageGallery = ({state, updateState}) => {
     }
   }
 
-  //expandedView function -- onMouseMove//
+  //expandedView function -- mousemove//
   const handleToExpand = (event) => {
     const mainImageWrapElement = document.getElementById('wrap');
     const mainImageElement = document.getElementById('main');
