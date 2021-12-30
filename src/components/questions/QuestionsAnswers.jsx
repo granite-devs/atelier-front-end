@@ -80,6 +80,7 @@ class QuestionsAnswers extends React.Component {
   }
 
   componentDidMount() {
+
     const { productId } = this.props;
     let questionConfig = {
       method: 'get',
