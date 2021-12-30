@@ -7,7 +7,14 @@ import App from '../src/App';
 import RelatedProductsList from '../src/components/Related/RelatedProductsList';
 import ProductCard from '../src/components/Related/ProductCard';
 
-describe("Product Cards", () => {
+
+describe("Product Card", () => {
+
+  it('is a stateful component', () => {
+    const productCard = shallow(<ProductCard />);
+    const productCardState = productCard.state();
+    expect(productCardState).not.toBeNull();
+  });
 
   it('should have an onClick method', () => {
     const productCard = shallow(<ProductCard productCardId={1} />);
@@ -26,9 +33,77 @@ describe("Product Cards", () => {
     expect(updateAppProductId).toHaveBeenCalled();
   });
 
+  describe('Product Card Info', () => {
+    let productCard, productCardState, cardName, cardCategory, cardPrice, cardSale;
+
+    beforeEach(() => {
+      productCard = shallow(<ProductCard />);
+      productCardState = productCard.state();
+    })
+
+    it('has a card name element with class `.card-name`', () => { //name
+      cardName = productCard.find('.card-name');
+      expect(cardName).toHaveLength(1);
+    });
+
+    it('displays the name of the card in the .card-name div', () => {
+      cardName = productCard.find('.card-name');
+      expect(cardName.text()).toEqual(productCardState.name);
+    });
+
+    it('has a card category element with class `.card-category`', () => { //category
+      cardCategory = productCard.find('.card-category');
+      expect(cardCategory).toHaveLength(1);
+    });
+
+    it('displays the category of the card in the `.card-category` div', () => {
+      cardCategory = productCard.find('.card-category');
+      expect(cardCategory.text()).toEqual(productCardState.category);
+    });
+
+    it('has a card price element with class `.card-price`', () => { //price
+      cardPrice = productCard.find('.card-price');
+      expect(cardPrice).toHaveLength(1);
+    });
+
+    it('displays the price of the card in the `.card-price` div', () => {
+      cardPrice = productCard.find('.card-price');
+      expect(cardPrice.text()).toEqual('$' + productCardState.price);
+    });
+
+    it('has a card sale element with class `.card-sale`', () => { //sale
+      cardSale = productCard.find('.card-sale');
+      expect(cardSale).toHaveLength(1);
+    });
+
+    it('displays the sale of the card in the `.card-sale` div', () => {
+      cardSale = productCard.find('.card-sale');
+      expect(cardSale.text()).toEqual(productCardState.salePrice);
+    });
+  })
+
+  describe('Product Card Rating', () => {
+    let productCard, productCardState, cardRating, starRating;
+
+    beforeEach(() => {
+      productCard = shallow(<ProductCard />);
+      productCardState = productCard.state();
+      starRating = productCard.find('StarRating');
+    })
+
+    it('renders a StarRating component with class `.card-rating`', () => {
+      expect(starRating).toHaveLength(1);
+      expect(starRating.find('.card-rating')).toHaveLength(1);
+    });
+
+    it('should pass the product rating from state as a prop to the StarRating component', () => {
+      expect(starRating.prop('rating')).toEqual(productCardState.rating);
+    });
+  })
+
 });
 
-describe("Related Products List", () => {
+xdescribe("Related Products List", () => {
   let RelatedProductsList, relatedProductsListState, wrapperInstance;
 
   beforeEach(() => {
