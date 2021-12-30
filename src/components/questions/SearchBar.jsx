@@ -2,8 +2,8 @@ import React from 'react';
 
 const SearchBar = (props) => {
   return (
-    <div id="search-bar-component">
-      <label name='question-search'></label>
+    <div id="search-bar-container">
+      <label name='question-search'>QUESTION & ANSWERS</label>
       <input
         id="search-input"
         type='text'

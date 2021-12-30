@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import SearchBar from './SearchBar.jsx';
+import QuestionsList from './QuestionsList.jsx'
 import API_KEY from '../../config';
 
 class QuestionsAnswers extends React.Component {
@@ -15,19 +16,21 @@ class QuestionsAnswers extends React.Component {
 
   //TODO: add filter search
   filterQuestionsList(term) {
-    if (term.length > 2) {
-      const filteredQuestionsList = this.state.questionsList.filter((question) => {
-        const questionBody = question.question_body.toLowerCase();
-        const search = term.toLowerCase();
-        if (questionBody.includes(search)) {
-          question.isVisible = true;
-          return question;
-        } else {
-          question.isVisible = false;
-          return question;
-        }
-      })
-      this.setState(filteredQuestionsList)
+
+    const filteredList = this.state.questionsList.filter((question) => {
+      const questionBody = question.question_body.toLowerCase();
+      const search = term.toLowerCase();
+      if (questionBody.includes(search)) {
+        question.isVisible = true;
+        return question;
+      } else {
+        question.isVisible = false;
+        return question;
+      }
+    })
+
+    if (term.length >= 3) {
+      this.setState({ questionsList: filteredList})
     }
   }
 
@@ -55,7 +58,7 @@ class QuestionsAnswers extends React.Component {
           })
 
           this.setState({
-            questionsList: res.data.results
+            questionsList: MappedQuestions
           })
         })
 
@@ -68,14 +71,16 @@ class QuestionsAnswers extends React.Component {
 
   render() {
     return (
-      <>
-        <h3>Questions & Answers</h3>
+      <div className="question-answers-container">
         <SearchBar filterQuestionsList={this.filterQuestionsList} />
         {/* TO DO: Add QuestionsList */}
+        <QuestionsList questions={this.state.questionsList} />
         {/* TO DO: Load More Questions/Add Querstios */}
-        <button id="load-question-button" type="button"> MORE ANSWERED QUESTIONS </button>
-        <button id="add-question-button" type="button"> ADD A QUESTION + </button>
-      </>
+        <div className="button-container">
+          <button id="load-question-button" type="button"> MORE QUESTIONS </button>
+          <button id="add-question-button" type="button"> ADD QUESTION </button>
+        </div>
+      </div>
     );
   }
 }
