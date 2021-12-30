@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import SearchBar from './SearchBar.jsx';
 import API_KEY from '../../config';
 
 class QuestionsAnswers extends React.Component {
@@ -7,14 +8,31 @@ class QuestionsAnswers extends React.Component {
     super(props);
     this.state = {
       questionsList: [],
-      term: ''
-    };
+    }
+    this.filterQuestionsList = this.filterQuestionsList.bind(this);
+  }
+
+
+  //TODO: add filter search
+  filterQuestionsList(term) {
+    if (term.length > 2) {
+      const filteredQuestionsList = this.state.questionsList.filter((question) => {
+        const questionBody = question.question_body.toLowerCase();
+        const search = term.toLowerCase();
+        if (questionBody.includes(search)) {
+          question.isVisible = true;
+          return question;
+        } else {
+          question.isVisible = false;
+          return question;
+        }
+      })
+      this.setState(filteredQuestionsList)
+    }
   }
 
   componentDidMount() {
-
     const { productId } = this.props;
-
     let questionConfig = {
       method: 'get',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions?product_id=${productId}`,
@@ -26,11 +44,21 @@ class QuestionsAnswers extends React.Component {
     if (productId) {
       axios(questionConfig)
         .then((res) => {
+          const MappedQuestions = res.data.results.map((question, idx) => {
+            if (idx < 2) {
+              question.isVisible = true;
+              return question;
+            } else {
+              question.isVisible = false;
+              return question;
+            }
+          })
+
           this.setState({
-            questionsList: res.data.results,
-            term: ''
-          });
+            questionsList: res.data.results
+          })
         })
+
         .catch((error) => {
           console.error(error);
         });
@@ -41,14 +69,12 @@ class QuestionsAnswers extends React.Component {
   render() {
     return (
       <>
-        <h3>
-          Questions & Answers
-        </h3>
-        {/* TO DO: Add Search Bar */}
+        <h3>Questions & Answers</h3>
+        <SearchBar filterQuestionsList={this.filterQuestionsList} />
         {/* TO DO: Add QuestionsList */}
         {/* TO DO: Load More Questions/Add Querstios */}
-        <button type="button"> MORE ANSWERED QUESTIONS </button>
-        <button type="button"> ADD A QUESTION + </button>
+        <button id="load-question-button" type="button"> MORE ANSWERED QUESTIONS </button>
+        <button id="add-question-button" type="button"> ADD A QUESTION + </button>
       </>
     );
   }
