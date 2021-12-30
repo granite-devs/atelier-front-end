@@ -4,7 +4,7 @@ const AnswerList = ({ answers }) => {
 
   return (
     <>
-      <strong>A: Scaffolding</strong>
+      <span><strong>A:</strong> Scaffolding</span>
     </>
   )
 }

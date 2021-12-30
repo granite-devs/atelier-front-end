@@ -1,13 +1,16 @@
 import React from 'react';
 import Question from './Question.jsx';
 
-const QuestionsList = ({ questions }) => {
+const QuestionsList = (props) => {
 
-  const filteredQuestions = questions.filter((question) => question.isVisible)
+  const filteredQuestions = props.questions.filter((question) => question.isVisible)
 
   return filteredQuestions.map((question) => {
     return (
-      <Question key={question.question_id} question={question} />
+      <Question
+      key={question.question_id}
+      question={question}
+      handleYesClick={props.handleYesClick}/>
     )
   })
 };
