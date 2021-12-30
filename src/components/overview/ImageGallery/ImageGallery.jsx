@@ -3,14 +3,14 @@ import DefaultView from './DefaultView.jsx';
 
 const ImageGallery = ({state, updateState}) => {
   const [ currentStylePhotos, updateStylePhotos ] = useState([]);
-  const [ clickedImage, updateClickedImage ] = useState(0);
+  const [ clickedImageIndex, updateClickedImageIndex ] = useState(0);
 
   //update main image//
   const updateMainImage = (event) => {
     event.preventDefault();
-    let clickedImg = event.target.src;
-    let currentImgIndex = currentStylePhotos.indexOf(clickedImg);
-    updateClickedImage(currentImgIndex);
+    const clickedImg = event.target.src;
+    const currentImgIndex = currentStylePhotos.indexOf(clickedImg);
+    updateClickedImageIndex(currentImgIndex);
 
     updateState((preValues) => {
       return {...preValues, mainImage: clickedImg};
@@ -18,10 +18,10 @@ const ImageGallery = ({state, updateState}) => {
   };
 
   useEffect(() => {
-    helperForArrow();
+    updateCurrentStylePhotosUrl();
 
     //differenciate selected main image//
-    let currentImageElement = document.getElementById(clickedImage);
+    const currentImageElement = document.getElementById(clickedImageIndex);
     if (currentImageElement !== null) {
       for (let i = 0; i < state.styleImages.length; i++) {
         document.getElementById(i).style.borderStyle = 'none';
@@ -35,7 +35,7 @@ const ImageGallery = ({state, updateState}) => {
   }, [state])
 
   //arrow click function//
-  const helperForArrow = () => {
+  const updateCurrentStylePhotosUrl = () => {
     let urlOnlyArray = [];
     for (let i = 0; i < state.styleImages.length; i++) {
       urlOnlyArray.push(state.styleImages[i].url);
@@ -51,7 +51,7 @@ const ImageGallery = ({state, updateState}) => {
       updateState((preValues) => {
         return {...preValues, mainImage: state.selectedStyle.photos[currentImgIndex + 1].url};
       });
-      updateClickedImage(currentImgIndex + 1);
+      updateClickedImageIndex(currentImgIndex + 1);
     }
   }
 
@@ -63,7 +63,7 @@ const ImageGallery = ({state, updateState}) => {
       updateState((preValues) => {
         return {...preValues, mainImage: state.selectedStyle.photos[currentImgIndex - 1].url};
       });
-      updateClickedImage(currentImgIndex - 1);
+      updateClickedImageIndex(currentImgIndex - 1);
     }
   }
 
@@ -81,7 +81,7 @@ const ImageGallery = ({state, updateState}) => {
       X = X / mWidth * 100;
       Y = Y / mHeight * 100;
 
-      mainImageElement.style.transform = 'translate(-'+X+'%, -'+Y+'%) scale(1.6)';
+      mainImageElement.style.transform = 'translate(-'+X+'%, -'+Y+'%) scale(2.0)';
     })
 
     mainImageWrapElement.addEventListener('mouseleave', () => {
@@ -97,7 +97,7 @@ const ImageGallery = ({state, updateState}) => {
         handleToExpand={handleToExpand}
         handleRightArrow={handleRightArrow}
         handleLeftArrow={handleLeftArrow}
-        helperForArrow={helperForArrow}
+        updateCurrentStylePhotosUrl={updateCurrentStylePhotosUrl}
         updateMainImage={updateMainImage}
       />
     </>

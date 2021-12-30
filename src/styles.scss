@@ -13,14 +13,26 @@ h1 {
 }
 
 // Overview Top //
+.defaultView {
+  display: flex;
+  background-color: rgba(245, 245, 245, 0.137);
+  width: 60%;
+  height: 28rem;
+  background-color: rgba(253, 247, 247, 0.541);
+  padding-top: 1.6rem;
+  border-right: transparent;
+  border-right: 4px solid rgba(238, 236, 236, 0.459);
+  border-bottom: 4px solid rgba(238, 236, 236, 0.459);
+}
+
 .styleImages {
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-left: 10px;
+  margin-left: 1rem;
   max-height: 54vh;
   overflow-y: scroll;
-  width: 100px;
+  width: 10rem;
 }
 
 .eachStyleImage {
@@ -37,23 +49,20 @@ h1 {
   opacity: 0.4;
 }
 
-.defaultView {
-  display: flex;
-  background-color: rgba(245, 245, 245, 0.137);
-  width: 60%;
-}
-
 #mainImage {
-  width: 80vh;
-  height: 60vh;
+  width: 65rem;
+  height: 27rem;
+  margin-left: 5rem;
 }
 
 #wrap {
   position: relative;
-  top: 0;
-  left: 0;
+  display: flex;
+  justify-content: center;
+  margin-left: 10vh;
+  margin-right: 10vh;
   width: 50vh;
-  height: 54vh;
+  height: 60vh;
   overflow: hidden;
 }
 
@@ -61,18 +70,17 @@ h1 {
   position: absolute;
   cursor: zoom-in;
   max-width: 100%;
-  min-height: 50%;
-  margin-left: 80px;
+  min-height: 100%;
+  width: 50vh;
+  height: 60vh;
 }
 
 .btnFloating {
+  position: absolute;
   width: 20px;
   height: 20px;
-  top: 28%;
+  top: 35%;
   cursor: pointer;
-  border: 1px solid black;
-  border-radius: 2px;
-
 }
 
 .btnFloating:hover {
@@ -83,13 +91,13 @@ h1 {
 #right {
   display: 'flex';
   align-items: 'end';
-  margin-left: 355px;
+  margin-left: 27rem;
 }
 
 #left {
   display: 'flex';
   align-items: 'end';
-  margin-left: 55px;
+  margin-left: 2.4rem;
 }
 
 // Overview bottom //
