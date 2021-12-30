@@ -81,7 +81,6 @@ const ImageGallery = ({state, updateState}) => {
       X = X / mWidth * 100;
       Y = Y / mHeight * 100;
 
-      console.log(X,Y)
       mainImageElement.style.transform = 'translate(-'+X+'%, -'+Y+'%) scale(1.6)';
     })
 

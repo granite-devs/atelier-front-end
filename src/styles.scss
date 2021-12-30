@@ -43,6 +43,11 @@ h1 {
   width: 60%;
 }
 
+#mainImage {
+  width: 80vh;
+  height: 60vh;
+}
+
 #wrap {
   position: relative;
   top: 0;
@@ -56,16 +61,18 @@ h1 {
   position: absolute;
   cursor: zoom-in;
   max-width: 100%;
-  min-height: 100%;
+  min-height: 50%;
   margin-left: 80px;
 }
 
 .btnFloating {
-  position: absolute;
   width: 20px;
   height: 20px;
   top: 28%;
   cursor: pointer;
+  border: 1px solid black;
+  border-radius: 2px;
+
 }
 
 .btnFloating:hover {
