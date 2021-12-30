@@ -8,11 +8,18 @@ import ProductInformation from './ProductInformation/ProductInformation.jsx';
 const Overview = ({productId}) => {
   const [ selectedProductId, updateProductId ] = useState(productId);
   const [ state, updateState ] = useState({
-    productDetailById: {},
-    productStyleById: {},
+    selectedProductDetail: {},
+    selectedProductStyle: {},
+    selectedProductCategory: '',
+    selectedProductDefaultPrice: '',
+    selectedProductDesc: '',
+    selectedProductName: '',
+    selectedProductSlogan: '',
+    selectedProductStyle: {},
+    selectedProductDefaultStyle: {},
     selectedStyle: {},
-    styleImages: [],
-    mainImage: 0,
+    selectedStyleDefaultImages: [],
+    mainImage: '',
     currentImgIndex: 0,
     isExpanded: false
   });
@@ -24,17 +31,38 @@ const Overview = ({productId}) => {
 
   useEffect (() => {
     if (selectedProductId) {
-      const getAllProductData = () => apiInstance.get(`${selectedProductId}/styles`);
-      getAllProductData()
+      //fetch styleDetail
+      const getStyleData = () => apiInstance.get(`${selectedProductId}/styles`);
+      getStyleData()
         .then((result) => {
           let styleResult = result.data.results;
           updateState((preValues) => {
             return {
               ...preValues,
-              productStyleById: styleResult,
-              selectedStyle: styleResult[0],
-              styleImages: styleResult[0].photos,
+              selectedProductStyle: styleResult,
+              selectedProductDefaultStyle: styleResult[0],
+              selectedStyleDefaultImages: styleResult[0].photos,
               mainImage: styleResult[0].photos[0].url
+            };
+          });
+        })
+        .catch ((err) => {
+          console.log(err);
+        });
+
+        //fetch productDetail
+      const getAllProductData = () => apiInstance.get(`${selectedProductId}`);
+      getAllProductData()
+        .then((result) => {
+          updateState((preValues) => {
+            return {
+              ...preValues,
+              selectedProductDetail: result.data,
+              selectedProductCategory: result.data.category,
+              selectedProductDefaultPrice: `$${result.data.default_price}`,
+              selectedProductDesc: result.data.description,
+              selectedProductName: result.data.name,
+              selectedProductSlogan: result.data.slogan
             };
           });
         })
@@ -47,7 +75,7 @@ const Overview = ({productId}) => {
   return (
     <>
       <ImageGallery state={state} updateState={updateState}/>
-      <ProductInformation/>
+      <ProductInformation state={state} updateState={updateState}/>
     </>
   );
 

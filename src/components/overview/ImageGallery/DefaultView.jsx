@@ -7,7 +7,7 @@ const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handl
       {(state !== undefined) && (
         <div className='defaultView'>
           <div className='styleImages'>
-            {state.styleImages.map((element, idx) => { //render all style photos
+            {state.selectedStyleDefaultImages.map((element, idx) => { //render all style photos
               return <img
                 id={idx}
                 key={idx}
@@ -18,9 +18,9 @@ const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handl
           </div>
           <div className='mainImage' id='mainImage'>
             <img onClick={handleLeftArrow} className='btnFloating' id='left' src ='https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png'></img>
-            {(state.styleImages[0] !== undefined && state.mainImage === '') ?
+            {(state.selectedStyleDefaultImages[0] !== undefined && state.mainImage === '') ?
               <div id='wrap'>
-                <img id ='main' src ={state.styleImages[0].url}/>
+                <img id ='main' src ={state.selectedStyleDefaultImages[0].url}/>
               </div> :
               <div onClick={handleToExpand} id='wrap'>
                 <img id ='main' src ={state.mainImage}/>

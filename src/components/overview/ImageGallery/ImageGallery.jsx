@@ -23,7 +23,7 @@ const ImageGallery = ({state, updateState}) => {
     //differenciate selected main image//
     const currentImageElement = document.getElementById(clickedImageIndex);
     if (currentImageElement !== null) {
-      for (let i = 0; i < state.styleImages.length; i++) {
+      for (let i = 0; i < state.selectedStyleDefaultImages.length; i++) {
         document.getElementById(i).style.borderStyle = 'none';
         document.getElementById(i).style.opacity = '1';
       }
@@ -37,8 +37,8 @@ const ImageGallery = ({state, updateState}) => {
   //arrow click function//
   const updateCurrentStylePhotosUrl = () => {
     let urlOnlyArray = [];
-    for (let i = 0; i < state.styleImages.length; i++) {
-      urlOnlyArray.push(state.styleImages[i].url);
+    for (let i = 0; i < state.selectedStyleDefaultImages.length; i++) {
+      urlOnlyArray.push(state.selectedStyleDefaultImages[i].url);
     }
     updateStylePhotos(urlOnlyArray);
   }
@@ -47,9 +47,9 @@ const ImageGallery = ({state, updateState}) => {
     let mainImageElement = document.getElementById('right');
     let currentImgIndex = currentStylePhotos.indexOf(state.mainImage);
 
-    if (currentImgIndex !== state.styleImages.length - 1) {
+    if (currentImgIndex !== state.selectedStyleDefaultImages.length - 1) {
       updateState((preValues) => {
-        return {...preValues, mainImage: state.selectedStyle.photos[currentImgIndex + 1].url};
+        return {...preValues, mainImage: state.selectedProductDefaultStyle.photos[currentImgIndex + 1].url};
       });
       updateClickedImageIndex(currentImgIndex + 1);
     }
@@ -61,7 +61,7 @@ const ImageGallery = ({state, updateState}) => {
 
     if (currentImgIndex !== 0) {
       updateState((preValues) => {
-        return {...preValues, mainImage: state.selectedStyle.photos[currentImgIndex - 1].url};
+        return {...preValues, mainImage: state.selectedProductDefaultStyle.photos[currentImgIndex - 1].url};
       });
       updateClickedImageIndex(currentImgIndex - 1);
     }
