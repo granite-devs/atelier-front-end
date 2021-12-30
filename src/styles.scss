@@ -40,8 +40,9 @@ h1 {
   align-items: 'end';
   margin-left: -22px;
 }
-// Overview
+// Overview ^
 
+// Ratings & Reviews
 .reviewTile {
   margin: 16px 10px;
   padding: 10px 12px;
@@ -72,3 +73,31 @@ h1 {
     text-decoration: underline;
   }
 }
+
+.reviewsBreakdown {
+  float: left;
+  padding: 20px;
+
+  .avgRating {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+  }
+
+  .starRating {
+    float: right;
+    margin-top: 12px;
+    margin-right: 60px;
+  }
+
+  .breakdownBar {
+    .leftSpan {
+      padding-right: 5px;
+    }
+
+    .rightSpan {
+      padding-left: 5px;
+    }
+  }
+}
+// Ratings & Reviews ^
