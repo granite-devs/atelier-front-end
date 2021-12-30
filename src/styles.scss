@@ -22,17 +22,25 @@ h1 {
 
 .eachStyleImage {
   border-style: solid;
+  border-radius: 10px;
   border-width: 2px;
   border-color: black;
-  margin-bottom: 1px;
+  margin-bottom: 5px;
+  width: 9vh;
+  height: 9vh;
+  cursor: pointer;
 }
 
 .defaultView {
   display: flex;
+  background-color: rgb(245, 245, 245);
+  width: 50%;
 }
 
 #main {
   cursor: zoom-in;
+  width: 75vh;
+  height: 54vh;
 }
 
 .btnFloating {
