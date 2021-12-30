@@ -9,7 +9,8 @@ class RelatedProductsList extends React.Component {
     super(props);
 
     this.state = {
-      relatedIds: []
+      relatedIds: [],
+      initialRequestMade: false
     }
 
     this.fetchRelatedIds = this.fetchRelatedIds.bind(this);
@@ -19,8 +20,11 @@ class RelatedProductsList extends React.Component {
     this.fetchRelatedIds(this.props.productId);
   }
 
-  fetchRelatedIds(productIdToGet = 39333) {
-    if (productIdToGet === null) productIdToGet = 39333;
+  fetchRelatedIds(productIdToGet) {
+    const { initialRequestMade } = this.state;
+
+    if (productIdToGet && !initialRequestMade) {
+      this.setState({initialRequestMade: true});
 
       const relatedIdsRequestConfig = {
         method: 'get',
@@ -33,20 +37,24 @@ class RelatedProductsList extends React.Component {
           this.setState({relatedIds: response.data});
         })
         .catch((error) => {
-          console.log(error);
+          console.log('HTTP request to fetch related product IDs failed');
         });
+    }
   }
 
   render() {
     return (
-      <div className='related-list'>
+      <>
+        <h3>Related Products</h3>
+        <div className='product-card-list'>
         {this.state.relatedIds.map((relatedId, i) => {
           return <ProductCard
             key={i}
             productCardId={relatedId}
             updateAppProductId={this.props.updateAppProductId} />
         })}
-      </div>
+        </div>
+      </>
     );
   }
 }
