@@ -13,24 +13,32 @@ class QuestionsAnswers extends React.Component {
     this.filterQuestionsList = this.filterQuestionsList.bind(this);
   }
 
-
-  //TODO: add filter search
   filterQuestionsList(term) {
 
-    const filteredList = this.state.questionsList.filter((question) => {
-      const questionBody = question.question_body.toLowerCase();
-      const search = term.toLowerCase();
-      if (questionBody.includes(search)) {
-        question.isVisible = true;
-        return question;
-      } else {
-        question.isVisible = false;
-        return question;
-      }
-    })
-
     if (term.length >= 3) {
+      const filteredList = this.state.questionsList.map((question) => {
+        const questionBody = question.question_body.toLowerCase();
+        const search = term.toLowerCase();
+        if (questionBody.includes(search)) {
+          question.isVisible = true;
+          return question;
+        } else {
+          question.isVisible = false;
+          return question;
+        }
+      })
       this.setState({ questionsList: filteredList})
+    } else {
+      const unfilteredList = this.state.questionsList.map((question, idx) => {
+        if (idx < 2) {
+          question.isVisible = true;
+          return question;
+        } else {
+          question.isVisible = false;
+          return question;
+        }
+      })
+      this.setState({ questionsList: unfilteredList})
     }
   }
 
