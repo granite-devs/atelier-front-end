@@ -27,7 +27,9 @@ class QuestionsAnswers extends React.Component {
           return question;
         }
       })
-      this.setState({ questionsList: filteredList})
+
+      this.setState({ questionsList: filteredList })
+
     } else {
       const unfilteredList = this.state.questionsList.map((question, idx) => {
         if (idx < 2) {
@@ -38,7 +40,9 @@ class QuestionsAnswers extends React.Component {
           return question;
         }
       })
-      this.setState({ questionsList: unfilteredList})
+
+      this.setState({ questionsList: unfilteredList })
+
     }
   }
 
@@ -81,10 +85,9 @@ class QuestionsAnswers extends React.Component {
     return (
       <div className="question-answers-container">
         <SearchBar filterQuestionsList={this.filterQuestionsList} />
-        {/* TO DO: Add QuestionsList */}
         <QuestionsList questions={this.state.questionsList} />
-        {/* TO DO: Load More Questions/Add Querstios */}
         <div className="button-container">
+          {/* TODO: Load More Questions/Add Questions function */}
           <button id="load-question-button" type="button"> MORE QUESTIONS </button>
           <button id="add-question-button" type="button"> ADD QUESTION </button>
         </div>

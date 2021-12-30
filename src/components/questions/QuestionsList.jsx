@@ -3,11 +3,7 @@ import Question from './Question.jsx';
 
 const QuestionsList = ({ questions }) => {
 
-
-
   const filteredQuestions = questions.filter((question) => question.isVisible)
-
-  console.log('These are the filtered questions ', filteredQuestions)
 
   return filteredQuestions.map((question) => {
     return (
