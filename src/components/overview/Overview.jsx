@@ -3,6 +3,7 @@ import App from '../../App.jsx';
 import axios from 'axios';
 import API_KEY from '../../config.js';
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
+import ProductInformation from './ProductInformation/ProductInformation.jsx';
 
 const Overview = ({productId}) => {
   const [ selectedProductId, updateProductId ] = useState(productId);
@@ -46,6 +47,7 @@ const Overview = ({productId}) => {
   return (
     <>
       <ImageGallery state={state} updateState={updateState}/>
+      <ProductInformation/>
     </>
   );
 
