@@ -9,8 +9,8 @@ const DefaultView = ({state, updateState, handleToExpand, handleRightArrow, hand
     updateState((preValues) => {
       return {...preValues, mainImage: clickedImg};
     });
-    console.log(state.styleImages);
   };
+
 
   return (
     <>
@@ -26,6 +26,7 @@ const DefaultView = ({state, updateState, handleToExpand, handleRightArrow, hand
               }}
               id = {idx}
               key = {idx}
+              class = 'eachStyleImage'
               onClick = {updateMainImage}
               src={element.url}/>;
           })}
