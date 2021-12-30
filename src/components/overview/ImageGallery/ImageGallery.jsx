@@ -5,6 +5,7 @@ const ImageGallery = ({state, updateState}) => {
   const [ currentStylePhotos, updateStylePhotos ] = useState([]);
   const [ clickedImage, updateClickedImage ] = useState(0);
 
+  //update main image//
   const updateMainImage = (event) => {
     event.preventDefault();
     let clickedImg = event.target.src;
@@ -16,26 +17,6 @@ const ImageGallery = ({state, updateState}) => {
     });
   };
 
-  const handleToExpand = () => {
-    let mainImageElement = document.getElementById('main');
-
-    if (!state.isExpanded) {
-      mainImageElement.style.width = '75rem';
-      mainImageElement.style.cursor = 'zoom-out';
-
-      updateState((preValues) => {
-        return {...preValues, isExpanded: true};
-      });
-    } else {
-      mainImageElement.style.width = '50vh';
-      mainImageElement.style.cursor = 'zoom-in';
-
-      updateState((preValues) => {
-        return {...preValues, isExpanded: false};
-      });
-    }
-  };
-
   useEffect(() => {
     helperForArrow();
 
@@ -44,14 +25,16 @@ const ImageGallery = ({state, updateState}) => {
     if (currentImageElement !== null) {
       for (let i = 0; i < state.styleImages.length; i++) {
         document.getElementById(i).style.borderStyle = 'none';
+        document.getElementById(i).style.opacity = '1';
       }
       currentImageElement.style.borderBottom = 'solid';
-      currentImageElement.style.borderColor = 'rgb(211, 215, 255)';
-      currentImageElement.style.borderWidth = '5px';
+      currentImageElement.style.opacity = '0.4'
+      currentImageElement.style.borderWidth = '6px';
     }
 
   }, [state])
 
+  //arrow click function//
   const helperForArrow = () => {
     let urlOnlyArray = [];
     for (let i = 0; i < state.styleImages.length; i++) {
@@ -82,8 +65,30 @@ const ImageGallery = ({state, updateState}) => {
       });
       updateClickedImage(currentImgIndex - 1);
     }
-
   }
+
+  //expandedView function -- onMouseMove//
+  const handleToExpand = (event) => {
+    const mainImageWrapElement = document.getElementById('wrap');
+    const mainImageElement = document.getElementById('main');
+    mainImageWrapElement.addEventListener('mousemove', (event) => {
+      let X = event.clientX - mainImageWrapElement.offsetLeft;
+      let Y = event.clientY - mainImageWrapElement.offsetTop;
+
+      let mWidth = mainImageWrapElement.offsetWidth;
+      let mHeight = mainImageWrapElement.offsetHeight;
+
+      X = X / mWidth * 100;
+      Y = Y / mHeight * 100;
+
+      console.log(X,Y)
+      mainImageElement.style.transform = 'translate(-'+X+'%, -'+Y+'%) scale(1.6)';
+    })
+
+    mainImageWrapElement.addEventListener('mouseleave', () => {
+      mainImageElement.style.transform = 'scale(1)'
+    })
+  };
 
   return (
     <>
@@ -98,7 +103,6 @@ const ImageGallery = ({state, updateState}) => {
       />
     </>
   );
-
 };
 
 

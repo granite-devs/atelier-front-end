@@ -10,11 +10,11 @@ const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handl
             {state.styleImages.map((element, idx) => { //render all style photos
               return <img id={idx} key={idx} className='eachStyleImage' onClick={updateMainImage} src={element.url}/>; })}
           </div>
-          <div className='mainImage'>
+          <div className='mainImage' id='mainImage'>
             <img onClick={handleLeftArrow} className='btnFloating' id='left' src ="https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png"></img>
             {(state.styleImages[0] !== undefined && state.mainImage === '') ?
-              <img id = 'main' onClick = {handleToExpand} src = {state.styleImages[0].url}/> :
-              <img id = 'main' onClick = {handleToExpand} src = {state.mainImage}/>
+              <div onClick = {handleToExpand} id='wrap'><img id = 'main' src = {state.styleImages[0].url}/></div> :
+              <div onClick = {handleToExpand} id='wrap'><img id = 'main' src = {state.mainImage}/></div>
             }
             <img onClick={handleRightArrow} className='btnFloating' id='right' src ="https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png"></img>
           </div>
