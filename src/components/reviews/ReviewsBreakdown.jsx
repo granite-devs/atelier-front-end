@@ -14,7 +14,7 @@ class ReviewsBreakdown extends React.Component {
     const { reviewsMetaData } = this.props;
     console.log(reviewsMetaData);
     if (reviewsMetaData) {
-      const { ratings } = reviewsMetaData;
+      const { ratings, recommended } = reviewsMetaData;
       const ratingsArray = [];
       let ratingsSum = 0;
       let reviewCount = 0;
@@ -25,6 +25,7 @@ class ReviewsBreakdown extends React.Component {
       }
       ratingsArray.reverse();
       const avgRating = Math.round(ratingsSum / reviewCount * 10) / 10;
+      const recommendPercentage = Math.round((recommended.true / reviewCount) * 100);
       return (
         <div className='reviewsBreakdown'>
           <span className='avgRating'>{avgRating}</span>
@@ -38,6 +39,9 @@ class ReviewsBreakdown extends React.Component {
               total={reviewCount}
             />
           ))}
+          <span className='recommendations'>
+            {recommendPercentage}% of reviews recommend this product
+          </span>
         </div>
       );
     } else {

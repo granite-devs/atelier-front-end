@@ -1,6 +1,7 @@
 $primary-color: white;
 $bg: black;
 $link-btn-color: rgb(27, 149, 197);
+$gray-text-color: rgb(69, 69, 69);
 
 h1 {
   color: $primary-color;
@@ -54,7 +55,7 @@ h1 {
 
   .name-date {
     font-size: 14px;
-    color: gray;
+    color: $gray-text-color;
     float: right;
   }
 
@@ -98,6 +99,12 @@ h1 {
     .rightSpan {
       padding-left: 5px;
     }
+  }
+
+  .recommendations {
+    display: block;
+    margin: 8px 5px;
+    color: $gray-text-color;
   }
 }
 // Ratings & Reviews ^
