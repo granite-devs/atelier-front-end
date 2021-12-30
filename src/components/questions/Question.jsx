@@ -25,7 +25,6 @@ class Question extends React.Component {
             <span>|</span>
             <a> Add Answer</a>
           </div>
-
         </div>
 
         <AnswerList answers={this.state.answerList} />
