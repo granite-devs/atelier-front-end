@@ -7,7 +7,14 @@ import App from '../src/App';
 import RelatedProductsList from '../src/components/Related/RelatedProductsList';
 import ProductCard from '../src/components/Related/ProductCard';
 
-describe("Product Cards", () => {
+
+describe("Product Card", () => {
+
+  it('is a stateful component', () => {
+    const productCard = shallow(<ProductCard />);
+    const productCardState = productCard.state();
+    expect(productCardState).not.toBeNull();
+  });
 
   it('should have an onClick method', () => {
     const productCard = shallow(<ProductCard productCardId={1} />);
@@ -26,9 +33,33 @@ describe("Product Cards", () => {
     expect(updateAppProductId).toHaveBeenCalled();
   });
 
+  describe('Product Card Info', () => {
+    let productCard, cardName, productCardState;
+
+    beforeEach(() => {
+      productCard = shallow(<ProductCard />);
+      cardName = productCard.find('.card-name');
+      productCardState = productCard.state();
+    })
+
+    it('has a card name element with class `product-card`', () => {
+      expect(cardName).toHaveLength(1);
+      expect(cardName.text()).toEqual(productCardState.name);
+    });
+
+    it('displays the name of the card in the .card-name div', () => {
+      expect(cardName.text()).toEqual(productCardState.name);
+    });
+
+    it('displays the category of the card in the .card-category div', () => {
+      expect(cardName.text()).toEqual(productCardState.name);
+    });
+
+  })
+
 });
 
-describe("Related Products List", () => {
+xdescribe("Related Products List", () => {
   let RelatedProductsList, relatedProductsListState, wrapperInstance;
 
   beforeEach(() => {
