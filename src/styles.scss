@@ -8,33 +8,97 @@ h1 {
   background-color: $bg;
 }
 
+.reviewsList {
+  max-height: 450px;
+  overflow-y: auto;
+}
+
 /* Overview ---------------------(start) */
+.defaultView {
+  display: flex;
+  background-color: rgba(245, 245, 245, 0.137);
+  width: 60%;
+  height: 28rem;
+  background-color: rgba(253, 247, 247, 0.541);
+  padding-top: 1.6rem;
+  border-right: transparent;
+  border-right: 4px solid rgba(238, 236, 236, 0.459);
+  border-bottom: 4px solid rgba(238, 236, 236, 0.459);
+}
+
 .styleImages {
   display: flex;
   flex-direction: column;
+  text-align: center;
+  margin-left: 1rem;
+  max-height: 54vh;
+  overflow-y: scroll;
+  width: 10rem;
 }
 
-.defaultView {
+.eachStyleImage {
+  margin-bottom: 5px;
+  border-radius: 8px;
+  width: 9vh;
+  height: 9vh;
+  cursor: pointer;
+}
+
+.eachStyleImage:hover {
+  height: 11vh;
+  width: 11vh;
+  opacity: 0.4;
+}
+
+#mainImage {
+  width: 65rem;
+  height: 27rem;
+  margin-left: 5rem;
+}
+
+#wrap {
+  position: relative;
   display: flex;
+  justify-content: center;
+  margin-left: 10vh;
+  margin-right: 10vh;
+  width: 50vh;
+  height: 60vh;
+  overflow: hidden;
 }
 
 #main {
+  position: absolute;
   cursor: zoom-in;
+  max-width: 100%;
+  min-height: 100%;
+  width: 50vh;
+  height: 60vh;
 }
 
 .btnFloating {
   position: absolute;
   width: 20px;
   height: 20px;
-  top: 28%;
+  top: 35%;
   cursor: pointer;
-  border: white 1px dotted;
+}
+
+.btnFloating:hover {
+  width: 25px;
+  height: 30px;
 }
 
 #right {
   display: 'flex';
   align-items: 'end';
-  margin-left: -22px;
+  margin-left: 27rem;
+}
+
+#left {
+  display: 'flex';
+  align-items: 'end';
+  margin-left: 2.4rem;
 }
 /* Overview ---------------------(end) */
 
