@@ -20,8 +20,7 @@ const Overview = ({productId}) => {
     selectedProductName: '',
     selectedProductSlogan: '',
     selectedProductStyle: {},
-    selectedProductDefaultStyle: {},
-    selectedStyle: {},
+    currentStyle: [],
     selectedStyleDefaultImages: [],
     mainImage: '',
     currentImgIndex: 0,
@@ -54,7 +53,7 @@ const Overview = ({productId}) => {
             return {
               ...preValues,
               selectedProductStyle: styleResult,
-              selectedProductDefaultStyle: styleResult[0],
+              currentStyle: styleResult[0],
               selectedStyleDefaultImages: styleResult[0].photos,
               mainImage: styleResult[0].photos[0].url
             };

@@ -18,18 +18,20 @@ const ImageGallery = ({state, updateState}) => {
   };
 
   useEffect(() => {
-    updateCurrentStylePhotosUrl();
+    if (state.currentStyle.photos !== undefined) {
+      updateCurrentStylePhotosUrl();
 
-    //differenciate selected main image//
-    const currentImageElement = document.getElementById(clickedImageIndex);
-    if (currentImageElement !== null) {
-      for (let i = 0; i < state.selectedStyleDefaultImages.length; i++) {
-        document.getElementById(i).style.borderStyle = 'none';
-        document.getElementById(i).style.opacity = '1';
+      //differenciate selected main image//
+      const currentImageElement = document.getElementById(clickedImageIndex);
+      if (currentImageElement !== null) {
+        for (let i = 0; i < state.currentStyle.photos.length; i++) {
+          document.getElementById(i).style.borderStyle = 'none';
+          document.getElementById(i).style.opacity = '1';
+        }
+        currentImageElement.style.borderBottom = 'solid';
+        currentImageElement.style.opacity = '0.4';
+        currentImageElement.style.borderWidth = '6px';
       }
-      currentImageElement.style.borderBottom = 'solid';
-      currentImageElement.style.opacity = '0.4';
-      currentImageElement.style.borderWidth = '6px';
     }
 
   }, [state]);
@@ -37,8 +39,8 @@ const ImageGallery = ({state, updateState}) => {
   //arrow click function//
   const updateCurrentStylePhotosUrl = () => {
     let urlOnlyArray = [];
-    for (let i = 0; i < state.selectedStyleDefaultImages.length; i++) {
-      urlOnlyArray.push(state.selectedStyleDefaultImages[i].url);
+    for (let i = 0; i < state.currentStyle.photos.length; i++) {
+      urlOnlyArray.push(state.currentStyle.photos[i].url);
     }
     updateStylePhotos(urlOnlyArray);
   };
@@ -47,7 +49,7 @@ const ImageGallery = ({state, updateState}) => {
     let mainImageElement = document.getElementById('right');
     let currentImgIndex = currentStylePhotos.indexOf(state.mainImage);
 
-    if (currentImgIndex !== state.selectedStyleDefaultImages.length - 1) {
+    if (currentImgIndex !== state.currentStyle.photos.length - 1) {
       updateState((preValues) => {
         return {...preValues, mainImage: state.currentStyle.photos[currentImgIndex + 1].url};
       });
@@ -81,7 +83,7 @@ const ImageGallery = ({state, updateState}) => {
       X = X / mWidth * 100;
       Y = Y / mHeight * 100;
 
-      mainImageElement.style.transform = 'translate(-'+X+'%, -'+Y+'%) scale(2.0)';
+      mainImageElement.style.transform = 'translate(-' + X + '%, -' + Y + '%) scale(2.0)';
     });
 
     mainImageWrapElement.addEventListener('mouseleave', () => {

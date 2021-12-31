@@ -14,21 +14,53 @@ const StyleSelector = ({state, updateState}) => {
     }
   }, [state]);
 
+  const updateCurrentStyle = (event) => {
+    event.preventDefault();
+    let selectedStyleIndex = event.target.id[5]; //since the id is style+Index
+    let selectedStyle = state.selectedProductStyle[selectedStyleIndex];
+    updateState((preValues) => {
+      return {
+        ...preValues,
+        currentStyle: selectedStyle,
+        mainImage: selectedStyle.photos[0].url
+      };
+    });
+    if (selectedStyle.sale_price !== null) {
+      let priceDesc = `Now On Sale! ${state.selectedProductDefaultPrice} -> $${Math.round(selectedStyle.sale_price)}`;
+      updateState((preValues) => {
+        return {
+          ...preValues,
+          currentPrice: priceDesc
+        };
+      });
+    }
+  };
+
   return (
     <>
       {theFirstPhotoOfEachStyle[0] !== undefined && (
         <div id='styleSelector'>
           <div id='styleTitle'>
-            STYLE : {state.selectedProductDefaultStyle.name}
+            STYLE : <b>{state.currentStyle.name}</b>
           </div>
           <div id='styleSelection'>
-            {theFirstPhotoOfEachStyle.map((element, idx) => {
-              return <img className='eachStyleSelection' key={idx} id={`style${idx}`} src={element}></img>;
-            })}
+            <div id='StyleTop'>
+              {theFirstPhotoOfEachStyle.map((element, idx) => {
+                if (idx < 4) {
+                  return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={idx} id={`style${idx}`} src={element}></img>;
+                }
+              })}
+            </div>
+            <div id='styleBottom'>
+              {theFirstPhotoOfEachStyle.map((element, idx) => {
+                if (idx > 3) {
+                  return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={idx} id={`style${idx}`} src={element}></img>;
+                }
+              })}
+            </div>
           </div>
         </div>
       )}
-
     </>
   );
 };
