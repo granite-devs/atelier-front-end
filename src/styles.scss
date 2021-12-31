@@ -14,6 +14,10 @@ h1 {
 }
 
 /* Overview ---------------------(start) */
+#overviewTop {
+  display: flex;
+}
+
 .defaultView {
   display: flex;
   background-color: rgba(245, 245, 245, 0.137);
@@ -99,6 +103,27 @@ h1 {
   display: 'flex';
   align-items: 'end';
   margin-left: 2.4rem;
+}
+
+#productinfo {
+  display: 'flex';
+  position: relative;
+  left: 8rem;
+}
+
+#rating {
+  display: 'flex';
+}
+
+#star {
+  flex: 1;
+  display: inline-block;
+}
+
+#readReview {
+  flex: 1;
+  display: inline-block;
+  margin-left: 1rem;
 }
 /* Overview ---------------------(end) */
 

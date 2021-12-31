@@ -74,8 +74,10 @@ const Overview = ({productId}) => {
 
   return (
     <>
+    <div id='overviewTop'>
       <ImageGallery state={state} updateState={updateState}/>
       <ProductInformation state={state} updateState={updateState}/>
+    </div>
     </>
   );
 
