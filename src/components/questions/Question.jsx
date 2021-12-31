@@ -50,7 +50,11 @@ class Question extends React.Component {
           </div>
         </div>
         <div className="answer-list-container">
-          <span>A:</span><AnswerList answers={ this.state.answersList } />
+          {
+            (Object.values(question.answers).length)?
+            (<><span>A:</span><AnswerList answers={ this.state.answersList } /></>):
+            null
+          }
         </div>
       </div>
     )

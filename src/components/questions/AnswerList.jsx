@@ -14,7 +14,7 @@ const AnswerList = (props) => {
               <span>by: {answer.answerer_name}</span>
               <span>{timeAgo(answer.date)}</span>
               <span> | </span>
-              <span> Helpful? <a> Yes{answer.answer_helpfulness}</a> </span>
+              <span> Helpful? <a> Yes {answer.helpfulness}</a> </span>
               <span> | </span>
               <a> Report </a>
             </div>
