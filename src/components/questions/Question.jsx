@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import AnswerList from './AnswerList.jsx';
+import API_KEY from '../../config';
 
 class Question extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class Question extends React.Component {
       method: 'get',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/${questionId}/answers`,
       headers: {
-        'Authorization': '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'
+        'Authorization': API_KEY
       }
     };
 
