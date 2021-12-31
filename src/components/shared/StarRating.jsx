@@ -20,7 +20,7 @@ const StarRating = (props) => {
   }
 
   return (
-    <div>
+    <div className='starRating'>
       {ratingFractions.map((fraction, i) => (
         <Star key={i} fraction={fraction}/>
       ))}

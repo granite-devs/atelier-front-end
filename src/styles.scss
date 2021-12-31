@@ -1,6 +1,7 @@
 $primary-color: white;
 $bg: black;
 $link-btn-color: rgb(27, 149, 197);
+$gray-text-color: rgb(69, 69, 69);
 $container-bg: whitesmoke;
 
 h1 {
@@ -147,32 +148,61 @@ h4 {
   min-width: 580px;
   border: 1px solid black;
   border-radius: 10px;
-  background-color: $container-bg;
+  background-color: whitesmoke;
 
-.name-date {
-  font-size: 14px;
-  color: gray;
-  float: right;
+  .name-date {
+    font-size: 14px;
+    color: $gray-text-color;
+    float: right;
+  }
+
+  h3 {
+    margin: 2px 0px;
+    font-size: 19px;
+  }
+
+  p {
+    word-wrap: break-word;
+  }
+
+  .showMoreBtn {
+    font-size: 15px;
+    color: $link-btn-color;
+    text-decoration: underline;
+  }
 }
 
-.reviewsList {
-  max-height: 450px;
-  overflow-y: auto;
-}
+.reviewsBreakdown {
+  float: left;
+  padding: 20px;
 
-.showMoreBtn {
-  font-size: 15px;
-  color: $link-btn-color;
-  text-decoration: underline;
-}
+  .avgRating {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+  }
 
-h3 {
-  margin: 2px 0px;
-  font-size: 19px;
-}
+  .starRating {
+    float: right;
+    margin-top: 12px;
+    margin-right: 60px;
+  }
 
-p {
-  word-wrap: break-word;
+  .breakdownBar {
+    .leftSpan {
+      padding-right: 5px;
+    }
+
+    .rightSpan {
+      padding-left: 5px;
+    }
+  }
+
+  .recommendations {
+    display: block;
+    margin: 8px 5px;
+    color: $gray-text-color;
+  }
 }
 /* Reviews ---------------------(end) */
 

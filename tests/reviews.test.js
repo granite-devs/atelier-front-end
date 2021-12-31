@@ -9,6 +9,7 @@ import { shallow, render } from 'enzyme';
 import Reviews from '../src/components/reviews/Reviews';
 import ReviewsList from '../src/components/reviews/ReviewsList';
 import ReviewTile from '../src/components/reviews/ReviewTile';
+import BreakdownBar from '../src/components/reviews/BreakdownBar';
 
 describe('Reviews component', () => {
   test('`setFilter` method should filter reviews based on the supplied filter function', () => {
@@ -117,5 +118,21 @@ describe('ReviewTile component', () => {
     );
     component.find('.showMoreBtn').simulate('click');
     expect(component.find('p').text()).toHaveLength(1000);
+  });
+});
+
+describe('BreakdownBar component', () => {
+  test('the ratio between green and gray on the bar should equal the ratio between the supplied rating count and the total rating count', () => {
+    for (let i = 0; i < 101; i++) {
+      const component = shallow( // mounts a `shallow` render of the component (does not render children)
+        <BreakdownBar
+          key={1}
+          stars={1}
+          reviews={i}
+          total={100}
+        />
+      );
+      expect(component.containsMatchingElement(<stop offset={`${(i / 100) * 100}%`}></stop>)).toBe(true);
+    }
   });
 });
