@@ -12,8 +12,12 @@ const AverageRating = ({state, updateState}) => {
 
   return (
     <>
-      <div id='starRating'><StarRating rating={avgRating} /></div>
-      <div id='readReview'>Read all [{reviewCount}]review(s)</div>
+      <div id='starRating'>
+        <StarRating rating={avgRating} />
+      </div>
+      <div id='readReview'>
+        Read all [{reviewCount}]review(s)
+      </div>
     </>
   );
 };

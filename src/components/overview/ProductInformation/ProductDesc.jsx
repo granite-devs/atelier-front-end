@@ -7,8 +7,12 @@ const ProductDesc = ({state, updateState}) => {
     <>
       {state !== undefined && (
         <>
-          <div id='slogan'>{state.selectedProductSlogan}</div>
-          <div id='productDescription'>{state.selectedProductDesc}</div>
+          <div id='slogan'>
+            {state.selectedProductSlogan}
+          </div>
+          <div id='productDescription'>
+            {state.selectedProductDesc}
+          </div>
         </>
       )}
     </>

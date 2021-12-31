@@ -62,7 +62,7 @@ const Overview = ({productId}) => {
           console.log(err);
         });
 
-        //fetch productDetail
+      //fetch productDetail
       const getAllProductData = () => apiInstance.get(`${selectedProductId}`);
       getAllProductData()
         .then((result) => {
@@ -82,34 +82,34 @@ const Overview = ({productId}) => {
           console.log(err);
         });
 
-        //fetch reviewData
-        const getReviewMetaData = () => apiInstanceForReview.get('');
-        getReviewMetaData()
-          .then((result) => {
-            console.log(result);
-            updateState((preValues) => {
-              return {
-                ...preValues,
-                rating: result.data.ratings
-              };
-            });
-          })
-          .catch ((err) => {
-            console.log(err);
+      //fetch reviewData
+      const getReviewMetaData = () => apiInstanceForReview.get('');
+      getReviewMetaData()
+        .then((result) => {
+          console.log(result);
+          updateState((preValues) => {
+            return {
+              ...preValues,
+              rating: result.data.ratings
+            };
           });
+        })
+        .catch ((err) => {
+          console.log(err);
+        });
     }
   }, []);
 
   return (
     <>
-    <div id='overviewTop'>
-      <ImageGallery state={state} updateState={updateState}/>
-      <ProductInformation state={state} updateState={updateState}/>
-      <SocialMedia/>
-    </div>
-    <div id='overviewBottom'>
-      <ProductDesc state={state} updateState={updateState}/>
-    </div>
+      <div id='overviewTop'>
+        <ImageGallery state={state} updateState={updateState}/>
+        <ProductInformation state={state} updateState={updateState}/>
+        <SocialMedia/>
+      </div>
+      <div id='overviewBottom'>
+        <ProductDesc state={state} updateState={updateState}/>
+      </div>
     </>
   );
 
