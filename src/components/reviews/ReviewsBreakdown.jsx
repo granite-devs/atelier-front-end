@@ -12,7 +12,6 @@ class ReviewsBreakdown extends React.Component {
 
   render() {
     const { reviewsMetaData } = this.props;
-    console.log(reviewsMetaData);
     if (reviewsMetaData) {
       const { ratings, recommended } = reviewsMetaData;
       const ratingsArray = [];
