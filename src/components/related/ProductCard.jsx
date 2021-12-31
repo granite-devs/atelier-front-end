@@ -107,21 +107,20 @@ class ProductCard extends React.Component {
 
   render() {
     const { productCardId, updateAppProductId } = this.props;
-    const { name, category, price, salePrice, rating, primaryImg } = this.state;
+    const { name, category, price, salePrice, rating } = this.state;
+    let primaryImg = this.state.primaryImg;
 
-    const imgStyle = {
-      backgroundImage: `url(${primaryImg})`
-    }
+    if (!primaryImg) { primaryImg = 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png'; }
 
     return (
       <div className='product-card'
-        onClick={() => { updateAppProductId(productCardId); }}
-        style={imgStyle}>
+        onClick={() => { updateAppProductId(productCardId); }}>
+        <img className='card-img' src={primaryImg}></img>
         <div className='card-info'>
           <p className='card-category'>{category}</p>
+          <h4 className='card-name'>{name}</h4>
           <p className='card-price'>{'$'}{price}</p>
           <p className='card-sale'>{salePrice}</p>
-          <h4 className='card-name'>{name}</h4>
         </div>
         <StarRating className='card-rating' rating={rating}/>
       </div>
