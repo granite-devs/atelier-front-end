@@ -86,7 +86,6 @@ const Overview = ({productId}) => {
       const getReviewMetaData = () => apiInstanceForReview.get('');
       getReviewMetaData()
         .then((result) => {
-          console.log(result);
           updateState((preValues) => {
             return {
               ...preValues,
