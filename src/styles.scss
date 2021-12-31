@@ -183,11 +183,21 @@ h1 {
 
 #styleSelector {
   position: absolute;
-  height: 6rem;
+  height: 10rem;
   width: 100%;
   margin-left: 54rem;
-  margin-top: 15rem;
+  margin-top: 12rem;
+}
 
+.eachStyleSelection {
+  border-radius: 12px;
+  width: 9vh;
+  height: 9vh;
+}
+
+#style4, #style5, #style6 {
+  position: absolute;
+  margin-top: 65px;
 }
 /* Overview ---------------------(end) */
 

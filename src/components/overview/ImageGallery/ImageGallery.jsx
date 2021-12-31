@@ -49,7 +49,7 @@ const ImageGallery = ({state, updateState}) => {
 
     if (currentImgIndex !== state.selectedStyleDefaultImages.length - 1) {
       updateState((preValues) => {
-        return {...preValues, mainImage: state.selectedProductDefaultStyle.photos[currentImgIndex + 1].url};
+        return {...preValues, mainImage: state.currentStyle.photos[currentImgIndex + 1].url};
       });
       updateClickedImageIndex(currentImgIndex + 1);
     }
@@ -61,7 +61,7 @@ const ImageGallery = ({state, updateState}) => {
 
     if (currentImgIndex !== 0) {
       updateState((preValues) => {
-        return {...preValues, mainImage: state.selectedProductDefaultStyle.photos[currentImgIndex - 1].url};
+        return {...preValues, mainImage: state.currentStyle.photos[currentImgIndex - 1].url};
       });
       updateClickedImageIndex(currentImgIndex - 1);
     }
