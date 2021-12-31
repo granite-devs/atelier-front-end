@@ -4,6 +4,7 @@ import axios from 'axios';
 import API_KEY from '../../config.js';
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
 import ProductInformation from './ProductInformation/ProductInformation.jsx';
+import ProductDesc from './ProductInformation/ProductDesc.jsx';
 import SocialMedia from './ProductInformation/SocialMedia.jsx';
 
 const Overview = ({productId}) => {
@@ -70,7 +71,7 @@ const Overview = ({productId}) => {
               ...preValues,
               selectedProductDetail: result.data,
               selectedProductCategory: result.data.category,
-              selectedProductDefaultPrice: `$ ${result.data.default_price}`,
+              selectedProductDefaultPrice: `$${Math.round(result.data.default_price)}`,
               selectedProductDesc: result.data.description,
               selectedProductName: result.data.name,
               selectedProductSlogan: result.data.slogan
@@ -105,6 +106,9 @@ const Overview = ({productId}) => {
       <ImageGallery state={state} updateState={updateState}/>
       <ProductInformation state={state} updateState={updateState}/>
       <SocialMedia/>
+    </div>
+    <div id='overviewBottom'>
+      <ProductDesc state={state} updateState={updateState}/>
     </div>
     </>
   );
