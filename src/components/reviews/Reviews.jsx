@@ -2,11 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import API_KEY from '../../config.js';
 import ReviewsList from './ReviewsList.jsx';
+import ReviewsBreakdown from './ReviewsBreakdown.jsx';
 
 class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      reviewsMetaData: null,
       reviewsList: [],
       filteredReviewsList: [],
       filter: () => true, // Default "filter": displays all reviews.
@@ -20,7 +22,38 @@ class Reviews extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchReviews(1, this.state.reviewsPerLoad);
+    this.fetchReviewMetaData(() => {
+      const { reviewsMetaData } = this.state;
+      let reviewsToLoad = 0;
+      for (let rating in reviewsMetaData.ratings) {
+        reviewsToLoad += parseInt(reviewsMetaData.ratings[rating]);
+      }
+      this.fetchReviews(1, reviewsToLoad);
+    });
+  }
+
+  fetchReviewMetaData(callback = null) {
+    const { productId } = this.props;
+    if (productId) {
+      const intializationConfig = {
+        method: 'get',
+        url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta',
+        headers: {
+          Authorization: API_KEY,
+        },
+        params: {
+          'product_id': this.props.productId
+        }
+      };
+
+      axios(intializationConfig)
+        .then((response) => {
+          this.setState({ reviewsMetaData: response.data }, callback);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   fetchReviews(page, count, reviewsList = [], callback = null) {
@@ -36,7 +69,6 @@ class Reviews extends React.Component {
         params: {
           page,
           count,
-          'sort': 'newest',
           'product_id': this.props.productId
         }
       };
@@ -87,11 +119,10 @@ class Reviews extends React.Component {
         filteredReviewsList.push(review);
       }
     }
-    this.setState({ reviewsList, filteredReviewsList, reviewCount, moreToLoad, isLoading: false }, () => {
-      if (callback) {
-        callback();
-      }
-    });
+    this.setState(
+      { reviewsList, filteredReviewsList, reviewCount, moreToLoad, isLoading: false },
+      callback
+    );
   }
 
   render() {
@@ -102,6 +133,9 @@ class Reviews extends React.Component {
         <h1>
           Ratings &amp; Reviews {name}
         </h1>
+        <ReviewsBreakdown
+          reviewsMetaData={this.state.reviewsMetaData}
+        />
         <ReviewsList
           loadMoreReviews={moreToLoad ? this.loadMoreReviews : null}
           reviews={this.state.filteredReviewsList}
