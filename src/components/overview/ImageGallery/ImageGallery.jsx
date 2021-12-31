@@ -28,11 +28,11 @@ const ImageGallery = ({state, updateState}) => {
         document.getElementById(i).style.opacity = '1';
       }
       currentImageElement.style.borderBottom = 'solid';
-      currentImageElement.style.opacity = '0.4'
+      currentImageElement.style.opacity = '0.4';
       currentImageElement.style.borderWidth = '6px';
     }
 
-  }, [state])
+  }, [state]);
 
   //arrow click function//
   const updateCurrentStylePhotosUrl = () => {
@@ -41,7 +41,7 @@ const ImageGallery = ({state, updateState}) => {
       urlOnlyArray.push(state.selectedStyleDefaultImages[i].url);
     }
     updateStylePhotos(urlOnlyArray);
-  }
+  };
 
   const handleRightArrow = () => {
     let mainImageElement = document.getElementById('right');
@@ -53,7 +53,7 @@ const ImageGallery = ({state, updateState}) => {
       });
       updateClickedImageIndex(currentImgIndex + 1);
     }
-  }
+  };
 
   const handleLeftArrow = () => {
     let mainImageElement = document.getElementById('left');
@@ -65,7 +65,7 @@ const ImageGallery = ({state, updateState}) => {
       });
       updateClickedImageIndex(currentImgIndex - 1);
     }
-  }
+  };
 
   //expandedView function -- mousemove//
   const handleToExpand = (event) => {
@@ -82,11 +82,11 @@ const ImageGallery = ({state, updateState}) => {
       Y = Y / mHeight * 100;
 
       mainImageElement.style.transform = 'translate(-'+X+'%, -'+Y+'%) scale(2.0)';
-    })
+    });
 
     mainImageWrapElement.addEventListener('mouseleave', () => {
-      mainImageElement.style.transform = 'scale(1)'
-    })
+      mainImageElement.style.transform = 'scale(1)';
+    });
   };
 
   return (
