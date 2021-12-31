@@ -109,14 +109,15 @@ h1 {
 #productinfo {
   display: 'flex';
   position: relative;
-  left: 8rem;
+  left: 2rem;
+  margin-top: 3rem;
 }
 
 #rating {
   display: 'flex';
 }
 
-#star {
+#starRating {
   flex: 1;
   display: inline-block;
 }
@@ -125,6 +126,28 @@ h1 {
   flex: 1;
   display: inline-block;
   margin-left: 1rem;
+  border-bottom:1px solid;
+  font-style: italic;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#category {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+#productName {
+  font-size: 28px;
+  font-weight: bold;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+#socialMedia {
+  display: flex;
+  height: 4vh;
+  width: 4vh;
 }
 /* Overview ---------------------(end) */
 

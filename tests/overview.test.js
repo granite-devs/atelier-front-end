@@ -37,5 +37,13 @@ describe('DefaultView component', () => {
   });
 });
 
+describe('Overview Product information component', () => {
+
+
+  it ('', () => {
+
+  });
+});
+
 
 

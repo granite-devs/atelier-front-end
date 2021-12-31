@@ -4,6 +4,7 @@ import axios from 'axios';
 import API_KEY from '../../config.js';
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
 import ProductInformation from './ProductInformation/ProductInformation.jsx';
+import SocialMedia from './ProductInformation/SocialMedia.jsx';
 
 const Overview = ({productId}) => {
   const [ selectedProductId, updateProductId ] = useState(productId);
@@ -22,7 +23,8 @@ const Overview = ({productId}) => {
     mainImage: '',
     currentImgIndex: 0,
     isExpanded: false,
-    rating: {}
+    rating: {},
+    ratingSum: 0
   });
 
   const apiInstance = axios.create({
@@ -68,7 +70,7 @@ const Overview = ({productId}) => {
               ...preValues,
               selectedProductDetail: result.data,
               selectedProductCategory: result.data.category,
-              selectedProductDefaultPrice: `$${result.data.default_price}`,
+              selectedProductDefaultPrice: `$ ${result.data.default_price}`,
               selectedProductDesc: result.data.description,
               selectedProductName: result.data.name,
               selectedProductSlogan: result.data.slogan
@@ -102,6 +104,7 @@ const Overview = ({productId}) => {
     <div id='overviewTop'>
       <ImageGallery state={state} updateState={updateState}/>
       <ProductInformation state={state} updateState={updateState}/>
+      <SocialMedia/>
     </div>
     </>
   );
