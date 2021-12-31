@@ -6,6 +6,8 @@ import ImageGallery from './ImageGallery/ImageGallery.jsx';
 import ProductInformation from './ProductInformation/ProductInformation.jsx';
 import ProductDesc from './ProductInformation/ProductDesc.jsx';
 import SocialMedia from './ProductInformation/SocialMedia.jsx';
+import StyleSelector from './StyleSelector/StyleSelector.jsx';
+
 
 const Overview = ({productId}) => {
   const [ selectedProductId, updateProductId ] = useState(productId);
@@ -105,6 +107,7 @@ const Overview = ({productId}) => {
         <ImageGallery state={state} updateState={updateState}/>
         <ProductInformation state={state} updateState={updateState}/>
         <SocialMedia/>
+        <StyleSelector state={state} updateState={updateState}/>
       </div>
       <div id='overviewBottom'>
         <ProductDesc state={state} updateState={updateState}/>

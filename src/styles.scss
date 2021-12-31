@@ -18,6 +18,7 @@ h1 {
 #overviewTop {
   display: flex;
   height: 34rem;
+  width: 87rem;
 }
 
 #overviewBottom {
@@ -118,26 +119,30 @@ h1 {
 }
 
 #right {
-  display: 'flex';
+  display: flex;
   align-items: 'end';
   margin-left: 27rem;
 }
 
 #left {
-  display: 'flex';
+  display: flex;
   align-items: 'end';
   margin-left: 2.4rem;
 }
 
 #productinfo {
-  display: 'flex';
+  display: flex;
+  flex-direction: column;
   position: relative;
-  left: 2rem;
+  right: 5rem;
   margin-top: 3rem;
+  height: 6rem;
+  width: 100%;
+  margin-left: 6rem;
 }
 
 #rating {
-  display: 'flex';
+  display: flex;
 }
 
 #starRating {
@@ -169,9 +174,20 @@ h1 {
 
 #socialMedia {
   display: flex;
+  position: absolute;
   height: 4vh;
   width: 4vh;
+  margin-left: 74rem;
   cursor: pointer;
+}
+
+#styleSelector {
+  position: absolute;
+  height: 6rem;
+  width: 100%;
+  margin-left: 54rem;
+  margin-top: 15rem;
+
 }
 /* Overview ---------------------(end) */
 
