@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import AverageRating from './AverageRating.jsx';
 
 const ProductInformation = ({state, updateState}) => {
 
@@ -8,7 +8,7 @@ const ProductInformation = ({state, updateState}) => {
       {state !== undefined && (
         <div id='productinfo'>
           <div id='rating'>
-            <div id='star'>STAR</div>
+            <div id='star'><AverageRating state={state} updateState={updateState}/></div>
             <div id='readReview'>Read all review</div>
           </div>
           <div id='productName'>

@@ -21,12 +21,21 @@ const Overview = ({productId}) => {
     selectedStyleDefaultImages: [],
     mainImage: '',
     currentImgIndex: 0,
-    isExpanded: false
+    isExpanded: false,
+    rating: {}
   });
 
   const apiInstance = axios.create({
     baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/',
     headers: { Authorization: API_KEY },
+  });
+
+  const apiInstanceForReview = axios.create({
+    baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta',
+    headers: { Authorization: API_KEY },
+    params: {
+      'product_id': productId
+    }
   });
 
   useEffect (() => {
@@ -69,6 +78,22 @@ const Overview = ({productId}) => {
         .catch ((err) => {
           console.log(err);
         });
+
+        //fetch reviewData
+        const getReviewMetaData = () => apiInstanceForReview.get('');
+        getReviewMetaData()
+          .then((result) => {
+            console.log(result);
+            updateState((preValues) => {
+              return {
+                ...preValues,
+                rating: result.data.ratings
+              };
+            });
+          })
+          .catch ((err) => {
+            console.log(err);
+          });
     }
   }, []);
 
