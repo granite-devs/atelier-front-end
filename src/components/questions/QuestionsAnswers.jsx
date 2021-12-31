@@ -106,19 +106,19 @@ class QuestionsAnswers extends React.Component {
   render() {
     return (
       <div className="question-answers-container">
-        <SearchBar filterQuestionsList={this.filterQuestionsList} />
+        <SearchBar filterQuestionsList={ this.filterQuestionsList } />
         <QuestionsList
-          questions={this.state.questionsList}
-          handleYesClick={this.addHelpfulVote} />
+          questions={ this.state.questionsList }
+          handleYesClick={ this.addHelpfulVote } />
         <div className="button-container">
           {
             (this.state.questionsList.length > 2) ?
               (<button
                 id="load-question-button"
                 type="button"
-                onClick={(e) => {
+                onClick={ (e) => {
                   this.loadMoreQuestions(e);
-                }}
+                } }
               > MORE QUESTIONS </button>) : null
           }
           <button

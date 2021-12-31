@@ -8,9 +8,9 @@ const QuestionsList = (props) => {
   return filteredQuestions.map((question) => {
     return (
       <Question
-      key={question.question_id}
-      question={question}
-      handleYesClick={props.handleYesClick}/>
+      key={ question.question_id }
+      question={ question }
+      handleYesClick={ props.handleYesClick }/>
     )
   })
 };
