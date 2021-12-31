@@ -10,7 +10,7 @@ const ProductInformation = ({state, updateState}) => {
           <div id='rating'>
             <div id='star'><AverageRating state={state} updateState={updateState}/></div>
           </div>
-          <div id='category'>Category - {state.selectedProductCategory}</div>
+          <div id='category'>[Category - {state.selectedProductCategory}]</div>
           <div id='productName'>{state.selectedProductName}</div>
           <div id='price'>{state.selectedProductDefaultPrice}</div>
         </div>
