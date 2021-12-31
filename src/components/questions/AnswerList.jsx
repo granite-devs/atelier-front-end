@@ -1,9 +1,7 @@
-import React from 'react';
-import timeAgo from '../../utils/timeAgo.js'
-
+import React from "react";
+import timeAgo from "../../utils/timeAgo.js";
 
 const AnswerList = (props) => {
-
   return (
     <div className="answer-item">
       {props.answers.map((answer) => {
@@ -14,21 +12,27 @@ const AnswerList = (props) => {
               <span>by: {answer.answerer_name}</span>
               <span>{timeAgo(answer.date)}</span>
               <span> | </span>
-              <span> Helpful? <a> Yes {answer.helpfulness}</a> </span>
+              <span>
+                {" "}
+                Helpful? <a> Yes {answer.helpfulness}</a>{" "}
+              </span>
               <span> | </span>
               <a> Report </a>
             </div>
             <div className="photo-container">
               {
-                (answer.photos) ? (answer.photos.map((photo) => {
-                  return (<img key={photo.id} src={photo.url} />)
-                })) : null
+                (answer.photos)?
+                (answer.photos.map((photo) => {
+                    return <img key={photo.id} src={photo.url} />;
+                }))
+                :null
               }
             </div>
-          </li>)
+          </li>
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default AnswerList
+export default AnswerList;
