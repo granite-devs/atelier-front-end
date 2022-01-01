@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import API_KEY from '../../config.js';
 import timeAgo from '../../utils/timeAgo.js';
+import StarRating from '../shared/StarRating.jsx';
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class ReviewTile extends React.Component {
     return (
       <div className='reviewTile'>
         <span className='name-date'>{review.reviewer_name}, {timeAgo(review.date)}</span>
+        <StarRating rating={review.rating}/>
         <h3>{review.summary}</h3>
         <p>{bodyToDisplay}{moreToDisplay ? '...' : ''}</p>
         {showMoreBtn}

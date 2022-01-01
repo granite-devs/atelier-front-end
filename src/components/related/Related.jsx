@@ -2,7 +2,7 @@ import RelatedProductsList from './RelatedProductsList.jsx';
 
 const Related = ({ productId, updateAppProductId }) => {
   return (
-    <div>
+    <div className='related-list'>
       <RelatedProductsList
         productId={productId}
         updateAppProductId={updateAppProductId} />

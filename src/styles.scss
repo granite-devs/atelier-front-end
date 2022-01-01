@@ -3,6 +3,7 @@
 $primary-color: white;
 $bg: black;
 $link-btn-color: rgb(27, 149, 197);
+<<<<<<< HEAD
 $primary-font: 'Ubuntu', sans-serif;
 $heavy: 600;
 $smallfont: .9rem;
@@ -19,6 +20,10 @@ $smallfont: .9rem;
 }
 
 //
+=======
+$gray-text-color: rgb(69, 69, 69);
+$container-bg: whitesmoke;
+>>>>>>> d3bd90fd20e724505c7dbfb3cc11b341a06ad3bc
 
 h1 {
   color: $primary-color;
@@ -30,36 +35,205 @@ h1 {
   overflow-y: auto;
 }
 
-// Overview
-.styleImages {
+/* Overview ---------------------(start) */
+#overviewTop {
   display: flex;
-  flex-direction: column;
+  height: 34rem;
+}
+
+#overviewBottom {
+  justify-content: center;
+  align-items: center;
+  width: 48rem;
+  margin-left: 4.3rem;
+  margin-bottom: 2rem;
+  margin-top: -2rem;
+  border-right: 4px solid rgba(238, 236, 236, 0.459);
+}
+
+#slogan {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+#productDescription {
+  font-size: 16px;
+  font-style: italic;
+
 }
 
 .defaultView {
   display: flex;
+  background-color: rgba(245, 245, 245, 0.137);
+  width: 60%;
+  height: 28rem;
+  background-color: rgba(253, 247, 247, 0.541);
+  padding-top: 1.6rem;
+  border-right: transparent;
+  border-right: 4px solid rgba(238, 236, 236, 0.459);
+  border-bottom: 4px solid rgba(238, 236, 236, 0.459);
+}
+
+.styleImages {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-left: 1rem;
+  max-height: 54vh;
+  overflow-y: scroll;
+  width: 10rem;
+}
+
+.eachStyleImage {
+  margin-bottom: 5px;
+  border-radius: 12px;
+  width: 9vh;
+  height: 9vh;
+  cursor: pointer;
+}
+
+.eachStyleImage:hover {
+  height: 11vh;
+  width: 11vh;
+  opacity: 0.4;
+}
+
+#mainImage {
+  width: 65rem;
+  height: 27rem;
+  margin-left: 5rem;
+}
+
+#wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-left: 10vh;
+  margin-right: 10vh;
+  width: 50vh;
+  height: 60vh;
+  overflow: hidden;
 }
 
 #main {
+  position: absolute;
   cursor: zoom-in;
+  max-width: 100%;
+  min-height: 100%;
+  width: 50vh;
+  height: 60vh;
 }
 
 .btnFloating {
   position: absolute;
   width: 20px;
   height: 20px;
-  top: 28%;
+  top: 35%;
   cursor: pointer;
-  border: white 1px dotted;
+}
+
+.btnFloating:hover {
+  width: 25px;
+  height: 30px;
 }
 
 #right {
   display: 'flex';
   align-items: 'end';
-  margin-left: -22px;
+  margin-left: 27rem;
 }
-// Overview
 
+#left {
+  display: 'flex';
+  align-items: 'end';
+  margin-left: 2.4rem;
+}
+
+#productinfo {
+  display: 'flex';
+  position: relative;
+  left: 2rem;
+  margin-top: 3rem;
+}
+
+#rating {
+  display: 'flex';
+}
+
+#starRating {
+  flex: 1;
+  display: inline-block;
+}
+
+#readReview {
+  flex: 1;
+  display: inline-block;
+  margin-left: 1rem;
+  border-bottom:1px solid;
+  font-style: italic;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#category {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+#productName {
+  font-size: 28px;
+  font-weight: bold;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+#socialMedia {
+  display: flex;
+  height: 4vh;
+  width: 4vh;
+  cursor: pointer;
+}
+/* Overview ---------------------(end) */
+
+/* Related ---------------------(start) */
+.related-list {
+  height: 15rem;
+  width: auto;
+}
+
+.product-card-list {
+  display: 'flex';
+  flex-flow: row wrap;
+  height: 100%;
+}
+
+.product-card {
+  background-color: $container-bg;
+  height: 8rem;
+  width: 16rem;
+  padding: 5px;
+  margin: 5px;
+
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: $container-bg;
+}
+.product-card:hover {
+  cursor: pointer;
+  color: $link-btn-color;
+}
+
+h4 {
+  margin: 5px;
+}
+
+.product-card p {
+  margin-left: 5px;
+}
+/* Related ---------------------(end) */
+
+/* Reviews ---------------------(start) */
 .reviewTile {
   margin: 16px 10px;
   padding: 10px 12px;
@@ -71,7 +245,7 @@ h1 {
 
   .name-date {
     font-size: 14px;
-    color: gray;
+    color: $gray-text-color;
     float: right;
   }
 
@@ -91,7 +265,9 @@ h1 {
   }
 }
 
-// QUESTION AND ANSWERS
+/* Reviews ---------------------(end) */
+
+/* Questions ---------------------(start) */
 
 .question-answers-container {
   padding: .25rem;
@@ -247,3 +423,36 @@ h1 {
 
 
 
+.reviewsBreakdown {
+  float: left;
+  padding: 20px;
+
+  .avgRating {
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+  }
+
+  .starRating {
+    float: right;
+    margin-top: 12px;
+    margin-right: 60px;
+  }
+
+  .breakdownBar {
+    .leftSpan {
+      padding-right: 5px;
+    }
+
+    .rightSpan {
+      padding-left: 5px;
+    }
+  }
+
+  .recommendations {
+    display: block;
+    margin: 8px 5px;
+    color: $gray-text-color;
+  }
+}
+/* Questions ---------------------(end) */

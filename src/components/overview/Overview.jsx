@@ -3,15 +3,29 @@ import App from '../../App.jsx';
 import axios from 'axios';
 import API_KEY from '../../config.js';
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
+import ProductInformation from './ProductInformation/ProductInformation.jsx';
+import ProductDesc from './ProductInformation/ProductDesc.jsx';
+import SocialMedia from './ProductInformation/SocialMedia.jsx';
 
 const Overview = ({productId}) => {
   const [ selectedProductId, updateProductId ] = useState(productId);
   const [ state, updateState ] = useState({
-    productDetailById: {},
-    productStyleById: {},
+    selectedProductDetail: {},
+    selectedProductStyle: {},
+    selectedProductCategory: '',
+    selectedProductDefaultPrice: '',
+    selectedProductDesc: '',
+    selectedProductName: '',
+    selectedProductSlogan: '',
+    selectedProductStyle: {},
+    selectedProductDefaultStyle: {},
     selectedStyle: {},
-    styleImages: [],
-    mainImage: 0
+    selectedStyleDefaultImages: [],
+    mainImage: '',
+    currentImgIndex: 0,
+    isExpanded: false,
+    rating: {},
+    ratingSum: 0
   });
 
   const apiInstance = axios.create({
@@ -19,18 +33,63 @@ const Overview = ({productId}) => {
     headers: { Authorization: API_KEY },
   });
 
+  const apiInstanceForReview = axios.create({
+    baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta',
+    headers: { Authorization: API_KEY },
+    params: {
+      'product_id': productId
+    }
+  });
+
   useEffect (() => {
     if (selectedProductId) {
-      const getAllProductData = () => apiInstance.get(`${selectedProductId}/styles`);
-      getAllProductData()
+      //fetch styleDetail
+      const getStyleData = () => apiInstance.get(`${selectedProductId}/styles`);
+      getStyleData()
         .then((result) => {
           let styleResult = result.data.results;
           updateState((preValues) => {
             return {
-              preValues,
-              productStyleById: styleResult,
-              selectedStyle: styleResult[0],
-              styleImages: styleResult[0].photos
+              ...preValues,
+              selectedProductStyle: styleResult,
+              selectedProductDefaultStyle: styleResult[0],
+              selectedStyleDefaultImages: styleResult[0].photos,
+              mainImage: styleResult[0].photos[0].url
+            };
+          });
+        })
+        .catch ((err) => {
+          console.log(err);
+        });
+
+      //fetch productDetail
+      const getAllProductData = () => apiInstance.get(`${selectedProductId}`);
+      getAllProductData()
+        .then((result) => {
+          updateState((preValues) => {
+            return {
+              ...preValues,
+              selectedProductDetail: result.data,
+              selectedProductCategory: result.data.category,
+              selectedProductDefaultPrice: `$${Math.round(result.data.default_price)}`,
+              selectedProductDesc: result.data.description,
+              selectedProductName: result.data.name,
+              selectedProductSlogan: result.data.slogan
+            };
+          });
+        })
+        .catch ((err) => {
+          console.log(err);
+        });
+
+      //fetch reviewData
+      const getReviewMetaData = () => apiInstanceForReview.get('');
+      getReviewMetaData()
+        .then((result) => {
+          updateState((preValues) => {
+            return {
+              ...preValues,
+              rating: result.data.ratings
             };
           });
         })
@@ -42,7 +101,14 @@ const Overview = ({productId}) => {
 
   return (
     <>
-      <ImageGallery state={state} updateState={updateState}/>
+      <div id='overviewTop'>
+        <ImageGallery state={state} updateState={updateState}/>
+        <ProductInformation state={state} updateState={updateState}/>
+        <SocialMedia/>
+      </div>
+      <div id='overviewBottom'>
+        <ProductDesc state={state} updateState={updateState}/>
+      </div>
     </>
   );
 
