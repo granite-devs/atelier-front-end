@@ -1,36 +1,28 @@
 import React from "react";
-import timeAgo from "../../utils/timeAgo.js";
+import Answer from "./Answer.jsx"
 
-const AnswerList = (props) => {
+const AnswerList = ({ answers, loadMoreAnswers }) => {
+
+  const arrayOfVisibleAnswers = answers.filter(answer => answer.isVisible ? answer : null)
+
   return (
     <div className="answer-item">
-      {props.answers.map((answer) => {
-        return (
-          <li key={answer.answer_id}>
-            <span>{answer.body}</span>
-            <div className="help-container">
-              <span>by: {answer.answerer_name}</span>
-              <span>{timeAgo(answer.date)}</span>
-              <span> | </span>
-              <span>
-                {" "}
-                Helpful? <a> Yes {answer.helpfulness}</a>{" "}
-              </span>
-              <span> | </span>
-              <a> Report </a>
-            </div>
-            <div className="photo-container">
-              {
-                (answer.photos)?
-                (answer.photos.map((photo) => {
-                    return <img key={photo.id} src={photo.url} />;
-                }))
-                :null
-              }
-            </div>
-          </li>
-        );
-      })}
+      {
+        arrayOfVisibleAnswers.map((answer) => {
+          return (<Answer key={answer.answer_id} answer={answer} />)
+        })
+      }
+      <br></br>
+      {
+        (answers.length > 2)?
+          (<a
+            id="see-more-answers-btn"
+            onClick={()=>{
+              loadMoreAnswers()
+            }}
+            > LOAD MORE ANSWERS </a>)
+          :null
+      }
     </div>
   );
 };

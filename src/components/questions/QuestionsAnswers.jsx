@@ -8,10 +8,10 @@ class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionsList: [],
+      questionsList: []
     }
     this.filterQuestionsList = this.filterQuestionsList.bind(this);
-    this.addHelpfulVote = this.addHelpfulVote.bind(this);
+    this.voteHelpfulQuestion = this.voteHelpfulQuestion.bind(this);
     this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
     this.setTwoQuestionsVisable = this.setTwoQuestionsVisable.bind(this);
   }
@@ -36,16 +36,20 @@ class QuestionsAnswers extends React.Component {
     }
   }
 
-  addHelpfulVote(questionToUpdate) {
+  voteHelpfulQuestion(questionToUpdate) {
+
     const newState = this.state.questionsList;
+    const button = document.querySelector(`#vote-helpful-question-${questionToUpdate.question_id}`);
 
-    newState.forEach((question) => {
-      if (questionToUpdate.question_id === question.question_id) {
-        questionToUpdate.question_helpfulness += 1;
-      }
-    })
-
-    this.setState({questionsList: newState})
+    if(!button.disable) {
+      newState.forEach((question) => {
+        if (questionToUpdate.question_id === question.question_id) {
+          questionToUpdate.question_helpfulness += 1;
+        }
+      })
+      this.setState({questionsList: newState})
+      button.disabled = true;
+    }
   }
 
   loadMoreQuestions(e) {
@@ -109,20 +113,23 @@ class QuestionsAnswers extends React.Component {
         <SearchBar filterQuestionsList={ this.filterQuestionsList } />
         <QuestionsList
           questions={ this.state.questionsList }
-          handleYesClick={ this.addHelpfulVote } />
+          handleYesClick={ this.voteHelpfulQuestion } />
         <div className="button-container">
           {
-            (this.state.questionsList.length > 2) ?
+            (this.state.questionsList.length > 2)?
               (<button
                 id="load-question-button"
                 type="button"
-                onClick={ (e) => {
+                className="big-btn"
+                onClick={(e) => {
                   this.loadMoreQuestions(e);
-                } }
-              > MORE QUESTIONS </button>) : null
+                }}
+              > MORE QUESTIONS </button>)
+               : null
           }
           <button
             id="add-question-button"
+            className="big-btn"
             type="button"> ADD QUESTION </button>
         </div>
       </div>
