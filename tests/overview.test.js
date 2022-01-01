@@ -23,7 +23,13 @@ let exampleData = {
   selectedProductCategory: 'Jackets',
   selectedProductDefaultPrice: '140',
   selectedProductSlogan: 'Blend in to your crowd',
-  selectedProductDesc: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.'
+  selectedProductDesc: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
+  selectedProductStyle : {
+    name: 'Forest Green & Black',
+    originalPrice: '140',
+    salePrice: null,
+    photo: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
+  }
 }
 
 describe('DefaultView component', () => {
@@ -79,3 +85,18 @@ describe('Overview Product information component', () => {
   });
 });
 
+describe('Overview Style Selector Component', () => {
+
+  it('should render a page successfully', () => {
+    const wrapper = shallow(<ProductInformation state={exampleData}/>);
+    expect(wrapper.length).toBe(1);
+    console.log(wrapper.debug());
+  });
+
+  it('should display a productName', () => {
+    const wrapper = shallow(<ProductInformation state={exampleData}/>);
+    expect(wrapper.find('#productName').text()).toEqual(exampleData.selectedProductName);
+  });
+
+
+});

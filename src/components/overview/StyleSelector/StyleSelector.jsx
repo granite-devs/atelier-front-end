@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const StyleSelector = ({state, updateState}) => {
-  const [ selectedStyleName, updateSelectedStyleName ] = useState('');
+  const [ selectedStyleIndex, updateSelectedStyleIndex ] = useState(0);
   const [ theFirstPhotoOfEachStyle, updateDefaultPhoto ] = useState([]);
 
   useEffect (() => {
@@ -12,12 +12,23 @@ const StyleSelector = ({state, updateState}) => {
       });
       updateDefaultPhoto(defaultStylePhotoArray);
     }
+
+    if (document.getElementById('style0') !== null) {
+      for (let i = 0; i < 6; i++) {
+        document.getElementById(`style${i}`).style.border = 'none';
+        document.getElementById(`style${i}`).style.opacity = '1';
+      }
+      document.getElementById(`style${selectedStyleIndex}`).style.border = 'solid';
+      document.getElementById(`style${selectedStyleIndex}`).style.opacity = '0.4';
+    }
   }, [state]);
 
   const updateCurrentStyle = (event) => {
     event.preventDefault();
     let selectedStyleIndex = event.target.id[5]; //since the id is style+Index
     let selectedStyle = state.selectedProductStyle[selectedStyleIndex];
+    updateSelectedStyleIndex(selectedStyleIndex);
+
     updateState((preValues) => {
       return {
         ...preValues,
@@ -25,6 +36,8 @@ const StyleSelector = ({state, updateState}) => {
         mainImage: selectedStyle.photos[0].url
       };
     });
+
+    //if the style has salePrice
     if (selectedStyle.sale_price !== null) {
       let priceDesc = `Now On Sale! ${state.selectedProductDefaultPrice} -> $${Math.round(selectedStyle.sale_price)}`;
       updateState((preValues) => {
