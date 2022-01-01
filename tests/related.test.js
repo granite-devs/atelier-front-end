@@ -21,6 +21,19 @@ describe("Product Card", () => {
     expect(productCard.props().onClick).toBeDefined();
   });
 
+  it('renders a product image using the state primaryImg url or the default image if the primaryUrl is null', () => {
+    const productCard = shallow(<ProductCard />);
+    const cardImg = productCard.find('.card-img');
+    const productCardState = productCard.state();
+
+    if (!productCardState.primaryImg) {
+      productCardState.primaryImg ="https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+    }
+
+    expect(cardImg).toHaveLength(1);
+    expect(cardImg.prop('src')).toEqual(productCardState.primaryImg);
+  });
+
   it('should call updateAppProductId on click', () => {
     const updateAppProductId = jest.fn();
     const productCard = shallow(<ProductCard updateAppProductId={updateAppProductId} />);
