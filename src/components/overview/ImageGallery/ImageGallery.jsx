@@ -83,7 +83,7 @@ const ImageGallery = ({state, updateState}) => {
       X = X / mWidth * 100;
       Y = Y / mHeight * 100;
 
-      mainImageElement.style.transform = 'translate(-' + X + '%, -' + Y + '%) scale(2.0)';
+      mainImageElement.style.transform = `translate(-${X}%, -${Y}%) scale(2.0)`;
     });
 
     mainImageWrapElement.addEventListener('mouseleave', () => {
