@@ -33,6 +33,23 @@ describe('Reviews component', () => {
       });
     });
   });
+
+  test('loaded reviews should be sorted in the selected sort order', () => {
+    const component = shallow(<Reviews />); // mounts a `shallow` render of the component (does not render children)
+    const instance = component.instance();
+    component.setState({ sortOrder: 'newest' }, () => {
+      instance.loadMoreReviews(() => {
+        const expectedList = component.state('filteredReviewsList').sort((a, b) => {
+          if (new Date(a.date) < new Date(b.date)) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+        expect(component.state('filteredReviewsList')).toEqual(expectedList);
+      });
+    });
+  });
 });
 
 describe('ReviewsList component', () => {
@@ -41,7 +58,7 @@ describe('ReviewsList component', () => {
     const component = shallow(
       <ReviewsList reviews={[]} loadMoreReviews={loadMoreReviews}/>
     ); // mounts a `shallow` render of the component (does not render children)
-    component.find('button').simulate('click');
+    component.find('.moreReviewsBtn').simulate('click');
     expect(loadMoreReviews).toHaveBeenCalled();
   });
 });
