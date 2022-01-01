@@ -128,18 +128,22 @@ class ProductCard extends React.Component {
     if (!primaryImg) { primaryImg = 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png'; }
 
     return (
-      <div className={displayModal ? 'product-card selected' : 'product-card'}>
-        <ActionButton actionBtnClick={this.actionBtnClick}
-          list={'related'}/>
-          <img className='card-img' src={primaryImg}
-            onClick={() => { updateAppProductId(productCardId); }}></img>
-          <div className='card-info' onClick={() => { updateAppProductId(productCardId); }}>
-            <p className='card-category'>{category}</p>
-            <h4 className='card-name'>{name}</h4>
-            <p className='card-price'>{'$'}{price}</p>
-            <p className='card-sale'>{salePrice}</p>
-          </div>
-          <StarRating className='card-rating' rating={rating}/>
+      <div className='card-modal-pair'>
+        <div className={displayModal ? 'product-card selected' : 'product-card'}>
+          <ActionButton actionBtnClick={this.actionBtnClick}
+            list={'related'}/>
+            <img className='card-img' src={primaryImg}
+              onClick={() => { updateAppProductId(productCardId); }}></img>
+            <div className='card-info' onClick={() => { updateAppProductId(productCardId); }}>
+              <p className='card-category'>{category}</p>
+              <h4 className='card-name'>{name}</h4>
+              <p className='card-price'>{'$'}{price}</p>
+              <p className='card-sale'>{salePrice}</p>
+            </div>
+            <StarRating className='card-rating' rating={rating}/>
+        </div>
+        <CompareModal features={features}
+        displayModal={displayModal} />
       </div>
     );
   }

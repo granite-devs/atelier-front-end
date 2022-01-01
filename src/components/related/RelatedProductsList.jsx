@@ -50,14 +50,9 @@ class RelatedProductsList extends React.Component {
         <h3>Related Products</h3>
         <div className='product-card-list'>
         {this.state.relatedIds.map((relatedId, i) => {
-          return <>
-            <ProductCard key={i}
+          return <ProductCard key={i}
               productCardId={relatedId}
               updateAppProductId={this.props.updateAppProductId} />
-
-            <CompareModal features={'fixthis'}
-            displayModal={'fixthis'} />
-          </>
         })}
         </div>
       </>
