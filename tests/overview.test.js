@@ -10,6 +10,7 @@ import ImageGallery from '../src/components/overview/ImageGallery/ImageGallery.j
 import Overview from '../src/components/overview/Overview.jsx';
 import ProductInformation from '../src/components/overview/ProductInformation/ProductInformation.jsx';
 import ProductDesc from '../src/components/overview/ProductInformation/ProductDesc.jsx';
+import StyleSelector from '../src/components/overview/StyleSelector/StyleSelector.jsx';
 
 let exampleData = {
   selectedStyleDefaultImages: [
@@ -24,18 +25,21 @@ let exampleData = {
   selectedProductDefaultPrice: '140',
   selectedProductSlogan: 'Blend in to your crowd',
   selectedProductDesc: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-  selectedProductStyle : {
+  selectedProductStyle: {
     name: 'Forest Green & Black',
     originalPrice: '140',
-    salePrice: null,
-    photo: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
-  }
-}
+    salePrice: null
+  },
+  currentStlye: {
+    photos: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
+  },
+
+};
 
 describe('DefaultView component', () => {
 
   it('should render a page successfully', () => {
-    const wrapper = shallow(<DefaultView/>);
+    const wrapper = shallow(<DefaultView state={exampleData}/>);
     expect(wrapper.length).toBe(1);
   });
 
@@ -56,7 +60,6 @@ describe('Overview Product information component', () => {
   it('should render a page successfully', () => {
     const wrapper = shallow(<ProductInformation state={exampleData}/>);
     expect(wrapper.length).toBe(1);
-    console.log(wrapper.debug());
   });
 
   it('should display a productName', () => {
@@ -66,7 +69,7 @@ describe('Overview Product information component', () => {
 
   it('should display a category', () => {
     const wrapper = shallow(<ProductInformation state={exampleData}/>);
-    expect(wrapper.find('#category').text()).toEqual(`[Category - ${exampleData.selectedProductCategory}]`);
+    expect(wrapper.find('#category').text()).toEqual(`Category - [${exampleData.selectedProductCategory}]`);
   });
 
   it('should display a price', () => {
@@ -88,15 +91,8 @@ describe('Overview Product information component', () => {
 describe('Overview Style Selector Component', () => {
 
   it('should render a page successfully', () => {
-    const wrapper = shallow(<ProductInformation state={exampleData}/>);
+    const wrapper = shallow(<StyleSelector state={exampleData}/>);
     expect(wrapper.length).toBe(1);
-    console.log(wrapper.debug());
   });
-
-  it('should display a productName', () => {
-    const wrapper = shallow(<ProductInformation state={exampleData}/>);
-    expect(wrapper.find('#productName').text()).toEqual(exampleData.selectedProductName);
-  });
-
 
 });
