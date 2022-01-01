@@ -62,9 +62,11 @@ class ProductCard extends React.Component {
       axios(pricePicsRequestConfig)
         .then((response) => {
           const data = response.data.results[0];
-          this.setState({price: data.original_price,
+          this.setState({
+            price: data.original_price,
             salePrice: data.sale_price,
-            primaryImg: data.photos[0].url});
+            primaryImg: data.photos[0].url
+          });
         })
         .catch((error) => {
           console.log('HTTP request to fetch product prices failed');
@@ -110,7 +112,9 @@ class ProductCard extends React.Component {
     const { name, category, price, salePrice, rating } = this.state;
     let primaryImg = this.state.primaryImg;
 
-    if (!primaryImg) { primaryImg = 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png'; }
+    if (!primaryImg) {
+      primaryImg = 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png';
+    }
 
     return (
       <div className='product-card'
