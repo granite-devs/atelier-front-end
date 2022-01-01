@@ -13,7 +13,7 @@ class ProductCard extends React.Component {
       price: '...',
       salePrice: '...',
       rating: null,
-      primaryImg: '...',
+      primaryImg: null,
       initialRequestMade: false
     }
   }
