@@ -3,10 +3,12 @@
 $primary-color: white;
 $bg: black;
 $link-btn-color: rgb(27, 149, 197);
-<<<<<<< HEAD
 $primary-font: 'Ubuntu', sans-serif;
 $heavy: 600;
 $smallfont: .9rem;
+$gray-text-color: rgb(69, 69, 69);
+$container-bg: whitesmoke;
+
 
 
 //util
@@ -19,11 +21,7 @@ $smallfont: .9rem;
   text-decoration: none !important;
 }
 
-//
-=======
-$gray-text-color: rgb(69, 69, 69);
-$container-bg: whitesmoke;
->>>>>>> d3bd90fd20e724505c7dbfb3cc11b341a06ad3bc
+
 
 h1 {
   color: $primary-color;
