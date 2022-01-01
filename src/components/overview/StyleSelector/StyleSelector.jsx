@@ -13,10 +13,12 @@ const StyleSelector = ({state, updateState}) => {
       updateDefaultPhoto(defaultStylePhotoArray);
     }
 
-    if (document.getElementById('style0') !== null) {
-      for (let i = 0; i < 6; i++) {
-        document.getElementById(`style${i}`).style.border = 'none';
-        document.getElementById(`style${i}`).style.opacity = '1';
+    if (document.getElementById('style0') !== null && state.currentStyle.photos[0] !== undefined) {
+      for (let i = 0; i < 8; i++) {
+        if (document.getElementById(`style${i}`)) {
+          document.getElementById(`style${i}`).style.border = 'none';
+          document.getElementById(`style${i}`).style.opacity = '1';
+        }
       }
       document.getElementById(`style${selectedStyleIndex}`).style.border = 'solid';
       document.getElementById(`style${selectedStyleIndex}`).style.opacity = '0.4';
@@ -67,7 +69,7 @@ const StyleSelector = ({state, updateState}) => {
               </div>
               <div id='styleBottom'>
                 {theFirstPhotoOfEachStyle.map((element, idx) => {
-                  if (idx > 3) {
+                  if (idx > 3 && idx < 8) {
                     return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={idx} id={`style${idx}`} src={element}></img>;
                   }
                 })}
