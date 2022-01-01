@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import API_KEY from '../../config.js';
+
 import StarRating from '../shared/StarRating.jsx';
+import ActionButton from './ActionButton.jsx';
+import CompareModal from './CompareModal.jsx';
 
 class ProductCard extends React.Component {
   constructor(props) {
@@ -14,8 +17,11 @@ class ProductCard extends React.Component {
       salePrice: '...',
       rating: null,
       primaryImg: null,
+      features: [],
+      displayModal: false,
       initialRequestMade: false
     }
+    this.actionBtnClick = this.actionBtnClick.bind(this);
   }
 
   componentDidMount() {
@@ -24,7 +30,7 @@ class ProductCard extends React.Component {
     this.fetchProductRating(this.props.productCardId);
   }
 
-  fetchProductInfo (productIdToGet) {
+  fetchProductInfo(productIdToGet) {
     const { initialRequestMade } = this.state;
 
     if (!initialRequestMade) {
@@ -47,7 +53,7 @@ class ProductCard extends React.Component {
     }
   }
 
-  fetchProductPricePics (productIdToGet) {
+  fetchProductPricePics(productIdToGet) {
     const { initialRequestMade } = this.state;
 
     if (!initialRequestMade) {
@@ -72,7 +78,7 @@ class ProductCard extends React.Component {
     }
   }
 
-  fetchProductRating (productIdToGet) {
+  fetchProductRating(productIdToGet) {
     const { initialRequestMade } = this.state;
 
     if (!initialRequestMade) {
@@ -105,24 +111,35 @@ class ProductCard extends React.Component {
     }
   }
 
+  actionBtnClick(buttonLocation) {
+    if (buttonLocation === 'relatedList') {
+      console.log(`related action button for ${this.state.name} clicked`);
+
+      this.setState({displayModal: !this.state.displayModal});
+    }
+  }
+
   render() {
     const { productCardId, updateAppProductId } = this.props;
-    const { name, category, price, salePrice, rating } = this.state;
+    const { name, category, price, salePrice,
+       rating, displayModal, features } = this.state;
     let primaryImg = this.state.primaryImg;
 
     if (!primaryImg) { primaryImg = 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png'; }
 
     return (
-      <div className='product-card'
-        onClick={() => { updateAppProductId(productCardId); }}>
-        <img className='card-img' src={primaryImg}></img>
-        <div className='card-info'>
-          <p className='card-category'>{category}</p>
-          <h4 className='card-name'>{name}</h4>
-          <p className='card-price'>{'$'}{price}</p>
-          <p className='card-sale'>{salePrice}</p>
-        </div>
-        <StarRating className='card-rating' rating={rating}/>
+      <div className={displayModal ? 'product-card selected' : 'product-card'}>
+        <ActionButton actionBtnClick={this.actionBtnClick}
+          list={'related'}/>
+          <img className='card-img' src={primaryImg}
+            onClick={() => { updateAppProductId(productCardId); }}></img>
+          <div className='card-info' onClick={() => { updateAppProductId(productCardId); }}>
+            <p className='card-category'>{category}</p>
+            <h4 className='card-name'>{name}</h4>
+            <p className='card-price'>{'$'}{price}</p>
+            <p className='card-sale'>{salePrice}</p>
+          </div>
+          <StarRating className='card-rating' rating={rating}/>
       </div>
     );
   }

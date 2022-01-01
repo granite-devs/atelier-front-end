@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import API_KEY from '../../config.js';
+
 import ProductCard from './ProductCard.jsx';
+import CompareModal from './CompareModal.jsx';
 
 
 class RelatedProductsList extends React.Component {
@@ -48,10 +50,14 @@ class RelatedProductsList extends React.Component {
         <h3>Related Products</h3>
         <div className='product-card-list'>
         {this.state.relatedIds.map((relatedId, i) => {
-          return <ProductCard
-            key={i}
-            productCardId={relatedId}
-            updateAppProductId={this.props.updateAppProductId} />
+          return <>
+            <ProductCard key={i}
+              productCardId={relatedId}
+              updateAppProductId={this.props.updateAppProductId} />
+
+            <CompareModal features={'fixthis'}
+            displayModal={'fixthis'} />
+          </>
         })}
         </div>
       </>

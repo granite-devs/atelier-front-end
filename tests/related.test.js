@@ -21,19 +21,6 @@ describe("Product Card", () => {
     expect(productCard.props().onClick).toBeDefined();
   });
 
-  it('renders a product image using the state primaryImg url or the default image if the primaryUrl is null', () => {
-    const productCard = shallow(<ProductCard />);
-    const cardImg = productCard.find('.card-img');
-    const productCardState = productCard.state();
-
-    if (!productCardState.primaryImg) {
-      productCardState.primaryImg ="https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
-    }
-
-    expect(cardImg).toHaveLength(1);
-    expect(cardImg.prop('src')).toEqual(productCardState.primaryImg);
-  });
-
   it('should call updateAppProductId on click', () => {
     const updateAppProductId = jest.fn();
     const productCard = shallow(<ProductCard updateAppProductId={updateAppProductId} />);
@@ -46,13 +33,62 @@ describe("Product Card", () => {
     expect(updateAppProductId).toHaveBeenCalled();
   });
 
-  describe('Product Card Info', () => {
+  describe('Product Card Information', () => {
     let productCard, productCardState, cardName, cardCategory, cardPrice, cardSale;
 
     beforeEach(() => {
       productCard = shallow(<ProductCard />);
       productCardState = productCard.state();
-    })
+    });
+
+    describe('Image', () => {
+      it('renders a product image using the state primaryImg url or the default image if the primaryUrl is null', () => {
+        const cardImg = productCard.find('.card-img');
+
+        if (!productCardState.primaryImg) {
+          productCardState.primaryImg ="https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+        }
+
+        expect(cardImg).toHaveLength(1);
+        expect(cardImg.prop('src')).toEqual(productCardState.primaryImg);
+      });
+    });
+
+    describe('Action Button', () => {
+
+      it('is a class component of the ProductCard component with the name `.action-btn`', () => {
+      });
+
+      it('opens the comparison modal module when clicked', () => {
+      });
+
+      describe('Comparison Modal', () => {
+
+        it('is hidden by default', () => {
+        });
+
+        it('it becomes visible when the related list action button is clicked', () => {
+        });
+
+        it('has a title with class name `compare-title` and text value `Comparing`', () => {
+        });
+
+        it('has a table with 3 columns', () => {
+        });
+
+        it('has table headers that match the name of the currentProduct and the productToCompare', () => {
+        });
+
+        it('displays all of the features for both the currentProduct and the productToCompare', () => {
+        });
+
+        it('displays a checkmark if either item has that feature', () => {
+        });
+
+      })
+
+    });
+
 
     it('has a card name element with class `.card-name`', () => { //name
       cardName = productCard.find('.card-name');
