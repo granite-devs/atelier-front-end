@@ -13,22 +13,26 @@ class Reviews extends React.Component {
       filteredReviewsList: [],
       filter: () => true, // Default "filter": displays all reviews.
       reviewsPerLoad: 2,
-      reviewCount: 0,
+      reviewCount: null,
+      reviewsLoaded: 0,
       moreToLoad: true,
-      isLoading: false
+      isLoading: false,
+      sortOrder: 'relevant'
     };
     this.loadMoreReviews = this.loadMoreReviews.bind(this);
     this.setFilter = this.setFilter.bind(this);
+    this.handleSortChange = this.handleSortChange.bind(this);
   }
 
   componentDidMount() {
     this.fetchReviewMetaData(() => {
-      const { reviewsMetaData } = this.state;
-      let reviewsToLoad = 0;
+      const { reviewsMetaData, reviewsPerLoad } = this.state;
+      let reviewCount = 0;
       for (let rating in reviewsMetaData.ratings) {
-        reviewsToLoad += parseInt(reviewsMetaData.ratings[rating]);
+        reviewCount += parseInt(reviewsMetaData.ratings[rating]);
       }
-      this.fetchReviews(1, reviewsToLoad);
+      this.setState({ reviewCount });
+      this.fetchReviews(1, reviewsPerLoad);
     });
   }
 
@@ -58,7 +62,7 @@ class Reviews extends React.Component {
 
   fetchReviews(page, count, reviewsList = [], callback = null) {
     const { productId } = this.props;
-    const { isLoading } = this.state;
+    const { isLoading, sortOrder } = this.state;
     if (productId && !isLoading) {
       const intializationConfig = {
         method: 'get',
@@ -69,7 +73,8 @@ class Reviews extends React.Component {
         params: {
           page,
           count,
-          'product_id': this.props.productId
+          'product_id': this.props.productId,
+          sort: sortOrder
         }
       };
 
@@ -85,8 +90,8 @@ class Reviews extends React.Component {
   }
 
   loadMoreReviews(callback = null) {
-    const { reviewCount, reviewsList, reviewsPerLoad } = this.state;
-    const page = (reviewCount + reviewsPerLoad) / reviewsPerLoad;
+    const { reviewsLoaded, reviewsList, reviewsPerLoad } = this.state;
+    const page = (reviewsLoaded + reviewsPerLoad) / reviewsPerLoad;
     this.fetchReviews(page, reviewsPerLoad, reviewsList, callback);
   }
 
@@ -110,8 +115,8 @@ class Reviews extends React.Component {
         reviewsList.push(review);
       }
     }
-    const reviewCount = reviewsList.length;
-    const moreToLoad = newReviews.length === this.state.reviewsPerLoad;
+    const reviewsLoaded = reviewsList.length;
+    const moreToLoad = !(newReviews.length < this.state.reviewsPerLoad);
     const filter = this.state.filter;
     const filteredReviewsList = [];
     for (let review of reviewsList) {
@@ -119,28 +124,65 @@ class Reviews extends React.Component {
         filteredReviewsList.push(review);
       }
     }
+    filteredReviewsList.sort(this.getSortFunction());
     this.setState(
-      { reviewsList, filteredReviewsList, reviewCount, moreToLoad, isLoading: false },
+      { reviewsList, filteredReviewsList, reviewsLoaded, moreToLoad, isLoading: false },
       callback
     );
   }
 
+  getSortFunction() {
+    const { sortOrder } = this.state;
+    if (sortOrder === 'newest') {
+      return (a, b) => {
+        if (new Date(a.date) < new Date(b.date)) {
+          return 1;
+        } else {
+          return -1;
+        }
+      };
+    } else if (sortOrder === 'relevant') { // not sure how to sort for relevancy?
+      return (a, b) => {};
+    } else if (sortOrder === 'helpful') {
+      return (a, b) => {
+        if (new Date(a.helpfulness) < new Date(b.helpfulness)) {
+          return 1;
+        } else {
+          return -1;
+        }
+      };
+    }
+  }
+
+  handleSortChange({ target }) {
+    const { reviewsLoaded } = this.state;
+    this.setState({ sortOrder: target.value, reviewsList: [] }, () => {
+      this.fetchReviews(1, reviewsLoaded);
+    });
+  }
+
   render() {
     const { name } = this.props;
-    const { moreToLoad } = this.state;
+    const { moreToLoad, reviewCount } = this.state;
     return (
-      <>
+      <div className='reviews'>
         <h1>
           Ratings &amp; Reviews {name}
         </h1>
         <ReviewsBreakdown
           reviewsMetaData={this.state.reviewsMetaData}
         />
+        <span className='reviewsHeader'>{reviewCount} reviews, sorted by </span>
+        <select name='sortOrder' onChange={this.handleSortChange}>
+          <option value='relevant'>relevance</option>
+          <option value='newest'>newest</option>
+          <option value='helpful'>helpfulness</option>
+        </select>
         <ReviewsList
           loadMoreReviews={moreToLoad ? this.loadMoreReviews : null}
           reviews={this.state.filteredReviewsList}
         />
-      </>
+      </div>
     );
   }
 }
