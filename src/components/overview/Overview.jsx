@@ -21,7 +21,7 @@ const Overview = ({productId}) => {
     selectedProductName: '',
     selectedProductSlogan: '',
     selectedProductStyle: {},
-    currentStyle: [],
+    currentStyle: {},
     selectedStyleDefaultImages: [],
     mainImage: '',
     currentImgIndex: 0,
@@ -103,7 +103,7 @@ const Overview = ({productId}) => {
 
   return (
     <>
-      {state.currentStyle.photos !== undefined && (
+      {state.currentStyle.name !== undefined && (
         <>
           <div id='overviewTop'>
             <ImageGallery state={state} updateState={updateState}/>
