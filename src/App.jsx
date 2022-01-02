@@ -15,6 +15,7 @@ class App extends React.Component {
     };
     this.updateAppProductId = this.updateAppProductId.bind(this);
     this.addItemToOutfit = this.addItemToOutfit.bind(this);
+    this.removeItemFromOutfit = this.removeItemFromOutfit.bind(this);
   }
 
   updateAppProductId(productId) {
@@ -22,12 +23,19 @@ class App extends React.Component {
   }
 
   addItemToOutfit(productToAdd) {
-    console.log('add to outfit clicked');
     const outfitItems = this.state.outfitItems;
 
     if (!outfitItems.includes(productToAdd)) {
       this.setState({outfitItems: [...this.state.outfitItems, productToAdd]});
     }
+  }
+
+  removeItemFromOutfit(productToRemove) {
+    const filteredOutfitList = this.state.outfitItems.filter(item => {
+      return productToRemove !== item;
+    })
+
+    this.setState({outfitItems: filteredOutfitList});
   }
 
   componentDidMount() {
@@ -61,6 +69,7 @@ class App extends React.Component {
           productId={productId}
           updateAppProductId={this.updateAppProductId}
           addItemToOutfit={this.addItemToOutfit}
+          removeItemFromOutfit={this.removeItemFromOutfit}
           outfitItems={outfitItems}
         />
       </div>
