@@ -113,7 +113,8 @@ class QuestionsAnswers extends React.Component {
         <SearchBar filterQuestionsList={this.filterQuestionsList} />
         <QuestionsList
           questions={this.state.questionsList}
-          handleYesQuestionClick={this.voteHelpfulQuestion} />
+          handleYesQuestionClick={this.voteHelpfulQuestion}
+          />
         <div className="button-container">
           {
             (this.state.questionsList.length > 2) && (
@@ -130,7 +131,9 @@ class QuestionsAnswers extends React.Component {
           <button
             id="add-question-button"
             className="big-btn"
-            type="button"> ADD QUESTION </button>
+            type="button"
+            onClick={() => {
+            }}> ADD QUESTION </button>
         </div>
       </div>
     );

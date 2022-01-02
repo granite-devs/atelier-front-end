@@ -10,7 +10,8 @@ const QuestionsList = (props) => {
       <Question
       key={ question.question_id }
       question={ question }
-      handleYesQuestionClick={ props.handleYesQuestionClick }/>
+      handleYesQuestionClick={ props.handleYesQuestionClick }
+      />
     )
   })
 };

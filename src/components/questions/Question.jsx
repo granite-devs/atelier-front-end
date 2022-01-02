@@ -17,7 +17,6 @@ class Question extends React.Component {
   voteHelpfulAnswer(targetId) {
 
     const button = document.querySelector(`#vote-helpful-answer-${targetId}`)
-    //TODO ADD ANSWER
     if (!button.disable) {
       const { answersList } = this.state;
       const alteredAnswerList = answersList.forEach((answer) => {
@@ -99,7 +98,9 @@ class Question extends React.Component {
               }}> Yes {question.question_helpfulness}
             </button>
             <span>|</span>
-            <a> Add Answer </a>
+            <a
+            onClick={() => {
+            }}> Add Answer </a>
           </div>
         </div>
         <div className='answer-list-container'>
