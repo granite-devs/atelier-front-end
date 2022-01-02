@@ -59,7 +59,7 @@ describe("Product Card", () => {
       it('is a class component of the ProductCard component with the name `.action-btn`', () => {
       });
 
-      it('opens the comparison modal module when clicked', () => {
+      it('calls the actionBtnClick method when clicked', () => {
       });
 
       describe('Comparison Modal', () => {
@@ -73,13 +73,10 @@ describe("Product Card", () => {
         it('has a title with class name `compare-title` and text value `Comparing`', () => {
         });
 
-        it('has a table with 3 columns', () => {
+        it('has a table with table headers that match the name of the currentItem and the relatedItem', () => {
         });
 
-        it('has table headers that match the name of the currentProduct and the productToCompare', () => {
-        });
-
-        it('displays all of the features for both the currentProduct and the productToCompare', () => {
+        it('displays all of the features for both the currentItem and the relatedItem', () => {
         });
 
         it('displays a checkmark if either item has that feature', () => {
