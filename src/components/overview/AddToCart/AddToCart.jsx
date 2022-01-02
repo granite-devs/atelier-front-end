@@ -13,7 +13,7 @@ const AddToCart = ({state, updateState}) => {
     let quantityValue = document.getElementById('quantity').value;
 
     if (toggleForModal) {
-      if (sizeValue === 'default' && quantityValue === 'default') {
+      if (sizeValue === 'default' || quantityValue === 'default') {
         document.getElementById('addToCartModalSelected').style.display = 'none';
       } else {
         document.getElementById('addToCartModalnotSelected').style.display = 'none';
