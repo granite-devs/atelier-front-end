@@ -13,13 +13,16 @@ const ProductInformation = ({state, updateState}) => {
             </div>
           </div>
           <div id='category'>
-            [Category - {state.selectedProductCategory}]
+            Category - [{state.selectedProductCategory}]
           </div>
           <div id='productName'>
             {state.selectedProductName}
           </div>
           <div id='price'>
-            {state.selectedProductDefaultPrice}
+            {(state.currentPrice && state.currentStyle.sale_price !== null) ?
+              <b>{state.currentPrice}</b> :
+              state.selectedProductDefaultPrice
+            }
           </div>
         </div>
       )}
