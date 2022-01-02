@@ -66,7 +66,7 @@ const SizeAndQuantitySelector = ({state, updateState}) => {
               <option id='QuantityDefault' value='default' key='default'>-</option>
             }
           </select>
-          {state.currentSize !== '' && (
+          {state.currentSize !== '' && state.currentSize !== 'default' && (
             quantity.length > 9 ?
               <div id='enoughStock' style={{color: '#3aba2c'}}>
               In Stock
