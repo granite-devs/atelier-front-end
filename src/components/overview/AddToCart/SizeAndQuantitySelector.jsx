@@ -48,10 +48,10 @@ const SizeAndQuantitySelector = ({state, updateState}) => {
 
   return (
     <>
-      {state.currentStyle.skus !== undefined && (
+      {state !== undefined && (
         <div id='sizeAndQuantitySelector'>
           <select onChange={updateSize} id='size'>
-            <option id='default' value='default' key='size'>Select Size</option>
+            <option id='SizeDefault' value='default' key='size'>Select Size</option>
             {sizeAndQuantity !== null && (
               Object.keys(sizeAndQuantity).map((element, idx) => {
                 return <option id={`size${element}`} key={idx}>{element}</option>;
@@ -63,7 +63,7 @@ const SizeAndQuantitySelector = ({state, updateState}) => {
               quantity.map((element, idx) => {
                 return <option id={`quantity${element}`} value={`quantity${element}`} key={idx}>{element}</option>;
               }) :
-              <option id='default' value='default' key='default'>-</option>
+              <option id='QuantityDefault' value='default' key='default'>-</option>
             }
           </select>
           {state.currentSize !== '' && (
