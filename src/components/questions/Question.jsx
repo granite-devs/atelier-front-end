@@ -15,7 +15,7 @@ class Question extends React.Component {
   }
 
   voteHelpfulAnswer(answer_id) {
-    console.log('This is our answer_id: ', answer_id)
+    //TODO ADD ANSWER
   }
 
   loadMoreAnswers() {
@@ -98,7 +98,6 @@ class Question extends React.Component {
                 <AnswerList
                 answers={ this.state.answersList }
                 loadMoreAnswers={ this.loadMoreAnswers }/>
-                voteHelpfulAnswer={ this.voteHelpfulAnswer }
               </>)
               : null
           }
