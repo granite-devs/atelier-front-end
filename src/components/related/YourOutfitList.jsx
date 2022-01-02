@@ -37,7 +37,9 @@ class YourOutfitList extends React.Component {
         <div className='product-card-list'>
           <div className='product-card add-outfit-card'
             onClick={() => { this.handleAddToOutfitClick(productId) }}>
-              ADD TO OUTFIT CARD </div>
+            <img className='add-outfit-icon' src='https://tinyurl.com/3hspumek'></img>
+            <span className='add-outfit-text'>Add to Outfit</span>
+          </div>
           {outfitItems.map((outfitItemId, i) => {
             return <ProductCard key={i}
                 productId={productId}
