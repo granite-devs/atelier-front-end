@@ -7,6 +7,7 @@ import ProductInformation from './ProductInformation/ProductInformation.jsx';
 import ProductDesc from './ProductInformation/ProductDesc.jsx';
 import SocialMedia from './ProductInformation/SocialMedia.jsx';
 import StyleSelector from './StyleSelector/StyleSelector.jsx';
+import AddToCart from './AddToCart/AddToCart.jsx';
 
 
 const Overview = ({productId}) => {
@@ -102,18 +103,22 @@ const Overview = ({productId}) => {
 
   return (
     <>
-      <div id='overviewTop'>
-        <ImageGallery state={state} updateState={updateState}/>
-        <ProductInformation state={state} updateState={updateState}/>
-        <SocialMedia/>
-        <StyleSelector state={state} updateState={updateState}/>
-      </div>
-      <div id='overviewBottom'>
-        <ProductDesc state={state} updateState={updateState}/>
-      </div>
+      {state.currentStyle.photos !== undefined && (
+        <>
+          <div id='overviewTop'>
+            <ImageGallery state={state} updateState={updateState}/>
+            <ProductInformation state={state} updateState={updateState}/>
+            <SocialMedia/>
+            <StyleSelector state={state} updateState={updateState}/>
+            <AddToCart state={state} updateState={updateState}/>
+          </div>
+          <div id='overviewBottom'>
+            <ProductDesc state={state} updateState={updateState}/>
+          </div>
+        </>
+      )}
     </>
   );
-
 };
 
 
