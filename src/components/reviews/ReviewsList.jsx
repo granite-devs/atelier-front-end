@@ -11,7 +11,7 @@ class ReviewsList extends React.Component {
   render() {
     const { reviews, loadMoreReviews } = this.props;
     return (
-      <>
+      <div className='reviewsListContainer'>
         <div className='reviewsList'>
           <ul>
             {reviews.map((review) => (
@@ -19,8 +19,15 @@ class ReviewsList extends React.Component {
             ))}
           </ul>
         </div>
-        {loadMoreReviews ? <button onClick={() => loadMoreReviews()}>More Reviews</button> : null}
-      </>
+        {loadMoreReviews ? <button
+          className='moreReviewsBtn'
+          onClick={() => loadMoreReviews()}
+        >More Reviews</button> : null}
+        {loadMoreReviews ? <button
+          className='addReviewBtn'
+          onClick={() => {}}
+        >Add Review</button> : null}
+      </div>
     );
   }
 }

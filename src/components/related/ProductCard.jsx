@@ -152,7 +152,9 @@ class ProductCard extends React.Component {
       displayModal, features, currentItemFeatures } = this.state;
     let primaryImg = this.state.primaryImg;
 
-    if (!primaryImg) { primaryImg = 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png'; }
+    if (!primaryImg) {
+      primaryImg = 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png';
+    }
 
     return (
       <div className='card-modal-pair'>
