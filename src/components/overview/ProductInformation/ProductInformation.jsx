@@ -3,6 +3,14 @@ import AverageRating from './AverageRating.jsx';
 
 const ProductInformation = ({state, updateState}) => {
 
+  //change price color when it's on sale.
+  useEffect (() => {
+    document.getElementById('price').style.color = 'black';
+    if (state.currentStyle.sale_price !== null) {
+      document.getElementById('price').style.color = 'red';
+    }
+  }, [state]);
+
   return (
     <>
       {state !== undefined && (
