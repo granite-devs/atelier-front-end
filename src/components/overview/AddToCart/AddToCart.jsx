@@ -2,15 +2,24 @@ import React, { useState, useEffect } from 'react';
 import SizeAndQuantitySelector from './SizeAndQuantitySelector.jsx';
 
 const AddToCart = ({state, updateState}) => {
+  const [ toggleForModal, test ] = useState(false);
 
-  const addToCartModal = () => {
+  const addToCartModal = (event) => {
+    test(!toggleForModal);
+  };
+
+  useEffect (() => {
     let sizeValue = document.getElementById('size').value;
     let quantityValue = document.getElementById('quantity').value;
 
-    if (sizeValue === 'default' || quantityValue === 'default') {
-      alert('You need to select a size and quantity first');
+    if (toggleForModal) {
+      if (sizeValue === 'default' && quantityValue === 'default') {
+        document.getElementById('addToCartModalSelected').style.display = 'none';
+      } else {
+        document.getElementById('addToCartModalnotSelected').style.display = 'none';
+      }
     }
-  };
+  }, [toggleForModal]);
 
   return (
     <>
@@ -18,6 +27,21 @@ const AddToCart = ({state, updateState}) => {
         <div id='addToCart'>
           <SizeAndQuantitySelector state={state} updateState={updateState}/>
           <button onClick={addToCartModal} id='addToCartButton'>Add To Cart</button>
+        </div>
+      )}
+      {toggleForModal && (
+        <div id='addToCartModal'>
+          <div id='addToCartModalOverlay'></div>
+          <div id='addToCartModalContent'>
+            <h2 style={{color: 'grey'}}>Hi 👋</h2>
+            <p id='addToCartModalnotSelected'>
+              Please select a size and quantity first.
+            </p>
+            <p id='addToCartModalSelected'>
+              Item Added To Cart
+            </p>
+            <button onClick={addToCartModal} id='addToCartModalClose'>CLOSE</button>
+          </div>
         </div>
       )}
     </>
