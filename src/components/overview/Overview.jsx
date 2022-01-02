@@ -27,7 +27,8 @@ const Overview = ({productId}) => {
     currentImgIndex: 0,
     isExpanded: false,
     rating: {},
-    ratingSum: 0
+    ratingSum: 0,
+    currentSize: ''
   });
 
   const apiInstance = axios.create({
