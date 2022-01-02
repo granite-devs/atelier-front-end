@@ -18,19 +18,22 @@ class ProductCard extends React.Component {
       rating: null,
       primaryImg: null,
       features: [],
-      displayModal: false,
+      displayModal: true,
+      currentItemFeatures: {name: '', features: []},
       initialRequestMade: false
     }
     this.actionBtnClick = this.actionBtnClick.bind(this);
   }
 
   componentDidMount() {
-    this.fetchProductInfo(this.props.productCardId);
-    this.fetchProductPricePics(this.props.productCardId);
-    this.fetchProductRating(this.props.productCardId);
+    const { productCardId, productId } = this.props;
+    this.fetchProductInfo(productCardId, 'currentRelatedItem');
+    this.fetchProductInfo(productId, 'currentItem');
+    this.fetchProductPricePics(productCardId);
+    this.fetchProductRating(productCardId);
   }
 
-  fetchProductInfo(productIdToGet) {
+  fetchProductInfo(productIdToGet, stateToUpdate) {
     const { initialRequestMade } = this.state;
 
     if (!initialRequestMade) {
@@ -44,8 +47,30 @@ class ProductCard extends React.Component {
 
       axios(infoRequestConfig)
         .then((response) => {
-          this.setState({name: response.data.name,
-            category: response.data.category});
+          const { name, category } = response.data;
+          let features = response.data.features;
+
+          if (stateToUpdate === 'currentRelatedItem') {
+            features.forEach(feature => {
+              feature['belongsTo'] = 'relatedItem';
+            });
+
+            this.setState({
+              name: name,
+              category: category,
+              features: features
+            });
+          }
+
+          if (stateToUpdate === 'currentItem') {
+            features.forEach(feature => {
+              feature['belongsTo'] = 'currentItem';
+            });
+
+            this.setState({
+              currentItemFeatures: {name: name, features: features}
+            });
+          }
         })
         .catch((error) => {
           console.log('HTTP request to fetch product info failed');
@@ -68,9 +93,11 @@ class ProductCard extends React.Component {
       axios(pricePicsRequestConfig)
         .then((response) => {
           const data = response.data.results[0];
-          this.setState({price: data.original_price,
+          this.setState({
+            price: data.original_price,
             salePrice: data.sale_price,
-            primaryImg: data.photos[0].url});
+            primaryImg: data.photos[0].url
+          });
         })
         .catch((error) => {
           console.log('HTTP request to fetch product prices failed');
@@ -121,8 +148,8 @@ class ProductCard extends React.Component {
 
   render() {
     const { productCardId, updateAppProductId } = this.props;
-    const { name, category, price, salePrice,
-       rating, displayModal, features } = this.state;
+    const { name, category, price, salePrice, rating,
+      displayModal, features, currentItemFeatures } = this.state;
     let primaryImg = this.state.primaryImg;
 
     if (!primaryImg) { primaryImg = 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png'; }
@@ -142,8 +169,10 @@ class ProductCard extends React.Component {
             </div>
             <StarRating className='card-rating' rating={rating}/>
         </div>
-        <CompareModal features={features}
-        displayModal={displayModal} />
+        <CompareModal relatedItemName={name}
+          relatedItemFeatures={features}
+          displayModal={displayModal}
+          currentItemFeatures={currentItemFeatures} />
       </div>
     );
   }
