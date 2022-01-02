@@ -1,7 +1,7 @@
 import React from "react";
 import Answer from "./Answer.jsx"
 
-const AnswerList = ({ answers, loadMoreAnswers }) => {
+const AnswerList = ({ answers, loadMoreAnswers, voteHelpfulAnswer }) => {
 
   const arrayOfVisibleAnswers = answers.filter(answer => answer.isVisible ? answer : null)
 
@@ -9,7 +9,12 @@ const AnswerList = ({ answers, loadMoreAnswers }) => {
     <div className="answer-item">
       {
         arrayOfVisibleAnswers.map((answer) => {
-          return (<Answer key={answer.answer_id} answer={answer} />)
+          return (
+            <Answer
+            key={ answer.answer_id }
+            answer={ answer }
+            voteHelpfulAnswer={ voteHelpfulAnswer }/>
+          )
         })
       }
       <br></br>

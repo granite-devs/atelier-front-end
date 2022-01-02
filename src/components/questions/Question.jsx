@@ -11,11 +11,23 @@ class Question extends React.Component {
     }
     this.setTwoAnswersVisible = this.setTwoAnswersVisible.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
-    this.voteHelpfulAnswer = this.voteHelpfulAnswer(this);
+    this.voteHelpfulAnswer = this.voteHelpfulAnswer.bind(this);
   }
 
-  voteHelpfulAnswer(answer_id) {
+  voteHelpfulAnswer(targetId) {
+
+    const button = document.querySelector(`#vote-helpful-answer-${targetId}`)
     //TODO ADD ANSWER
+    if (!button.disable) {
+      const { answersList } = this.state;
+      const alteredAnswerList = answersList.forEach((answer) => {
+        if (answer.answer_id === targetId) {
+          answer.helpfulness += 1
+        }
+      })
+      button.disabled = true;
+      this.setState({ answerList:alteredAnswerList })
+    }
   }
 
   loadMoreAnswers() {
@@ -29,7 +41,7 @@ class Question extends React.Component {
         return answer;
       })
       button.innerHTML = 'SEE LESS ANSWERS'
-      this.setState({ answerList: allAnswersVisible})
+      this.setState({ answerList: allAnswersVisible })
     } else {
       const twoVisibleAnwers = this.setTwoAnswersVisible(answersList)
       button.innerHTML = 'LOAD MORE ANSWERS'
@@ -83,7 +95,7 @@ class Question extends React.Component {
             <button
               id={`vote-helpful-question-${question.question_id}`}
               onClick={() => {
-                this.props.handleYesClick(this.props.question)
+                this.props.handleYesQuestionClick(this.props.question)
               }}> Yes {question.question_helpfulness}
             </button>
             <span>|</span>
@@ -92,14 +104,16 @@ class Question extends React.Component {
         </div>
         <div className='answer-list-container'>
           {
-            (Object.values(question.answers).length) ?
-              (<>
+            (Object.keys(question.answers).length > 0) && (
+              <>
                 <span>A:</span>
                 <AnswerList
-                answers={ this.state.answersList }
-                loadMoreAnswers={ this.loadMoreAnswers }/>
-              </>)
-              : null
+                  answers={this.state.answersList}
+                  loadMoreAnswers={this.loadMoreAnswers}
+                  voteHelpfulAnswer={this.voteHelpfulAnswer}
+                />
+              </>
+            )
           }
         </div>
       </div>
