@@ -9,9 +9,7 @@ const AddToCart = ({state, updateState}) => {
       {state !== undefined && (
         <div id='addToCart'>
           <SizeAndQuantitySelector state={state} updateState={updateState}/>
-          <div id='addToCartButton'>
-            <button>Add To Cart</button>
-          </div>
+          <button id='addToCartButton'>Add To Cart</button>
         </div>
       )}
     </>
