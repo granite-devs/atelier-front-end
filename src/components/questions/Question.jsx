@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import AnswerList from './AnswerList.jsx';
+import AddAnswerModal from './modals/AddAnswerModal.jsx';
 import API_KEY from '../../config';
 
 class Question extends React.Component {
@@ -12,6 +13,43 @@ class Question extends React.Component {
     this.setTwoAnswersVisible = this.setTwoAnswersVisible.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
     this.voteHelpfulAnswer = this.voteHelpfulAnswer.bind(this);
+    this.toggleAddAnswerModal = this.toggleAddAnswerModal.bind(this);
+    this.addAnswerToList = this.addAnswerToList.bind(this);
+  }
+
+  addAnswerToList(answer) {
+
+    const { answersList } = this.state;
+    const lastAnswer = answersList[answersList.length - 1];
+
+    let nextId;
+
+    (lastAnswer) ?
+      (nextId = lastAnswer.answer_id + 1)
+      :
+      (nextId = 1);
+
+    answer.answer_id = nextId;
+    answer.isVisible = true;
+    answer.helpfulness = 1;
+
+    console.log('This is the new answer ', answer)
+
+    this.setState({
+      answersList: [...answersList, answer],
+      questionView: 'main'
+    })
+  }
+
+  toggleAddAnswerModal(viewChange) {
+
+    const { answersList } = this.state;
+
+    this.setState({
+      answersList: [...answersList],
+      questionView: viewChange
+    })
+
   }
 
   voteHelpfulAnswer(targetId) {
@@ -25,7 +63,7 @@ class Question extends React.Component {
         }
       })
       button.disabled = true;
-      this.setState({ answerList:alteredAnswerList })
+      this.setState({ answerList: alteredAnswerList })
     }
   }
 
@@ -64,6 +102,7 @@ class Question extends React.Component {
   componentDidMount() {
 
     const questionId = this.props.question.question_id;
+
     var config = {
       method: 'get',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/${questionId}/answers`,
@@ -75,7 +114,9 @@ class Question extends React.Component {
     axios(config)
       .then((res) => {
         const displayAnswers = this.setTwoAnswersVisible(res.data.results)
-        this.setState({ answersList: displayAnswers })
+        this.setState({
+          answersList: displayAnswers
+        })
       })
       .catch((error) => {
         console.log(error);
@@ -84,8 +125,10 @@ class Question extends React.Component {
   }
 
   render() {
+
     const question = this.props.question;
-    return (
+
+    const questionComponent = (
       <div className='question-container'>
         <div className='question-body'>
           <span className='heavy'> Q: {question.question_body}</span>
@@ -95,30 +138,45 @@ class Question extends React.Component {
               id={`vote-helpful-question-${question.question_id}`}
               onClick={() => {
                 this.props.handleYesQuestionClick(this.props.question)
-              }}> Yes { question.question_helpfulness }
+              }}> Yes {question.question_helpfulness}
             </button>
             <span>|</span>
             <a
-            onClick={() => {
-            }}> Add Answer </a>
+              onClick={() => {
+                this.toggleAddAnswerModal('AddAnswerModal')
+              }}> Add Answer </a>
           </div>
         </div>
         <div className='answer-list-container'>
-          {
-            (Object.keys(question.answers).length > 0) && (
-              <>
-                <span>A:</span>
-                <AnswerList
-                  answers={this.state.answersList}
-                  loadMoreAnswers={this.loadMoreAnswers}
-                  voteHelpfulAnswer={this.voteHelpfulAnswer}
-                />
-              </>
-            )
-          }
+          <AnswerList
+            answers={this.state.answersList}
+            loadMoreAnswers={this.loadMoreAnswers}
+            voteHelpfulAnswer={this.voteHelpfulAnswer}
+          />
+
         </div>
       </div>
     )
+
+    switch (this.state.questionView) {
+
+      case 'AddAnswerModal':
+        return (
+          <>
+            <AddAnswerModal
+              toggleAddAnswerModal={this.toggleAddAnswerModal}
+              addAnswerToList={this.addAnswerToList}
+            />
+          </>
+        )
+
+      default:
+        return (
+          <>
+            {questionComponent}
+          </>
+        )
+    }
   }
 };
 

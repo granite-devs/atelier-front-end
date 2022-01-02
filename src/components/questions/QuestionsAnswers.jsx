@@ -3,21 +3,19 @@ import axios from 'axios';
 import SearchBar from './SearchBar.jsx';
 import QuestionsList from './QuestionsList.jsx';
 import AddQuestionModal from './modals/AddQuestionModal.jsx';
-import AddAnswerModal from './modals/AddAnswerModal.jsx';
 import API_KEY from '../../config';
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionsList: [],
-      view: 'question-main'
+      questionsList: []
     }
     this.filterQuestionsList = this.filterQuestionsList.bind(this);
     this.voteHelpfulQuestion = this.voteHelpfulQuestion.bind(this);
     this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
     this.setTwoQuestionsVisable = this.setTwoQuestionsVisable.bind(this);
-    this.setQuestionsView = this.setQuestionsView.bind(this);
+    this.toggleQuestionsModal = this.toggleQuestionsModal.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
   }
 
@@ -30,15 +28,15 @@ class QuestionsAnswers extends React.Component {
 
     question.question_id = nextQuestionId;
 
-    const updatedQuestionsList = [...questionsList, question ]
+    const updatedQuestionsList = [...questionsList, question]
 
     this.setState({
       questionsList: updatedQuestionsList,
-      view: 'question-main'
+      view: 'main'
     })
   }
 
-  setQuestionsView(viewChange) {
+  toggleQuestionsModal(viewChange) {
     this.setState({
       questionsList: this.state.questionsList,
       view: viewChange
@@ -81,7 +79,7 @@ class QuestionsAnswers extends React.Component {
     }
   }
 
-  loadMoreQuestions( ) {
+  loadMoreQuestions() {
 
     const button = document.querySelector('#load-question-button')
 
@@ -140,12 +138,13 @@ class QuestionsAnswers extends React.Component {
 
   render() {
 
-    const QuestionsAnswersBody = (
+    const QuestionsAnswersComponent = (
       <div className="question-answers-container">
         <SearchBar filterQuestionsList={this.filterQuestionsList} />
         <QuestionsList
           questions={this.state.questionsList}
           handleYesQuestionClick={this.voteHelpfulQuestion}
+          changeView={this.changeView}
         />
         <div className="button-container">
           {
@@ -155,9 +154,10 @@ class QuestionsAnswers extends React.Component {
                 type="button"
                 className="big-btn"
                 onClick={(e) => {
-                  this.loadMoreQuestions(e);
+                  this.loadMoreQuestions();
                 }}
-              > MORE QUESTIONS </button>
+              > MORE QUESTIONS
+              </button>
             )
           }
           <button
@@ -165,8 +165,9 @@ class QuestionsAnswers extends React.Component {
             className="big-btn"
             type="button"
             onClick={() => {
-              this.setQuestionsView('AddQuestionModal')
-            }}> ADD QUESTION </button>
+              this.toggleQuestionsModal('AddQuestionModal')
+            }}> ADD QUESTION
+          </button>
         </div>
       </div>
     );
@@ -177,26 +178,18 @@ class QuestionsAnswers extends React.Component {
         return (
           <>
             <AddQuestionModal
-            productId={ this.props.productId }
-            setQuestionsView={ this.setQuestionsView }
-            addQuestion={ this.addQuestion }
+              productId={this.props.productId}
+              toggleQuestionsModal={this.toggleQuestionsModal}
+              addQuestion={this.addQuestion}
             />
-            {QuestionsAnswersBody}
-          </>
-        )
-
-      case 'AddAnswerModal':
-        return (
-          <>
-            <AddAnswerModal setQuestionsView={this.setQuestionsView} />
-            {QuestionsAnswersBody}
+            {QuestionsAnswersComponent}
           </>
         )
 
       default:
         return (
           <>
-            {QuestionsAnswersBody}
+            {QuestionsAnswersComponent}
           </>
         );
     }

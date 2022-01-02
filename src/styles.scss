@@ -443,6 +443,10 @@ h4 {
         display: flex;
         flex-direction: column;
 
+        .answer-label {
+          display: flex;
+        }
+
         li {
           list-style-type: none;
           margin-bottom: .5rem;
@@ -515,7 +519,7 @@ h4 {
 
 /* Question Modals */
 
-#add-question-modal {
+.modal {
   display: flex;
   position: fixed;
   flex-direction: column;
@@ -555,11 +559,30 @@ h4 {
     }
   }
 
-  .btn {
-    cursor: pointer;
-    border: .1rem solid black;
-    height: 1.5rem;
+  .answer-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: auto;
+    background-color: white;
+    height: 90%;
+    width: 90%;
+
+    .field-item {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin: .5rem;
+      font-size: $largefont;
+
+      input {
+        font-size: 1rem;
+        font-size: $largefont;
+      }
+    }
   }
+
+
 }
 
 /* Questions ---------------------(end) */

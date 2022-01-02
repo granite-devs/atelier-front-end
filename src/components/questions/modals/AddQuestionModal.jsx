@@ -5,13 +5,13 @@ import API_KEY from '../../../config.js'
 const AddQuestionModal = (props) => {
 
   return (
-    <div id='add-question-modal'>
+    <div className='modal'>
       <div className='question-form'>
         <div className='field-item'>
           <button
             className='btn'
             onClick={() => {
-              props.setQuestionsView()
+              props.toggleQuestionsModal('main')
             }}> Close
           </button>
           <h1>Ask your question about {props.productId}</h1>
@@ -21,27 +21,30 @@ const AddQuestionModal = (props) => {
           <textarea
             id='question-input'
             name='question-body'
+            maxLength='1000'
             type='text'
             rows='8'
             required
           />
         </div>
         <div className='field-item'>
-          <label name='Username'> Username  </label>
+          <label name='question-username'> Username  </label>
           <input
-            id='username-input'
-            name='username'
+            id='question-username-input'
+            name='question-username'
+            maxLength='60'
             type='text'
             placeholder='Example: jackson11!'
             required
           />
         </div>
         <div className='field-item'>
-          <label name='email'> Email </label>
+          <label name='question-email'> Email </label>
           <input
-            id='email-input'
-            name='email'
+            id='question-email-input'
+            name='question-email'
             type='email'
+            maxLength='60'
             placeholder='jackson11@emailprovider.com'
             required
           />
@@ -50,8 +53,8 @@ const AddQuestionModal = (props) => {
           <button
             onClick={() => {
 
-              const username = document.querySelector('#username-input').value;
-              const email = document.querySelector('#email-input').value;
+              const username = document.querySelector('#question-username-input').value;
+              const email = document.querySelector('#question-email-input').value;
               const questionText = document.querySelector('#question-input').value;
               const date = new Date();
 

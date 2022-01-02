@@ -10,10 +10,14 @@ const AnswerList = ({ answers, loadMoreAnswers, voteHelpfulAnswer }) => {
       {
         arrayOfVisibleAnswers.map((answer) => {
           return (
-            <Answer
-            key={ answer.answer_id }
-            answer={ answer }
-            voteHelpfulAnswer={ voteHelpfulAnswer }/>
+            <div className='answer-label' key={answer.answer_id}>
+              <strong>A:</strong>
+              <Answer
+                key={answer.answer_id}
+                answer={answer}
+                voteHelpfulAnswer={voteHelpfulAnswer}
+              />
+            </div>
           )
         })
       }
