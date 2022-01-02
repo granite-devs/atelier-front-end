@@ -1,7 +1,7 @@
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
 
-const Related = ({ productId, updateAppProductId }) => {
+const Related = ({ productId, updateAppProductId, addItemToOutfit, outfitItems }) => {
   return (
     <div className='related-list'>
       <RelatedProductsList
@@ -9,7 +9,9 @@ const Related = ({ productId, updateAppProductId }) => {
         updateAppProductId={updateAppProductId} />
       <YourOutfitList
         productId={productId}
-        updateAppProductId={updateAppProductId}/>
+        updateAppProductId={updateAppProductId}
+        addItemToOutfit={addItemToOutfit}
+        outfitItems={outfitItems} />
     </div>
   );
 }

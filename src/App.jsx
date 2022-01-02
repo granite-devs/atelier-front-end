@@ -10,13 +10,24 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: null
+      productId: null,
+      outfitItems: []
     };
     this.updateAppProductId = this.updateAppProductId.bind(this);
+    this.addItemToOutfit = this.addItemToOutfit.bind(this);
   }
 
   updateAppProductId(productId) {
     this.setState({ productId });
+  }
+
+  addItemToOutfit(productToAdd) {
+    console.log('add to outfit clicked');
+    const outfitItems = this.state.outfitItems;
+
+    if (!outfitItems.includes(productToAdd)) {
+      this.setState({outfitItems: [...this.state.outfitItems, productToAdd]});
+    }
   }
 
   componentDidMount() {
@@ -39,7 +50,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { productId } = this.state;
+    const { productId, outfitItems } = this.state;
     return (
       <div>
         <Overview key={`${productId}-1`} productId={productId} />
@@ -49,6 +60,8 @@ class App extends React.Component {
           key={`${productId}-4`}
           productId={productId}
           updateAppProductId={this.updateAppProductId}
+          addItemToOutfit={this.addItemToOutfit}
+          outfitItems={outfitItems}
         />
       </div>
     );

@@ -15,37 +15,30 @@ class YourOutfitList extends React.Component {
       initialRequestMade: false
     }
 
-    this.addItemToOutfit = this.addItemToOutfit.bind(this);
+    this.handleAddToOutfitClick = this.handleAddToOutfitClick.bind(this);
   }
 
   componentDidMount() {
 
   }
 
-  addItemToOutfit(productToAdd) {
-    console.log('add to outfit clicked');
-    const outfitItems = this.state.outfitItems;
-
-    //check if item already exists
-    if (!outfitItems.includes(productToAdd)) {
-      this.setState({outfitItems: [...this.state.outfitItems, productToAdd]});
-    }
-
+  handleAddToOutfitClick(productToAdd) {
+    console.log(productToAdd);
+    this.props.addItemToOutfit(productToAdd);
   }
 
 
   render() {
-    const { productId, productCardId, updateAppProductId} = this.props;
-    console.log(productId);
+    const { productId, productCardId, updateAppProductId, outfitItems } = this.props;
 
     return (
       <>
         <h3>Your Outfit</h3>
         <div className='product-card-list'>
           <div className='product-card add-outfit-card'
-            onClick={() => { this.addItemToOutfit(productId) }}>
+            onClick={() => { this.handleAddToOutfitClick(productId) }}>
               ADD TO OUTFIT CARD </div>
-          {this.state.outfitItems.map((outfitItemId, i) => {
+          {outfitItems.map((outfitItemId, i) => {
             return <ProductCard key={i}
                 productId={productId}
                 productCardId={outfitItemId}
