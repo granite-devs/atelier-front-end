@@ -18,18 +18,14 @@ class YourOutfitList extends React.Component {
     this.handleAddToOutfitClick = this.handleAddToOutfitClick.bind(this);
   }
 
-  componentDidMount() {
-
-  }
-
   handleAddToOutfitClick(productToAdd) {
     console.log(productToAdd);
     this.props.addItemToOutfit(productToAdd);
   }
 
-
   render() {
-    const { productId, productCardId, updateAppProductId, outfitItems } = this.props;
+    const { productId, productCardId, updateAppProductId,
+      outfitItems, currentList, removeItemFromOutfit } = this.props;
 
     return (
       <>
@@ -42,9 +38,11 @@ class YourOutfitList extends React.Component {
           </div>
           {outfitItems.map((outfitItemId, i) => {
             return <ProductCard key={i}
-                productId={productId}
-                productCardId={outfitItemId}
-                updateAppProductId={updateAppProductId} />
+              currentList={currentList}
+              productId={productId}
+              productCardId={outfitItemId}
+              updateAppProductId={updateAppProductId}
+              removeItemFromOutfit={removeItemFromOutfit} />
           })}
         </div>
       </>

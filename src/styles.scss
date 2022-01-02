@@ -5,6 +5,7 @@ $gray-text-color: rgb(69, 69, 69);
 $container-bg: whitesmoke;
 $related-gradient: linear-gradient(rgb(245, 245, 245), rgb(224, 224, 224));
 $related-shadow: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.26));
+$related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 
 h1 {
   color: $primary-color;
@@ -298,6 +299,7 @@ h4 {
   left: 10rem;
   padding-top: .6rem;
   z-index: 6;
+  filter: $related-shadow-white;
 }
 
 .card-modal-pair {
@@ -360,6 +362,7 @@ h4 {
   background: $container-bg;
   border: 1px solid rgb(190, 190, 190);
   width: 10rem;
+  min-width: 10rem;
 }
 
 .add-outfit-icon {
