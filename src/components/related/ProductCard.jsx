@@ -18,7 +18,7 @@ class ProductCard extends React.Component {
       rating: null,
       primaryImg: null,
       features: [],
-      displayModal: true,
+      displayModal: false,
       currentItemFeatures: {name: '', features: []},
       initialRequestMade: false
     }

@@ -1,10 +1,9 @@
 const CompareModal = ({relatedItemFeatures, relatedItemName,
   displayModal, currentItemFeatures}) => {
-    console.log(currentItemFeatures);
     return (
       <div className={displayModal ? 'compare modal-show' : 'compare modal-hide'}>
         <h5 className='compare-title'>Comparing</h5>
-        <table>
+        <table className='compare-table'>
           <thead>
             <tr>
               <th>{currentItemFeatures.name}</th>
@@ -19,7 +18,7 @@ const CompareModal = ({relatedItemFeatures, relatedItemName,
                     <td>
                       {feature.belongsTo === 'currentItem' ? '✔' : ''}
                     </td>
-                    <td>{feature.feature}
+                    <td className='td-feature'>{feature.feature}
                       {feature.value ? ': ' + feature.value : ''}</td>
                     <td>
                       {feature.belongsTo === 'relatedItem' ? '✔' : ''}
