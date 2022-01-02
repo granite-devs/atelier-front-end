@@ -13,6 +13,7 @@ class ProductCard extends React.Component {
       price: '...',
       salePrice: '...',
       rating: null,
+      primaryImg: null,
       initialRequestMade: false
     }
   }
@@ -61,7 +62,11 @@ class ProductCard extends React.Component {
       axios(pricePicsRequestConfig)
         .then((response) => {
           const data = response.data.results[0];
-          this.setState({price: data.original_price, salePrice: data.sale_price});
+          this.setState({
+            price: data.original_price,
+            salePrice: data.sale_price,
+            primaryImg: data.photos[0].url
+          });
         })
         .catch((error) => {
           console.log('HTTP request to fetch product prices failed');
@@ -105,14 +110,22 @@ class ProductCard extends React.Component {
   render() {
     const { productCardId, updateAppProductId } = this.props;
     const { name, category, price, salePrice, rating } = this.state;
+    let primaryImg = this.state.primaryImg;
+
+    if (!primaryImg) {
+      primaryImg = 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png';
+    }
 
     return (
       <div className='product-card'
         onClick={() => { updateAppProductId(productCardId); }}>
-        <h4 className='card-name'>{name}</h4>
-        <p className='card-category'>{category}</p>
-        <p className='card-price'>{'$'}{price}</p>
-        <p className='card-sale'>{salePrice}</p>
+        <img className='card-img' src={primaryImg}></img>
+        <div className='card-info'>
+          <p className='card-category'>{category}</p>
+          <h4 className='card-name'>{name}</h4>
+          <p className='card-price'>{'$'}{price}</p>
+          <p className='card-sale'>{salePrice}</p>
+        </div>
         <StarRating className='card-rating' rating={rating}/>
       </div>
     );

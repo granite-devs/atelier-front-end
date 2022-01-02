@@ -11,6 +11,11 @@ class Question extends React.Component {
     }
     this.setTwoAnswersVisible = this.setTwoAnswersVisible.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
+    this.voteHelpfulAnswer = this.voteHelpfulAnswer(this);
+  }
+
+  voteHelpfulAnswer(answer_id) {
+    console.log('This is our answer_id: ', answer_id)
   }
 
   loadMoreAnswers() {
@@ -93,6 +98,7 @@ class Question extends React.Component {
                 <AnswerList
                 answers={ this.state.answersList }
                 loadMoreAnswers={ this.loadMoreAnswers }/>
+                voteHelpfulAnswer={ this.voteHelpfulAnswer }
               </>)
               : null
           }

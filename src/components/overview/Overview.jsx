@@ -6,6 +6,8 @@ import ImageGallery from './ImageGallery/ImageGallery.jsx';
 import ProductInformation from './ProductInformation/ProductInformation.jsx';
 import ProductDesc from './ProductInformation/ProductDesc.jsx';
 import SocialMedia from './ProductInformation/SocialMedia.jsx';
+import StyleSelector from './StyleSelector/StyleSelector.jsx';
+
 
 const Overview = ({productId}) => {
   const [ selectedProductId, updateProductId ] = useState(productId);
@@ -18,8 +20,7 @@ const Overview = ({productId}) => {
     selectedProductName: '',
     selectedProductSlogan: '',
     selectedProductStyle: {},
-    selectedProductDefaultStyle: {},
-    selectedStyle: {},
+    currentStyle: [],
     selectedStyleDefaultImages: [],
     mainImage: '',
     currentImgIndex: 0,
@@ -52,7 +53,7 @@ const Overview = ({productId}) => {
             return {
               ...preValues,
               selectedProductStyle: styleResult,
-              selectedProductDefaultStyle: styleResult[0],
+              currentStyle: styleResult[0],
               selectedStyleDefaultImages: styleResult[0].photos,
               mainImage: styleResult[0].photos[0].url
             };
@@ -105,6 +106,7 @@ const Overview = ({productId}) => {
         <ImageGallery state={state} updateState={updateState}/>
         <ProductInformation state={state} updateState={updateState}/>
         <SocialMedia/>
+        <StyleSelector state={state} updateState={updateState}/>
       </div>
       <div id='overviewBottom'>
         <ProductDesc state={state} updateState={updateState}/>
