@@ -45,7 +45,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { productId, view } = this.state;
+    const { productId } = this.state;
 
     return (
       <div>

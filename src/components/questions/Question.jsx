@@ -86,16 +86,16 @@ class Question extends React.Component {
   render() {
     const question = this.props.question;
     return (
-      <div className="question-container">
-        <div className="question-body">
-          <span className="heavy"> Q: {question.question_body}</span>
-          <div className="help-container">
+      <div className='question-container'>
+        <div className='question-body'>
+          <span className='heavy'> Q: {question.question_body}</span>
+          <div className='help-container'>
             <span> Helpful? </span>
             <button
               id={`vote-helpful-question-${question.question_id}`}
               onClick={() => {
                 this.props.handleYesQuestionClick(this.props.question)
-              }}> Yes {question.question_helpfulness}
+              }}> Yes { question.question_helpfulness }
             </button>
             <span>|</span>
             <a
