@@ -14,14 +14,14 @@ const AnswerList = ({ answers, loadMoreAnswers }) => {
       }
       <br></br>
       {
-        (answers.length > 2)?
-          (<a
+        (answers.length > 2) && (
+          <a
             id="see-more-answers-btn"
-            onClick={()=>{
+            onClick={() => {
               loadMoreAnswers()
             }}
-            > LOAD MORE ANSWERS </a>)
-          :null
+          > LOAD MORE ANSWERS </a>
+        )
       }
     </div>
   );

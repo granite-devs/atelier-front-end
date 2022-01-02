@@ -41,13 +41,13 @@ class QuestionsAnswers extends React.Component {
     const newState = this.state.questionsList;
     const button = document.querySelector(`#vote-helpful-question-${questionToUpdate.question_id}`);
 
-    if(!button.disable) {
+    if (!button.disable) {
       newState.forEach((question) => {
         if (questionToUpdate.question_id === question.question_id) {
           questionToUpdate.question_helpfulness += 1;
         }
       })
-      this.setState({questionsList: newState})
+      this.setState({ questionsList: newState })
       button.disabled = true;
     }
   }
@@ -110,22 +110,22 @@ class QuestionsAnswers extends React.Component {
   render() {
     return (
       <div className="question-answers-container">
-        <SearchBar filterQuestionsList={ this.filterQuestionsList } />
+        <SearchBar filterQuestionsList={this.filterQuestionsList} />
         <QuestionsList
-          questions={ this.state.questionsList }
-          handleYesClick={ this.voteHelpfulQuestion } />
+          questions={this.state.questionsList}
+          handleYesClick={this.voteHelpfulQuestion} />
         <div className="button-container">
           {
-            (this.state.questionsList.length > 2)?
-              (<button
+            (this.state.questionsList.length > 2) && (
+              <button
                 id="load-question-button"
                 type="button"
                 className="big-btn"
                 onClick={(e) => {
                   this.loadMoreQuestions(e);
                 }}
-              > MORE QUESTIONS </button>)
-               : null
+              > MORE QUESTIONS </button>
+            )
           }
           <button
             id="add-question-button"
