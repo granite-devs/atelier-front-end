@@ -17,6 +17,7 @@ describe('Question and answers component', () => {
   const searchBarShallow = shallow(<SearchBar filterQuestionsList={QuestionsAnswers.filterQuestionsList} />);
   const searchBarInstance = searchBarShallow.instance();
 
+  //Questions Answers component and methods
   test('questionsAnswersInstance is a class of QuestionsAnswers', () => {
     expect(questionsAnswersInstance).toBeInstanceOf(QuestionsAnswers);
   })

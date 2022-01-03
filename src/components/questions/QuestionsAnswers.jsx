@@ -1,22 +1,24 @@
 import React from 'react';
 import axios from 'axios';
 import SearchBar from './SearchBar.jsx';
+import QuestionsList from './QuestionsList.jsx'
 import API_KEY from '../../config';
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionsList: [],
+      questionsList: []
     }
     this.filterQuestionsList = this.filterQuestionsList.bind(this);
+    this.voteHelpfulQuestion = this.voteHelpfulQuestion.bind(this);
+    this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
+    this.setTwoQuestionsVisable = this.setTwoQuestionsVisable.bind(this);
   }
 
-
-  //TODO: add filter search
   filterQuestionsList(term) {
-    if (term.length > 2) {
-      const filteredQuestionsList = this.state.questionsList.filter((question) => {
+    if (term.length >= 3) {
+      const filteredList = this.state.questionsList.map((question) => {
         const questionBody = question.question_body.toLowerCase();
         const search = term.toLowerCase();
         if (questionBody.includes(search)) {
@@ -27,11 +29,62 @@ class QuestionsAnswers extends React.Component {
           return question;
         }
       })
-      this.setState(filteredQuestionsList)
+      this.setState({ questionsList: filteredList })
+    } else {
+      const unfilteredList = this.setTwoQuestionsVisable(this.state.questionsList)
+      this.setState({ questionsList: unfilteredList })
     }
   }
 
+  voteHelpfulQuestion(questionToUpdate) {
+
+    const newState = this.state.questionsList;
+    const button = document.querySelector(`#vote-helpful-question-${questionToUpdate.question_id}`);
+
+    if (!button.disable) {
+      newState.forEach((question) => {
+        if (questionToUpdate.question_id === question.question_id) {
+          questionToUpdate.question_helpfulness += 1;
+        }
+      })
+      this.setState({ questionsList: newState })
+      button.disabled = true;
+    }
+  }
+
+  loadMoreQuestions(e) {
+
+    const button = document.querySelector('#load-question-button')
+
+    if (button.innerHTML.includes('MORE QUESTIONS')) {
+      button.innerHTML = 'LESS QUESTIONS'
+      const entireQuestionList = this.state.questionsList.map((question) => {
+        question.isVisible = true;
+        return question;
+      })
+      this.setState({ questionsList: entireQuestionList })
+    } else {
+      button.innerHTML = 'MORE QUESTIONS'
+      const unfilteredList = this.setTwoQuestionsVisable(this.state.questionsList);
+      this.setState({ questionsList: unfilteredList })
+    }
+  }
+
+  setTwoQuestionsVisable(array) {
+    const twoSetVisable = array.map((question, idx) => {
+      if (idx < 2) {
+        question.isVisible = true;
+        return question;
+      } else {
+        question.isVisible = false;
+        return question;
+      }
+    })
+    return twoSetVisable;
+  }
+
   componentDidMount() {
+
     const { productId } = this.props;
     let questionConfig = {
       method: 'get',
@@ -44,21 +97,9 @@ class QuestionsAnswers extends React.Component {
     if (productId) {
       axios(questionConfig)
         .then((res) => {
-          const MappedQuestions = res.data.results.map((question, idx) => {
-            if (idx < 2) {
-              question.isVisible = true;
-              return question;
-            } else {
-              question.isVisible = false;
-              return question;
-            }
-          })
-
-          this.setState({
-            questionsList: res.data.results
-          })
+          const mappedQuestions = this.setTwoQuestionsVisable(res.data.results);
+          this.setState({ questionsList: mappedQuestions })
         })
-
         .catch((error) => {
           console.error(error);
         });
@@ -68,14 +109,30 @@ class QuestionsAnswers extends React.Component {
 
   render() {
     return (
-      <>
-        <h3>Questions & Answers</h3>
+      <div className="question-answers-container">
         <SearchBar filterQuestionsList={this.filterQuestionsList} />
-        {/* TO DO: Add QuestionsList */}
-        {/* TO DO: Load More Questions/Add Querstios */}
-        <button id="load-question-button" type="button"> MORE ANSWERED QUESTIONS </button>
-        <button id="add-question-button" type="button"> ADD A QUESTION + </button>
-      </>
+        <QuestionsList
+          questions={this.state.questionsList}
+          handleYesClick={this.voteHelpfulQuestion} />
+        <div className="button-container">
+          {
+            (this.state.questionsList.length > 2) && (
+              <button
+                id="load-question-button"
+                type="button"
+                className="big-btn"
+                onClick={(e) => {
+                  this.loadMoreQuestions(e);
+                }}
+              > MORE QUESTIONS </button>
+            )
+          }
+          <button
+            id="add-question-button"
+            className="big-btn"
+            type="button"> ADD QUESTION </button>
+        </div>
+      </div>
     );
   }
 }

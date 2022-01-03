@@ -1,8 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
 $primary-color: white;
 $bg: black;
 $link-btn-color: rgb(27, 149, 197);
+$primary-font: 'Ubuntu', sans-serif;
+$heavy: 600;
+$smallfont: .9rem;
 $gray-text-color: rgb(69, 69, 69);
 $container-bg: whitesmoke;
+
+
+
+//util
+
+.heavy {
+  font-weight: 600;
+}
+
+.td-none {
+  text-decoration: none !important;
+}
+
+
 
 h1 {
   color: $primary-color;
@@ -346,6 +365,165 @@ h4 {
   }
 }
 
+/* Reviews ---------------------(end) */
+
+/* Questions ---------------------(start) */
+
+.question-answers-container {
+  padding: .25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+  margin: auto;
+
+  #search-bar-container{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+
+    label {
+      font-family: $primary-font;
+      margin-top: .5rem;
+      margin-bottom: .5rem;
+    }
+
+    #search-input{
+      height: 2.5rem;
+      width: 99%;
+      font-size: 1rem;
+      margin:0;
+      font-family: 600;
+    }
+  }
+
+  .question-container {
+    font-family: $primary-font;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: .25rem;
+    overflow: auto;
+
+    .question-body {
+      display: flex;
+      justify-content: space-between;
+
+      .help-container {
+        display: flex;
+        justify-content: space-between;
+        font-size: $smallfont;
+
+        a {
+          cursor: pointer;
+          margin-left: .25rem;
+          margin-right: .25rem;
+          text-decoration: underline;
+        }
+
+        button {
+          text-decoration: underline;
+          border: none;
+          background-color: inherit;
+          font-size: inherit;
+        }
+
+        button:disabled {
+          font-weight: 500;
+        }
+      }
+    }
+
+    .answer-list-container {
+      display: flex;
+      flex-direction: row;
+      margin-top: .75rem;
+
+        a {
+          cursor: pointer;
+        }
+    }
+
+      .answer-item {
+        display: flex;
+        flex-direction: column;
+
+        li {
+          list-style-type: none;
+          margin-bottom: .5rem;
+
+          .help-container {
+            display: flex;
+            justify-content: space-between;
+            font-size: .75rem;
+
+            a {
+              cursor: pointer;
+              margin-left: .25rem;
+              margin-right: .25rem;
+              text-decoration: underline;
+            }
+
+            button {
+              text-decoration: underline;
+              border: none;
+              background-color: inherit;
+              font-size: inherit;
+            }
+
+            button:disabled {
+              font-weight: 500;
+            }
+
+            span {
+              margin-left : .25rem;
+              margin-right : .25rem;
+            }
+        }
+
+        .photo-container {
+          display: flex;
+          flex-direction: row;
+          margin: auto;
+
+          img {
+            border: .1rem solid black;
+            margin-top: .5rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            max-height: 4rem;
+            max-width: auto;
+          }
+
+        }
+      }
+      #see-more-answers-btn {
+        font-size: .65rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .button-container {
+    margin: .5rem;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .big-btn {
+    cursor: pointer;
+    border: .1rem solid black;
+    padding: 1rem;
+  };
+
+}
+
+/* Questions ---------------------(end) */
+
+
+
+
+
 .reviewsBreakdown {
   float: left;
   padding: 20px;
@@ -378,8 +556,4 @@ h4 {
     color: $gray-text-color;
   }
 }
-/* Reviews ---------------------(end) */
 
-/* Questions ---------------------(start) */
-
-/* Questions ---------------------(end) */
