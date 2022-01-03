@@ -9,7 +9,9 @@ class CreateReview extends React.Component {
       recommended: null,
       characteristics: {}
     };
+    this.setRating = this.setRating.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   getSelectedIndex(form, name) {
@@ -19,6 +21,14 @@ class CreateReview extends React.Component {
       }
     }
     return null;
+  }
+
+  setRating(rating) {
+    this.setState({ rating });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
   }
 
   onChange({ target: { form } }) {
@@ -39,16 +49,28 @@ class CreateReview extends React.Component {
       characteristics[name] = this.getSelectedIndex(form, name);
     }
 
-    console.log(form);
+    const summary = form.summary.value;
+    const body = form.body.value;
+    const username = form.username.value;
+    const email = form.email.value;
+
     console.log(
       rating,
       recommended,
-      characteristics
+      characteristics,
+      summary,
+      body,
+      username,
+      email
     );
     this.setState({
       rating,
       recommended,
-      characteristics
+      characteristics,
+      summary,
+      body,
+      username,
+      email
     });
   }
 
@@ -83,7 +105,7 @@ class CreateReview extends React.Component {
         <form onSubmit={this.onSubmit} onChange={this.onChange}>
           <h2>Write a new review</h2>
           <label>Overall rating: *</label>
-          <StarInput rating={rating}/>
+          <StarInput rating={rating} setRating={this.setRating}/>
           <br></br>
           <label>Do you recommend this product? *</label>
           <div>
@@ -130,6 +152,7 @@ class CreateReview extends React.Component {
           <small>For authentication reasons, you will not be emailed</small>
           <br></br>
           <br></br>
+          <input type='submit'></input>
         </form>
       </div>
     );
