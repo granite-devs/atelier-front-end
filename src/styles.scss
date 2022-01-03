@@ -1,18 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
 $primary-color: white;
 $bg: black;
 $link-btn-color: rgb(27, 149, 197);
+$primary-font: 'Ubuntu', sans-serif;
+$heavy: 600;
+$smallfont: .9rem;
+$largefont: 1.2rem;
 $gray-text-color: rgb(69, 69, 69);
 $container-bg: whitesmoke;
 $related-gradient: linear-gradient(rgb(245, 245, 245), rgb(224, 224, 224));
 $related-shadow: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.26));
 $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 
-h1 {
-  color: $primary-color;
-  background-color: $bg;
+
+
+//util
+
+.heavy {
+  font-weight: 600;
 }
 
+.td-none {
+  text-decoration: none !important;
+}
+
+
 /* Overview ---------------------(start) */
+#overview {
+  width: 100%;
+  height: auto;
+}
+
 #overviewTop {
   display: flex;
   height: 34rem;
@@ -84,30 +103,28 @@ h1 {
 }
 
 #wrap {
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: center;
-  margin-left: 10vh;
-  margin-right: 10vh;
-  width: 50vh;
-  height: 60vh;
+  margin-left: 5.2rem;
+  margin-right: 5rem;
+  width: 20rem;
+  height: 25rem;
   overflow: hidden;
 }
 
 #main {
   position: absolute;
   cursor: zoom-in;
-  max-width: 100%;
-  min-height: 100%;
-  width: 50vh;
-  height: 60vh;
+  width: 20rem;
+  height: 25rem;
 }
 
 .btnFloating {
-  position: absolute;
+  position: relative;
   width: 20px;
   height: 20px;
-  top: 35%;
+  top: 50%;
   cursor: pointer;
 }
 
@@ -117,13 +134,13 @@ h1 {
 }
 
 #right {
-  display: flex;
+  display: absolute;
   align-items: 'end';
-  margin-left: 27rem;
+  margin-left: 23rem;
 }
 
 #left {
-  display: flex;
+  display: absolute;
   align-items: 'end';
   margin-left: 2.4rem;
 }
@@ -170,6 +187,10 @@ h1 {
   margin-bottom: 1rem;
 }
 
+#price {
+  font-style: italic;
+}
+
 #socialMedia {
   display: flex;
   position: absolute;
@@ -181,16 +202,16 @@ h1 {
 
 #styleSelector {
   position: absolute;
-  height: 12rem;
-  width: 100%;
+  height: 30rem;
+  width: 33.5vh;
   margin-left: 53.5rem;
   margin-top: 13rem;
 }
 
 #styleSelection {
   display: flex;
-  width: 100%;
-  height: 26vh;
+  width: 33.5vh;
+  height: 20vh;
   cursor: pointer;
 }
 
@@ -198,14 +219,98 @@ h1 {
   border-radius: 40px;
   margin-top: 1rem;
   margin-right: 1rem;
-  width: 7vh;
-  height: 7vh;
-  border: 8px solid rgba(238, 236, 236, 0.822);
+  width: 6vh;
+  height: 6vh;
 }
 
 #styleBottom {
   position: absolute;
-  margin-top: 5rem;
+  height: 2.5vh;
+  margin-top: 4rem;
+}
+
+#styleTop {
+  position: absolute;
+  height: 2.5vh;
+}
+
+#addToCart {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 48vh;
+  height: 10rem;
+  margin-left: 53.5rem;
+  margin-top: 24rem;
+}
+
+#size {
+  margin-right: 10px;
+  height: 5vh;
+  width: 25vh;
+  cursor: pointer;
+}
+
+#quantity {
+  height: 5vh;
+  width: 20vh;
+  cursor: pointer;
+}
+
+#addToCartButton {
+  position: relative;
+  background-color: black;
+  color: white;
+  margin-top: 20px;
+  margin-left: 50px;
+  height: 7vh;
+  width: 30vh;
+  border: solid;
+  cursor: pointer;
+}
+
+#addToCartButton:hover {
+  border: whitesmoke;
+}
+
+#addToCartModal, #addToCartModalOverlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+#addToCartModalOverlay {
+  background-color: rgba(168, 168, 168, 0.801);
+}
+
+#addToCartModalContent {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+#addToCartModalClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 7px;
+}
+
+#addToCartModalnotSelected, #addToCartModalSelected {
+  color: rgba(252, 101, 101, 0.589);
+  font-weight: bold;
+  font-style: italic;
 }
 
 /* Overview ---------------------(end) */
@@ -448,6 +553,237 @@ h4 {
   }
 }
 
+/* Reviews ---------------------(end) */
+
+/* Questions ---------------------(start) */
+
+.question-answers-container {
+  padding: .25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+  margin: auto;
+
+  #search-bar-container{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+
+    label {
+      font-family: $primary-font;
+      margin-top: .5rem;
+      margin-bottom: .5rem;
+    }
+
+    #search-input{
+      height: 2.5rem;
+      width: 99%;
+      font-size: 1rem;
+      margin:0;
+      font-family: 600;
+    }
+  }
+
+  .question-container {
+    font-family: $primary-font;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: .25rem;
+    overflow: auto;
+
+    .question-body {
+      display: flex;
+      justify-content: space-between;
+
+      .help-container {
+        display: flex;
+        justify-content: space-between;
+        font-size: $smallfont;
+
+        a {
+          cursor: pointer;
+          margin-left: .25rem;
+          margin-right: .25rem;
+          text-decoration: underline;
+        }
+
+        button {
+          text-decoration: underline;
+          border: none;
+          background-color: inherit;
+          font-size: inherit;
+        }
+
+        button:disabled {
+          font-weight: 500;
+        }
+      }
+    }
+
+    .answer-list-container {
+      display: flex;
+      flex-direction: row;
+      margin-top: .75rem;
+
+        a {
+          cursor: pointer;
+        }
+    }
+
+      .answer-item {
+        display: flex;
+        flex-direction: column;
+
+        .answer-label {
+          display: flex;
+        }
+
+        li {
+          list-style-type: none;
+          margin-bottom: .5rem;
+
+          .help-container {
+            display: flex;
+            justify-content: space-between;
+            font-size: .75rem;
+
+            a {
+              cursor: pointer;
+              margin-left: .25rem;
+              margin-right: .25rem;
+              text-decoration: underline;
+            }
+
+            button {
+              text-decoration: underline;
+              border: none;
+              background-color: inherit;
+              font-size: inherit;
+            }
+
+            button:disabled {
+              font-weight: 500;
+            }
+
+            span {
+              margin-left : .25rem;
+              margin-right : .25rem;
+            }
+        }
+
+        .photo-container {
+          display: flex;
+          flex-direction: row;
+          margin: auto;
+
+          img {
+            border: .1rem solid black;
+            margin-top: .5rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            max-height: 4rem;
+            max-width: auto;
+          }
+
+        }
+      }
+      #see-more-answers-btn {
+        font-size: .65rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .button-container {
+    margin: .5rem;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .big-btn {
+    cursor: pointer;
+    border: .1rem solid black;
+    padding: 1rem;
+  };
+
+}
+
+/* Question Modals */
+
+.modal {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  font-family: $primary-font;
+  font-size: $largefont;
+
+  h1 {
+    text-align: center;
+  }
+
+  .question-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: auto;
+    background-color: white;
+    height: 90%;
+    width: 90%;
+
+    .field-item {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin: 1rem;
+      font-size: $largefont;
+
+      input {
+        font-size: 1rem;
+        font-size: $largefont;
+      }
+    }
+  }
+
+  .answer-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: auto;
+    background-color: white;
+    height: 90%;
+    width: 90%;
+
+    .field-item {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin: .5rem;
+      font-size: $largefont;
+
+      input {
+        font-size: 1rem;
+        font-size: $largefont;
+      }
+    }
+  }
+
+
+}
+
+/* Questions ---------------------(end) */
+
+
+
+
+
 .reviewsBreakdown {
   float: left;
   padding: 20px;
@@ -480,8 +816,4 @@ h4 {
     color: $gray-text-color;
   }
 }
-/* Reviews ---------------------(end) */
 
-/* Questions ---------------------(start) */
-
-/* Questions ---------------------(end) */

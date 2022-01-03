@@ -100,7 +100,7 @@ class ProductCard extends React.Component {
           });
         })
         .catch((error) => {
-          console.log('HTTP request to fetch product prices failed');
+          console.error('HTTP request to fetch product prices failed');
         });
     }
   }
@@ -133,7 +133,7 @@ class ProductCard extends React.Component {
           this.setState({rating: ratingFraction});
         })
         .catch((error) => {
-          console.log('HTTP request to fetch product prices failed');
+          //console.log('HTTP request to fetch product rating failed');
         });
     }
   }

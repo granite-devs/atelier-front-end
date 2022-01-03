@@ -4,6 +4,8 @@ import Overview from './components/overview/Overview.jsx';
 import Reviews from './components/reviews/Reviews.jsx';
 import QuestionsAnswers from './components/questions/QuestionsAnswers.jsx';
 import Related from './components/related/Related.jsx';
+
+
 import API_KEY from './config.js';
 
 class App extends React.Component {
@@ -18,8 +20,11 @@ class App extends React.Component {
     this.removeItemFromOutfit = this.removeItemFromOutfit.bind(this);
   }
 
-  updateAppProductId(productId) {
-    this.setState({ productId });
+  updateAppProductId(productId) {   
+    this.setState({
+      productId: productId
+    });
+    
     window.scrollTo(0, 0);
   }
 
@@ -50,7 +55,9 @@ class App extends React.Component {
 
     axios(intializationConfig)
       .then((response) => {
-        this.setState({ productId: response.data[0].id }); // sets the id of the first prodcut in the list as the init id
+        this.setState({
+          productId: response.data[0].id,
+        }); // sets the id of the first prodcut in the list as the init id
       })
       .catch((error) => {
         console.log(error);
@@ -58,10 +65,16 @@ class App extends React.Component {
   }
 
   render() {
-    const { productId, outfitItems } = this.state;
+    const { productId } = this.state;
+
     return (
       <div>
         <Overview key={`${productId}-1`} productId={productId} />
+        <Reviews key={`${productId}-2`} productId={productId} />
+        <QuestionsAnswers
+          key={`${productId}-3`}
+          productId={productId}
+        />
         <Related
           key={`${productId}-4`}
           productId={productId}
@@ -73,8 +86,9 @@ class App extends React.Component {
         <QuestionsAnswers key={`${productId}-3`} productId={productId} />
         <Reviews key={`${productId}-2`} productId={productId} />
       </div>
-    );
+    )
   }
+
 }
 
 export default App;
