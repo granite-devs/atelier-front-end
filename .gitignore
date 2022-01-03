@@ -1,7 +1,4 @@
 node_modules
 dist/bundle.js
 src/config.js
-package-lock.json
-src/components/overview
-src/components/related
-src/components/reviews
+
