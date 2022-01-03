@@ -1,4 +1,8 @@
 node_modules
 dist/bundle.js
 src/config.js
+<<<<<<< HEAD
 package-lock.json
+=======
+package-lock.json
+>>>>>>> 3fec777410657deed65d09a75cb18463afe7f75f
