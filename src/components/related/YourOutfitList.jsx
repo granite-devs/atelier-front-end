@@ -19,7 +19,6 @@ class YourOutfitList extends React.Component {
   }
 
   handleAddToOutfitClick(productToAdd) {
-    console.log(productToAdd);
     this.props.addItemToOutfit(productToAdd);
   }
 

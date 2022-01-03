@@ -159,7 +159,7 @@ class ProductCard extends React.Component {
     return (
       <div className='card-modal-pair'>
         <div className={displayModal ? 'product-card selected' : 'product-card'}>
-          <ActionButton actionBtnClick={() => {this.actionBtnClick}}
+          <ActionButton actionBtnClick={this.actionBtnClick}
             currentList={currentList}/>
             <img className='card-img' src={primaryImg}
               onClick={() => { updateAppProductId(productCardId); }}></img>

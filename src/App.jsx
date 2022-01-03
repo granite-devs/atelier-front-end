@@ -20,6 +20,7 @@ class App extends React.Component {
 
   updateAppProductId(productId) {
     this.setState({ productId });
+    window.scrollTo(0, 0);
   }
 
   addItemToOutfit(productToAdd) {
@@ -39,7 +40,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-
     const intializationConfig = {
       method: 'get',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products',
@@ -62,8 +62,6 @@ class App extends React.Component {
     return (
       <div>
         <Overview key={`${productId}-1`} productId={productId} />
-        <Reviews key={`${productId}-2`} productId={productId} />
-        <QuestionsAnswers key={`${productId}-3`} productId={productId} />
         <Related
           key={`${productId}-4`}
           productId={productId}
@@ -72,6 +70,8 @@ class App extends React.Component {
           removeItemFromOutfit={this.removeItemFromOutfit}
           outfitItems={outfitItems}
         />
+        <QuestionsAnswers key={`${productId}-3`} productId={productId} />
+        <Reviews key={`${productId}-2`} productId={productId} />
       </div>
     );
   }
