@@ -24,6 +24,11 @@ $container-bg: whitesmoke;
 
 
 /* Overview ---------------------(start) */
+#overview {
+  width: 100%;
+  height: auto;
+}
+
 #overviewTop {
   display: flex;
   height: 34rem;
@@ -95,30 +100,28 @@ $container-bg: whitesmoke;
 }
 
 #wrap {
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: center;
-  margin-left: 10vh;
-  margin-right: 10vh;
-  width: 50vh;
-  height: 60vh;
+  margin-left: 5.2rem;
+  margin-right: 5rem;
+  width: 20rem;
+  height: 25rem;
   overflow: hidden;
 }
 
 #main {
   position: absolute;
   cursor: zoom-in;
-  max-width: 100%;
-  min-height: 100%;
-  width: 50vh;
-  height: 60vh;
+  width: 20rem;
+  height: 25rem;
 }
 
 .btnFloating {
-  position: absolute;
+  position: relative;
   width: 20px;
   height: 20px;
-  top: 35%;
+  top: 50%;
   cursor: pointer;
 }
 
@@ -128,13 +131,13 @@ $container-bg: whitesmoke;
 }
 
 #right {
-  display: flex;
+  display: absolute;
   align-items: 'end';
-  margin-left: 27rem;
+  margin-left: 23rem;
 }
 
 #left {
-  display: flex;
+  display: absolute;
   align-items: 'end';
   margin-left: 2.4rem;
 }
@@ -232,7 +235,7 @@ $container-bg: whitesmoke;
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 48vh;
   height: 10rem;
   margin-left: 53.5rem;
   margin-top: 24rem;
@@ -252,10 +255,10 @@ $container-bg: whitesmoke;
 }
 
 #addToCartButton {
-  position: absolute;
+  position: relative;
   background-color: black;
   color: white;
-  margin-top: 55px;
+  margin-top: 20px;
   margin-left: 50px;
   height: 7vh;
   width: 30vh;
