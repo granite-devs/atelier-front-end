@@ -5,15 +5,22 @@ const QuestionsList = (props) => {
 
   const filteredQuestions = props.questions.filter((question) => question.isVisible)
 
-  return filteredQuestions.map((question) => {
-    return (
-      <Question
-      key={ question.question_id }
-      question={ question }
-      handleYesQuestionClick={ props.handleYesQuestionClick }
-      />
-    )
-  })
+  return (
+    <div id='questions-list-component'>
+      {
+        filteredQuestions.map((question) => {
+          return (
+            <Question
+              key={question.question_id}
+              question={question}
+              handleYesQuestionClick={props.handleYesQuestionClick}
+            />
+          )
+        })
+      }
+    </div>
+  )
+
 };
 
 export default QuestionsList;
