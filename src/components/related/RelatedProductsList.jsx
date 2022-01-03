@@ -44,6 +44,14 @@ class RelatedProductsList extends React.Component {
     }
   }
 
+  handleLeftArrowClick() {
+    console.log('handle right arrow click fired');
+  }
+
+  handleRightArrowClick() {
+    console.log('handle right arrow click fired');
+  }
+
   render() {
     const { productId, productCardId, updateAppProductId,
       currentList, removeItemFromOutfit} = this.props;
@@ -51,14 +59,26 @@ class RelatedProductsList extends React.Component {
     return (
       <>
         <h3>Related Products</h3>
-        <div className='product-card-list'>
-        {this.state.relatedIds.map((relatedId, i) => {
-          return <ProductCard key={i}
-            currentList={currentList}
-            productId={productId}
-            productCardId={relatedId}
-            updateAppProductId={updateAppProductId} />
-        })}
+        <div id='related-list'>
+          <div className='related-arrow'
+            onClick={() => { this.handleLeftArrowClick() }}>
+            <img className='related-left-arrow'
+              src='https://i.ibb.co/r0GN44X/image.png'></img>
+          </div>
+          <div className='product-card-list'>
+            {this.state.relatedIds.map((relatedId, i) => {
+              return <ProductCard key={i}
+                currentList={currentList}
+                productId={productId}
+                productCardId={relatedId}
+                updateAppProductId={updateAppProductId} />
+            })}
+          </div>
+          <div className='related-arrow'
+            onClick={() => { this.handleRightArrowClick() }}>
+            <img className='related-right-arrow'
+              src='https://i.ibb.co/k3GTgnr/arrow-icon-1177.png'></img>
+          </div>
         </div>
       </>
     );
