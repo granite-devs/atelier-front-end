@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React from 'react';
+import API_KEY from '../../config.js';
 import StarInput from '../shared/StarInput.jsx';
 
 class CreateReview extends React.Component {
@@ -27,26 +29,126 @@ class CreateReview extends React.Component {
     this.setState({ rating });
   }
 
+  validateState() {
+    const {
+      rating,
+      recommended,
+      characteristics,
+      summary,
+      body,
+      username,
+      email
+    } = this.state;
+
+    const fails = {
+      failed: false
+    };
+
+    if (rating === 0) {
+      fails.rating = 'Please rate this product';
+      fails.failed = true;
+    }
+    if (recommended === null) {
+      fails.recommended = 'Please indicate whether you would recommend buying this product';
+      fails.failed = true;
+    }
+    const { characteristics: characteristicsObj } = this.props.reviewsMetaData;
+    for (let name in characteristicsObj) {
+      if (!characteristics[name]) {
+        fails[name] = `Please indicate the ${name.toLowerCase()} of the product`;
+        fails.failed = true;
+      }
+    }
+    if (body) {
+      if (body.length < 50) {
+        fails.body = 'Review body must be at least 50 characters';
+        fails.failed = true;
+      }
+      if (body.length > 1000) {
+        fails.body = 'Review body can be no longer than 1000 characters';
+        fails.failed = true;
+      }
+    } else {
+      fails.body = 'Please write a review body';
+      fails.failed = true;
+    }
+    if (username === null) {
+      fails.username = 'Please enter a name';
+      fails.failed = true;
+    }
+    if (email === null) {
+      fails.email = 'Please enter an email';
+      fails.failed = true;
+    }
+    return fails;
+  }
+
   onSubmit(e) {
     e.preventDefault();
     console.log(e);
+    const {
+      rating,
+      recommended,
+      characteristics,
+      summary,
+      body,
+      username,
+      email
+    } = this.state;
+    const {
+      product_id: productId,
+      characteristics: characteristicsObj
+    } = this.props.reviewsMetaData;
+
+    const validation = this.validateState();
+    console.log(this.props.reviewsMetaData);
+    if (validation.failed) {
+
+    } else {
+      const characteristicsData = {};
+      for (let name in characteristicsObj) {
+        characteristicsData[characteristicsObj[name].id] = characteristics[name];
+      }
+      const reviewPostBody = {
+        'product_id': parseInt(productId),
+        'rating': parseInt(rating),
+        'summary': summary,
+        'body': body,
+        'recommend': recommended,
+        'name': username,
+        'email': email,
+        'photos': [],
+        'characteristics': characteristicsData
+      };
+      console.log(reviewPostBody);
+
+      const postConfig = {
+        method: 'post',
+        url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews',
+        headers: {
+          Authorization: API_KEY,
+        },
+        data: reviewPostBody
+      };
+
+      axios(postConfig)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   onChange({ target: { form } }) {
     const rating = form[0].value;
     const recommended = form.yes.checked;
 
-    const characteristicsNames = [
-      'Size',
-      'Width',
-      'Comfort',
-      'Quality',
-      'Length',
-      'Fit'
-    ];
+    const { characteristics: characteristicsObj } = this.props.reviewsMetaData;
 
     const characteristics = {};
-    for (let name of characteristicsNames) {
+    for (let name in characteristicsObj) {
       characteristics[name] = this.getSelectedIndex(form, name);
     }
 
@@ -55,15 +157,6 @@ class CreateReview extends React.Component {
     const username = form.username.value;
     const email = form.email.value;
 
-    console.log(
-      rating,
-      recommended,
-      characteristics,
-      summary,
-      body,
-      username,
-      email
-    );
     this.setState({
       rating,
       recommended,
@@ -77,14 +170,11 @@ class CreateReview extends React.Component {
 
   render() {
 
-    const characteristicsNames = [
-      'Size',
-      'Width',
-      'Comfort',
-      'Quality',
-      'Length',
-      'Fit'
-    ];
+    const { characteristics: characteristicsObj } = this.props.reviewsMetaData;
+    const characteristicsNames = [];
+    for (let name in characteristicsObj) {
+      characteristicsNames.push(name);
+    }
 
     const characteristicsText = {
       'Size': ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
@@ -138,17 +228,17 @@ class CreateReview extends React.Component {
           <br></br>
           <label>Review body: *</label>
           <br></br>
-          <textarea id='body'></textarea>
+          <textarea id='body' maxLength={1000}></textarea>
           <br></br>
           <br></br>
           <label>Your nickname: *</label>
-          <input type='text' id='username' placeholder='Example: jackson11!'></input>
+          <input type='text' id='username' placeholder='Example: jackson11!' maxLength={60}></input>
           <br></br>
           <small>For privacy reasons, do not use your full name or email address</small>
           <br></br>
           <br></br>
           <label>Your email: *</label>
-          <input type='email' id='email' placeholder='Example:  jackson11@email.com'></input>
+          <input type='email' id='email' placeholder='Example:  jackson11@email.com' maxLength={60}></input>
           <br></br>
           <small>For authentication reasons, you will not be emailed</small>
           <br></br>

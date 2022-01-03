@@ -172,7 +172,10 @@ class Reviews extends React.Component {
       createReviewModal = (
         <div className='modal'>
           <div>
-            <CreateReview closeFn={(() => this.setState({creatingReview: false})).bind(this)}/>
+            <CreateReview
+              reviewsMetaData={this.state.reviewsMetaData}
+              closeFn={(() => this.setState({creatingReview: false})).bind(this)}
+            />
           </div>
         </div>
       );
@@ -195,7 +198,6 @@ class Reviews extends React.Component {
           <option value='helpful'>helpfulness</option>
         </select>
         <ReviewsList
-          loadMoreReviews={moreToLoad ? this.loadMoreReviews : null}
           reviews={this.state.filteredReviewsList}
         />
         {moreToLoad ? <button
