@@ -33,12 +33,11 @@ class Question extends React.Component {
     answer.isVisible = true;
     answer.helpfulness = 1;
 
-    console.log('This is the new answer ', answer)
-
     this.setState({
       answersList: [...answersList, answer],
       questionView: 'main'
     })
+
   }
 
   toggleAddAnswerModal(viewChange) {
