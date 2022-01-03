@@ -12,7 +12,8 @@ class RelatedProductsList extends React.Component {
 
     this.state = {
       relatedIds: [],
-      initialRequestMade: false
+      initialRequestMade: false,
+      indexesToShow: [0, 1, 2]
     }
 
     this.fetchRelatedIds = this.fetchRelatedIds.bind(this);
@@ -46,15 +47,21 @@ class RelatedProductsList extends React.Component {
 
   handleLeftArrowClick() {
     console.log('handle right arrow click fired');
+    this.setState({
+      indexesToShow: this.state.indexesToShow.map(index => { return index - 1; })
+    });
   }
 
   handleRightArrowClick() {
     console.log('handle right arrow click fired');
+    this.setState({
+      indexesToShow: this.state.indexesToShow.map(index => { return index + 1; })
+    });
   }
 
   render() {
     const { productId, productCardId, updateAppProductId,
-      currentList, removeItemFromOutfit} = this.props;
+      currentList, removeItemFromOutfit, indexesToShow} = this.props;
 
     return (
       <>
@@ -68,6 +75,7 @@ class RelatedProductsList extends React.Component {
           <div className='product-card-list'>
             {this.state.relatedIds.map((relatedId, i) => {
               return <ProductCard key={i}
+                hidden={!this.state.indexesToShow.includes(i)}
                 currentList={currentList}
                 productId={productId}
                 productCardId={relatedId}

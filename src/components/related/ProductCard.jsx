@@ -149,16 +149,16 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { productCardId, updateAppProductId, currentList } = this.props;
+    const { productCardId, updateAppProductId, currentList, hidden } = this.props;
     const { name, category, price, salePrice, rating,
-      displayModal, features, currentItemFeatures } = this.state;
+      features, currentItemFeatures } = this.state;
     let primaryImg = this.state.primaryImg;
 
     if (!primaryImg) { primaryImg = 'https://tinyurl.com/5nur3x7w'; }
 
     return (
       <div className='card-modal-pair'>
-        <div className={displayModal ? 'product-card selected' : 'product-card'}>
+        <div className={hidden ? 'product-card hidden' : 'product-card'}>
           <ActionButton actionBtnClick={this.actionBtnClick}
             currentList={currentList}/>
             <img className='card-img' src={primaryImg}
@@ -173,7 +173,7 @@ class ProductCard extends React.Component {
         </div>
         <CompareModal relatedItemName={name}
           relatedItemFeatures={features}
-          displayModal={displayModal}
+          //displayModal={displayModal}
           currentItemFeatures={currentItemFeatures} />
       </div>
     );

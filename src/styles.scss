@@ -368,16 +368,16 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 
   border: 1px solid black;
   border-radius: 10px;
-  transition-duration: 0.2s;
+  transition-duration: 0.5s;
 }
 .product-card:hover {
   cursor: pointer;
   background-color:rgb(252, 252, 252);
   filter: $related-shadow;
 }
-.selected {
-  background-color:rgb(243, 243, 243);
-  filter: $related-shadow;
+.product-card.hidden {
+  display: none;
+  width: 0rem;
 }
 
 h4 {
