@@ -105,7 +105,7 @@ const Overview = ({productId}) => {
   return (
     <>
       {state.currentStyle.name !== undefined && (
-        <>
+        <div id='overview'>
           <div id='overviewTop'>
             <ImageGallery state={state} updateState={updateState}/>
             <ProductInformation state={state} updateState={updateState}/>
@@ -116,7 +116,7 @@ const Overview = ({productId}) => {
           <div id='overviewBottom'>
             <ProductDesc state={state} updateState={updateState}/>
           </div>
-        </>
+        </div>
       )}
     </>
   );
