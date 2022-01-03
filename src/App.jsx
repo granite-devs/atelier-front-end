@@ -50,18 +50,18 @@ class App extends React.Component {
     return (
       <div>
         <Overview key={`${productId}-1`} productId={productId} />
-        <Reviews key={`${productId}-2`} productId={productId} />
-        <QuestionsAnswers
-          key={`${productId}-3`}
-          productId={productId}
-        />
         <Related
           key={`${productId}-4`}
           productId={productId}
           updateAppProductId={this.updateAppProductId}
         />
+        <QuestionsAnswers
+          key={`${productId}-3`}
+          productId={productId}
+        />
+        <Reviews key={`${productId}-2`} productId={productId} />
       </div>
-    )
+    );
   }
 
 }
