@@ -1,6 +1,6 @@
-const ActionButton = ({list, actionBtnClick}) => {
+const ActionButton = ({currentList, actionBtnClick}) => {
 
-  if (list === 'related') {
+  if (currentList === 'related') {
     return (
         <svg width="20" height="20"
           className='action-btn'
@@ -9,13 +9,23 @@ const ActionButton = ({list, actionBtnClick}) => {
           style={{
             fill: 'none',
             stroke: 'gray',
-            strokeWidth: 2,
-            fillRule: 'evenodd' //need?
+            strokeWidth: 2
           }} />
         </svg>
     );
   } else {
-    return <div></div>
+    return (
+      <svg width="20" height="20"
+        className='action-btn'
+        onClick={() => {actionBtnClick('yourOutfit')}}>
+      <path d="M0 2 2 0 9 7 16 0 18 2 11 9 18 16 16 18 9 11 2 18 0 16 7 9 0 2"
+        style={{
+          fill: 'gray',
+          stroke: 'gray',
+          strokeWidth: 2
+        }} />
+      </svg>
+  );
   }
 
 }

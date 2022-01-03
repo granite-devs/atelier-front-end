@@ -26,9 +26,7 @@ const CompareModal = ({relatedItemFeatures, relatedItemName,
                     </tr>
               })}
           </tbody>
-
         </table>
-
       </div>
     );
 
