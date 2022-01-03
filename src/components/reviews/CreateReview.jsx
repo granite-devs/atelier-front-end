@@ -29,6 +29,7 @@ class CreateReview extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
+    console.log(e);
   }
 
   onChange({ target: { form } }) {
@@ -153,6 +154,8 @@ class CreateReview extends React.Component {
           <br></br>
           <br></br>
           <input type='submit'></input>
+          <br></br>
+          <br></br>
         </form>
       </div>
     );
