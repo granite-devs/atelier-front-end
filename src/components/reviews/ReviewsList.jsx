@@ -23,10 +23,10 @@ class ReviewsList extends React.Component {
           className='moreReviewsBtn'
           onClick={() => loadMoreReviews()}
         >More Reviews</button> : null}
-        {loadMoreReviews ? <button
+        <button
           className='addReviewBtn'
           onClick={() => {}}
-        >Add Review</button> : null}
+        >Add Review</button>
       </div>
     );
   }

@@ -456,71 +456,6 @@ h4 {
 }
 /* Related ---------------------(end) */
 
-/* Reviews ---------------------(start) */
-// .reviews {
-//
-// }
-
-.reviewsHeader {
-  margin-left: 60px;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.reviewsListContainer {
-
-  .reviewsList {
-    max-height: 450px;
-    overflow-y: auto;
-  }
-
-  .moreReviewsBtn {
-    width: 120px;
-    height: 40px;
-    margin-left: 540px;
-    margin-right: 6px;
-  }
-
-  .addReviewBtn {
-    width: 120px;
-    height: 40px;
-    margin-left: 6px;
-  }
-}
-
-.reviewTile {
-  margin: 16px 10px;
-  padding: 10px 12px;
-  width: 50%;
-  min-width: 580px;
-  border: 1px solid black;
-  border-radius: 10px;
-  background-color: whitesmoke;
-
-  .name-date {
-    font-size: 14px;
-    color: $gray-text-color;
-    float: right;
-  }
-
-  h3 {
-    margin: 2px 0px;
-    font-size: 19px;
-  }
-
-  p {
-    word-wrap: break-word;
-  }
-
-  .showMoreBtn {
-    font-size: 15px;
-    color: $link-btn-color;
-    text-decoration: underline;
-  }
-}
-
-/* Reviews ---------------------(end) */
-
 /* Questions ---------------------(start) */
 
 .question-answers-container {
@@ -679,6 +614,8 @@ h4 {
 /* Question Modals */
 
 .modal {
+  z-index: 1;
+  overflow-y: scroll;
   display: flex;
   position: fixed;
   flex-direction: column;
@@ -747,8 +684,67 @@ h4 {
 /* Questions ---------------------(end) */
 
 
+/* Reviews ---------------------(start) */
+.reviews {
+  .moreReviewsBtn {
+    width: 120px;
+    height: 40px;
+    margin-left: 540px;
+    margin-right: 6px;
+  }
 
+  .addReviewBtn {
+    width: 120px;
+    height: 40px;
+    margin-left: 6px;
+  }
+}
 
+.reviewsHeader {
+  margin-left: 60px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.reviewsListContainer {
+
+  .reviewsList {
+    min-height: 100px;
+    max-height: 450px;
+    overflow-y: auto;
+  }
+}
+
+.reviewTile {
+  margin: 16px 10px;
+  padding: 10px 12px;
+  width: 50%;
+  min-width: 580px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: whitesmoke;
+
+  .name-date {
+    font-size: 14px;
+    color: $gray-text-color;
+    float: right;
+  }
+
+  h3 {
+    margin: 2px 0px;
+    font-size: 19px;
+  }
+
+  p {
+    word-wrap: break-word;
+  }
+
+  .showMoreBtn {
+    font-size: 15px;
+    color: $link-btn-color;
+    text-decoration: underline;
+  }
+}
 
 .reviewsBreakdown {
   float: left;
@@ -783,3 +779,58 @@ h4 {
   }
 }
 
+.createReview {
+  background-color: $container-bg;
+  padding: 0px 100px;
+
+  button {
+    margin-top: 20px;
+  }
+
+  label {
+    margin-right: 10px;
+  }
+
+  table {
+    width: 375px;
+  }
+
+  textarea {
+    width: 40%;
+    height: 200px;
+  }
+
+  td {
+    font-size: 14px;
+    font-weight: bold;
+
+    span {
+      display: inline-block;
+      width: 95px;
+      text-align: center;
+    }
+
+    input {
+      margin: 0 10px;
+    }
+  }
+}
+/* Reviews ---------------------(end) */
+
+/* Questions ---------------------(start) */
+
+/* Questions ---------------------(end) */
+
+/* Shared ---------------------(start) */
+.starInputContainer {
+  display: inline-block;
+
+  .inputStar {
+    display: inline-block;
+  }
+
+  .ratingText {
+    padding: 4px 5px;
+  }
+}
+/* Shared ---------------------(end) */
