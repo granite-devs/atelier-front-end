@@ -20,11 +20,11 @@ class App extends React.Component {
     this.removeItemFromOutfit = this.removeItemFromOutfit.bind(this);
   }
 
-  updateAppProductId(productId) {   
+  updateAppProductId(productId) {
     this.setState({
       productId: productId
     });
-    
+
     window.scrollTo(0, 0);
   }
 
@@ -39,7 +39,7 @@ class App extends React.Component {
   removeItemFromOutfit(productToRemove) {
     const filteredOutfitList = this.state.outfitItems.filter(item => {
       return productToRemove !== item;
-    })
+    });
 
     this.setState({outfitItems: filteredOutfitList});
   }
@@ -65,18 +65,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { productId } = this.state;
+    const { productId, outfitItems } = this.state;
 
     return (
       <div>
         <Overview key={`${productId}-1`} productId={productId} />
-        <Reviews key={`${productId}-2`} productId={productId} />
-        <QuestionsAnswers
-          key={`${productId}-3`}
-          productId={productId}
-        />
         <Related
-          key={`${productId}-4`}
+          key={`${productId}-2`}
           productId={productId}
           updateAppProductId={this.updateAppProductId}
           addItemToOutfit={this.addItemToOutfit}
@@ -84,9 +79,9 @@ class App extends React.Component {
           outfitItems={outfitItems}
         />
         <QuestionsAnswers key={`${productId}-3`} productId={productId} />
-        <Reviews key={`${productId}-2`} productId={productId} />
+        <Reviews key={`${productId}-4`} productId={productId} />
       </div>
-    )
+    );
   }
 
 }
