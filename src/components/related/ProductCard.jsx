@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import API_KEY from '../../config.js';
+
 import StarRating from '../shared/StarRating.jsx';
+import ActionButton from './ActionButton.jsx';
+import CompareModal from './CompareModal.jsx';
 
 class ProductCard extends React.Component {
   constructor(props) {
@@ -14,17 +17,23 @@ class ProductCard extends React.Component {
       salePrice: '...',
       rating: null,
       primaryImg: null,
+      features: [],
+      displayModal: false,
+      currentItemFeatures: {name: '', features: []},
       initialRequestMade: false
     }
+    this.actionBtnClick = this.actionBtnClick.bind(this);
   }
 
   componentDidMount() {
-    this.fetchProductInfo(this.props.productCardId);
-    this.fetchProductPricePics(this.props.productCardId);
-    this.fetchProductRating(this.props.productCardId);
+    const { productCardId, productId } = this.props;
+    this.fetchProductInfo(productCardId, 'currentRelatedItem');
+    this.fetchProductInfo(productId, 'currentItem');
+    this.fetchProductPricePics(productCardId);
+    this.fetchProductRating(productCardId);
   }
 
-  fetchProductInfo (productIdToGet) {
+  fetchProductInfo(productIdToGet, stateToUpdate) {
     const { initialRequestMade } = this.state;
 
     if (!initialRequestMade) {
@@ -38,8 +47,30 @@ class ProductCard extends React.Component {
 
       axios(infoRequestConfig)
         .then((response) => {
-          this.setState({name: response.data.name,
-            category: response.data.category});
+          const { name, category } = response.data;
+          let features = response.data.features;
+
+          if (stateToUpdate === 'currentRelatedItem') {
+            features.forEach(feature => {
+              feature['belongsTo'] = 'relatedItem';
+            });
+
+            this.setState({
+              name: name,
+              category: category,
+              features: features
+            });
+          }
+
+          if (stateToUpdate === 'currentItem') {
+            features.forEach(feature => {
+              feature['belongsTo'] = 'currentItem';
+            });
+
+            this.setState({
+              currentItemFeatures: {name: name, features: features}
+            });
+          }
         })
         .catch((error) => {
           console.log('HTTP request to fetch product info failed');
@@ -47,7 +78,7 @@ class ProductCard extends React.Component {
     }
   }
 
-  fetchProductPricePics (productIdToGet) {
+  fetchProductPricePics(productIdToGet) {
     const { initialRequestMade } = this.state;
 
     if (!initialRequestMade) {
@@ -69,12 +100,12 @@ class ProductCard extends React.Component {
           });
         })
         .catch((error) => {
-          console.log('HTTP request to fetch product prices failed');
+          console.error('HTTP request to fetch product prices failed');
         });
     }
   }
 
-  fetchProductRating (productIdToGet) {
+  fetchProductRating(productIdToGet) {
     const { initialRequestMade } = this.state;
 
     if (!initialRequestMade) {
@@ -102,14 +133,23 @@ class ProductCard extends React.Component {
           this.setState({rating: ratingFraction});
         })
         .catch((error) => {
-          console.log('HTTP request to fetch product prices failed');
+          //console.log('HTTP request to fetch product rating failed');
         });
+    }
+  }
+
+  actionBtnClick(buttonLocation) {
+    if (buttonLocation === 'relatedList') {
+      console.log(`related action button for ${this.state.name} clicked`);
+
+      this.setState({displayModal: !this.state.displayModal});
     }
   }
 
   render() {
     const { productCardId, updateAppProductId } = this.props;
-    const { name, category, price, salePrice, rating } = this.state;
+    const { name, category, price, salePrice, rating,
+      displayModal, features, currentItemFeatures } = this.state;
     let primaryImg = this.state.primaryImg;
 
     if (!primaryImg) {
@@ -117,16 +157,24 @@ class ProductCard extends React.Component {
     }
 
     return (
-      <div className='product-card'
-        onClick={() => { updateAppProductId(productCardId); }}>
-        <img className='card-img' src={primaryImg}></img>
-        <div className='card-info'>
-          <p className='card-category'>{category}</p>
-          <h4 className='card-name'>{name}</h4>
-          <p className='card-price'>{'$'}{price}</p>
-          <p className='card-sale'>{salePrice}</p>
+      <div className='card-modal-pair'>
+        <div className={displayModal ? 'product-card selected' : 'product-card'}>
+          <ActionButton actionBtnClick={this.actionBtnClick}
+            list={'related'}/>
+            <img className='card-img' src={primaryImg}
+              onClick={() => { updateAppProductId(productCardId); }}></img>
+            <div className='card-info' onClick={() => { updateAppProductId(productCardId); }}>
+              <p className='card-category'>{category}</p>
+              <h4 className='card-name'>{name}</h4>
+              <p className='card-price'>{'$'}{price}</p>
+              <p className='card-sale'>{salePrice}</p>
+            </div>
+            <StarRating className='card-rating' rating={rating}/>
         </div>
-        <StarRating className='card-rating' rating={rating}/>
+        <CompareModal relatedItemName={name}
+          relatedItemFeatures={features}
+          displayModal={displayModal}
+          currentItemFeatures={currentItemFeatures} />
       </div>
     );
   }
