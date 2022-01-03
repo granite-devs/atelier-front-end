@@ -140,27 +140,27 @@ class ProductCard extends React.Component {
 
   actionBtnClick(buttonLocation) {
     if (buttonLocation === 'relatedList') {
-      console.log(`related action button for ${this.state.name} clicked`);
-
       this.setState({displayModal: !this.state.displayModal});
+    }
+
+    if (buttonLocation === 'yourOutfit') {
+      this.props.removeItemFromOutfit(this.props.productCardId);
     }
   }
 
   render() {
-    const { productCardId, updateAppProductId } = this.props;
+    const { productCardId, updateAppProductId, currentList } = this.props;
     const { name, category, price, salePrice, rating,
       displayModal, features, currentItemFeatures } = this.state;
     let primaryImg = this.state.primaryImg;
 
-    if (!primaryImg) {
-      primaryImg = 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png';
-    }
+    if (!primaryImg) { primaryImg = 'https://tinyurl.com/5nur3x7w'; }
 
     return (
       <div className='card-modal-pair'>
         <div className={displayModal ? 'product-card selected' : 'product-card'}>
           <ActionButton actionBtnClick={this.actionBtnClick}
-            list={'related'}/>
+            currentList={currentList}/>
             <img className='card-img' src={primaryImg}
               onClick={() => { updateAppProductId(productCardId); }}></img>
             <div className='card-info' onClick={() => { updateAppProductId(productCardId); }}>

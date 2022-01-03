@@ -3,6 +3,7 @@ import axios from 'axios';
 import API_KEY from '../../config.js';
 import ReviewsList from './ReviewsList.jsx';
 import ReviewsBreakdown from './ReviewsBreakdown.jsx';
+import CreateReview from './CreateReview.jsx';
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -17,7 +18,8 @@ class Reviews extends React.Component {
       reviewsLoaded: 0,
       moreToLoad: true,
       isLoading: false,
-      sortOrder: 'relevant'
+      sortOrder: 'relevant',
+      creatingReview: false
     };
     this.loadMoreReviews = this.loadMoreReviews.bind(this);
     this.setFilter = this.setFilter.bind(this);
@@ -163,12 +165,26 @@ class Reviews extends React.Component {
 
   render() {
     const { name } = this.props;
-    const { moreToLoad, reviewCount } = this.state;
+    const { moreToLoad, reviewCount, creatingReview } = this.state;
+
+    let createReviewModal;
+    if (creatingReview) {
+      createReviewModal = (
+        <div className='modal'>
+          <div>
+            <CreateReview closeFn={(() => this.setState({creatingReview: false})).bind(this)}/>
+          </div>
+        </div>
+      );
+    } else {
+      createReviewModal = null;
+    }
+
     return (
       <div className='reviews'>
-        <h1>
+        <h3>
           Ratings &amp; Reviews {name}
-        </h1>
+        </h3>
         <ReviewsBreakdown
           reviewsMetaData={this.state.reviewsMetaData}
         />
@@ -182,6 +198,15 @@ class Reviews extends React.Component {
           loadMoreReviews={moreToLoad ? this.loadMoreReviews : null}
           reviews={this.state.filteredReviewsList}
         />
+        {moreToLoad ? <button
+          className='moreReviewsBtn'
+          onClick={() => this.loadMoreReviews()}
+        >More Reviews</button> : null}
+        <button
+          className='addReviewBtn'
+          onClick={() => this.setState({creatingReview: true})}
+        >Add Review</button>
+        {createReviewModal}
       </div>
     );
   }

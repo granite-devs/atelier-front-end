@@ -23,6 +23,9 @@ class ReviewsBreakdown extends React.Component {
         ratingsArray.push(rating);
       }
       ratingsArray.reverse();
+      if (reviewCount === 0) {
+        return null;
+      }
       const avgRating = Math.round(ratingsSum / reviewCount * 10) / 10;
       const recommendPercentage = Math.round((recommended.true / reviewCount) * 100);
       return (
