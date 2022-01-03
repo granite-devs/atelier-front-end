@@ -6,6 +6,7 @@ $link-btn-color: rgb(27, 149, 197);
 $primary-font: 'Ubuntu', sans-serif;
 $heavy: 600;
 $smallfont: .9rem;
+$largefont: 1.2rem;
 $gray-text-color: rgb(69, 69, 69);
 $container-bg: whitesmoke;
 
@@ -21,12 +22,6 @@ $container-bg: whitesmoke;
   text-decoration: none !important;
 }
 
-
-
-h1 {
-  color: $primary-color;
-  background-color: $bg;
-}
 
 /* Overview ---------------------(start) */
 #overviewTop {
@@ -607,6 +602,10 @@ h4 {
         display: flex;
         flex-direction: column;
 
+        .answer-label {
+          display: flex;
+        }
+
         li {
           list-style-type: none;
           margin-bottom: .5rem;
@@ -674,6 +673,74 @@ h4 {
     border: .1rem solid black;
     padding: 1rem;
   };
+
+}
+
+/* Question Modals */
+
+.modal {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  font-family: $primary-font;
+  font-size: $largefont;
+
+  h1 {
+    text-align: center;
+  }
+
+  .question-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: auto;
+    background-color: white;
+    height: 90%;
+    width: 90%;
+
+    .field-item {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin: 1rem;
+      font-size: $largefont;
+
+      input {
+        font-size: 1rem;
+        font-size: $largefont;
+      }
+    }
+  }
+
+  .answer-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: auto;
+    background-color: white;
+    height: 90%;
+    width: 90%;
+
+    .field-item {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin: .5rem;
+      font-size: $largefont;
+
+      input {
+        font-size: 1rem;
+        font-size: $largefont;
+      }
+    }
+  }
+
 
 }
 

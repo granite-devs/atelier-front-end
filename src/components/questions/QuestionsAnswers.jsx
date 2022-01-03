@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import SearchBar from './SearchBar.jsx';
-import QuestionsList from './QuestionsList.jsx'
+import QuestionsList from './QuestionsList.jsx';
+import AddQuestionModal from './modals/AddQuestionModal.jsx';
 import API_KEY from '../../config';
 
 class QuestionsAnswers extends React.Component {
@@ -14,6 +15,32 @@ class QuestionsAnswers extends React.Component {
     this.voteHelpfulQuestion = this.voteHelpfulQuestion.bind(this);
     this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
     this.setTwoQuestionsVisable = this.setTwoQuestionsVisable.bind(this);
+    this.toggleQuestionsModal = this.toggleQuestionsModal.bind(this);
+    this.addQuestion = this.addQuestion.bind(this);
+  }
+
+  addQuestion(question) {
+
+    const { questionsList } = this.state;
+    const lastQuestion = questionsList[questionsList.length - 1];
+    const lastQuestionId = lastQuestion.question_id;
+    const nextQuestionId = lastQuestionId + 1;
+
+    question.question_id = nextQuestionId;
+
+    const updatedQuestionsList = [...questionsList, question]
+
+    this.setState({
+      questionsList: updatedQuestionsList,
+      view: 'main'
+    })
+  }
+
+  toggleQuestionsModal(viewChange) {
+    this.setState({
+      questionsList: this.state.questionsList,
+      view: viewChange
+    })
   }
 
   filterQuestionsList(term) {
@@ -52,7 +79,7 @@ class QuestionsAnswers extends React.Component {
     }
   }
 
-  loadMoreQuestions(e) {
+  loadMoreQuestions() {
 
     const button = document.querySelector('#load-question-button')
 
@@ -98,7 +125,10 @@ class QuestionsAnswers extends React.Component {
       axios(questionConfig)
         .then((res) => {
           const mappedQuestions = this.setTwoQuestionsVisable(res.data.results);
-          this.setState({ questionsList: mappedQuestions })
+          this.setState({
+            questionsList: mappedQuestions,
+            view: 'question-main',
+          })
         })
         .catch((error) => {
           console.error(error);
@@ -106,14 +136,16 @@ class QuestionsAnswers extends React.Component {
     }
   }
 
-
   render() {
-    return (
+
+    const QuestionsAnswersComponent = (
       <div className="question-answers-container">
         <SearchBar filterQuestionsList={this.filterQuestionsList} />
         <QuestionsList
           questions={this.state.questionsList}
-          handleYesClick={this.voteHelpfulQuestion} />
+          handleYesQuestionClick={this.voteHelpfulQuestion}
+          changeView={this.changeView}
+        />
         <div className="button-container">
           {
             (this.state.questionsList.length > 2) && (
@@ -122,18 +154,45 @@ class QuestionsAnswers extends React.Component {
                 type="button"
                 className="big-btn"
                 onClick={(e) => {
-                  this.loadMoreQuestions(e);
+                  this.loadMoreQuestions();
                 }}
-              > MORE QUESTIONS </button>
+              > MORE QUESTIONS
+              </button>
             )
           }
           <button
             id="add-question-button"
             className="big-btn"
-            type="button"> ADD QUESTION </button>
+            type="button"
+            onClick={() => {
+              this.toggleQuestionsModal('AddQuestionModal')
+            }}> ADD QUESTION
+          </button>
         </div>
       </div>
     );
+
+    switch (this.state.view) {
+
+      case 'AddQuestionModal':
+        return (
+          <>
+            <AddQuestionModal
+              productId={this.props.productId}
+              toggleQuestionsModal={this.toggleQuestionsModal}
+              addQuestion={this.addQuestion}
+            />
+            {QuestionsAnswersComponent}
+          </>
+        )
+
+      default:
+        return (
+          <>
+            {QuestionsAnswersComponent}
+          </>
+        );
+    }
   }
 }
 
