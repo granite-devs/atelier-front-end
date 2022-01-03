@@ -24,6 +24,7 @@ class Reviews extends React.Component {
     this.loadMoreReviews = this.loadMoreReviews.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.handleSortChange = this.handleSortChange.bind(this);
+    this.onReviewSubmitted = this.onReviewSubmitted.bind(this);
   }
 
   componentDidMount() {
@@ -156,6 +157,13 @@ class Reviews extends React.Component {
     }
   }
 
+  onReviewSubmitted() {
+    const { reviewsLoaded } = this.state;
+    this.fetchReviews(1, reviewsLoaded, [], () => {
+      this.setState({creatingReview: false});
+    });
+  }
+
   handleSortChange({ target }) {
     const { reviewsLoaded } = this.state;
     this.setState({ sortOrder: target.value, reviewsList: [] }, () => {
@@ -174,6 +182,7 @@ class Reviews extends React.Component {
           <div>
             <CreateReview
               reviewsMetaData={this.state.reviewsMetaData}
+              onReviewSubmitted={this.onReviewSubmitted}
               closeFn={(() => this.setState({creatingReview: false})).bind(this)}
             />
           </div>

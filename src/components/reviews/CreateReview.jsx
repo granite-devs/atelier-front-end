@@ -133,7 +133,7 @@ class CreateReview extends React.Component {
 
       axios(postConfig)
         .then((response) => {
-          console.log(response);
+          this.props.onReviewSubmitted();
         })
         .catch((error) => {
           console.log(error);
