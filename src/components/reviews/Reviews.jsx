@@ -179,13 +179,11 @@ class Reviews extends React.Component {
     if (creatingReview) {
       createReviewModal = (
         <div className='modal'>
-          <div>
-            <CreateReview
-              reviewsMetaData={this.state.reviewsMetaData}
-              onReviewSubmitted={this.onReviewSubmitted}
-              closeFn={(() => this.setState({creatingReview: false})).bind(this)}
-            />
-          </div>
+          <CreateReview
+            reviewsMetaData={this.state.reviewsMetaData}
+            onReviewSubmitted={this.onReviewSubmitted}
+            closeFn={(() => this.setState({creatingReview: false})).bind(this)}
+          />
         </div>
       );
     } else {

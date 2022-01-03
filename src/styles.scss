@@ -817,7 +817,9 @@ h4 {
 
 .createReview {
   background-color: $container-bg;
-  padding: 0px 100px;
+  margin: 50px;
+  padding: 0px 50px;
+  overflow-y: scroll;
 
   button {
     margin-top: 20px;
