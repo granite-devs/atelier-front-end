@@ -18,7 +18,8 @@ class Reviews extends React.Component {
       reviewsLoaded: 0,
       moreToLoad: true,
       isLoading: false,
-      sortOrder: 'relevant'
+      sortOrder: 'relevant',
+      creatingReview: false
     };
     this.loadMoreReviews = this.loadMoreReviews.bind(this);
     this.setFilter = this.setFilter.bind(this);
@@ -164,7 +165,21 @@ class Reviews extends React.Component {
 
   render() {
     const { name } = this.props;
-    const { moreToLoad, reviewCount } = this.state;
+    const { moreToLoad, reviewCount, creatingReview } = this.state;
+
+    let createReviewModal;
+    if (creatingReview) {
+      createReviewModal = (
+        <div className='modal'>
+          <div>
+            <CreateReview closeFn={(() => this.setState({creatingReview: false})).bind(this)}/>
+          </div>
+        </div>
+      );
+    } else {
+      createReviewModal = null;
+    }
+
     return (
       <div className='reviews'>
         <h3>
@@ -183,8 +198,15 @@ class Reviews extends React.Component {
           loadMoreReviews={moreToLoad ? this.loadMoreReviews : null}
           reviews={this.state.filteredReviewsList}
         />
-        {/* TODO REMOVE ME */}
-        <CreateReview />
+        {moreToLoad ? <button
+          className='moreReviewsBtn'
+          onClick={() => this.loadMoreReviews()}
+        >More Reviews</button> : null}
+        <button
+          className='addReviewBtn'
+          onClick={() => this.setState({creatingReview: true})}
+        >Add Review</button>
+        {createReviewModal}
       </div>
     );
   }
