@@ -11,6 +11,8 @@ import Overview from '../src/components/overview/Overview.jsx';
 import ProductInformation from '../src/components/overview/ProductInformation/ProductInformation.jsx';
 import ProductDesc from '../src/components/overview/ProductInformation/ProductDesc.jsx';
 import StyleSelector from '../src/components/overview/StyleSelector/StyleSelector.jsx';
+import AddToCart from '../src/components/overview/AddToCart/AddToCart.jsx';
+import SizeAndQuantitySelector from '../src/components/overview/AddToCart/SizeAndQuantitySelector.jsx';
 
 let exampleData = {
   selectedStyleDefaultImages: [
@@ -41,6 +43,7 @@ describe('DefaultView component', () => {
   it('should render a page successfully', () => {
     const wrapper = shallow(<DefaultView state={exampleData}/>);
     expect(wrapper.length).toBe(1);
+    console.log(wrapper.debug());
   });
 
   it('render the main page correctly', () => {
@@ -95,4 +98,22 @@ describe('Overview Style Selector Component', () => {
     expect(wrapper.length).toBe(1);
   });
 
+});
+
+describe('Overview AddToCart Component', () => {
+
+  it('AddToCart page should render a page successfully', () => {
+    const wrapper = shallow(<AddToCart state={exampleData}/>);
+    expect(wrapper.length).toBe(1);
+  });
+
+  it('SizeAndQuantitySelector should render a page successfully', () => {
+    const wrapper = shallow(<SizeAndQuantitySelector state={exampleData}/>);
+    expect(wrapper.length).toBe(1);
+  });
+
+  it('should display Select Size as default option', () => {
+    const wrapper = shallow(<SizeAndQuantitySelector state={exampleData}/>);
+    expect(wrapper.find('#SizeDefault').text()).toEqual('Select Size');
+  });
 });
