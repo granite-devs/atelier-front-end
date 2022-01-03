@@ -45,7 +45,8 @@ class RelatedProductsList extends React.Component {
   }
 
   render() {
-    const { productId, productCardId, updateAppProductId} = this.props;
+    const { productId, productCardId, updateAppProductId,
+      currentList, removeItemFromOutfit} = this.props;
 
     return (
       <>
@@ -53,9 +54,10 @@ class RelatedProductsList extends React.Component {
         <div className='product-card-list'>
         {this.state.relatedIds.map((relatedId, i) => {
           return <ProductCard key={i}
-              productId={productId}
-              productCardId={relatedId}
-              updateAppProductId={updateAppProductId} />
+            currentList={currentList}
+            productId={productId}
+            productCardId={relatedId}
+            updateAppProductId={updateAppProductId} />
         })}
         </div>
       </>

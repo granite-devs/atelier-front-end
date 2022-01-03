@@ -6,8 +6,8 @@ const SocialMedia = ({state, updateState}) => {
     <>
       <div id='socialMedia'>
         <img src='https://cdn-icons-png.flaticon.com/512/174/174855.png' style={{marginRight: '8px'}}></img>
-        <img src='https://cdn-icons.flaticon.com/png/512/3256/premium/3256013.png?token=exp=1640928080~hmac=6077844553ddfcf35080cbcd04b05f67' style={{marginRight: '8px'}}></img>
-        <img src='https://cdn-icons.flaticon.com/png/512/3536/premium/3536559.png?token=exp=1640928109~hmac=ee95748e34aaa41a4c09b24da7d55c69'></img>
+        <img src='https://cdn.cdnlogo.com/logos/t/96/twitter-icon.svg' style={{marginRight: '8px'}}></img>
+        <img src='https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Pinterest_colored_svg-1024.png'></img>
       </div>
     </>
   );
