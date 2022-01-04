@@ -13,7 +13,7 @@ class RelatedProductsList extends React.Component {
     this.state = {
       relatedIds: [],
       initialRequestMade: false,
-      indexesToShow: [0, 1, 2],
+      indexesToShow: [0],
       showLeftArrow: false,
       showRightArrow: true
     }

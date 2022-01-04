@@ -12,7 +12,7 @@ class YourOutfitList extends React.Component {
 
     this.state = {
       initialRequestMade: false,
-      indexesToShow: [0, 1, 2],
+      indexesToShow: [0],
       showLeftArrow: false,
       showRightArrow: true
     }
@@ -44,7 +44,6 @@ class YourOutfitList extends React.Component {
   }
 
   handleLeftArrowClick() {
-    console.log('handle left arrow click fired');
     const { indexesToShow } = this.state;
     const { outfitItems } = this.props;
     let { showLeftArrow, showRightArrow } = this.state;
@@ -65,8 +64,6 @@ class YourOutfitList extends React.Component {
   }
 
   handleRightArrowClick() {
-    console.log('handle right arrow click fired');
-
     const { indexesToShow } = this.state;
     const { outfitItems } = this.props;
     let { showLeftArrow, showRightArrow } = this.state;
@@ -87,11 +84,10 @@ class YourOutfitList extends React.Component {
 
   }
 
-
   handleAddToOutfitClick(productToAdd) {
     this.props.addItemToOutfit(productToAdd);
+    this.computeIndexesToShow();
   }
-
 
   render() {
     const { productId, productCardId, updateAppProductId,

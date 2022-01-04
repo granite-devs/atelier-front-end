@@ -318,11 +318,13 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 /* Related ---------------------(start) */
 .related-module {
   width: auto;
-  background: rgb(212, 212, 212);
+  border-top: 1px solid rgb(168, 168, 168);
+  border-bottom: 1px solid rgb(168, 168, 168);
 }
 
-.related-list h3 {
-  margin: 0px;
+.related-module h3 {
+  margin: 0rem;
+  padding: 0rem;
 }
 
 #related-list, #outfit-list {
