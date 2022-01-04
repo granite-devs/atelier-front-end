@@ -1,13 +1,17 @@
 const CompareModal = ({relatedItemFeatures, relatedItemName,
-  displayModal, currentItemFeatures}) => {
+  displayModal, currentItemFeatures, actionBtnClick}) => {
     return (
-      <div className={displayModal ? 'compare modal-show' : 'compare modal-hide'}>
-        <h5 className='compare-title'>Comparing</h5>
+      <div className={displayModal ? 'compare modal-show' : 'compare modal-hide'}
+        onClick={() => { actionBtnClick('relatedList') } }>
+        <div className='compare-header'>
+          <p className='compare-title'>Comparing</p>
+          <p className='compare-exit'>X</p>
+        </div>
         <table className='compare-table'>
           <thead>
             <tr>
               <th>{currentItemFeatures.name}</th>
-              <th>Feature</th>
+              <th></th>
               <th>{relatedItemName}</th>
             </tr>
           </thead>

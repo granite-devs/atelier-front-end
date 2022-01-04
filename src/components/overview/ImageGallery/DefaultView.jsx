@@ -6,10 +6,10 @@ const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handl
   if (state.currentStyle) {
     displayStyleImages =
       <div className='styleImages'>
-        {state.currentStyle.photos.map((element, idx) => { //render all style photos
+        {state.currentStyle.photos.map((element, index) => { //render all style photos
           return <img
-            id={idx}
-            key={idx}
+            id={index}
+            key={index}
             className='eachStyleImage'
             onClick={updateMainImage}
             src={element.url}/>;
