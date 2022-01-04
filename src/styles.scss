@@ -17,6 +17,10 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 
 //util
 
+body {
+  font-family: $primary-font;
+}
+
 .heavy {
   font-weight: 600;
 }
@@ -334,8 +338,9 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 }
 
 .related-module h3 {
-  margin: 0rem;
-  padding: 0rem;
+  margin: 0;
+  padding-top: 1rem;
+  font-weight: $heavy;
 }
 
 #related-list, #outfit-list {
@@ -395,7 +400,6 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
   margin: 5px;
 
   border: 1px solid black;
-  border-radius: 10px;
   transition-duration: 0.5s;
 }
 .product-card:hover {
@@ -407,44 +411,38 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
   display: none;
 }
 
-h4 {
-  margin: 5px;
-}
-
 .card-img {
   position: relative;
   width: 100%;
   height: 60%;
   border-bottom: 1px solid black;
-  border-radius: 10px 10px 0px 0px;
   z-index: 2;
 }
 
+.product-card p {
+  padding-bottom: .2rem;
+}
 .card-info {
   display: flex;
   flex-direction: column;
   padding: 3px;
 }
-
 .card-category {
   margin: 0px;
   text-transform: uppercase;
-  font-size: 2vh;
+  font-size: 1.5vh;
 }
-
 .card-name {
   margin: 0px;
-  font-size: 3vh;
+  font-size: 2.2vh;
+  font-weight: bold;
 }
-
 .card-price {
   margin: 0px;
 }
-
 .card-sale {
   margin: 0px;
 }
-
 .card-rating {
   align-self: flex-end;
 }
@@ -457,31 +455,66 @@ h4 {
   filter: $related-shadow-white;
 }
 
-.card-modal-pair {
-  display: flex;
-  flex-direction: row;
+.compare:hover {
+  cursor: pointer;
 }
 
-.compare {
+.modal-hide {
+  opacity: 0;
+  width: 0rem;
+  height: 0rem;
+  padding: 0rem;
+}
+
+.modal-show {
+  width: 40vw;
+  min-width: 20rem;
+  left: 25vw;
+  top: .3rem;
+
+  position: absolute;
+  display: block;
   margin-top: .5rem;
   padding: 1rem;
   height: 17rem;
   overflow-y: scroll;
   background-color: $container-bg;
   border: 1px solid gray;
-  transition-duration: 1s;
+  transition-duration: .5s;
+  z-index: 5;
+  filter: $related-shadow;
+}
+
+.compare-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.compare-title, .compare-exit {
+  margin: 0rem;
+  text-transform: uppercase;
+  padding-bottom: 1.5rem;
 }
 
 .compare-title {
-  margin-top: 0rem;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
+  padding-top: .1rem;
+}
+
+.compare-exit {
+  font-family: verdana;
+  color: gray;
+}
+.compare-exit:hover {
+  color: rgb(71, 71, 71);
 }
 
 .compare-table {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+  width: 95%;
 }
 
 .compare-table th {
@@ -501,18 +534,6 @@ h4 {
   width: 8rem;
 }
 
-.modal-hide {
-  opacity: 0;
-  left: -12rem;
-  width: 0rem;
-  padding: 0px;
-}
-
-.modal-show {
-  width: 22rem;
-  left: 11.5rem;
-}
-
 .add-outfit-card {
   background: transparent;
   border: none;
@@ -528,7 +549,6 @@ h4 {
   margin: 5px;
 
   border: 1px solid gray;
-  border-radius: 10px;
   transition-duration: 0.5s;
 }
 
