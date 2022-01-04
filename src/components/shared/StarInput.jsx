@@ -45,7 +45,10 @@ class StarInput extends React.Component {
         {ratingFractions.map((fraction, i) => (
           <div
             key={i}
-            onClick={() => this.setRating(i + 1)}
+            onClick={() => {
+              this.setRating(i + 1);
+              this.props.setRating(i + 1);
+            }}
             className='inputStar'
           >
             <Star fraction={fraction}/>

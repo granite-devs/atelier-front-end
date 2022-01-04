@@ -21,8 +21,8 @@ const Overview = ({productId}) => {
     selectedProductName: '',
     selectedProductSlogan: '',
     selectedProductStyle: {},
+    selectedProductFeature: [],
     currentStyle: {},
-    selectedStyleDefaultImages: [],
     mainImage: '',
     currentImgIndex: 0,
     isExpanded: false,
@@ -77,7 +77,8 @@ const Overview = ({productId}) => {
               selectedProductDefaultPrice: `$${Math.round(result.data.default_price)}`,
               selectedProductDesc: result.data.description,
               selectedProductName: result.data.name,
-              selectedProductSlogan: result.data.slogan
+              selectedProductSlogan: result.data.slogan,
+              selectedProductFeature: result.data.features
             };
           });
         })
