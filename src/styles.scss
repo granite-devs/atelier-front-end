@@ -862,6 +862,12 @@ body {
     cursor: pointer;
   }
 
+  .recommended {
+    margin-left: 10px;
+    font-size: $smallfont;
+    color: $gray-text-color;
+  }
+
   .salesResponse {
     background-color: lightgray;
     padding: 10px;
