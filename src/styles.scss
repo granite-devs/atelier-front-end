@@ -316,11 +316,17 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 /* Overview ---------------------(end) */
 
 /* Related ---------------------(start) */
-.related-list {
+.related-module {
   width: auto;
+  background: rgb(212, 212, 212);
 }
 
-#related-list {
+.related-list h3 {
+  margin: 0px;
+}
+
+#related-list, #outfit-list {
+  padding-top: 1rem;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -495,16 +501,27 @@ h4 {
 }
 
 .add-outfit-card {
-  background: $container-bg;
-  border: 1px solid rgb(190, 190, 190);
-  width: 10rem;
-  min-width: 10rem;
+  background: transparent;
+  border: none;
+  min-width: 12rem;
+  margin: 0rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 20rem;
+  width: 12rem;
+  margin: 5px;
+
+  border: 1px solid gray;
+  border-radius: 10px;
+  transition-duration: 0.5s;
 }
 
 .add-outfit-icon {
   background-color:rgb(209, 209, 209);
   background: $related-gradient;
-  margin-top: 70%;
   border: 1px solid gray;
   height: 2.5rem;
   width: 2.5rem;

@@ -13,7 +13,7 @@ class RelatedProductsList extends React.Component {
     this.state = {
       relatedIds: [],
       initialRequestMade: false,
-      indexesToShow: [0, 1, 2, 3],
+      indexesToShow: [0, 1, 2],
       showLeftArrow: false,
       showRightArrow: true
     }
@@ -65,7 +65,6 @@ class RelatedProductsList extends React.Component {
   }
 
   handleLeftArrowClick() {
-    console.log('handle right arrow click fired');
     const { indexesToShow, relatedIds } = this.state;
     let { showLeftArrow, showRightArrow } = this.state;
 
@@ -73,8 +72,6 @@ class RelatedProductsList extends React.Component {
       showLeftArrow = false;
     }
 
-    //if
-    //
     if (indexesToShow[indexesToShow.length - 1] < relatedIds.length) {
       showRightArrow = true;
     }
@@ -87,7 +84,6 @@ class RelatedProductsList extends React.Component {
   }
 
   handleRightArrowClick() {
-    console.log('handle right arrow click fired');
     const { indexesToShow, relatedIds } = this.state;
     let { showLeftArrow, showRightArrow } = this.state;
 
@@ -126,7 +122,7 @@ class RelatedProductsList extends React.Component {
               src='https://i.ibb.co/r0GN44X/image.png'
               onClick={() => { this.handleLeftArrowClick() }}></img>
           </div>
-          <div className='product-card-list related-cards'>
+          <div className='product-card-list'>
             {this.state.relatedIds.map((relatedId, i) => {
               return <ProductCard key={i}
                 hidden={!indexesToShow.includes(i)}
