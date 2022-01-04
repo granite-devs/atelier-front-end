@@ -56,17 +56,11 @@ const AddQuestionModal = (props) => {
               const username = document.querySelector('#question-username-input').value;
               const email = document.querySelector('#question-email-input').value;
               const questionText = document.querySelector('#question-input').value;
-              const date = new Date();
 
               if (username && email && questionText) {
                 props.addQuestion({
-                  answers: {},
-                  isVisible : true,
-                  asker_name: username,
-                  question_body: questionText,
-                  question_date: date.toISOString(),
-                  question_helpfulness: 1,
-                  reported: false,
+                  name: username,
+                  body: questionText,
                   email: email
                 })
               }

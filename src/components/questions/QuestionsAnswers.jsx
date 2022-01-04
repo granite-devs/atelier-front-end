@@ -1,16 +1,17 @@
-import React from 'react';
-import axios from 'axios';
-import SearchBar from './SearchBar.jsx';
-import QuestionsList from './QuestionsList.jsx';
-import AddQuestionModal from './modals/AddQuestionModal.jsx';
-import API_KEY from '../../config';
+import React from "react";
+import axios from "axios";
+import SearchBar from "./SearchBar.jsx";
+import QuestionsList from "./QuestionsList.jsx";
+import AddQuestionModal from "./modals/AddQuestionModal.jsx";
+import API_KEY from "../../config";
+import makeAxiosRequest from "../../utils/questionsUtils.js";
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionsList: []
-    }
+      questionsList: [],
+    };
     this.filterQuestionsList = this.filterQuestionsList.bind(this);
     this.voteHelpfulQuestion = this.voteHelpfulQuestion.bind(this);
     this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
@@ -21,26 +22,47 @@ class QuestionsAnswers extends React.Component {
 
   addQuestion(question) {
 
-    const { questionsList } = this.state;
-    const lastQuestion = questionsList[questionsList.length - 1];
-    const lastQuestionId = lastQuestion.question_id;
-    const nextQuestionId = lastQuestionId + 1;
 
-    question.question_id = nextQuestionId;
+    question.product_id = this.props.productId;
 
-    const updatedQuestionsList = [...questionsList, question]
+    const config = {
+      method: 'post',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions?product_id=39339&count=100',
+      headers: {
+        'Authorization': API_KEY,
+        'Content-Type': 'application/json',
+      },
+      data: question,
+    };
+
+    axios(config)
+      .then((response) => {
+        console.log('this is our response', JSON.stringify(response));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // const { questionsList } = this.state;
+    // const lastQuestion = questionsList[questionsList.length - 1];
+    // const lastQuestionId = lastQuestion.question_id;
+    // const nextQuestionId = lastQuestionId + 1;
+
+    // question.question_id = nextQuestionId;
+
+    const updatedQuestionsList = [...questionsList, question];
 
     this.setState({
       questionsList: updatedQuestionsList,
-      view: 'main'
-    })
+      view: "main",
+    });
   }
 
   toggleQuestionsModal(viewChange) {
     this.setState({
       questionsList: this.state.questionsList,
-      view: viewChange
-    })
+      view: viewChange,
+    });
   }
 
   filterQuestionsList(term) {
@@ -55,45 +77,49 @@ class QuestionsAnswers extends React.Component {
           question.isVisible = false;
           return question;
         }
-      })
-      this.setState({ questionsList: filteredList })
+      });
+      this.setState({ questionsList: filteredList });
     } else {
-      const unfilteredList = this.setTwoQuestionsVisable(this.state.questionsList)
-      this.setState({ questionsList: unfilteredList })
+      const unfilteredList = this.setTwoQuestionsVisable(
+        this.state.questionsList
+      );
+      this.setState({ questionsList: unfilteredList });
     }
   }
 
   voteHelpfulQuestion(questionToUpdate) {
-
     const newState = this.state.questionsList;
-    const button = document.querySelector(`#vote-helpful-question-${questionToUpdate.question_id}`);
+    const button = document.querySelector(
+      `#vote-helpful-question-${questionToUpdate.question_id}`
+    );
 
     if (!button.disable) {
       newState.forEach((question) => {
         if (questionToUpdate.question_id === question.question_id) {
           questionToUpdate.question_helpfulness += 1;
         }
-      })
-      this.setState({ questionsList: newState })
+      });
+      this.setState({ questionsList: newState });
       button.disabled = true;
     }
   }
 
   loadMoreQuestions() {
+    const button = document.querySelector("#load-question-button");
 
-    const button = document.querySelector('#load-question-button')
-
-    if (button.innerHTML.includes('MORE QUESTIONS')) {
-      button.innerHTML = 'LESS QUESTIONS'
+    if (button.innerHTML.includes("MORE QUESTIONS")) {
+      button.innerHTML = "LESS QUESTIONS";
       const entireQuestionList = this.state.questionsList.map((question) => {
         question.isVisible = true;
         return question;
-      })
-      this.setState({ questionsList: entireQuestionList })
+      });
+      this.setState({ questionsList: entireQuestionList });
     } else {
-      button.innerHTML = 'MORE QUESTIONS'
-      const unfilteredList = this.setTwoQuestionsVisable(this.state.questionsList);
-      this.setState({ questionsList: unfilteredList })
+      button.innerHTML = "MORE QUESTIONS";
+      const unfilteredList = this.setTwoQuestionsVisable(
+        this.state.questionsList
+      );
+      this.setState({ questionsList: unfilteredList });
     }
   }
 
@@ -106,19 +132,19 @@ class QuestionsAnswers extends React.Component {
         question.isVisible = false;
         return question;
       }
-    })
+    });
     return twoSetVisable;
   }
 
   componentDidMount() {
-
     const { productId } = this.props;
+
     let questionConfig = {
-      method: 'get',
+      method: "get",
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions?product_id=${productId}`,
       headers: {
-        Authorization: API_KEY
-      }
+        Authorization: API_KEY,
+      },
     };
 
     if (productId) {
@@ -127,8 +153,8 @@ class QuestionsAnswers extends React.Component {
           const mappedQuestions = this.setTwoQuestionsVisable(res.data.results);
           this.setState({
             questionsList: mappedQuestions,
-            view: 'question-main',
-          })
+            view: "question-main",
+          });
         })
         .catch((error) => {
           console.error(error);
@@ -137,7 +163,6 @@ class QuestionsAnswers extends React.Component {
   }
 
   render() {
-
     const QuestionsAnswersComponent = (
       <div className="question-answers-container">
         <SearchBar filterQuestionsList={this.filterQuestionsList} />
@@ -147,34 +172,36 @@ class QuestionsAnswers extends React.Component {
           changeView={this.changeView}
         />
         <div className="button-container">
-          {
-            (this.state.questionsList.length > 2) && (
-              <button
-                id="load-question-button"
-                type="button"
-                className="big-btn"
-                onClick={(e) => {
-                  this.loadMoreQuestions();
-                }}
-              > MORE QUESTIONS
-              </button>
-            )
-          }
+          {this.state.questionsList.length > 2 && (
+            <button
+              id="load-question-button"
+              type="button"
+              className="big-btn"
+              onClick={(e) => {
+                this.loadMoreQuestions();
+              }}
+            >
+              {" "}
+              MORE QUESTIONS
+            </button>
+          )}
           <button
             id="add-question-button"
             className="big-btn"
             type="button"
             onClick={() => {
-              this.toggleQuestionsModal('AddQuestionModal')
-            }}> ADD QUESTION
+              this.toggleQuestionsModal("AddQuestionModal");
+            }}
+          >
+            {" "}
+            ADD QUESTION
           </button>
         </div>
       </div>
     );
 
     switch (this.state.view) {
-
-      case 'AddQuestionModal':
+      case "AddQuestionModal":
         return (
           <>
             <AddQuestionModal
@@ -184,14 +211,10 @@ class QuestionsAnswers extends React.Component {
             />
             {QuestionsAnswersComponent}
           </>
-        )
+        );
 
       default:
-        return (
-          <>
-            {QuestionsAnswersComponent}
-          </>
-        );
+        return <>{QuestionsAnswersComponent}</>;
     }
   }
 }
