@@ -2,37 +2,38 @@ import React, { useState, useEffect } from 'react';
 
 const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handleRightArrow, handleLeftArrow}) => {
 
+  let displayStyleImages, displayMainImage;
+  if (state.currentStyle) {
+    displayStyleImages =
+      <div className='styleImages'>
+        {state.currentStyle.photos.map((element, idx) => { //render all style photos
+          return <img
+            id={idx}
+            key={idx}
+            className='eachStyleImage'
+            onClick={updateMainImage}
+            src={element.url}/>;
+        })}
+      </div>;
+    if (state.mainImage === '') {
+      displayMainImage = <img id ='main' src ={state.currentStyle.photos[0].url}/>;
+    } else {
+      displayMainImage = <img id ='main' src ={state.mainImage}/>;
+    }
+  }
 
   return (
     <>
-      {state !== undefined && (
-        (state.currentStyle.photos !== undefined) && (
-          <div className='defaultView'>
-            <div className='styleImages'>
-              {state.currentStyle.photos.map((element, idx) => { //render all style photos
-                return <img
-                  id={idx}
-                  key={idx}
-                  className='eachStyleImage'
-                  onClick={updateMainImage}
-                  src={element.url}/>;
-              })}
-            </div>
-            <div className='mainImage' id='mainImage'>
-              <img onClick={handleLeftArrow} className='btnFloating' id='left' src ='https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png'></img>
-              {(state.currentStyle.photos[0] !== undefined && state.mainImage === '') ?
-                <div id='wrap'>
-                  <img id ='main' src ={state.currentStyle.photos[0].url}/>
-                </div> :
-                <div onClick={handleToExpand} id='wrap'>
-                  <img id ='main' src ={state.mainImage}/>
-                </div>
-              }
-              <img onClick={handleRightArrow} className='btnFloating' id='right' src ='https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png'></img>
-            </div>
+      <div className='defaultView'>
+        {displayStyleImages}
+        <div className='mainImage' id='mainImage'>
+          <img onClick={handleLeftArrow} className='btnFloating' id='left' src ='https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png'></img>
+          <div onClick={handleToExpand} id='wrap'>
+            {displayMainImage}
           </div>
-        )
-      )}
+          <img onClick={handleRightArrow} className='btnFloating' id='right' src ='https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png'></img>
+        </div>
+      </div>
     </>
   );
 };
