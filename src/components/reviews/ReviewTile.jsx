@@ -44,6 +44,7 @@ class ReviewTile extends React.Component {
         <h3>{review.summary}</h3>
         <p>{bodyToDisplay}{moreToDisplay ? '...' : ''}</p>
         {showMoreBtn}
+        {review.recommend ? <p className='recommended'>&#9745; I recommend this product</p> : null}
         {salesResponse}
       </div>
     );

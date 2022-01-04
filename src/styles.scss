@@ -780,6 +780,12 @@ h4 {
     text-decoration: underline;
   }
 
+  .recommended {
+    margin-left: 10px;
+    font-size: $smallfont;
+    color: $gray-text-color;
+  }
+
   .salesResponse {
     background-color: lightgray;
     padding: 10px;
