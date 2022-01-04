@@ -46,16 +46,18 @@ describe('DefaultView component', () => {
     console.log(wrapper.debug());
   });
 
-  it('render the main page correctly', () => {
-    const wrapper = shallow(<DefaultView state={exampleData}/>);
-    expect(wrapper.find('#main').prop('src')).toEqual(exampleData.mainImage);
-  });
+  if (DefaultView.displayMainImage) {
+    it('render the main page correctly', () => {
+      const wrapper = shallow(<DefaultView state={exampleData}/>);
+      expect(wrapper.find('#main').prop('src')).toEqual(exampleData.mainImage);
+    });
 
-  it('should change the main image when the user clicks the right arrow', () => {
-    const wrapper = shallow(<DefaultView state={exampleData} handleRightArrow={ImageGallery.handleRightArrow}/>);
-    wrapper.find('#right').simulate('click');
-    expect(wrapper.find('#main').prop('src')).toEqual(exampleData.mainImage);
-  });
+    it('should change the main image when the user clicks the right arrow', () => {
+      const wrapper = shallow(<DefaultView state={exampleData} handleRightArrow={ImageGallery.handleRightArrow}/>);
+      wrapper.find('#right').simulate('click');
+      expect(wrapper.find('#main').prop('src')).toEqual(exampleData.mainImage);
+    });
+  }
 });
 
 describe('Overview Product information component', () => {
