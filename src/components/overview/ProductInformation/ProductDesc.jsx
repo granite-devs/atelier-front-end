@@ -4,8 +4,8 @@ const ProductDesc = ({state, updateState}) => {
 
   let productFeature;
   if (state.selectedProductFeature) {
-    productFeature = state.selectedProductFeature.map((element, idx) => {
-      return <div key={idx} style={{marginBottom: '2px'}}>{`- ${element.feature}: ${element.value}`}</div>;
+    productFeature = state.selectedProductFeature.map((element, index) => {
+      return <div key={index} style={{marginBottom: '2px'}}>{`- ${element.feature}: ${element.value}`}</div>;
     });
   }
 

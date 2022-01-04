@@ -61,16 +61,16 @@ const StyleSelector = ({state, updateState}) => {
             </div>
             <div id='styleSelection'>
               <div id='StyleTop'>
-                {theFirstPhotoOfEachStyle.map((element, idx) => {
-                  if (idx < 4) {
-                    return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={idx} id={`style${idx}`} src={element}></img>;
+                {theFirstPhotoOfEachStyle.map((element, index) => {
+                  if (index < 4) {
+                    return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={index} id={`style${index}`} src={element}></img>;
                   }
                 })}
               </div>
               <div id='styleBottom'>
-                {theFirstPhotoOfEachStyle.map((element, idx) => {
-                  if (idx > 3 && idx < 8) {
-                    return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={idx} id={`style${idx}`} src={element}></img>;
+                {theFirstPhotoOfEachStyle.map((element, index) => {
+                  if (index > 3 && index < 8) {
+                    return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={index} id={`style${index}`} src={element}></img>;
                   }
                 })}
               </div>
