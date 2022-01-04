@@ -85,7 +85,6 @@ class CreateReview extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(e);
     const {
       rating,
       recommended,
@@ -101,7 +100,6 @@ class CreateReview extends React.Component {
     } = this.props.reviewsMetaData;
 
     const validation = this.validateState();
-    console.log(this.props.reviewsMetaData);
     if (validation.failed) {
 
     } else {
@@ -120,7 +118,6 @@ class CreateReview extends React.Component {
         'photos': [],
         'characteristics': characteristicsData
       };
-      console.log(reviewPostBody);
 
       const postConfig = {
         method: 'post',
