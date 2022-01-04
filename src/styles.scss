@@ -327,17 +327,56 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 /* Overview ---------------------(end) */
 
 /* Related ---------------------(start) */
-.related-list {
+.related-module {
   width: auto;
+  border-top: 1px solid rgb(168, 168, 168);
+  border-bottom: 1px solid rgb(168, 168, 168);
+}
+
+.related-module h3 {
+  margin: 0rem;
+  padding: 0rem;
+}
+
+#related-list, #outfit-list {
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 95vw;
 }
 
 .product-card-list {
   display: flex;
-  flex-flow: row;
+  flex-wrap: nowrap;
+  flex-direction: row;
   width: 90vw;
-  overflow-y: scroll;
+  overflow-y: hidden;
   position: relative;
   z-index: 1;
+  height: 22rem;
+}
+
+.related-arrow {
+  align-self: center;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+  height: 2.5rem;
+  width: 2.1rem;
+  transition-duration: 0.2s;
+}
+
+.related-left-arrow, .related-right-arrow {
+  height: 2.5rem;
+  width: 2rem;
+  transition-duration: 0.2s;
+}
+.related-left-arrow:hover, .related-right-arrow:hover {
+  filter: $related-shadow;
+  cursor: pointer;
+}
+.related-left-arrow.hide, .related-right-arrow.hide {
+  display: none;
 }
 
 .product-card {
@@ -357,15 +396,15 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 
   border: 1px solid black;
   border-radius: 10px;
+  transition-duration: 0.5s;
 }
 .product-card:hover {
   cursor: pointer;
   background-color:rgb(252, 252, 252);
   filter: $related-shadow;
 }
-.selected {
-  background-color:rgb(243, 243, 243);
-  filter: $related-shadow;
+.product-card.hidden {
+  display: none;
 }
 
 h4 {
@@ -475,16 +514,27 @@ h4 {
 }
 
 .add-outfit-card {
-  background: $container-bg;
-  border: 1px solid rgb(190, 190, 190);
-  width: 10rem;
-  min-width: 10rem;
+  background: transparent;
+  border: none;
+  min-width: 12rem;
+  margin: 0rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 20rem;
+  width: 12rem;
+  margin: 5px;
+
+  border: 1px solid gray;
+  border-radius: 10px;
+  transition-duration: 0.5s;
 }
 
 .add-outfit-icon {
   background-color:rgb(209, 209, 209);
   background: $related-gradient;
-  margin-top: 70%;
   border: 1px solid gray;
   height: 2.5rem;
   width: 2.5rem;

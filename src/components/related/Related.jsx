@@ -4,7 +4,7 @@ import YourOutfitList from './YourOutfitList.jsx';
 const Related = ({ productId, updateAppProductId, addItemToOutfit,
   outfitItems, removeItemFromOutfit }) => {
   return (
-    <div className='related-list'>
+    <div className='related-module'>
       <RelatedProductsList
         currentList={'related'}
         productId={productId}
