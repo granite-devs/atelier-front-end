@@ -13,7 +13,9 @@ class RelatedProductsList extends React.Component {
     this.state = {
       relatedIds: [],
       initialRequestMade: false,
-      indexesToShow: [0, 1, 2]
+      indexesToShow: [0, 1, 2],
+      showLeftArrow: false,
+      showRightArrow: true
     }
 
     this.fetchRelatedIds = this.fetchRelatedIds.bind(this);
@@ -47,21 +49,50 @@ class RelatedProductsList extends React.Component {
 
   handleLeftArrowClick() {
     console.log('handle right arrow click fired');
+    const { indexesToShow, relatedIds } = this.state;
+    let { showLeftArrow, showRightArrow } = this.state;
+
+    if (indexesToShow[0] - 1 === 0) {
+      showLeftArrow = false;
+    }
+
+    if (indexesToShow[indexesToShow.length - 1] - 2 < relatedIds.length) {
+      showRightArrow = true;
+    }
+
     this.setState({
-      indexesToShow: this.state.indexesToShow.map(index => { return index - 1; })
+      showLeftArrow: showLeftArrow,
+      showRightArrow: showRightArrow,
+      indexesToShow: indexesToShow.map(index => { return index - 1; })
     });
+
   }
 
   handleRightArrowClick() {
     console.log('handle right arrow click fired');
+    const { indexesToShow, relatedIds } = this.state;
+    let { showLeftArrow, showRightArrow } = this.state;
+
+    if (indexesToShow[0] + 1 > 0) {
+      showLeftArrow = true;
+    }
+
+    if (indexesToShow[indexesToShow.length - 1] + 2 === relatedIds.length) {
+      showRightArrow = false;
+    }
+
     this.setState({
-      indexesToShow: this.state.indexesToShow.map(index => { return index + 1; })
+      showLeftArrow: showLeftArrow,
+      showRightArrow: showRightArrow,
+      indexesToShow: indexesToShow.map(index => { return index + 1; })
     });
+
   }
 
   render() {
     const { productId, productCardId, updateAppProductId,
-      currentList, removeItemFromOutfit, indexesToShow} = this.props;
+      currentList, removeItemFromOutfit } = this.props;
+    const { showLeftArrow, showRightArrow, indexesToShow } = this.state;
 
     return (
       <>
@@ -69,20 +100,20 @@ class RelatedProductsList extends React.Component {
         <div id='related-list'>
           <div className='related-arrow'
             onClick={() => { this.handleLeftArrowClick() }}>
-            <img className='related-left-arrow'
+            <img className={showLeftArrow ? 'related-left-arrow' : 'related-left-arrow hide'}
               src='https://i.ibb.co/r0GN44X/image.png'></img>
           </div>
           <div className='product-card-list'>
             {this.state.relatedIds.map((relatedId, i) => {
               return <ProductCard key={i}
-                hidden={!this.state.indexesToShow.includes(i)}
+                hidden={!indexesToShow.includes(i)}
                 currentList={currentList}
                 productId={productId}
                 productCardId={relatedId}
                 updateAppProductId={updateAppProductId} />
             })}
           </div>
-          <div className='related-arrow'
+          <div className={showRightArrow ? 'related-right-arrow' : 'related-right-arrow hide'}
             onClick={() => { this.handleRightArrowClick() }}>
             <img className='related-right-arrow'
               src='https://i.ibb.co/k3GTgnr/arrow-icon-1177.png'></img>

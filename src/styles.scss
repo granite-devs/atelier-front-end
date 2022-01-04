@@ -350,6 +350,9 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
   filter: $related-shadow;
   cursor: pointer;
 }
+.related-left-arrow.hide, .related-right-arrow.hide {
+  display: none;
+}
 
 .product-card {
   display: flex;
