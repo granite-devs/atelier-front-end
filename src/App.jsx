@@ -23,9 +23,13 @@ class App extends React.Component {
   updateAppProductId(productId) {
     this.setState({
       productId: productId
+    }, () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
 
-    window.scrollTo(0, 0);
   }
 
   addItemToOutfit(productToAdd) {

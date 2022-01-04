@@ -10,12 +10,20 @@ const AverageRating = ({state, updateState}) => {
   }
   const avgRating = Math.round(ratingsSum / reviewCount * 10) / 10;
 
+  const scrollToReview = () => {
+    window.scrollTo({
+      top: 1500,
+      left: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <>
       <div id='starRating'>
         <StarRating rating={avgRating} />
       </div>
-      <div id='readReview'>
+      <div onClick={scrollToReview} id='readReview'>
         Read all [{reviewCount}]review(s)
       </div>
     </>

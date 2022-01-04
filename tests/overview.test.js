@@ -27,6 +27,12 @@ let exampleData = {
   selectedProductDefaultPrice: '140',
   selectedProductSlogan: 'Blend in to your crowd',
   selectedProductDesc: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
+  selectedProductDetail: {
+    slogan: 'Blend in to your crowd',
+    description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
+    category: 'Jackets',
+    name: 'Camo Onesie'
+  },
   selectedProductStyle: {
     name: 'Forest Green & Black',
     originalPrice: '140',
@@ -74,7 +80,7 @@ describe('Overview Product information component', () => {
 
   it('should display a category', () => {
     const wrapper = shallow(<ProductInformation state={exampleData}/>);
-    expect(wrapper.find('#category').text()).toEqual(`Category - [${exampleData.selectedProductCategory}]`);
+    expect(wrapper.find('#category').text()).toEqual(`Category - [${exampleData.selectedProductDetail.category}]`);
   });
 
   it('should display a price', () => {
@@ -84,7 +90,7 @@ describe('Overview Product information component', () => {
 
   it('should display a slogan', () => {
     const wrapper = shallow(<ProductDesc state={exampleData}/>);
-    expect(wrapper.find('#slogan').text()).toEqual(exampleData.selectedProductSlogan);
+    expect(wrapper.find('#slogan').text()).toEqual(exampleData.selectedProductDetail.slogan);
   });
 
   it('should display a description', () => {
