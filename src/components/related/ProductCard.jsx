@@ -133,12 +133,13 @@ class ProductCard extends React.Component {
           this.setState({rating: ratingFraction});
         })
         .catch((error) => {
-          //console.log('HTTP request to fetch product rating failed');
+          console.log('HTTP request to fetch product rating failed');
         });
     }
   }
 
   actionBtnClick(buttonLocation) {
+    console.log('clicky');
     if (buttonLocation === 'relatedList') {
       this.setState({displayModal: !this.state.displayModal});
     }
@@ -149,32 +150,37 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { productCardId, updateAppProductId, currentList } = this.props;
+    const { productCardId, updateAppProductId, currentList, hidden } = this.props;
     const { name, category, price, salePrice, rating,
-      displayModal, features, currentItemFeatures } = this.state;
-    let primaryImg = this.state.primaryImg;
+      features, currentItemFeatures, displayModal } = this.state;
 
+    let primaryImg = this.state.primaryImg;
     if (!primaryImg) { primaryImg = 'https://tinyurl.com/5nur3x7w'; }
 
+    let compareModal;
+    if (currentList === 'related') {
+      compareModal = <CompareModal relatedItemName={name}
+          relatedItemFeatures={features}
+          displayModal={displayModal}
+          currentItemFeatures={currentItemFeatures}
+          actionBtnClick={this.actionBtnClick} /> ;
+    }
+
     return (
-      <div className='card-modal-pair'>
-        <div className={displayModal ? 'product-card selected' : 'product-card'}>
+      <div>{compareModal}
+        <div className={hidden ? 'product-card hidden' : 'product-card'}>
           <ActionButton actionBtnClick={this.actionBtnClick}
             currentList={currentList}/>
             <img className='card-img' src={primaryImg}
               onClick={() => { updateAppProductId(productCardId); }}></img>
             <div className='card-info' onClick={() => { updateAppProductId(productCardId); }}>
               <p className='card-category'>{category}</p>
-              <h4 className='card-name'>{name}</h4>
+              <p className='card-name'>{name}</p>
               <p className='card-price'>{'$'}{price}</p>
               <p className='card-sale'>{salePrice}</p>
             </div>
             <StarRating className='card-rating' rating={rating}/>
         </div>
-        <CompareModal relatedItemName={name}
-          relatedItemFeatures={features}
-          displayModal={displayModal}
-          currentItemFeatures={currentItemFeatures} />
       </div>
     );
   }

@@ -27,8 +27,16 @@ class ReviewTile extends React.Component {
       <a
         className='showMoreBtn'
         onClick={this.toggleFullBody}
-      >Show {displayFullBody ? 'Less' : 'More'}</a>
-    ) : '';
+      >
+        Show {displayFullBody ? 'Less' : 'More'}
+      </a>
+    ) : null;
+    const salesResponse = review.response ? (
+      <div className='salesResponse'>
+        <b>Response from seller:</b>
+        <p>{review.response}</p>
+      </div>
+    ) : null;
     return (
       <div className='reviewTile'>
         <span className='name-date'>{review.reviewer_name}, {timeAgo(review.date)}</span>
@@ -36,6 +44,8 @@ class ReviewTile extends React.Component {
         <h3>{review.summary}</h3>
         <p>{bodyToDisplay}{moreToDisplay ? '...' : ''}</p>
         {showMoreBtn}
+        {review.recommend ? <p className='recommended'>&#9745; I recommend this product</p> : null}
+        {salesResponse}
       </div>
     );
   }
