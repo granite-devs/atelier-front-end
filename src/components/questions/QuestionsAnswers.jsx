@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar.jsx";
 import QuestionsList from "./QuestionsList.jsx";
 import AddQuestionModal from "./modals/AddQuestionModal.jsx";
 import API_KEY from "../../config";
-import makeAxiosRequest from "../../utils/questionsUtils.js";
+import { getQuestions, postQuestion } from "../../utils/questionsUtils.js";
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {
@@ -22,40 +22,27 @@ class QuestionsAnswers extends React.Component {
 
   addQuestion(question) {
 
+    const { productId } = this.props;
 
-    question.product_id = this.props.productId;
-
-    const config = {
-      method: 'post',
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions?product_id=39339&count=100',
-      headers: {
-        'Authorization': API_KEY,
-        'Content-Type': 'application/json',
-      },
-      data: question,
-    };
-
-    axios(config)
-      .then((response) => {
-        console.log('this is our response', JSON.stringify(response));
+    postQuestion(question, productId)
+      .then((res) => {
+        if (res.status === 201) {
+          getQuestions(productId)
+            .then((response) => {
+              const mappedQuestions = this.setTwoQuestionsVisable(response);
+              this.setState({
+                questionsList: mappedQuestions,
+                view: "main",
+              });
+            })
+            .catch((err) => {
+              console.error("Error getting questions after posting one!", err);
+            });
+        }
       })
       .catch((error) => {
-        console.log(error);
+        console.error("Error posting one question!", err);
       });
-
-    // const { questionsList } = this.state;
-    // const lastQuestion = questionsList[questionsList.length - 1];
-    // const lastQuestionId = lastQuestion.question_id;
-    // const nextQuestionId = lastQuestionId + 1;
-
-    // question.question_id = nextQuestionId;
-
-    const updatedQuestionsList = [...questionsList, question];
-
-    this.setState({
-      questionsList: updatedQuestionsList,
-      view: "main",
-    });
   }
 
   toggleQuestionsModal(viewChange) {
@@ -105,17 +92,17 @@ class QuestionsAnswers extends React.Component {
   }
 
   loadMoreQuestions() {
-    const button = document.querySelector("#load-question-button");
+    const button = document.querySelector('#load-question-button');
 
-    if (button.innerHTML.includes("MORE QUESTIONS")) {
-      button.innerHTML = "LESS QUESTIONS";
+    if (button.innerHTML.includes('MORE QUESTIONS')) {
+      button.innerHTML = 'LESS QUESTIONS';
       const entireQuestionList = this.state.questionsList.map((question) => {
         question.isVisible = true;
         return question;
       });
       this.setState({ questionsList: entireQuestionList });
     } else {
-      button.innerHTML = "MORE QUESTIONS";
+      button.innerHTML = 'MORE QUESTIONS';
       const unfilteredList = this.setTwoQuestionsVisable(
         this.state.questionsList
       );
@@ -139,26 +126,14 @@ class QuestionsAnswers extends React.Component {
   componentDidMount() {
     const { productId } = this.props;
 
-    let questionConfig = {
-      method: "get",
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions?product_id=${productId}`,
-      headers: {
-        Authorization: API_KEY,
-      },
-    };
-
     if (productId) {
-      axios(questionConfig)
-        .then((res) => {
-          const mappedQuestions = this.setTwoQuestionsVisable(res.data.results);
-          this.setState({
-            questionsList: mappedQuestions,
-            view: "question-main",
-          });
-        })
-        .catch((error) => {
-          console.error(error);
+      getQuestions(productId).then((response) => {
+        const mappedQuestions = this.setTwoQuestionsVisable(response);
+        this.setState({
+          questionsList: mappedQuestions,
+          view: "main",
         });
+      });
     }
   }
 
