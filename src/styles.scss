@@ -338,10 +338,16 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
   height: 22rem;
 }
 
-.related-left-arrow, .related-right-arrow {
-  align-self: baseline;
+.related-arrow {
+  align-self: center;
   padding-top: 7rem;
   padding-bottom: 7rem;
+  height: 2.5rem;
+  width: 2.1rem;
+  transition-duration: 0.2s;
+}
+
+.related-left-arrow, .related-right-arrow {
   height: 2.5rem;
   width: 2rem;
   transition-duration: 0.2s;
@@ -380,7 +386,6 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 }
 .product-card.hidden {
   display: none;
-  width: 0rem;
 }
 
 h4 {
