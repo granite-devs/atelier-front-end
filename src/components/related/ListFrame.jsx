@@ -73,8 +73,6 @@ class RelatedProductsList extends React.Component {
       showLeftArrow = false;
     }
 
-    //if
-    //
     if (indexesToShow[indexesToShow.length - 1] < relatedIds.length) {
       showRightArrow = true;
     }
