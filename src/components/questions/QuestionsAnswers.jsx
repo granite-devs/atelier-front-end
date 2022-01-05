@@ -3,7 +3,6 @@ import axios from "axios";
 import SearchBar from "./SearchBar.jsx";
 import QuestionsList from "./QuestionsList.jsx";
 import AddQuestionModal from "./modals/AddQuestionModal.jsx";
-import API_KEY from "../../config";
 import { getQuestions, postQuestion } from "../../utils/questionsUtils.js";
 
 class QuestionsAnswers extends React.Component {

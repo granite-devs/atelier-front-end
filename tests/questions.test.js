@@ -12,9 +12,6 @@ import AddQuestionModal from  '../src/components/questions/modals/AddQuestionMod
 import AddAnswerModal from '../src/components/questions/modals/AddAnswerModal.jsx';
 
 
-
-
-
 configure({ adapter: new Adapter() });
 
 describe('Question and answers component', () => {
@@ -65,7 +62,7 @@ describe('Question and answers component', () => {
     expect(howManyAreVisible.length).toBe(1);
   });
 
-  test('Should have questions list component', ()=> {
+  test('Should have questions list component', () => {
     expect(questionsAnswersShallow.exists('#questions-list-component')).toBe(true);
   });
 

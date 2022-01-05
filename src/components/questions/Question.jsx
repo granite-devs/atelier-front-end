@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import AnswerList from './AnswerList.jsx';
 import AddAnswerModal from './modals/AddAnswerModal.jsx';
-import API_KEY from '../../config';
+import { getAnswers, postAnswer } from "../../utils/questionsUtils.js";
+
 
 class Question extends React.Component {
   constructor(props) {
@@ -14,30 +15,29 @@ class Question extends React.Component {
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
     this.voteHelpfulAnswer = this.voteHelpfulAnswer.bind(this);
     this.toggleAddAnswerModal = this.toggleAddAnswerModal.bind(this);
-    this.addAnswerToList = this.addAnswerToList.bind(this);
+    this.addAnswer = this.addAnswer.bind(this);
   }
 
-  addAnswerToList(answer) {
+  addAnswer(answer) {
 
-    const { answersList } = this.state;
-    const lastAnswer = answersList[answersList.length - 1];
-
-    let nextId;
-
-    (lastAnswer) ?
-      (nextId = lastAnswer.answer_id + 1)
-      :
-      (nextId = 1);
-
-    answer.answer_id = nextId;
-    answer.isVisible = true;
-    answer.helpfulness = 1;
-
-    this.setState({
-      answersList: [...answersList, answer],
-      questionView: 'main'
+    answer.photos = [];
+    const { question_id } = this.props.question
+    postAnswer(answer, question_id)
+    .then((response) => {
+      if (response.status === 201) {
+        getAnswers(question_id)
+        .then((response) => {
+          const answersList = this.setTwoAnswersVisible(response)
+          this.setState({answersList, questionView: 'main'})
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+      }
     })
-
+    .catch((err) => {
+      console.error(err)
+    })
   }
 
   toggleAddAnswerModal(viewChange) {
@@ -100,27 +100,17 @@ class Question extends React.Component {
 
   componentDidMount() {
 
-    const questionId = this.props.question.question_id;
+    const { question_id } = this.props.question;
 
-    var config = {
-      method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/${questionId}/answers`,
-      headers: {
-        'Authorization': API_KEY
-      }
-    };
+    getAnswers(question_id)
+    .then((response) => {
+      const answersList = this.setTwoAnswersVisible(response)
 
-    axios(config)
-      .then((res) => {
-        const displayAnswers = this.setTwoAnswersVisible(res.data.results)
-        this.setState({
-          answersList: displayAnswers
-        })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
+      this.setState({answersList})
+    })
+    .catch((err) => {
+      console.error(err)
+    })
   }
 
   render() {
@@ -164,7 +154,7 @@ class Question extends React.Component {
           <>
             <AddAnswerModal
               toggleAddAnswerModal={this.toggleAddAnswerModal}
-              addAnswerToList={this.addAnswerToList}
+              addAnswer={this.addAnswer}
             />
           </>
         )
