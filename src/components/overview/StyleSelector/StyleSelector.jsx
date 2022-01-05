@@ -53,31 +53,27 @@ const StyleSelector = ({state, updateState}) => {
 
   return (
     <>
-      {state !== undefined && theFirstPhotoOfEachStyle[0] !== undefined && (
-        <>
-          <div id='styleSelector'>
-            <div id='styleTitle'>
-              STYLE : <b>{state.currentStyle.name}</b>
-            </div>
-            <div id='styleSelection'>
-              <div id='styleTop'>
-                {theFirstPhotoOfEachStyle.map((element, index) => {
-                  if (index < 4) {
-                    return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={index} id={`style${index}`} src={element}></img>;
-                  }
-                })}
-              </div>
-              <div id='styleBottom'>
-                {theFirstPhotoOfEachStyle.map((element, index) => {
-                  if (index > 3 && index < 8) {
-                    return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={index} id={`style${index}`} src={element}></img>;
-                  }
-                })}
-              </div>
-            </div>
+      <div id='styleSelector'>
+        <div id='styleTitle'>
+          STYLE : <b>{state.currentStyle.name}</b>
+        </div>
+        <div id='styleSelection'>
+          <div id='styleTop'>
+            {theFirstPhotoOfEachStyle.map((element, index) => {
+              if (index < 4) {
+                return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={index} id={`style${index}`} src={element}></img>;
+              }
+            })}
           </div>
-        </>
-      )}
+          <div id='styleBottom'>
+            {theFirstPhotoOfEachStyle.map((element, index) => {
+              if (index > 3 && index < 8) {
+                return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={index} id={`style${index}`} src={element}></img>;
+              }
+            })}
+          </div>
+        </div>
+      </div>
     </>
   );
 };

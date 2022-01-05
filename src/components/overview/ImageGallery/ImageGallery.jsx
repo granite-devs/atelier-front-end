@@ -93,17 +93,15 @@ const ImageGallery = ({state, updateState}) => {
 
   return (
     <>
-      {state !== undefined && (
-        <DefaultView
-          state={state}
-          updateState={updateState}
-          handleToExpand={handleToExpand}
-          handleRightArrow={handleRightArrow}
-          handleLeftArrow={handleLeftArrow}
-          updateCurrentStylePhotosUrl={updateCurrentStylePhotosUrl}
-          updateMainImage={updateMainImage}
-        />
-      )}
+      <DefaultView
+        state={state}
+        updateState={updateState}
+        handleToExpand={handleToExpand}
+        handleRightArrow={handleRightArrow}
+        handleLeftArrow={handleLeftArrow}
+        updateCurrentStylePhotosUrl={updateCurrentStylePhotosUrl}
+        updateMainImage={updateMainImage}
+      />
     </>
   );
 };
