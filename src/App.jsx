@@ -13,23 +13,34 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: null,
-      outfitItems: []
+      outfitItems: [],
+      cachedProducts: {},
+      initialRequestMade: false
     };
     this.updateAppProductId = this.updateAppProductId.bind(this);
     this.addItemToOutfit = this.addItemToOutfit.bind(this);
     this.removeItemFromOutfit = this.removeItemFromOutfit.bind(this);
+    this.checkCache = this.checkCache.bind(this);
   }
 
-  updateAppProductId(productId) {
+  updateAppProductId(productId, productObject) {
+    const updatedCache = {...this.state.cachedProducts};
+    updatedCache[productId] = productObject;
+
     this.setState({
-      productId: productId
+      productId: productId,
+      cachedProducts: updatedCache
     }, () => {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
       });
     });
+  }
 
+  checkCache(productIdToCheck) {
+    console.log(`checking cache for ${productIdToCheck}`);
+    return this.state.cachedProducts[productIdToCheck];
   }
 
   addItemToOutfit(productToAdd) {
@@ -49,6 +60,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log('INITAL REQUEST');
+
     const intializationConfig = {
       method: 'get',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products',
@@ -61,6 +74,7 @@ class App extends React.Component {
       .then((response) => {
         this.setState({
           productId: response.data[0].id,
+          initialRequestMade: true
         }); // sets the id of the first prodcut in the list as the init id
       })
       .catch((error) => {
@@ -69,23 +83,53 @@ class App extends React.Component {
   }
 
   render() {
-    const { productId, outfitItems } = this.state;
+    console.log('APP RENDER------');
 
-    return (
-      <div>
-        <Overview key={`${productId}-1`} productId={productId} />
-        <Related
-          key={`${productId}-2`}
-          productId={productId}
-          updateAppProductId={this.updateAppProductId}
-          addItemToOutfit={this.addItemToOutfit}
-          removeItemFromOutfit={this.removeItemFromOutfit}
-          outfitItems={outfitItems}
-        />
-        <QuestionsAnswers key={`${productId}-3`} productId={productId} />
-        <Reviews key={`${productId}-4`} productId={productId} />
-      </div>
-    );
+
+    const { productId, outfitItems, initialRequestMade } = this.state;
+
+    // return (
+    //   <div>
+    //     <Overview key={`${productId}-1`} productId={productId} />
+    //     <Related
+    //       key={`${productId}-2`}
+    //       productId={productId}
+    //       checkCache={this.checkCache}
+    //       updateAppProductId={this.updateAppProductId}
+    //       addItemToOutfit={this.addItemToOutfit}
+    //       removeItemFromOutfit={this.removeItemFromOutfit}
+    //       outfitItems={outfitItems}
+    //     />
+    //     {/* <QuestionsAnswers key={`${productId}-3`} productId={productId} />
+    //     <Reviews key={`${productId}-4`} productId={productId} /> */}
+    //   </div>
+    // );
+
+    if (initialRequestMade) {
+      return (
+        <div>
+          <Overview key={`${productId}-1`} productId={productId} />
+          <Related
+            key={`${productId}-2`}
+            productId={productId}
+            checkCache={this.checkCache}
+            updateAppProductId={this.updateAppProductId}
+            addItemToOutfit={this.addItemToOutfit}
+            removeItemFromOutfit={this.removeItemFromOutfit}
+            outfitItems={outfitItems}
+          />
+          {/* <QuestionsAnswers key={`${productId}-3`} productId={productId} />
+          <Reviews key={`${productId}-4`} productId={productId} /> */}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Overview key={`${productId}-1`} productId={productId} />
+        </div>
+      );
+    }
+
   }
 
 }

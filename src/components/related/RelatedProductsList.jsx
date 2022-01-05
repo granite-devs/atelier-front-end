@@ -105,7 +105,7 @@ class RelatedProductsList extends React.Component {
 
   render() {
     const { productId, productCardId, updateAppProductId,
-      currentList, removeItemFromOutfit } = this.props;
+      currentList, removeItemFromOutfit, checkCache } = this.props;
     const { showLeftArrow, indexesToShow, relatedIds } = this.state;
     let { showRightArrow } = this.state;
 
@@ -129,7 +129,8 @@ class RelatedProductsList extends React.Component {
                 currentList={currentList}
                 productId={productId}
                 productCardId={relatedId}
-                updateAppProductId={updateAppProductId} />
+                updateAppProductId={updateAppProductId}
+                checkCache={checkCache} />
             })}
           </div>
           <div className='related-arrow'>

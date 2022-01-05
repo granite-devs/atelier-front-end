@@ -23,20 +23,86 @@ class ProductCard extends React.Component {
       initialRequestMade: false
     }
     this.actionBtnClick = this.actionBtnClick.bind(this);
+
+    this.fetchProductDetails = this.fetchProductDetails.bind(this); //todo: delete
   }
 
   componentDidMount() {
-    const { productCardId, productId } = this.props;
-    this.fetchProductInfo(productCardId, 'currentRelatedItem');
-    this.fetchProductInfo(productId, 'currentItem');
-    this.fetchProductPricePics(productCardId);
-    this.fetchProductRating(productCardId);
+    const { productCardId, productId, checkCache } = this.props;
+    const cachedProduct = checkCache(productCardId);
+
+    console.log(`--> product card ${productCardId} mounted!`);
+    console.log('cachedProduct: ', cachedProduct);
+
+    if (cachedProduct) {
+      console.log('cache match found for id', cachedProduct);
+      this.setState({
+        category: cachedProduct.category,
+        name: cachedProduct.name,
+        price: cachedProduct.price,
+        salePrice: cachedProduct.salePrice,
+        rating: cachedProduct.rating,
+        primaryImg: cachedProduct.primaryImg,
+        features: cachedProduct.features
+      });
+    }
+
+    if (!cachedProduct) {
+      console.log('making requests for ', cachedProduct);
+      this.fetchProductInfo(productCardId, 'currentRelatedItem');
+      this.fetchProductInfo(productId, 'currentItem');
+      this.fetchProductPricePics(productCardId);
+      this.fetchProductRating(productCardId);
+    }
+  }
+
+  fetchProductDetails(productIdToGet) {
+    const { initialRequestMade } = this.state;
+
+    console.log('FETCHING ALL');
+
+    const productRequestRequestConfig = {
+      method: 'get',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}`,
+      headers: {Authorization: API_KEY}
+    };
+
+    const stylesRequestConfig = {
+      method: 'get',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/styles`,
+      headers: {Authorization: API_KEY}
+    };
+
+    const ratingRequestConfig = {
+      method: 'get',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta?product_id=${productIdToGet}`,
+      headers: {Authorization: API_KEY}
+    };
+
+    const productRequest = axios(productRequestRequestConfig);
+    const stylesRequest = axios(stylesRequestConfig);
+    const ratingRequest = axios(ratingRequestConfig);
+
+    axios.all([productRequest, stylesRequest, ratingRequest])
+      .then(axios.spread((...responses) => {
+        const productResponse = responses[0];
+        const stylesResponse = responses[1];
+        const ratingResponse = responses[2];
+
+
+
+      }))
+      .catch(errors => {
+        console.log('error fetching requests!', errors);
+      })
+
   }
 
   fetchProductInfo(productIdToGet, stateToUpdate) {
     const { initialRequestMade } = this.state;
 
     if (!initialRequestMade) {
+      console.log('fetching info for', productIdToGet);
       this.setState({initialRequestMade: true});
 
       const infoRequestConfig = {
@@ -150,9 +216,17 @@ class ProductCard extends React.Component {
   }
 
   render() {
+    console.log('PRODUCT CARD RENDER------');
+
+
     const { productCardId, updateAppProductId, currentList, hidden } = this.props;
     const { name, category, price, salePrice, rating,
       features, currentItemFeatures, displayModal } = this.state;
+
+    const productObjectToCache = {
+      name: name, category: category, price: price, salePrice: salePrice,
+      rating:rating, features: features, primaryImg: primaryImg
+    };
 
     let primaryImg = this.state.primaryImg;
     if (!primaryImg) { primaryImg = 'https://tinyurl.com/5nur3x7w'; }
@@ -167,13 +241,17 @@ class ProductCard extends React.Component {
     }
 
     return (
-      <div>{compareModal}
+      <div>
+        <div onClick={() => { this.fetchProductDetails(productCardId); }}>CLICK MEEEE</div>
+        {compareModal}
         <div className={hidden ? 'product-card hidden' : 'product-card'}>
           <ActionButton actionBtnClick={this.actionBtnClick}
             currentList={currentList}/>
             <img className='card-img' src={primaryImg}
-              onClick={() => { updateAppProductId(productCardId); }}></img>
-            <div className='card-info' onClick={() => { updateAppProductId(productCardId); }}>
+              onClick={() => { updateAppProductId(productCardId, productObjectToCache); }}>
+              </img>
+            <div className='card-info'
+              onClick={() => { updateAppProductId(productCardId, productObjectToCache); }}>
               <p className='card-category'>{category}</p>
               <p className='card-name'>{name}</p>
               <p className='card-price'>{'$'}{price}</p>
