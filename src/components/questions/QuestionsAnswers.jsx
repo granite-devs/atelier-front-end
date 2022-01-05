@@ -10,7 +10,6 @@ class QuestionsAnswers extends React.Component {
     super(props);
     this.state = {
       questionsList: [],
-      votedQuestions: {}
     };
     this.filterQuestionsList = this.filterQuestionsList.bind(this);
     this.voteHelpfulQuestion = this.voteHelpfulQuestion.bind(this);
@@ -23,7 +22,6 @@ class QuestionsAnswers extends React.Component {
   addQuestion(question) {
 
     const { productId } = this.props;
-    const { votedQuestions } = this.state;
 
     postQuestion(question, productId)
       .then((res) => {
@@ -33,7 +31,6 @@ class QuestionsAnswers extends React.Component {
               const mappedQuestions = this.setTwoQuestionsVisable(response);
               this.setState({
                 questionsList: mappedQuestions,
-                votedQuestions: votedQuestions,
                 view: "main",
               });
             })
@@ -50,7 +47,6 @@ class QuestionsAnswers extends React.Component {
   toggleQuestionsModal(viewChange) {
     this.setState({
       questionsList: this.state.questionsList,
-      votedQuestions: this.state.votedQuestions,
       view: viewChange
     });
   }
@@ -79,36 +75,28 @@ class QuestionsAnswers extends React.Component {
 
   voteHelpfulQuestion(questionToUpdate) {
 
-    const { questionsList, votedQuestions } = this.state;
+    const { questionsList, view } = this.state;
     const { productId } = this.props;
     const targetQuestionId = questionToUpdate.question_id;
     const button = document.querySelector(`#vote-helpful-question-${targetQuestionId}`);
 
-    if (!button.disable) {
+    if (!window.localStorage[targetQuestionId]) {
       putHelpfulQuestion(targetQuestionId)
-        .then((response) => {
-          if (response) {
-            getQuestions(productId)
-              .then((questions) => {
-                const updatedQuestions = this.setTwoQuestionsVisable(questions);
-                votedQuestions[targetQuestionId] = true;
-                window.localStorage[targetQuestionId] = true;
-                this.setState({
-                  questionsList: updatedQuestions,
-                  view: this.state.view,
-                  votedQuestions: votedQuestions
-                })
-              })
-              .catch((error) => {
-                console.error(error)
-              })
+      .then(()=> {
+        button.disabled = true;
+        window.localStorage[targetQuestionId] = true;
+        const updatedQuestions = questionsList.map((question) => {
+          if (targetQuestionId == question.question_id) {
+            question.question_helpfulness += 1
           }
+          return question;
         })
-        .catch((error) => {
-          console.error(error)
-        })
-
-      }
+        this.setState({ questionsList: updatedQuestions })
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+    }
   }
 
   loadMoreQuestions() {
@@ -157,15 +145,23 @@ class QuestionsAnswers extends React.Component {
     }
   }
 
+  ComponentDidUpdate() {
+
+    const {questionsList, view} = this.state;
+    this.setState({
+      questionsList,
+      view
+    })
+  }
+
   render() {
 
-    const { questionsList, votedQuestions, view } = this.state;
+    const { questionsList, view } = this.state;
     const QuestionsAnswersComponent = (
       <div className="question-answers-container">
         <SearchBar filterQuestionsList={this.filterQuestionsList} />
         <QuestionsList
           questions={questionsList}
-          votedQuestions={votedQuestions}
           handleYesQuestionClick={this.voteHelpfulQuestion}
           changeView={this.changeView}
         />

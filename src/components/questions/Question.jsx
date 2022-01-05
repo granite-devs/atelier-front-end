@@ -10,7 +10,6 @@ class Question extends React.Component {
     super(props)
     this.state = {
       answersList: [],
-      wasVoted: false
     }
     this.setTwoAnswersVisible = this.setTwoAnswersVisible.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
@@ -104,7 +103,7 @@ class Question extends React.Component {
 
   componentDidMount() {
 
-    const { question_id, votedQuestions, wasVoted } = this.props.question;
+    const { question_id } = this.props.question;
 
     getAnswers(question_id)
       .then((response) => {
@@ -120,10 +119,8 @@ class Question extends React.Component {
 
   render() {
 
-    const {
-      question,
-      wasVoted,
-      handleYesQuestionClick } = this.props;
+    const { question, handleYesQuestionClick } = this.props;
+    const { question_id } = question;
 
     const questionComponent = (
       <div className='question-container'>
@@ -132,8 +129,12 @@ class Question extends React.Component {
           <div className='help-container'>
             <span> Helpful? </span>
             {
-              (wasVoted)?
-                (<button disabled> Yes {question.question_helpfulness} </button>)
+              (window.localStorage[question_id]) ?
+                (<button
+                  id={`vote-helpful-question-${question.question_id}`}
+                  disabled
+                  > Yes {question.question_helpfulness}
+                </button>)
                 :
                 (<button
                   id={`vote-helpful-question-${question.question_id}`}

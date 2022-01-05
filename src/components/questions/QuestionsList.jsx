@@ -3,12 +3,7 @@ import Question from './Question.jsx';
 
 const QuestionsList = (props) => {
 
-  const { votedQuestions } = props;
-  const searchedQuestions = props.questions.filter((question) => question.isVisible)
-  const filteredQuestions = searchedQuestions.map((question) => {
-    (votedQuestions[question.question_id]) ? (question.wasVoted = true) : (question.wasVoted = false);
-    return question;
-  })
+  const filteredQuestions = props.questions.filter((question) => question.isVisible)
 
   return (
     <div id='questions-list-component'>
@@ -19,7 +14,6 @@ const QuestionsList = (props) => {
               key={question.question_id}
               question={question}
               handleYesQuestionClick={props.handleYesQuestionClick}
-              wasVoted={question.wasVoted}
             />
           )
         })
