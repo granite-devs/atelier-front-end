@@ -32,239 +32,135 @@ class ProductCard extends React.Component {
     const cachedProduct = checkCache(productCardId);
 
     console.log(`--> product card ${productCardId} mounted!`);
-    console.log('cachedProduct: ', cachedProduct);
 
-    if (cachedProduct) {
-      console.log('cache match found for id', cachedProduct);
-      this.setState({
-        category: cachedProduct.category,
-        name: cachedProduct.name,
-        price: cachedProduct.price,
-        salePrice: cachedProduct.salePrice,
-        rating: cachedProduct.rating,
-        primaryImg: cachedProduct.primaryImg,
-        features: cachedProduct.features
-      });
-    }
-
-    if (!cachedProduct) {
-      console.log('making requests for ', cachedProduct);
-      this.fetchProductInfo(productCardId, 'currentRelatedItem');
-      this.fetchProductInfo(productId, 'currentItem');
-      this.fetchProductPricePics(productCardId);
-      this.fetchProductRating(productCardId);
-    }
+    this.fetchProductDetails(productCardId, 'currentRelatedItem');
+    //this.fetchProductDetails(productId, 'currentItem');
   }
 
   fetchProductDetails(productIdToGet, stateToUpdate = 'currentRelatedItem') {
     const { initialRequestMade } = this.state;
     const { updateAppProductId, productId, relatedId, checkCache } = this.props;
 
-    console.log('FETCHING ALL');
+    if (productIdToGet) {
+      const cachedProduct = checkCache(productIdToGet);
 
-    const cachedProduct = checkCache(productIdToGet);
 
-    if (cachedProduct) {
-      console.log('pull from the cache!!');
+      console.log('FETCHING ALL FOR PRODUCT ', productIdToGet);
 
-      const { name, category } = cachedProduct.details;
-      const { price, salePrice, primaryImg } = cachedProduct.styles;
-      const { ratings } = cachedProduct.reviews;
+      if (cachedProduct) {
+        console.log(' CACHED PRODUCT: ----- ', cachedProduct);
+        console.log('pulling from the cache and setting state!!');
 
-      let features = cachedProduct.details.features;
+        const { name } = cachedProduct.details;
+        let features = cachedProduct.details;
 
-      if (stateToUpdate === 'currentRelatedItem') {
-        features.forEach(feature => {
-          feature['belongsTo'] = 'relatedItem';
-        });
+        if (stateToUpdate === 'relatedItem') {
+          features.forEach(feature => {
+            feature['belongsTo'] = 'relatedItem';
+          });
 
-        const ratingFraction = () => {
-          let ratingFraction;
-          let [count, sum] = [0, 0];
+          const stateObject = this.stateBuilder(cachedProduct);
 
-          for (let key in ratings) {
-            count += parseInt(ratings[key]);
-            sum += parseInt(key) * parseInt(ratings[key]);
-          }
+          this.setState(stateObject);
+        }
 
-          const average = sum / count;
-          if (average > 0 ) { return average };
+        if (stateToUpdate === 'currentItem') {
+          features.forEach(feature => {
+            feature['belongsTo'] = 'currentItem';
+          });
 
-          return 0;
+          this.setState({
+            currentItemFeatures: {name: name, features: features}
+          });
+        }
+
+      } else {
+        const productRequestRequestConfig = {
+          method: 'get',
+          url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}`,
+          headers: {Authorization: API_KEY}
         };
 
-        this.setState({
-          name: name,
-          category: category,
-          features: features,
-          price: price,
-          salePrice: salePrice,
-          primaryImg: primaryImg,
-          rating: ratingFraction()
-        });
+        const stylesRequestConfig = {
+          method: 'get',
+          url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/styles`,
+          headers: {Authorization: API_KEY}
+        };
 
+        const reviewsRequestConfig = {
+          method: 'get',
+          url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta?product_id=${productIdToGet}`,
+          headers: {Authorization: API_KEY}
+        };
+
+        const productRequest = axios(productRequestRequestConfig);
+        const stylesRequest = axios(stylesRequestConfig);
+        const reviewsRequest = axios(reviewsRequestConfig);
+
+        axios.all([productRequest, stylesRequest, reviewsRequest])
+          .then(axios.spread((...responses) => {
+            const productResponse = responses[0];
+            const stylesResponse = responses[1];
+            const reviewsResponse = responses[2];
+
+            let productObjectToCache = {
+              details: productResponse.data,
+              styles: stylesResponse.data,
+              reviews: reviewsResponse.data
+            }
+
+            updateAppProductId(productId, productObjectToCache, productIdToGet);
+
+            const stateObject = this.stateBuilder(productObjectToCache);
+
+            this.setState(stateObject);
+
+          }))
+          .catch(errors => {
+            console.log('error fetching requests!', errors);
+          })
+      }
+    }
+  }
+
+  stateBuilder(productCacheObject) {
+
+    const { name, category } = productCacheObject.details;
+    const { price, salePrice, results } = productCacheObject.styles;
+    const { ratings } = productCacheObject.reviews;
+
+    let features = productCacheObject.details.features;
+
+      features.forEach(feature => {
+        feature['belongsTo'] = 'relatedItem';
+      });
+
+      const ratingFraction = () => {
+        let ratingFraction;
+        let [count, sum] = [0, 0];
+
+        for (let key in ratings) {
+          count += parseInt(ratings[key]);
+          sum += parseInt(key) * parseInt(ratings[key]);
+        }
+
+        const average = sum / count;
+        if (average > 0 ) { return average };
+
+        return 0;
+      };
+
+      const stateObject = {
+        name: name,
+        category: category,
+        features: features,
+        price: results[0].original_price,
+        salePrice: results[0].sale_price,
+        primaryImg: results[0].photos[0].url,
+        rating: ratingFraction()
       }
 
-      if (stateToUpdate === 'currentItem') {
-        features.forEach(feature => {
-          feature['belongsTo'] = 'currentItem';
-        });
-
-        this.setState({
-          currentItemFeatures: {name: name, features: features}
-        });
-      }
-      // END DETAILS
-
-
-    } else {
-      const productRequestRequestConfig = {
-        method: 'get',
-        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}`,
-        headers: {Authorization: API_KEY}
-      };
-
-      const stylesRequestConfig = {
-        method: 'get',
-        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/styles`,
-        headers: {Authorization: API_KEY}
-      };
-
-      const reviewsRequestConfig = {
-        method: 'get',
-        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta?product_id=${productIdToGet}`,
-        headers: {Authorization: API_KEY}
-      };
-
-      const productRequest = axios(productRequestRequestConfig);
-      const stylesRequest = axios(stylesRequestConfig);
-      const reviewsRequest = axios(reviewsRequestConfig);
-
-      axios.all([productRequest, stylesRequest, reviewsRequest])
-        .then(axios.spread((...responses) => {
-          const productResponse = responses[0];
-          const stylesResponse = responses[1];
-          const reviewsResponse = responses[2];
-
-          let productObjectToCache = {
-            details: productResponse.data,
-            styles: stylesResponse.data,
-            reviews: reviewsResponse.data
-          }
-
-          updateAppProductId(productId, productObjectToCache, productIdToGet);
-
-        }))
-        .catch(errors => {
-          console.log('error fetching requests!', errors);
-        })
-    }
-  }
-
-  fetchProductInfo(productIdToGet, stateToUpdate) {
-    const { initialRequestMade } = this.state;
-
-    if (!initialRequestMade) {
-      console.log('fetching info for', productIdToGet);
-      this.setState({initialRequestMade: true});
-
-      const infoRequestConfig = {
-        method: 'get',
-        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}`,
-        headers: {Authorization: API_KEY}
-      };
-
-      axios(infoRequestConfig)
-        .then((response) => {
-          const { name, category } = response.data;
-          let features = response.data.features;
-
-          if (stateToUpdate === 'currentRelatedItem') {
-            features.forEach(feature => {
-              feature['belongsTo'] = 'relatedItem';
-            });
-
-            this.setState({
-              name: name,
-              category: category,
-              features: features
-            });
-          }
-
-          if (stateToUpdate === 'currentItem') {
-            features.forEach(feature => {
-              feature['belongsTo'] = 'currentItem';
-            });
-
-            this.setState({
-              currentItemFeatures: {name: name, features: features}
-            });
-          }
-        })
-        .catch((error) => {
-          console.log('HTTP request to fetch product info failed');
-        });
-    }
-  }
-
-  fetchProductPricePics(productIdToGet) {
-    const { initialRequestMade } = this.state;
-
-    if (!initialRequestMade) {
-      this.setState({initialRequestMade: true});
-
-      const pricePicsRequestConfig = {
-        method: 'get',
-        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/styles`,
-        headers: {Authorization: API_KEY}
-      };
-
-      axios(pricePicsRequestConfig)
-        .then((response) => {
-          const data = response.data.results[0];
-          this.setState({
-            price: data.original_price,
-            salePrice: data.sale_price,
-            primaryImg: data.photos[0].url
-          });
-        })
-        .catch((error) => {
-          console.error('HTTP request to fetch product prices failed');
-        });
-    }
-  }
-
-  fetchProductRating(productIdToGet) {
-    const { initialRequestMade } = this.state;
-
-    if (!initialRequestMade) {
-      this.setState({initialRequestMade: true});
-
-      const ratingRequestConfig = {
-        method: 'get',
-        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta?product_id=${productIdToGet}`,
-        headers: {Authorization: API_KEY}
-      };
-
-      axios(ratingRequestConfig)
-        .then((response) => {
-          const ratings = response.data.ratings;
-          let ratingFraction;
-          let [count, sum] = [0, 0];
-
-          for (let key in ratings) {
-            count += parseInt(ratings[key]);
-            sum += parseInt(key) * parseInt(ratings[key]);
-          }
-
-          const average = sum / count;
-          average > 0 ? ratingFraction = average : ratingFraction = 0;
-          this.setState({rating: ratingFraction});
-        })
-        .catch((error) => {
-          console.log('HTTP request to fetch product rating failed');
-        });
-    }
+      return stateObject;
   }
 
   actionBtnClick(buttonLocation) {
@@ -279,8 +175,7 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    console.log('PRODUCT CARD RENDER------');
-
+    //console.log('PRODUCT CARD RENDER------');
 
     const { productCardId, updateAppProductId, currentList, hidden } = this.props;
     const { name, category, price, salePrice, rating,
@@ -305,7 +200,6 @@ class ProductCard extends React.Component {
 
     return (
       <div>
-        <div onClick={() => { this.fetchProductDetails(productCardId); }}>CLICK MEEEE</div>
         {compareModal}
         <div className={hidden ? 'product-card hidden' : 'product-card'}>
           <ActionButton actionBtnClick={this.actionBtnClick}
@@ -317,7 +211,7 @@ class ProductCard extends React.Component {
               onClick={() => { updateAppProductId(productCardId, productObjectToCache); }}>
               <p className='card-category'>{category}</p>
               <p className='card-name'>{name}</p>
-              <p className='card-price'>{'$'}{price}</p>
+              <p className='card-price'>{'$' + price}</p>
               <p className='card-sale'>{salePrice}</p>
             </div>
             <StarRating className='card-rating' rating={rating}/>

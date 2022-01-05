@@ -23,24 +23,111 @@ class App extends React.Component {
     this.checkCache = this.checkCache.bind(this);
   }
 
-  updateAppProductId(newProductId, productObject, productIdToCache) {
-    const updatedCache = {...this.state.cachedProducts};
-    updatedCache[productIdToCache || newProductId] = productObject;
+  updateAppProductId(newProductId, productObject) {
+    console.log('new ID: ', newProductId);
 
-    this.setState({
-      productId: newProductId,
-      cachedProducts: updatedCache
-    }, () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    const updateProductId = newProductId !== this.state.productId;
+
+    const updatedCache = {...this.state.cachedProducts};
+    updatedCache[newProductId] = productObject;
+
+    if (updateProductId) {
+      this.setState({
+        productId: newProductId,
+        cachedProducts: updatedCache
+      }, () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       });
-    });
+    } else {
+      this.setState({
+        cachedProducts: updatedCache
+      });
+    }
+
   }
 
-  checkCache(productIdToCheck) {
-    console.log(`checking cache for ${productIdToCheck}`);
+  checkCache(productIdToCheck, callback) {
+    console.log(`checking cache for ${productIdToCheck} \n `,
+    this.state.cachedProducts[productIdToCheck]);
+
     return this.state.cachedProducts[productIdToCheck];
+  }
+
+
+  componentDidMount() {
+    console.log('APP HAS MOUNTED----');
+
+    const intializationConfig = {
+      method: 'get',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products',
+      headers: {
+        Authorization: API_KEY,
+      },
+    };
+
+    axios(intializationConfig)
+      .then((response) => {
+
+        this.setState({ // sets the id of the first product in the list as the init id
+          productId: response.data[0].id,
+          initialRequestMade: true
+        }, () => {
+          this.fetchProductDetails(response.data[0].id);
+        });
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
+  fetchProductDetails(productIdToGet) {
+    const { initialRequestMade } = this.state;
+
+    const productRequestRequestConfig = {
+      method: 'get',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}`,
+      headers: {Authorization: API_KEY}
+    };
+
+    const stylesRequestConfig = {
+      method: 'get',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/styles`,
+      headers: {Authorization: API_KEY}
+    };
+
+    const reviewsRequestConfig = {
+      method: 'get',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta?product_id=${productIdToGet}`,
+      headers: {Authorization: API_KEY}
+    };
+
+    const productRequest = axios(productRequestRequestConfig);
+    const stylesRequest = axios(stylesRequestConfig);
+    const reviewsRequest = axios(reviewsRequestConfig);
+
+    axios.all([productRequest, stylesRequest, reviewsRequest])
+      .then(axios.spread((...responses) => {
+        const productResponse = responses[0];
+          const stylesResponse = responses[1];
+          const reviewsResponse = responses[2];
+
+          let productObjectToCache = {
+            details: productResponse.data,
+            styles: stylesResponse.data,
+            reviews: reviewsResponse.data
+          }
+
+          console.log('updating app product id with  object to cache');
+          this.updateAppProductId(productIdToGet, productObjectToCache);
+
+        }))
+        .catch(errors => {
+          console.log('error fetching requests!', errors);
+        })
   }
 
   addItemToOutfit(productToAdd) {
@@ -59,31 +146,9 @@ class App extends React.Component {
     this.setState({outfitItems: filteredOutfitList});
   }
 
-  componentDidMount() {
-    console.log('INITAL REQUEST');
-
-    const intializationConfig = {
-      method: 'get',
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products',
-      headers: {
-        Authorization: API_KEY,
-      },
-    };
-
-    axios(intializationConfig)
-      .then((response) => {
-        this.setState({
-          productId: response.data[0].id,
-          initialRequestMade: true
-        }); // sets the id of the first prodcut in the list as the init id
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
 
   render() {
-    console.log('APP RENDER------');
+    //console.log('APP RENDER------');
 
 
     const { productId, outfitItems, initialRequestMade } = this.state;
@@ -109,7 +174,7 @@ class App extends React.Component {
       return (
         <div>
           <Overview key={`${productId}-1`} productId={productId} />
-          <Related
+          {/* <Related
             key={`${productId}-2`}
             productId={productId}
             checkCache={this.checkCache}
@@ -117,7 +182,7 @@ class App extends React.Component {
             addItemToOutfit={this.addItemToOutfit}
             removeItemFromOutfit={this.removeItemFromOutfit}
             outfitItems={outfitItems}
-          />
+          /> */}
           {/* <QuestionsAnswers key={`${productId}-3`} productId={productId} />
           <Reviews key={`${productId}-4`} productId={productId} /> */}
         </div>
