@@ -12,7 +12,7 @@ const AverageRating = ({state, updateState}) => {
 
   const scrollToReview = () => {
     window.scrollTo({
-      top: 2500,
+      top: 3000,
       left: 0,
       behavior: 'smooth'
     });
