@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import API_KEY from '../../../config.js';
 
+
 const AddAnswerModal = (props) => {
 
   return (
@@ -11,7 +12,7 @@ const AddAnswerModal = (props) => {
           <button
             className='btn'
             onClick={() => {
-              props.toggleAddAnswerModal('main-view')
+              props.toggleAddAnswerModal('main')
             }}> Close
           </button>
           <h1>Submit Your Answer</h1>
@@ -60,19 +61,14 @@ const AddAnswerModal = (props) => {
             id='submit-answer-btn'
             onClick={() => {
 
-              const answerBody = document.querySelector('#answer-input').value;
-              const user = document.querySelector('#answer-user-input').value;
+              const body = document.querySelector('#answer-input').value;
+              const name = document.querySelector('#answer-user-input').value;
               const email = document.querySelector('#answer-email-input').value;
-              const date = new Date();
 
-              const answer = {
-                answer_name: user,
-                body: answerBody,
-                date: date.toISOString()
-              }
+              const answer = {body, name, email}
 
-              if (answerBody && user && email) {
-                props.addAnswerToList(answer)
+              if (body && name && email) {
+                props.addAnswer(answer)
                }
 
             }}
