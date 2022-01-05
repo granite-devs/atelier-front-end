@@ -23,12 +23,12 @@ class App extends React.Component {
     this.checkCache = this.checkCache.bind(this);
   }
 
-  updateAppProductId(productId, productObject) {
+  updateAppProductId(newProductId, productObject, productIdToCache) {
     const updatedCache = {...this.state.cachedProducts};
-    updatedCache[productId] = productObject;
+    updatedCache[productIdToCache || newProductId] = productObject;
 
     this.setState({
-      productId: productId,
+      productId: newProductId,
       cachedProducts: updatedCache
     }, () => {
       window.scrollTo({

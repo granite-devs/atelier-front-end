@@ -58,6 +58,7 @@ class ProductCard extends React.Component {
 
   fetchProductDetails(productIdToGet) {
     const { initialRequestMade } = this.state;
+    const { updateAppProductId, productId, relatedId } = this.props;
 
     console.log('FETCHING ALL');
 
@@ -89,13 +90,18 @@ class ProductCard extends React.Component {
         const stylesResponse = responses[1];
         const ratingResponse = responses[2];
 
+        let productObjectToCache = {
+          details: productResponse.data,
+          styles: stylesResponse.data,
+          rating: ratingResponse.data
+        }
 
+        updateAppProductId(productId, productObjectToCache, productIdToGet);
 
       }))
       .catch(errors => {
         console.log('error fetching requests!', errors);
       })
-
   }
 
   fetchProductInfo(productIdToGet, stateToUpdate) {
