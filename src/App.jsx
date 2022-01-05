@@ -8,13 +8,13 @@ import Related from './components/related/Related.jsx';
 
 import API_KEY from './config.js';
 
-window.$productsCache = {};
+window.localStorage.clear();
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: null,
+      productId: 39333,
       outfitItems: [],
       cachedProducts: {},
       initialRequestMade: false
@@ -135,7 +135,7 @@ class App extends React.Component {
           let stateCache = this.state.cachedProducts;
           stateCache[productIdToGet] = productObjectToCache;
 
-          $productsCache[productIdToGet] = productObjectToCache;
+          window.localStorage.setItem(productIdToGet, JSON.stringify(productObjectToCache))
 
           console.log('--> axios request for product details complete');
           this.setState({

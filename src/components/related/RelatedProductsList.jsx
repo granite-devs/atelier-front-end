@@ -27,41 +27,38 @@ class RelatedProductsList extends React.Component {
   }
 
   fetchRelatedIds(productIdToGet) {
-    console.log('--> fetching related IDs');
     const { initialRequestMade } = this.state;
 
-    if (productIdToGet && !initialRequestMade) {
-      this.setState({initialRequestMade: true});
+      if (productIdToGet && !initialRequestMade) {
+        this.setState({initialRequestMade: true});
 
-      const relatedIdsRequestConfig = {
-        method: 'get',
-        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/related`,
-        headers: {Authorization: API_KEY}
-      };
+        const relatedIdsRequestConfig = {
+          method: 'get',
+          url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/related`,
+          headers: {Authorization: API_KEY}
+        };
 
-      axios(relatedIdsRequestConfig)
-        .then((response) => {
-          console.log('--> related IDs fetched');
+        axios(relatedIdsRequestConfig)
+          .then((response) => {
+            console.log('--> related IDs fetched');
 
-          const relatedIds = response.data;
+            const relatedIds = response.data;
 
-          this.setState({relatedIds: response.data});
+            this.setState({relatedIds: response.data});
 
-          relatedIds.forEach(relatedId => {
+              relatedIds.forEach(relatedId => {
 
-            $productsCache[relatedId] ? console.log('cache found') : console.log('cache not found');
-
-            if (!$productsCache[relatedId]) {
-              console.log('---> attempting to cache product id', relatedId);
-              this.props.fetchProductDetails(relatedId);
-            }
+                if (!window.localStorage.getItem(relatedId)) {
+                  console.log('--fetching and caching ', relatedId);
+                  //doesn't exist in local storage, fetch them
+                  this.props.fetchProductDetails(relatedId);
+                }
+              })
           })
-
-        })
-        .catch((error) => {
-          console.log('HTTP request to fetch related product IDs failed');
-        });
-    }
+          .catch((error) => {
+            console.log('HTTP request to fetch related product IDs failed');
+          });
+      }
   }
 
   computeIndexesToShow() {
@@ -132,9 +129,9 @@ class RelatedProductsList extends React.Component {
     }
 
     let productCard = null;
-    console.log('related list render cached products:', cachedProducts);
+    //console.log('related list render cached products:', Object.keys(cachedProducts).length);
 
-    if (Object.keys(cachedProducts).length > 0) {
+    if (window.localStorage.length > 0) {
       productCard = <div className='product-card-list'>
             {this.state.relatedIds.map((relatedId, i) => {
               return <ProductCard key={i}
@@ -144,7 +141,7 @@ class RelatedProductsList extends React.Component {
                 productCardId={relatedId}
                 updateAppProductId={updateAppProductId}
                 checkCache={checkCache}
-                cardData={cachedProducts[relatedId]}
+                cardData={JSON.parse(window.localStorage.getItem(relatedId))}
                 currentProductFeatures={cachedProducts[productId]} />
             })}
       </div>
