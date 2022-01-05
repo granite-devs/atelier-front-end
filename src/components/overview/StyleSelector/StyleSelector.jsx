@@ -35,7 +35,7 @@ const StyleSelector = ({state, updateState}) => {
       return {
         ...preValues,
         currentStyle: selectedStyle,
-        mainImage: selectedStyle.photos[0].url
+        mainImage: selectedStyle.photos[0].thumbnail_url
       };
     });
 

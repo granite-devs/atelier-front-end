@@ -16,7 +16,7 @@ const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handl
         })}
       </div>;
     if (state.mainImage === '') {
-      displayMainImage = <img id ='main' src ={state.currentStyle.photos[0].url}/>;
+      displayMainImage = <img id ='main' src ={state.currentStyle.photos[0].thumbnail_url}/>;
     } else {
       displayMainImage = <img id ='main' src ={state.mainImage}/>;
     }
