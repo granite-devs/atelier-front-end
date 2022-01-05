@@ -977,6 +977,22 @@ body {
   margin: 4px;
 }
 
+.imageModal {
+  max-height: 80%;
+  max-width: 80%;
+  padding: 2rem;
+  padding-top: 0.5rem;
+  background-color: $container-bg;
+  border-radius: 10px;
+  button {
+    position: absolute;
+  }
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
 .attachImage {
   width: 20rem;
   padding: 2rem;
