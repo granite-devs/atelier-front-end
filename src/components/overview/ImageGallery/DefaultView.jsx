@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handleRightArrow, handleLeftArrow}) => {
 
   let displayStyleImages, displayMainImage;
-  if (state.currentStyle) {
+  if (state.currentStyle.photos) {
     displayStyleImages =
       <div className='styleImages'>
         {state.currentStyle.photos.map((element, index) => { //render all style photos
