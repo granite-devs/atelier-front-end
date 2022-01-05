@@ -191,7 +191,7 @@ class Reviews extends React.Component {
     }
 
     return (
-      <div className='reviews'>
+      <div id='reviews' className='reviews'>
         <h3>
           Ratings &amp; Reviews {name}
         </h3>
