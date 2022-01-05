@@ -13,7 +13,7 @@ class Reviews extends React.Component {
       reviewsList: [],
       filteredReviewsList: [],
       filter: () => true, // Default "filter": displays all reviews.
-      reviewsPerLoad: 2,
+      reviewsPerLoad: 100,
       reviewCount: null,
       reviewsLoaded: 0,
       moreToLoad: true,
@@ -196,6 +196,7 @@ class Reviews extends React.Component {
           Ratings &amp; Reviews {name}
         </h3>
         <ReviewsBreakdown
+          setFilter={this.setFilter}
           reviewsMetaData={this.state.reviewsMetaData}
         />
         <span className='reviewsHeader'>{reviewCount} reviews, sorted by </span>

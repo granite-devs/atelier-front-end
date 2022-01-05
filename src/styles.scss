@@ -2,9 +2,11 @@
 
 $primary-color: white;
 $bg: black;
+$border-color: black;
 $link-btn-color: rgb(27, 149, 197);
 $primary-font: 'Ubuntu', sans-serif;
 $heavy: 600;
+$tinyfont: .75rem;
 $smallfont: .9rem;
 $largefont: 1.2rem;
 $gray-text-color: rgb(69, 69, 69);
@@ -942,7 +944,19 @@ body {
     margin-right: 60px;
   }
 
+  .filterSpan {
+    font-size: $tinyfont;
+    color: black;
+    background-color: lightgray;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    padding: 0 0.5em;
+    margin: 0 0.12em;
+    cursor: pointer;
+  }
+
   .breakdownBar {
+    cursor: pointer;
     .leftSpan {
       padding-right: 5px;
     }

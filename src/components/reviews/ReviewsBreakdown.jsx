@@ -8,19 +8,52 @@ import BreakdownBar from './BreakdownBar.jsx';
 class ReviewsBreakdown extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      ratingsToFilter: {}
+    };
+    this.toggleRatingFilter = this.toggleRatingFilter.bind(this);
+  }
+
+  clearAllFilters() {
+    this.setState({ ratingsToFilter: {} });
+    this.props.setFilter((review) => true);
+  }
+
+  toggleRatingFilter(stars) {
+    const { ratingsToFilter } = this.state;
+    if (ratingsToFilter[stars]) {
+      ratingsToFilter[stars] = false;
+    } else {
+      ratingsToFilter[stars] = true;
+    }
+    let allFiltersOff = true;
+    for (let rating in ratingsToFilter) {
+      if (ratingsToFilter[rating]) {
+        allFiltersOff = false;
+      }
+    }
+    this.props.setFilter((review) => {
+      return (allFiltersOff || ratingsToFilter[review.rating]);
+    });
+    this.setState({ ratingsToFilter });
   }
 
   render() {
     const { reviewsMetaData } = this.props;
+    const { ratingsToFilter } = this.state;
     if (reviewsMetaData) {
       const { ratings, recommended } = reviewsMetaData;
       const ratingsArray = [];
+      const filteredRatingsArray = [];
       let ratingsSum = 0;
       let reviewCount = 0;
       for (let rating in ratings) {
         ratingsSum += parseInt(ratings[rating]) * rating;
         reviewCount += parseInt(ratings[rating]);
         ratingsArray.push(rating);
+        if (ratingsToFilter[rating]) {
+          filteredRatingsArray.push(rating);
+        }
       }
       ratingsArray.reverse();
       if (reviewCount === 0) {
@@ -33,12 +66,31 @@ class ReviewsBreakdown extends React.Component {
           <span className='avgRating'>{avgRating}</span>
           <StarRating rating={avgRating} />
           <br></br>
+          {filteredRatingsArray.length > 0 ? (
+            <>
+              <span>Filters: </span>
+              <span className='filterSpan' onClick={() => this.clearAllFilters()}>
+                Clear all
+              </span>
+              <br></br>
+            </>
+          ) : null}
+          {filteredRatingsArray.map((stars) => (
+            <span
+              key={stars}
+              className='filterSpan'
+              onClick={() => this.toggleRatingFilter(stars)}
+            >
+              {stars} Stars
+            </span>
+          ))}
           {ratingsArray.map((stars) => (
             <BreakdownBar
               key={stars}
               stars={stars}
               reviews={ratings[stars]}
               total={reviewCount}
+              onClick={this.toggleRatingFilter}
             />
           ))}
           <span className='recommendations'>
