@@ -11,11 +11,7 @@ const AverageRating = ({state, updateState}) => {
   const avgRating = Math.round(ratingsSum / reviewCount * 10) / 10;
 
   const scrollToReview = () => {
-    window.scrollTo({
-      top: 1500,
-      left: 0,
-      behavior: 'smooth'
-    });
+    document.getElementById('reviews').scrollIntoView(true);
   };
 
   return (

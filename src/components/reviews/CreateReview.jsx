@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import API_KEY from '../../config.js';
+import AttatchImage from '../shared/AttatchImage.jsx';
 import StarInput from '../shared/StarInput.jsx';
 
 class CreateReview extends React.Component {
@@ -9,7 +10,12 @@ class CreateReview extends React.Component {
     this.state = {
       rating: 0,
       recommended: null,
-      characteristics: {}
+      characteristics: {},
+      summary: null,
+      body: null,
+      photoLinks: [],
+      username: null,
+      email: null
     };
     this.setRating = this.setRating.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -85,12 +91,14 @@ class CreateReview extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
+    this.onChange({ target: { form: e.target } });
     const {
       rating,
       recommended,
       characteristics,
       summary,
       body,
+      photoLinks,
       username,
       email
     } = this.state;
@@ -115,7 +123,7 @@ class CreateReview extends React.Component {
         'recommend': recommended,
         'name': username,
         'email': email,
-        'photos': [],
+        'photos': photoLinks,
         'characteristics': characteristicsData
       };
 
@@ -151,6 +159,14 @@ class CreateReview extends React.Component {
 
     const summary = form.summary.value;
     const body = form.body.value;
+
+    const photoLinks = [];
+    for (let i = 0; i < 5; i++) {
+      if (form[`image${i}`]) {
+        photoLinks.push(form[`image${i}`].value);
+      }
+    }
+
     const username = form.username.value;
     const email = form.email.value;
 
@@ -160,6 +176,7 @@ class CreateReview extends React.Component {
       characteristics,
       summary,
       body,
+      photoLinks,
       username,
       email
     });
@@ -185,7 +202,9 @@ class CreateReview extends React.Component {
     const {
       rating,
       recommended,
-      characteristics
+      characteristics,
+      imageModalOpen,
+      photoLinks
     } = this.state;
     return (
       <div className='createReview'>
@@ -227,6 +246,10 @@ class CreateReview extends React.Component {
           <br></br>
           <textarea id='body' maxLength={1000}></textarea>
           <br></br>
+          <AttatchImage
+            maxImages={5}
+            imageLinks={photoLinks}
+          />
           <br></br>
           <label>Your nickname: *</label>
           <input type='text' id='username' placeholder='Example: jackson11!' maxLength={60}></input>
