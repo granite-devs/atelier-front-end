@@ -3,7 +3,7 @@ import axios from "axios";
 import SearchBar from "./SearchBar.jsx";
 import QuestionsList from "./QuestionsList.jsx";
 import AddQuestionModal from "./modals/AddQuestionModal.jsx";
-import { getQuestions, postQuestion } from "../../utils/questionsUtils.js";
+import { getQuestions, postQuestion, putHelpfulQuestion } from "../../utils/questionsUtils.js";
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {
@@ -79,25 +79,36 @@ class QuestionsAnswers extends React.Component {
 
   voteHelpfulQuestion(questionToUpdate) {
 
-    const storage = window.localStorage
     const { questionsList, votedQuestions } = this.state;
-    const targetId = questionToUpdate.question_id;
-    const button = document.querySelector(`#vote-helpful-question-${targetId}`);
+    const { productId } = this.props;
+    const targetQuestionId = questionToUpdate.question_id;
+    const button = document.querySelector(`#vote-helpful-question-${targetQuestionId}`);
 
     if (!button.disable) {
-      questionsList.forEach((question) => {
-        if (questionToUpdate.question_id === question.question_id) {
-          questionToUpdate.question_helpfulness += 1;
-        }
-        votedQuestions[targetId] = true;
-        storage[targetId] = true;
-      });
-      this.setState({
-        questionsList: questionsList,
-        votedQuestions: votedQuestions
-      });
-      button.disabled = true;
-    }
+      putHelpfulQuestion(targetQuestionId)
+        .then((response) => {
+          if (response) {
+            getQuestions(productId)
+              .then((questions) => {
+                const updatedQuestions = this.setTwoQuestionsVisable(questions);
+                votedQuestions[targetQuestionId] = true;
+                window.localStorage[targetQuestionId] = true;
+                this.setState({
+                  questionsList: updatedQuestions,
+                  view: this.state.view,
+                  votedQuestions: votedQuestions
+                })
+              })
+              .catch((error) => {
+                console.error(error)
+              })
+          }
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+
+      }
   }
 
   loadMoreQuestions() {
