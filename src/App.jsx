@@ -21,12 +21,15 @@ class App extends React.Component {
     this.addItemToOutfit = this.addItemToOutfit.bind(this);
     this.removeItemFromOutfit = this.removeItemFromOutfit.bind(this);
     this.checkCache = this.checkCache.bind(this);
+    this.fetchProductDetails = this.fetchProductDetails.bind(this);
   }
 
   updateAppProductId(newProductId, productObject) {
-    console.log('new ID: ', newProductId);
+    console.log('*attempting to update app product Id to', newProductId);
 
     const updateProductId = newProductId !== this.state.productId;
+
+    console.log('will update product ID and cache: ', updateProductId);
 
     const updatedCache = {...this.state.cachedProducts};
     updatedCache[newProductId] = productObject;
@@ -85,6 +88,8 @@ class App extends React.Component {
     }
 
   fetchProductDetails(productIdToGet) {
+    console.log('--> fetching details for', productIdToGet);
+
     const { initialRequestMade } = this.state;
 
     const productRequestRequestConfig = {
@@ -121,8 +126,13 @@ class App extends React.Component {
             reviews: reviewsResponse.data
           }
 
-          console.log('updating app product id with  object to cache');
-          this.updateAppProductId(productIdToGet, productObjectToCache);
+          let stateCache = this.state.cachedProducts;
+          stateCache[productIdToGet] = productObjectToCache;
+
+          console.log('--> app fetch product details complete');
+          this.setState({
+            cachedProducts: stateCache
+          });
 
         }))
         .catch(errors => {
@@ -150,31 +160,13 @@ class App extends React.Component {
   render() {
     //console.log('APP RENDER------');
 
-
-    const { productId, outfitItems, initialRequestMade } = this.state;
-
-    // return (
-    //   <div>
-    //     <Overview key={`${productId}-1`} productId={productId} />
-    //     <Related
-    //       key={`${productId}-2`}
-    //       productId={productId}
-    //       checkCache={this.checkCache}
-    //       updateAppProductId={this.updateAppProductId}
-    //       addItemToOutfit={this.addItemToOutfit}
-    //       removeItemFromOutfit={this.removeItemFromOutfit}
-    //       outfitItems={outfitItems}
-    //     />
-    //     {/* <QuestionsAnswers key={`${productId}-3`} productId={productId} />
-    //     <Reviews key={`${productId}-4`} productId={productId} /> */}
-    //   </div>
-    // );
+    const { productId, outfitItems, initialRequestMade, cachedProducts } = this.state;
 
     if (initialRequestMade) {
       return (
         <div>
           <Overview key={`${productId}-1`} productId={productId} />
-          {/* <Related
+          <Related
             key={`${productId}-2`}
             productId={productId}
             checkCache={this.checkCache}
@@ -182,7 +174,9 @@ class App extends React.Component {
             addItemToOutfit={this.addItemToOutfit}
             removeItemFromOutfit={this.removeItemFromOutfit}
             outfitItems={outfitItems}
-          /> */}
+            fetchProductDetails={this.fetchProductDetails}
+            cachedProducts={cachedProducts}
+          />
           {/* <QuestionsAnswers key={`${productId}-3`} productId={productId} />
           <Reviews key={`${productId}-4`} productId={productId} /> */}
         </div>

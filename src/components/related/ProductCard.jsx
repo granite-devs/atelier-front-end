@@ -177,17 +177,9 @@ class ProductCard extends React.Component {
   render() {
     //console.log('PRODUCT CARD RENDER------');
 
-    const { productCardId, updateAppProductId, currentList, hidden } = this.props;
-    const { name, category, price, salePrice, rating,
+    const { productCardId, updateAppProductId, currentList, hidden, cardData } = this.props;
+    const { rating,
       features, currentItemFeatures, displayModal } = this.state;
-
-    const productObjectToCache = {
-      name: name, category: category, price: price, salePrice: salePrice,
-      rating:rating, features: features, primaryImg: primaryImg
-    };
-
-    let primaryImg = this.state.primaryImg;
-    if (!primaryImg) { primaryImg = 'https://tinyurl.com/5nur3x7w'; }
 
     let compareModal;
     if (currentList === 'related') {
@@ -196,6 +188,21 @@ class ProductCard extends React.Component {
           displayModal={displayModal}
           currentItemFeatures={currentItemFeatures}
           actionBtnClick={this.actionBtnClick} /> ;
+    }
+
+    console.log('CARD DATA: ', cardData);
+
+    let [ category, name, price, sale ] = [ '...', '...', '...', '...'];
+    let primaryImg = 'https://tinyurl.com/5nur3x7w';
+
+    if (cardData) {
+      category = cardData.details.category;
+      name = cardData.details.name;
+      price = cardData.styles.results[0].original_price;
+      sale = cardData.styles.results[0].sale;
+
+      const photoPath = cardData.styles.results[0].photos[0].url;
+      if (photoPath) { primaryImg = photoPath };
     }
 
     return (
@@ -212,7 +219,7 @@ class ProductCard extends React.Component {
               <p className='card-category'>{category}</p>
               <p className='card-name'>{name}</p>
               <p className='card-price'>{'$' + price}</p>
-              <p className='card-sale'>{salePrice}</p>
+              <p className='card-sale'>{sale}</p>
             </div>
             <StarRating className='card-rating' rating={rating}/>
         </div>

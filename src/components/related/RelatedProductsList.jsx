@@ -13,18 +13,21 @@ class RelatedProductsList extends React.Component {
     this.state = {
       relatedIds: [],
       initialRequestMade: false,
-      indexesToShow: [0],
+      indexesToShow: [0, 1, 2],
       showLeftArrow: false,
       showRightArrow: true
     }
   }
 
   componentDidMount() {
-    this.computeIndexesToShow();
+    const { relatedIds } = this.state.relatedIds;
+
+    //this.computeIndexesToShow();
     this.fetchRelatedIds(this.props.productId);
   }
 
   fetchRelatedIds(productIdToGet) {
+    console.log('--> fetching related IDs');
     const { initialRequestMade } = this.state;
 
     if (productIdToGet && !initialRequestMade) {
@@ -38,7 +41,17 @@ class RelatedProductsList extends React.Component {
 
       axios(relatedIdsRequestConfig)
         .then((response) => {
+          console.log('--> related IDs fetched');
+
+          const relatedIds = response.data;
+
           this.setState({relatedIds: response.data});
+
+          relatedIds.forEach(relatedId => {
+            console.log('---> attempting to cache product id', relatedId);
+            this.props.fetchProductDetails(relatedId);
+          })
+
         })
         .catch((error) => {
           console.log('HTTP request to fetch related product IDs failed');
@@ -105,12 +118,30 @@ class RelatedProductsList extends React.Component {
 
   render() {
     const { productId, productCardId, updateAppProductId,
-      currentList, removeItemFromOutfit, checkCache } = this.props;
+      currentList, removeItemFromOutfit, checkCache, cachedProducts } = this.props;
     const { showLeftArrow, indexesToShow, relatedIds } = this.state;
     let { showRightArrow } = this.state;
 
     if (relatedIds.length <= indexesToShow.length) {
       showRightArrow = false;
+    }
+
+    let productCard = null;
+    console.log(cachedProducts);
+
+    if (cachedProducts) {
+      productCard = <div className='product-card-list'>
+            {this.state.relatedIds.map((relatedId, i) => {
+              return <ProductCard key={i}
+                hidden={!indexesToShow.includes(i)}
+                currentList={currentList}
+                productId={productId}
+                productCardId={relatedId}
+                updateAppProductId={updateAppProductId}
+                checkCache={checkCache}
+                cardData={cachedProducts[relatedId]} />
+            })}
+      </div>
     }
 
     return (
@@ -122,17 +153,7 @@ class RelatedProductsList extends React.Component {
               src='https://i.ibb.co/r0GN44X/image.png'
               onClick={() => { this.handleLeftArrowClick() }}></img>
           </div>
-          <div className='product-card-list'>
-            {this.state.relatedIds.map((relatedId, i) => {
-              return <ProductCard key={i}
-                hidden={!indexesToShow.includes(i)}
-                currentList={currentList}
-                productId={productId}
-                productCardId={relatedId}
-                updateAppProductId={updateAppProductId}
-                checkCache={checkCache} />
-            })}
-          </div>
+          {productCard}
           <div className='related-arrow'>
             <img className={showRightArrow ? 'related-right-arrow' : 'related-right-arrow hide'}
               src='https://i.ibb.co/k3GTgnr/arrow-icon-1177.png'
