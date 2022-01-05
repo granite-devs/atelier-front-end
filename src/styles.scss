@@ -835,10 +835,10 @@ body {
 }
 
 .reviewTile {
-  margin: 16px 10px;
+  margin: 16px auto;
   padding: 10px 12px;
-  width: 50%;
-  min-width: 580px;
+  width: 80%;
+  min-width: 30.5em;
   border: 1px solid black;
   border-radius: 10px;
   background-color: whitesmoke;
@@ -851,7 +851,7 @@ body {
 
   h3 {
     margin: 2px 0px;
-    font-size: 19px;
+    font-size: 17px;
   }
 
   p {
@@ -865,6 +865,15 @@ body {
     cursor: pointer;
   }
 
+  .helpful {
+    font-size: $smallfont;
+    color: $gray-text-color;
+    a {
+      text-decoration: underline;
+      font-style: italic;
+      cursor: pointer;
+    }
+  }
   .recommended {
     margin-left: 10px;
     font-size: $smallfont;

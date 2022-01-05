@@ -22,8 +22,7 @@ class ReviewTile extends React.Component {
   }
 
   render() {
-    const { review } = this.props;
-    console.log(review);
+    const { review, hasVotedHelpul, voteReviewHelpful } = this.props;
     const { displayFullBody, imageInModal } = this.state;
     const bodyToDisplay = displayFullBody ? review.body : review.body.substr(0, 250);
     const moreToDisplay = bodyToDisplay.length < review.body.length;
@@ -35,6 +34,23 @@ class ReviewTile extends React.Component {
         Show {displayFullBody ? 'Less' : 'More'}
       </a>
     ) : null;
+    const voteHelpfulBtns = !hasVotedHelpul ? (
+      <div className='helpful'>
+        <span>Was this review helpful? </span>
+        <a onClick={() => {
+          review.helpfulness++;
+          voteReviewHelpful(review.review_id);
+        }}>
+          Yes ({review.helpfulness})
+        </a><span> / </span><a>
+          No
+        </a>
+      </div>
+    ) : (
+      <div className='helpful'>
+        <span>{review.helpfulness} users found this review useful</span>
+      </div>
+    );
     const salesResponse = review.response ? (
       <div className='salesResponse'>
         <b>Response from seller:</b>
@@ -66,6 +82,7 @@ class ReviewTile extends React.Component {
         {review.recommend ? <p className='recommended'>&#9745; I recommend this product</p> : null}
         {salesResponse}
         {imageModal}
+        {voteHelpfulBtns}
       </div>
     );
   }
