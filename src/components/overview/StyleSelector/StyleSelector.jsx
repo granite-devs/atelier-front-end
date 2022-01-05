@@ -8,7 +8,7 @@ const StyleSelector = ({state, updateState}) => {
     let defaultStylePhotoArray = [];
     if (state.selectedProductStyle[0] !== undefined) {
       state.selectedProductStyle.forEach ((eachStyle) => {
-        defaultStylePhotoArray.push(eachStyle.photos[0].url);
+        defaultStylePhotoArray.push(eachStyle.photos[0].thumbnail_url);
       });
       updateDefaultPhoto(defaultStylePhotoArray);
     }
