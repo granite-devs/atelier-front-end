@@ -48,8 +48,13 @@ class RelatedProductsList extends React.Component {
           this.setState({relatedIds: response.data});
 
           relatedIds.forEach(relatedId => {
-            console.log('---> attempting to cache product id', relatedId);
-            this.props.fetchProductDetails(relatedId);
+
+            $productsCache[relatedId] ? console.log('cache found') : console.log('cache not found');
+
+            if (!$productsCache[relatedId]) {
+              console.log('---> attempting to cache product id', relatedId);
+              this.props.fetchProductDetails(relatedId);
+            }
           })
 
         })
@@ -127,9 +132,9 @@ class RelatedProductsList extends React.Component {
     }
 
     let productCard = null;
-    console.log(cachedProducts);
+    console.log('related list render cached products:', cachedProducts);
 
-    if (cachedProducts) {
+    if (Object.keys(cachedProducts).length > 0) {
       productCard = <div className='product-card-list'>
             {this.state.relatedIds.map((relatedId, i) => {
               return <ProductCard key={i}

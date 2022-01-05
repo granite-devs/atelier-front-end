@@ -8,6 +8,8 @@ import Related from './components/related/Related.jsx';
 
 import API_KEY from './config.js';
 
+window.$productsCache = {};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -24,6 +26,40 @@ class App extends React.Component {
     this.fetchProductDetails = this.fetchProductDetails.bind(this);
   }
 
+  componentDidMount() {
+    const intializationConfig = {
+      method: 'get',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products',
+      headers: {
+        Authorization: API_KEY,
+      },
+    };
+
+    axios(intializationConfig)
+      .then((response) => {
+        const newProductId = response.data[0].id;
+        const stateCache = this.state.cachedProducts;
+
+        if (stateCache[newProductId]) {
+          console.log('COMPONENT MOUNT SET PRODUCT ID');
+          this.setState({ //do not fetch info if product exists in cache
+            productId: newProductId
+          });
+        } else {
+          this.setState({ // sets the id of the first product in the list as the init id
+            productId: newProductId,
+            initialRequestMade: true
+          }, () => {
+            console.log('INITIAL FETCH PRODUCT DETAILS');
+            this.fetchProductDetails(newProductId);
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    }
+
   updateAppProductId(newProductId, productObject) {
     console.log('*attempting to update app product Id to', newProductId);
 
@@ -31,8 +67,11 @@ class App extends React.Component {
 
     console.log('will update product ID and cache: ', updateProductId);
 
-    const updatedCache = {...this.state.cachedProducts};
-    updatedCache[newProductId] = productObject;
+    const updatedCache = this.state.cachedProducts;
+
+    if (productObject) {
+      updatedCache[newProductId] = productObject;
+    }
 
     if (updateProductId) {
       this.setState({
@@ -53,43 +92,10 @@ class App extends React.Component {
   }
 
   checkCache(productIdToCheck, callback) {
-    console.log(`checking cache for ${productIdToCheck} \n `,
-    this.state.cachedProducts[productIdToCheck]);
-
     return this.state.cachedProducts[productIdToCheck];
   }
 
-
-  componentDidMount() {
-    console.log('APP HAS MOUNTED----');
-
-    const intializationConfig = {
-      method: 'get',
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products',
-      headers: {
-        Authorization: API_KEY,
-      },
-    };
-
-    axios(intializationConfig)
-      .then((response) => {
-
-        this.setState({ // sets the id of the first product in the list as the init id
-          productId: response.data[0].id,
-          initialRequestMade: true
-        }, () => {
-          this.fetchProductDetails(response.data[0].id);
-        });
-
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
-
   fetchProductDetails(productIdToGet) {
-    console.log('--> fetching details for', productIdToGet);
-
     const { initialRequestMade } = this.state;
 
     const productRequestRequestConfig = {
@@ -129,7 +135,9 @@ class App extends React.Component {
           let stateCache = this.state.cachedProducts;
           stateCache[productIdToGet] = productObjectToCache;
 
-          console.log('--> app fetch product details complete');
+          $productsCache[productIdToGet] = productObjectToCache;
+
+          console.log('--> axios request for product details complete');
           this.setState({
             cachedProducts: stateCache
           });
@@ -158,8 +166,6 @@ class App extends React.Component {
 
 
   render() {
-    //console.log('APP RENDER------');
-
     const { productId, outfitItems, initialRequestMade, cachedProducts } = this.state;
 
     if (initialRequestMade) {

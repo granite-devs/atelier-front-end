@@ -11,7 +11,6 @@ class ProductCard extends React.Component {
     super(props);
 
     this.state = {
-      features: [],
       displayModal: false,
       componentMounted: true
     }
@@ -22,12 +21,10 @@ class ProductCard extends React.Component {
     const { productCardId, productId, checkCache } = this.props;
     const cachedProduct = checkCache(productCardId);
 
-    console.log(`--> product card ${productCardId} mounted!`);
     this.setState({componentMounted: true});
   }
 
   actionBtnClick(buttonLocation) {
-    console.log('clicky');
     if (buttonLocation === 'relatedList') {
       this.setState({displayModal: !this.state.displayModal});
     }
@@ -76,8 +73,7 @@ class ProductCard extends React.Component {
 
     let compareModal;
 
-    if (cardData) {
-      console.log('assembling card data from the cache!');
+    if (cardData) { //assemble product card details using the cache
       category = cardData.details.category;
       name = cardData.details.name;
       price = cardData.styles.results[0].original_price;
@@ -95,9 +91,8 @@ class ProductCard extends React.Component {
 
       if (currentList === 'related') {
         compareModal = <CompareModal
-          relatedItemName={name}
-          relatedItemFeatures={relatedFeaturesLabeled}
           displayModal={displayModal}
+          relatedItemFeatures={relatedFeaturesLabeled}
           currentProductFeatures={currentProductFeatures.details.features}
           actionBtnClick={this.actionBtnClick} /> ;
       }
@@ -107,7 +102,6 @@ class ProductCard extends React.Component {
       return (
         <div>
           {compareModal}
-
           <div className={hidden ? 'product-card hidden' : 'product-card'}>
             <ActionButton actionBtnClick={this.actionBtnClick}
               currentList={currentList}/>
