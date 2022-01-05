@@ -12,7 +12,7 @@ const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handl
             key={index}
             className='eachStyleImage'
             onClick={updateMainImage}
-            src={element.url}/>;
+            src={element.thumbnail_url}/>;
         })}
       </div>;
     if (state.mainImage === '') {
