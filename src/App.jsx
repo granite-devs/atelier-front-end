@@ -5,10 +5,9 @@ import Reviews from './components/reviews/Reviews.jsx';
 import QuestionsAnswers from './components/questions/QuestionsAnswers.jsx';
 import Related from './components/related/Related.jsx';
 
-
 import API_KEY from './config.js';
 
-window.localStorage.clear();
+window.localStorage.clear(); //TODO: delete!!!
 
 class App extends React.Component {
   constructor(props) {
@@ -16,8 +15,8 @@ class App extends React.Component {
     this.state = {
       productId: 39333,
       outfitItems: [],
-      cachedProducts: {},
-      initialRequestMade: false
+      initialRequestMade: false,
+      renderer: 0
     };
     this.updateAppProductId = this.updateAppProductId.bind(this);
     this.addItemToOutfit = this.addItemToOutfit.bind(this);
@@ -38,9 +37,9 @@ class App extends React.Component {
     axios(intializationConfig)
       .then((response) => {
         const newProductId = response.data[0].id;
-        const stateCache = this.state.cachedProducts;
+        const cachedProduct = JSON.parse(window.localStorage.getItem(newProductId));
 
-        if (stateCache[newProductId]) {
+        if (cachedProduct) {
           console.log('COMPONENT MOUNT SET PRODUCT ID');
           this.setState({ //do not fetch info if product exists in cache
             productId: newProductId
@@ -64,19 +63,14 @@ class App extends React.Component {
     console.log('*attempting to update app product Id to', newProductId);
 
     const updateProductId = newProductId !== this.state.productId;
-
     console.log('will update product ID and cache: ', updateProductId);
 
-    const updatedCache = this.state.cachedProducts;
-
-    if (productObject) {
-      updatedCache[newProductId] = productObject;
-    }
 
     if (updateProductId) {
+      window.localStorage.setItem(newProductId, JSON.stringify(productObject));
+
       this.setState({
-        productId: newProductId,
-        cachedProducts: updatedCache
+        productId: newProductId
       }, () => {
         window.scrollTo({
           top: 0,
@@ -84,15 +78,13 @@ class App extends React.Component {
         });
       });
     } else {
-      this.setState({
-        cachedProducts: updatedCache
-      });
+      window.localStorage.setItem(newProductId, JSON.stringify(productObject));
     }
 
   }
 
   checkCache(productIdToCheck, callback) {
-    return this.state.cachedProducts[productIdToCheck];
+    return JSON.parse(window.localStorage.getItem(productIdToCheck));
   }
 
   fetchProductDetails(productIdToGet) {
@@ -132,15 +124,9 @@ class App extends React.Component {
             reviews: reviewsResponse.data
           }
 
-          let stateCache = this.state.cachedProducts;
-          stateCache[productIdToGet] = productObjectToCache;
-
           window.localStorage.setItem(productIdToGet, JSON.stringify(productObjectToCache))
-
-          console.log('--> axios request for product details complete');
-          this.setState({
-            cachedProducts: stateCache
-          });
+          console.log('--> axios request complete. product cached');
+          this.setState({ renderer: Math.random() });
 
         }))
         .catch(errors => {
@@ -166,7 +152,7 @@ class App extends React.Component {
 
 
   render() {
-    const { productId, outfitItems, initialRequestMade, cachedProducts } = this.state;
+    const { productId, outfitItems, initialRequestMade, renderer } = this.state;
 
     if (initialRequestMade) {
       return (
@@ -181,7 +167,7 @@ class App extends React.Component {
             removeItemFromOutfit={this.removeItemFromOutfit}
             outfitItems={outfitItems}
             fetchProductDetails={this.fetchProductDetails}
-            cachedProducts={cachedProducts}
+            renderer={renderer}
           />
           {/* <QuestionsAnswers key={`${productId}-3`} productId={productId} />
           <Reviews key={`${productId}-4`} productId={productId} /> */}
