@@ -139,7 +139,8 @@ class RelatedProductsList extends React.Component {
                 productCardId={relatedId}
                 updateAppProductId={updateAppProductId}
                 checkCache={checkCache}
-                cardData={cachedProducts[relatedId]} />
+                cardData={cachedProducts[relatedId]}
+                currentProductFeatures={cachedProducts[productId]} />
             })}
       </div>
     }

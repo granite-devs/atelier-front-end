@@ -50,21 +50,31 @@ class ProductCard extends React.Component {
     return average > 0 ? ratingFraction = average : ratingFraction = 0;
   }
 
-  render() {
-    const { productCardId, updateAppProductId, currentList, hidden, cardData } = this.props;
-    const { displayModal, componentMounted } = this.state;
-
-    let compareModal;
-    if (currentList === 'related') {
-      compareModal = <CompareModal relatedItemName={name}
-          //relatedItemFeatures={features}
-          displayModal={displayModal}
-          //currentItemFeatures={currentItemFeatures}
-          actionBtnClick={this.actionBtnClick} /> ;
+  appendFeatureLabels(features, owner, name) {
+    if (owner === 'currentProduct') {
+      features.forEach(feature => {
+        feature['belongsTo'] = 'currentProduct';
+        feature['name'] = name;
+      });
     }
+
+    if (owner === 'currentRelatedItem') {
+      features.forEach(feature => {
+        feature['belongsTo'] = 'relatedItem';
+        feature['name'] = name;
+      });
+    }
+  }
+
+  render() {
+    const { productCardId, updateAppProductId, currentList, hidden, cardData,
+      currentProductFeatures } = this.props;
+    const { displayModal, componentMounted } = this.state;
 
     let [ category, name, price, sale, rating ] = [ '...', '...', '...', '...', 0];
     let primaryImg = 'https://tinyurl.com/5nur3x7w';
+
+    let compareModal;
 
     if (cardData) {
       console.log('assembling card data from the cache!');
@@ -76,13 +86,28 @@ class ProductCard extends React.Component {
 
       const photoPath = cardData.styles.results[0].photos[0].url;
       if (photoPath) { primaryImg = photoPath };
+
+      let currentFeaturesLabeled = currentProductFeatures.details.features;
+      let currentProductName = currentProductFeatures.details.name;
+      let relatedFeaturesLabeled = cardData.details.features;
+      this.appendFeatureLabels(currentFeaturesLabeled, 'currentProduct', currentProductName);
+      this.appendFeatureLabels(relatedFeaturesLabeled, 'currentRelatedItem', name);
+
+      if (currentList === 'related') {
+        compareModal = <CompareModal
+          relatedItemName={name}
+          relatedItemFeatures={relatedFeaturesLabeled}
+          displayModal={displayModal}
+          currentProductFeatures={currentProductFeatures.details.features}
+          actionBtnClick={this.actionBtnClick} /> ;
+      }
     }
 
     if (componentMounted) {
       return (
         <div>
-          {/* {compareModal}
-           */}
+          {compareModal}
+
           <div className={hidden ? 'product-card hidden' : 'product-card'}>
             <ActionButton actionBtnClick={this.actionBtnClick}
               currentList={currentList}/>
