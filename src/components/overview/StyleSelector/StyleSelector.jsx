@@ -67,7 +67,7 @@ const StyleSelector = ({state, updateState}) => {
                   }
                 })}
               </div>
-              <div id='styleBottom'>
+              <div id='StyleBottom'>
                 {theFirstPhotoOfEachStyle.map((element, index) => {
                   if (index > 3 && index < 8) {
                     return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={index} id={`style${index}`} src={element}></img>;

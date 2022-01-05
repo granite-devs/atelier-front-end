@@ -109,10 +109,12 @@ const Overview = ({productId}) => {
         <div id='overview'>
           <div id='overviewTop'>
             <ImageGallery state={state} updateState={updateState}/>
-            <ProductInformation state={state} updateState={updateState}/>
-            <SocialMedia/>
-            <StyleSelector state={state} updateState={updateState}/>
-            <AddToCart state={state} updateState={updateState}/>
+            <div id='productInformationSection'>
+              <ProductInformation state={state} updateState={updateState}/>
+              <StyleSelector state={state} updateState={updateState}/>
+              <AddToCart state={state} updateState={updateState}/>
+              <SocialMedia/>
+            </div>
           </div>
           <div id='overviewBottom'>
             <ProductDesc state={state} updateState={updateState}/>
