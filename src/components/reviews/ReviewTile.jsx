@@ -3,12 +3,15 @@ import axios from 'axios';
 import API_KEY from '../../config.js';
 import timeAgo from '../../utils/timeAgo.js';
 import StarRating from '../shared/StarRating.jsx';
+import Reviews from './Reviews.jsx';
+import ImageModal from '../shared/ImageModal.jsx';
 
 class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayFullBody: false
+      displayFullBody: false,
+      imageInModal: null
     };
     this.toggleFullBody = this.toggleFullBody.bind(this);
   }
@@ -20,7 +23,7 @@ class ReviewTile extends React.Component {
 
   render() {
     const { review, hasVotedHelpul, voteReviewHelpful } = this.props;
-    const { displayFullBody, justVotedHelpful } = this.state;
+    const { displayFullBody, imageInModal } = this.state;
     const bodyToDisplay = displayFullBody ? review.body : review.body.substr(0, 250);
     const moreToDisplay = bodyToDisplay.length < review.body.length;
     const showMoreBtn = review.body.length > 250 ? (
@@ -54,6 +57,12 @@ class ReviewTile extends React.Component {
         <p>{review.response}</p>
       </div>
     ) : null;
+    const imageModal = imageInModal ? (
+      <ImageModal
+        image={imageInModal}
+        closeFn={() => this.setState({ imageInModal: null })}
+      />
+    ) : null;
     return (
       <div className='reviewTile'>
         <span className='name-date'>{review.reviewer_name}, {timeAgo(review.date)}</span>
@@ -61,8 +70,18 @@ class ReviewTile extends React.Component {
         <h3>{review.summary}</h3>
         <p>{bodyToDisplay}{moreToDisplay ? '...' : ''}</p>
         {showMoreBtn}
+        {review.photos.map((image, i) => (
+          <div className='imgPreview' key={i}>
+            <img
+              src={image.url}
+              height={65}
+              onClick={() => this.setState({ imageInModal: image })}
+            ></img>
+          </div>
+        ))}
         {review.recommend ? <p className='recommended'>&#9745; I recommend this product</p> : null}
         {salesResponse}
+        {imageModal}
         {voteHelpfulBtns}
       </div>
     );

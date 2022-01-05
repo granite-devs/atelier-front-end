@@ -775,6 +775,8 @@ body {
   overflow-y: scroll;
   display: flex;
   position: fixed;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   height: 100vh;
   width: 100%;
@@ -1017,6 +1019,39 @@ body {
 
   .ratingText {
     padding: 4px 5px;
+  }
+}
+
+.imgPreview {
+  display: inline-block;
+  margin: 4px;
+}
+
+.imageModal {
+  max-height: 80%;
+  max-width: 80%;
+  padding: 2rem;
+  padding-top: 0.5rem;
+  background-color: $container-bg;
+  border-radius: 10px;
+  button {
+    position: absolute;
+  }
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.attachImage {
+  width: 20rem;
+  padding: 2rem;
+  padding-top: 0.5rem;
+  background-color: $container-bg;
+  border-radius: 10px;
+  p {
+    font-size: $smallfont;
+    margin-bottom: 0px;
   }
 }
 /* Shared ---------------------(end) */
