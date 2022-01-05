@@ -56,52 +56,109 @@ class ProductCard extends React.Component {
     }
   }
 
-  fetchProductDetails(productIdToGet) {
+  fetchProductDetails(productIdToGet, stateToUpdate = 'currentRelatedItem') {
     const { initialRequestMade } = this.state;
-    const { updateAppProductId, productId, relatedId } = this.props;
+    const { updateAppProductId, productId, relatedId, checkCache } = this.props;
 
     console.log('FETCHING ALL');
 
-    const productRequestRequestConfig = {
-      method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}`,
-      headers: {Authorization: API_KEY}
-    };
+    const cachedProduct = checkCache(productIdToGet);
 
-    const stylesRequestConfig = {
-      method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/styles`,
-      headers: {Authorization: API_KEY}
-    };
+    if (cachedProduct) {
+      console.log('pull from the cache!!');
 
-    const ratingRequestConfig = {
-      method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta?product_id=${productIdToGet}`,
-      headers: {Authorization: API_KEY}
-    };
+      const { name, category } = cachedProduct.details;
+      const { price, salePrice, primaryImg } = cachedProduct.styles;
+      const { ratings } = cachedProduct.reviews;
 
-    const productRequest = axios(productRequestRequestConfig);
-    const stylesRequest = axios(stylesRequestConfig);
-    const ratingRequest = axios(ratingRequestConfig);
+      let features = cachedProduct.details.features;
 
-    axios.all([productRequest, stylesRequest, ratingRequest])
-      .then(axios.spread((...responses) => {
-        const productResponse = responses[0];
-        const stylesResponse = responses[1];
-        const ratingResponse = responses[2];
+      if (stateToUpdate === 'currentRelatedItem') {
+        features.forEach(feature => {
+          feature['belongsTo'] = 'relatedItem';
+        });
 
-        let productObjectToCache = {
-          details: productResponse.data,
-          styles: stylesResponse.data,
-          rating: ratingResponse.data
-        }
+        const ratingFraction = () => {
+          let ratingFraction;
+          let [count, sum] = [0, 0];
 
-        updateAppProductId(productId, productObjectToCache, productIdToGet);
+          for (let key in ratings) {
+            count += parseInt(ratings[key]);
+            sum += parseInt(key) * parseInt(ratings[key]);
+          }
 
-      }))
-      .catch(errors => {
-        console.log('error fetching requests!', errors);
-      })
+          const average = sum / count;
+          if (average > 0 ) { return average };
+
+          return 0;
+        };
+
+        this.setState({
+          name: name,
+          category: category,
+          features: features,
+          price: price,
+          salePrice: salePrice,
+          primaryImg: primaryImg,
+          rating: ratingFraction()
+        });
+
+      }
+
+      if (stateToUpdate === 'currentItem') {
+        features.forEach(feature => {
+          feature['belongsTo'] = 'currentItem';
+        });
+
+        this.setState({
+          currentItemFeatures: {name: name, features: features}
+        });
+      }
+      // END DETAILS
+
+
+    } else {
+      const productRequestRequestConfig = {
+        method: 'get',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}`,
+        headers: {Authorization: API_KEY}
+      };
+
+      const stylesRequestConfig = {
+        method: 'get',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/styles`,
+        headers: {Authorization: API_KEY}
+      };
+
+      const reviewsRequestConfig = {
+        method: 'get',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta?product_id=${productIdToGet}`,
+        headers: {Authorization: API_KEY}
+      };
+
+      const productRequest = axios(productRequestRequestConfig);
+      const stylesRequest = axios(stylesRequestConfig);
+      const reviewsRequest = axios(reviewsRequestConfig);
+
+      axios.all([productRequest, stylesRequest, reviewsRequest])
+        .then(axios.spread((...responses) => {
+          const productResponse = responses[0];
+          const stylesResponse = responses[1];
+          const reviewsResponse = responses[2];
+
+          let productObjectToCache = {
+            details: productResponse.data,
+            styles: stylesResponse.data,
+            reviews: reviewsResponse.data
+          }
+
+          updateAppProductId(productId, productObjectToCache, productIdToGet);
+
+        }))
+        .catch(errors => {
+          console.log('error fetching requests!', errors);
+        })
+    }
   }
 
   fetchProductInfo(productIdToGet, stateToUpdate) {
