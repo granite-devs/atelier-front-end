@@ -1,7 +1,6 @@
 const CompareModal = ({
-  relatedItemFeatures,
-  relatedItemName,
   displayModal,
+  relatedItemFeatures,
   currentProductFeatures,
   actionBtnClick
 }) => {
