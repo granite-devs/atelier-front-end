@@ -966,6 +966,21 @@ body {
     }
   }
 
+  .characteristics {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .rangeMeanings {
+      width: 80%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      color: black;
+      font-size: $smallfont;
+      font-weight: bold;
+    }
+  }
+
   .recommendations {
     display: block;
     margin: 8px 5px;

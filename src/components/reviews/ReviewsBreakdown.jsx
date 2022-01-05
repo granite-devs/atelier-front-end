@@ -4,6 +4,7 @@ import API_KEY from '../../config.js';
 import ReviewTile from './ReviewTile.jsx';
 import StarRating from '../shared/StarRating.jsx';
 import BreakdownBar from './BreakdownBar.jsx';
+import CharacteristicBar from './CharacteristicBar.jsx';
 
 class ReviewsBreakdown extends React.Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class ReviewsBreakdown extends React.Component {
     const { reviewsMetaData } = this.props;
     const { ratingsToFilter } = this.state;
     if (reviewsMetaData) {
-      const { ratings, recommended } = reviewsMetaData;
+      const { ratings, recommended, characteristics } = reviewsMetaData;
       const ratingsArray = [];
       const filteredRatingsArray = [];
       let ratingsSum = 0;
@@ -61,6 +62,19 @@ class ReviewsBreakdown extends React.Component {
       }
       const avgRating = Math.round(ratingsSum / reviewCount * 10) / 10;
       const recommendPercentage = Math.round((recommended.true / reviewCount) * 100);
+
+      const characteristicsNames = [];
+      for (let name in characteristics) {
+        characteristicsNames.push(name);
+      }
+      const characteristicsText = {
+        'Size': ['A size too small', 'A size too wide'],
+        'Width': ['Too narrow', 'Too wide'],
+        'Comfort': ['Uncomfortable', 'Perfect'],
+        'Quality': ['Poor', 'Perfect'],
+        'Length': ['Runs Short', 'Runs long'],
+        'Fit': ['Runs tight', 'Runs long']
+      };
       return (
         <div className='reviewsBreakdown'>
           <span className='avgRating'>{avgRating}</span>
@@ -84,13 +98,21 @@ class ReviewsBreakdown extends React.Component {
               {stars} Stars
             </span>
           ))}
-          {ratingsArray.map((stars) => (
+          {ratingsArray.map((stars, i) => (
             <BreakdownBar
-              key={stars}
+              key={i}
               stars={stars}
               reviews={ratings[stars]}
               total={reviewCount}
               onClick={this.toggleRatingFilter}
+            />
+          ))}
+          {characteristicsNames.map((name, i) => (
+            <CharacteristicBar
+              key={i}
+              name={name}
+              value={characteristics[name].value}
+              meanings={characteristicsText[name]}
             />
           ))}
           <span className='recommendations'>
