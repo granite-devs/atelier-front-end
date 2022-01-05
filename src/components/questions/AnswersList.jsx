@@ -1,7 +1,7 @@
 import React from "react";
 import Answer from "./Answer.jsx";
 
-const AnswerList = ({ answers, loadMoreAnswers, voteHelpfulAnswer }) => {
+const AnswersList = ({ answers, loadMoreAnswers, voteHelpfulAnswer }) => {
   const arrayOfVisibleAnswers = answers.filter((answer) =>
     answer.isVisible ? answer : null
   );
@@ -39,4 +39,4 @@ const AnswerList = ({ answers, loadMoreAnswers, voteHelpfulAnswer }) => {
   );
 };
 
-export default AnswerList;
+export default AnswersList;

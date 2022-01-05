@@ -10,6 +10,7 @@ class QuestionsAnswers extends React.Component {
     super(props);
     this.state = {
       questionsList: [],
+      votedQuestions: {}
     };
     this.filterQuestionsList = this.filterQuestionsList.bind(this);
     this.voteHelpfulQuestion = this.voteHelpfulQuestion.bind(this);
@@ -22,6 +23,7 @@ class QuestionsAnswers extends React.Component {
   addQuestion(question) {
 
     const { productId } = this.props;
+    const { votedQuestions } = this.state;
 
     postQuestion(question, productId)
       .then((res) => {
@@ -31,6 +33,7 @@ class QuestionsAnswers extends React.Component {
               const mappedQuestions = this.setTwoQuestionsVisable(response);
               this.setState({
                 questionsList: mappedQuestions,
+                votedQuestions: votedQuestions,
                 view: "main",
               });
             })
@@ -47,7 +50,8 @@ class QuestionsAnswers extends React.Component {
   toggleQuestionsModal(viewChange) {
     this.setState({
       questionsList: this.state.questionsList,
-      view: viewChange,
+      votedQuestions: this.state.votedQuestions,
+      view: viewChange
     });
   }
 
@@ -74,18 +78,24 @@ class QuestionsAnswers extends React.Component {
   }
 
   voteHelpfulQuestion(questionToUpdate) {
-    const newState = this.state.questionsList;
-    const button = document.querySelector(
-      `#vote-helpful-question-${questionToUpdate.question_id}`
-    );
+
+    const storage = window.localStorage
+    const { questionsList, votedQuestions } = this.state;
+    const targetId = questionToUpdate.question_id;
+    const button = document.querySelector(`#vote-helpful-question-${targetId}`);
 
     if (!button.disable) {
-      newState.forEach((question) => {
+      questionsList.forEach((question) => {
         if (questionToUpdate.question_id === question.question_id) {
           questionToUpdate.question_helpfulness += 1;
         }
+        votedQuestions[targetId] = true;
+        storage[targetId] = true;
       });
-      this.setState({ questionsList: newState });
+      this.setState({
+        questionsList: questionsList,
+        votedQuestions: votedQuestions
+      });
       button.disabled = true;
     }
   }
@@ -137,28 +147,32 @@ class QuestionsAnswers extends React.Component {
   }
 
   render() {
+
+    const { questionsList, votedQuestions, view } = this.state;
     const QuestionsAnswersComponent = (
       <div className="question-answers-container">
         <SearchBar filterQuestionsList={this.filterQuestionsList} />
         <QuestionsList
-          questions={this.state.questionsList}
+          questions={questionsList}
+          votedQuestions={votedQuestions}
           handleYesQuestionClick={this.voteHelpfulQuestion}
           changeView={this.changeView}
         />
         <div className="button-container">
-          {this.state.questionsList.length > 2 && (
-            <button
-              id="load-question-button"
-              type="button"
-              className="big-btn"
-              onClick={(e) => {
-                this.loadMoreQuestions();
-              }}
-            >
-              {" "}
-              MORE QUESTIONS
-            </button>
-          )}
+          {
+            questionsList.length > 2 && (
+              <button
+                id="load-question-button"
+                type="button"
+                className="big-btn"
+                onClick={(e) => {
+                  this.loadMoreQuestions();
+                }}
+              >
+                MORE QUESTIONS
+              </button>
+            )
+          }
           <button
             id="add-question-button"
             className="big-btn"
@@ -167,14 +181,13 @@ class QuestionsAnswers extends React.Component {
               this.toggleQuestionsModal("AddQuestionModal");
             }}
           >
-            {" "}
             ADD QUESTION
           </button>
         </div>
       </div>
     );
 
-    switch (this.state.view) {
+    switch (view) {
       case "AddQuestionModal":
         return (
           <>
