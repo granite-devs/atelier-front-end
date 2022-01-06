@@ -25,7 +25,7 @@ const Answer = ({ answer, voteHelpfulAnswer }) => {
           }
         </span>
         <span>{timeAgo(date)}</span>
-        <span>|   Helpful ?
+        <span>|    Helpful ?
           {
             (window.localStorage.getItem(`${answer_id}`)) ? (
               <button
