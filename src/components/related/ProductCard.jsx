@@ -96,7 +96,7 @@ class ProductCard extends React.Component {
           this.setState({
             price: data.original_price,
             salePrice: data.sale_price,
-            primaryImg: data.photos[0].url
+            primaryImg: data.photos[0].thumbnail_url
           });
         })
         .catch((error) => {
