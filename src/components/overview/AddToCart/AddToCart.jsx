@@ -23,12 +23,11 @@ const AddToCart = ({state, updateState}) => {
 
   return (
     <>
-      {state !== undefined && (
-        <div id='addToCart'>
-          <SizeAndQuantitySelector state={state} updateState={updateState}/>
-          <button onClick={addToCartModal} id='addToCartButton'>Add To Cart</button>
-        </div>
-      )}
+      <div id='addToCart'>
+        <SizeAndQuantitySelector state={state} updateState={updateState}/>
+        <button onClick={addToCartModal} id='addToCartButton'>Add To Cart</button>
+      </div>
+
       {toggleForModal && (
         <div id='addToCartModal'>
           <div id='addToCartModalOverlay'></div>
