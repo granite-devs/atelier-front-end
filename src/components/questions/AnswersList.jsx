@@ -1,10 +1,18 @@
 import React from "react";
 import Answer from "./Answer.jsx";
 
-const AnswersList = ({ answers, loadMoreAnswers, voteHelpfulAnswer }) => {
+const AnswersList = (props) => {
+
+  const { answers,
+    loadMoreAnswers,
+    voteHelpfulAnswer,
+    questionId
+  } = props;
   const arrayOfVisibleAnswers = answers.filter((answer) =>
     answer.isVisible ? answer : null
   );
+
+
 
   return (
     <div className="answer-item">
@@ -25,16 +33,19 @@ const AnswersList = ({ answers, loadMoreAnswers, voteHelpfulAnswer }) => {
         </div>
       </div>
       <br></br>
-      {answers.length > 2 && (
-        <a
-          id="see-more-answers-btn"
-          onClick={() => {
-            loadMoreAnswers();
-          }}
-        >
-          LOAD MORE ANSWERS
-        </a>
-      )}
+      {
+        (answers.length > 2) && (
+          <a
+            id={`see-answers-${questionId}`}
+            className='see-more-answers'
+            onClick={() => {
+              loadMoreAnswers(questionId);
+            }}
+          >
+            LOAD MORE ANSWERS
+          </a>
+        )
+      }
     </div>
   );
 };

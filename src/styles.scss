@@ -713,6 +713,7 @@ b {
         }
 
         button {
+          cursor: pointer;
           text-decoration: underline;
           border: none;
           background-color: inherit;
@@ -720,6 +721,7 @@ b {
         }
 
         button:disabled {
+          cursor: default;
           font-weight: 500;
         }
       }
@@ -729,6 +731,7 @@ b {
       display: flex;
       flex-direction: row;
       margin-top: .75rem;
+
 
         a {
           cursor: pointer;
@@ -747,10 +750,17 @@ b {
           list-style-type: none;
           margin-bottom: .5rem;
 
+          .answer-body {
+            min-width: auto;
+            max-width: auto;
+            font-size: $smallfont;
+          }
+
           .help-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             font-size: .75rem;
+            max-width: 40rem;
 
             a {
               cursor: pointer;
@@ -759,6 +769,9 @@ b {
               text-decoration: underline;
             }
 
+            span {
+              min-width: 8rem;
+            }
 
 
             button {
@@ -767,11 +780,6 @@ b {
               border: none;
               background-color: inherit;
               font-size: inherit;
-            }
-
-            button:disabled {
-              font-weight: 500;
-
             }
 
             span {
@@ -796,10 +804,11 @@ b {
 
         }
       }
-      #see-more-answers-btn {
+      .see-more-answers {
         font-size: .65rem;
         font-weight: 600;
       }
+
     }
   }
 

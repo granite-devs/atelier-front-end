@@ -14,7 +14,7 @@ const Answer = ({ answer, voteHelpfulAnswer }) => {
 
   return (
     <li>
-      <span>{body}</span>
+      <span className='answer-body'>{body}</span>
       <div className="help-container">
         <span>
           {
@@ -25,29 +25,27 @@ const Answer = ({ answer, voteHelpfulAnswer }) => {
           }
         </span>
         <span>{timeAgo(date)}</span>
-        <span> | </span>
-        <span> Helpful ? </span>
-        {
-          (window.localStorage.getItem(`${answer_id}`)) ? (
-            <button
-              id={`vote-helpful-answer-${answer_id}`}
-              disabled
-            > Yes {helpfulness}
-            </button>
-          )
-            :
-            (
+        <span>|   Helpful ?
+          {
+            (window.localStorage.getItem(`${answer_id}`)) ? (
               <button
                 id={`vote-helpful-answer-${answer_id}`}
-                onClick={() => {
-                  voteHelpfulAnswer(answer_id)
-                }}> Yes {helpfulness}
+                disabled
+              > Yes {helpfulness}
               </button>
             )
+              :
+              (
+                <button
+                  id={`vote-helpful-answer-${answer_id}`}
+                  onClick={() => {
+                    voteHelpfulAnswer(answer_id)
+                  }}> Yes {helpfulness}
+                </button>
+              )
 
-        }
-        <span> | </span>
-        <a> Report </a>
+          }
+          </span>
       </div>
       <div className="photo-container">
         {

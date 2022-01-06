@@ -80,8 +80,7 @@ class Question extends React.Component {
   }
 
   loadMoreAnswers(questionId) {
-
-    const button = document.querySelector('#see-more-answers-btn');
+    const button = document.querySelector(`#see-answers-${questionId}`);
 
     const { answersList } = this.state
 
@@ -97,6 +96,7 @@ class Question extends React.Component {
       button.innerHTML = 'LOAD MORE ANSWERS'
       this.setState({ answersList: twoVisibleAnwers })
     }
+
   }
 
   setTwoAnswersVisible(arrayOfAnswers) {
@@ -130,31 +130,32 @@ class Question extends React.Component {
 
   render() {
 
+    const { loadMoreAnswers, voteHelpfulAnswer} = this;
+    const { answersList, questionView } = this.state;
     const { question, handleYesQuestionClick } = this.props;
-    const { question_id } = question;
+    const { question_id, question_body, question_helpfulness} = question;
 
     const questionComponent = (
       <div className='question-container'>
         <div className='question-body'>
-          <span className='heavy'> Q: {question.question_body}</span>
+          <span className='heavy'> Q: { question_body }</span>
           <div className='help-container'>
             <span> Helpful? </span>
             {
-              (window.localStorage.getItem(`${question_id}`)) ?
+              (window.localStorage.getItem(`${ question_id }`)) ?
                 (<button
-                  id={`vote-helpful-question-${question.question_id}`}
-                  disabled
-                > Yes {question.question_helpfulness}
+                  id={`vote-helpful-question-${ question_id }`}
+                  disabled>
+                 Yes {question.question_helpfulness}
                 </button>)
                 :
                 (<button
-                  id={`vote-helpful-question-${question.question_id}`}
+                  id={`vote-helpful-question-${ question_id }`}
                   onClick={() => {
-                    this.props.handleYesQuestionClick(this.props.question)
-                  }}> Yes {question.question_helpfulness}
+                    this.props.handleYesQuestionClick(question)
+                  }}> Yes { question_helpfulness }
                 </button>)
             }
-            <span>|</span>
             <a
               onClick={() => {
                 this.toggleAddAnswerModal('AddAnswerModal')
@@ -163,9 +164,10 @@ class Question extends React.Component {
         </div>
         <div className='answer-list-container'>
           <AnswersList
-            answers={this.state.answersList}
-            loadMoreAnswers={this.loadMoreAnswers}
-            voteHelpfulAnswer={this.voteHelpfulAnswer}
+            questionId={question_id}
+            answers={answersList}
+            loadMoreAnswers={loadMoreAnswers}
+            voteHelpfulAnswer={voteHelpfulAnswer}
           />
         </div>
       </div >
