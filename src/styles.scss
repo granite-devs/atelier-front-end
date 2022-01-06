@@ -591,13 +591,12 @@ b {
   min-width: 20rem;
   left: 25vw;
   top: .3rem;
-  height: 12rem;
+  height: 14rem;
 
   position: absolute;
   display: block;
   margin-top: .5rem;
   padding: 1rem;
-  overflow-y: scroll;
   background-color: $container-bg;
   border: 1px solid gray;
   transition-duration: .5s;
@@ -628,6 +627,45 @@ b {
 }
 .compare-exit:hover {
   color: rgb(71, 71, 71);
+}
+
+.compare-container {
+  height: 78%;
+  overflow-y: scroll;
+}
+
+.compare-container::-webkit-scrollbar {
+  width: .5rem;
+  height: .5rem;
+}
+.compare-container::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+.compare-container::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+.compare-container::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+.compare-container::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+.compare-container::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+.compare-container::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+.compare-container::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+.compare-container::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 .compare-table {
