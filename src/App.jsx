@@ -13,7 +13,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: null,
-      outfitItems: [],
+      outfitItems: []
     };
     this.updateAppProductId = this.updateAppProductId.bind(this);
     this.addItemToOutfit = this.addItemToOutfit.bind(this);
