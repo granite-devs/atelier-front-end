@@ -12,14 +12,14 @@ const Related = ({ productId, updateAppProductId, addItemToOutfit, cachedProduct
         checkCache={checkCache}
         fetchProductDetails={fetchProductDetails}
         cachedProducts={cachedProducts} />
-      {/* <YourOutfitList
+      <YourOutfitList
         currentList={'yourOutfit'}
         productId={productId}
         checkCache={checkCache}
         updateAppProductId={updateAppProductId}
         addItemToOutfit={addItemToOutfit}
         outfitItems={outfitItems}
-        removeItemFromOutfit={removeItemFromOutfit} /> */}
+        removeItemFromOutfit={removeItemFromOutfit} />
     </div>
   );
 }

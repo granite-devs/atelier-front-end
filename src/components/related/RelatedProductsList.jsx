@@ -40,20 +40,16 @@ class RelatedProductsList extends React.Component {
 
         axios(relatedIdsRequestConfig)
           .then((response) => {
-            console.log('--> related IDs fetched');
-
             const relatedIds = response.data;
 
             this.setState({relatedIds: response.data});
 
               relatedIds.forEach(relatedId => {
-
                 if (!window.localStorage.getItem(relatedId)) {
-                  console.log('--fetching and caching ', relatedId);
-                  //doesn't exist in local storage, fetch them
                   this.props.fetchProductDetails(relatedId);
                 }
               })
+
           })
           .catch((error) => {
             console.log('HTTP request to fetch related product IDs failed');
@@ -129,7 +125,6 @@ class RelatedProductsList extends React.Component {
     }
 
     let productCard = null;
-    //console.log('related list render cached products:', Object.keys(cachedProducts).length);
 
     if (window.localStorage.length > 0) {
       productCard = <div className='product-card-list'>
@@ -142,7 +137,7 @@ class RelatedProductsList extends React.Component {
                 updateAppProductId={updateAppProductId}
                 checkCache={checkCache}
                 cardData={JSON.parse(window.localStorage.getItem(relatedId))}
-                currentProductFeatures={JSON.parse(window.localStorage.getItem(productId))} />
+                currentProductData={JSON.parse(window.localStorage.getItem(productId))} />
             })}
       </div>
     }

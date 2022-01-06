@@ -40,7 +40,6 @@ class App extends React.Component {
         const cachedProduct = JSON.parse(window.localStorage.getItem(newProductId));
 
         if (cachedProduct) {
-          console.log('COMPONENT MOUNT SET PRODUCT ID');
           this.setState({ //do not fetch info if product exists in cache
             productId: newProductId
           });
@@ -49,7 +48,6 @@ class App extends React.Component {
             productId: newProductId,
             initialRequestMade: true
           }, () => {
-            console.log('INITIAL FETCH PRODUCT DETAILS');
             this.fetchProductDetails(newProductId);
           });
         }
@@ -60,15 +58,14 @@ class App extends React.Component {
     }
 
   updateAppProductId(newProductId, productObject) {
-    console.log('*attempting to update app product Id to', newProductId);
-
+    const productIsCached = window.localStorage.getItem(newProductId);
     const updateProductId = newProductId !== this.state.productId;
-    console.log('will update product ID and cache: ', updateProductId);
 
+    if (!productIsCached) {
+      window.localStorage.setItem(newProductId, JSON.stringify(productObject));
+    }
 
     if (updateProductId) {
-      window.localStorage.setItem(newProductId, JSON.stringify(productObject));
-
       this.setState({
         productId: newProductId
       }, () => {
@@ -77,10 +74,7 @@ class App extends React.Component {
           behavior: 'smooth'
         });
       });
-    } else {
-      window.localStorage.setItem(newProductId, JSON.stringify(productObject));
     }
-
   }
 
   checkCache(productIdToCheck, callback) {
@@ -125,12 +119,10 @@ class App extends React.Component {
           }
 
           window.localStorage.setItem(productIdToGet, JSON.stringify(productObjectToCache))
-          console.log('--> axios request complete. product cached');
           this.setState({ renderer: Math.random() });
-
         }))
         .catch(errors => {
-          console.log('error fetching requests!', errors);
+          console.log(errors);
         })
   }
 
@@ -169,8 +161,8 @@ class App extends React.Component {
             fetchProductDetails={this.fetchProductDetails}
             renderer={renderer}
           />
-          {/* <QuestionsAnswers key={`${productId}-3`} productId={productId} />
-          <Reviews key={`${productId}-4`} productId={productId} /> */}
+          <QuestionsAnswers key={`${productId}-3`} productId={productId} />
+          <Reviews key={`${productId}-4`} productId={productId} />
         </div>
       );
     } else {

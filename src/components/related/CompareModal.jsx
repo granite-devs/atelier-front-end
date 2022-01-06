@@ -1,9 +1,12 @@
 const CompareModal = ({
   displayModal,
-  relatedItemFeatures,
-  currentProductFeatures,
+  cardData,
+  currentProductData,
   actionBtnClick
 }) => {
+
+  if (currentProductData && cardData) {
+    const relatedItemFeatures = cardData.details.features;
 
     return (
       <div className={displayModal ? 'compare modal-show' : 'compare modal-hide'}
@@ -15,13 +18,13 @@ const CompareModal = ({
         <table className='compare-table'>
           <thead>
             <tr>
-              <th>{currentProductFeatures[0].name}</th>
+              <th>{currentProductData.details.name}</th>
               <th></th>
               <th>{relatedItemFeatures[0].name}</th>
             </tr>
           </thead>
           <tbody>
-              {relatedItemFeatures.concat(currentProductFeatures)
+              {relatedItemFeatures.concat(currentProductData.details.features)
                 .map((feature, i) => {
                   return <tr key={i}>
                     <td>
@@ -38,7 +41,9 @@ const CompareModal = ({
         </table>
       </div>
     );
-
+  } else {
+    return <div></div>
+  }
 }
 
 export default CompareModal;
