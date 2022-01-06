@@ -7,7 +7,7 @@ import Related from './components/related/Related.jsx';
 
 import API_KEY from './config.js';
 
-window.localStorage.clear(); //TODO: delete!!!
+// window.localStorage.clear(); //TODO: delete!!!
 
 class App extends React.Component {
   constructor(props) {
