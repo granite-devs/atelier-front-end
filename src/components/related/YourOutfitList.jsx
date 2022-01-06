@@ -34,7 +34,7 @@ class YourOutfitList extends React.Component {
     const numberOfCardsToShow = Math.floor(visibleWidth / cardWidth);
     let indexesArray = [0];
 
-    for (let i = 1; i < numberOfCardsToShow - 1; i++) {
+    for (let i = 1; i < numberOfCardsToShow - 2; i++) {
       indexesArray.push(i);
     }
 
@@ -125,7 +125,9 @@ class YourOutfitList extends React.Component {
                 productId={productId}
                 productCardId={outfitItemId}
                 updateAppProductId={updateAppProductId}
-                removeItemFromOutfit={removeItemFromOutfit} />
+                removeItemFromOutfit={removeItemFromOutfit}
+                cardData={JSON.parse(window.localStorage.getItem(outfitItemId))}
+                currentProductData={JSON.parse(window.localStorage.getItem(productId))} />
             })}
           </div>
 
