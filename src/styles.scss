@@ -15,7 +15,7 @@ $related-gradient: linear-gradient(rgb(245, 245, 245), rgb(224, 224, 224));
 $related-shadow: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.26));
 $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 $related-listbg: rgb(230,230,230);
-$related-listgradient: linear-gradient(90deg, rgba(230,230,230,1) 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 80%, rgba(230,230,230,1) 100%);
+$related-listgradient: linear-gradient(90deg, rgb(230, 230, 230) 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 80%, rgba(230,230,230,1) 100%);
 
 $accent-blue: rgb(27, 125, 182);
 
@@ -285,7 +285,7 @@ h3 {
 #rating {
   display: flex;
   flex-direction: row;
-  width: 95%;
+  width: 100%;
   align-items: center;
 }
 
@@ -355,7 +355,6 @@ b {
 #styleSelection {
   display: flex;
   flex-direction: column;
-  background: red;
   width: 90%;
   min-width: 5rem;
   height: 90%;
@@ -460,22 +459,52 @@ b {
   font-weight: bold;
 }
 
-@media (max-width: 950px) {
-  #rating {
-    display: none;
+@media (max-width: 850px) {
+
+  .components {
+    width: 85%;
   }
 
-}
+  #overviewTop {
+    flex-direction: column;
+    align-items: center;
+  }
 
-@media (max-width: 850px) {
-  #productinfo, #addToCart, #socialMedia, #productFeature {
-    display: none;
+  #defaultView {
+    width: 100%;
+    padding-bottom: 1rem;
+  }
+
+  #productInformationSection {
+    margin-top: 2rem;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  #productinfo {
+    width: 45%;
+    height: 10rem;
+    margin: 0;
+  }
+
+  #styleSelector {
+    width: 40%;
+    height: 10rem;
+    align-items: center;
+  }
+
+  #addToCart {
+    height: 10rem;
+    min-width: 10rem;
+    align-items: center;
   }
 
   #styleTop, #styleBottom {
-    display: flex;
-    flex-direction: column;
-    width: auto;
+    width: 15.5rem;
   }
 }
 
@@ -485,16 +514,16 @@ b {
 #related {
   width: 100%;
   margin: 0;
-}
-
-#related h3 {
-  margin: 0;
-  margin-top: .5rem;
-  padding-top: .5rem;
-  font-weight: $heavy;
   background: $related-listbg;
   background: $related-listgradient;
   border-top: 1px solid $accent-blue;
+  border-bottom: 1px solid $accent-blue;
+}
+
+#related h3 {
+  margin: .5rem 0 0 1rem;
+  padding-top: .5rem;
+  font-weight: $heavy;
   padding-left: .25rem;
 }
 
@@ -504,9 +533,6 @@ b {
   flex-wrap: nowrap;
   align-items: center;
   width: 100%;
-  background: $related-listbg;
-  background: $related-listgradient;
-  border-bottom: 1px solid $accent-blue;
 }
 
 .product-card-list {
@@ -750,6 +776,7 @@ b {
   align-items: center;
   width: 100%;
   margin: auto;
+  border-bottom: 1px solid $accent-blue;
 
   .questions-container {
     width: 90%;
@@ -988,7 +1015,17 @@ b {
 
 
 /* Reviews ---------------------(start) */
+
+#reviews {
+  width: 100%;
+}
+
 .reviews {
+
+  h3 {
+    margin-left: 1rem;
+  }
+
   .moreReviewsBtn {
     width: 120px;
     height: 40px;

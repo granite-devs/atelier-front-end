@@ -55,7 +55,7 @@ const StyleSelector = ({state, updateState}) => {
     <>
       <div id='styleSelector'>
         <div id='styleTitle'>
-          <p>Style: </p> <p>{state.currentStyle.name}</p>
+          <p>Style:</p> <p>{state.currentStyle.name}</p>
         </div>
         <div id='styleSelection'>
           <div id='styleTop'>
