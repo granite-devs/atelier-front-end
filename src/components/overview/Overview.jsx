@@ -45,7 +45,8 @@ const Overview = ({productId}) => {
   });
 
   useEffect (() => {
-    if (selectedProductId) {
+    if (productId) {
+      // console.log(JSON.parse(window.localStorage.getItem(productId)));
       //fetch styleDetail
       const getStyleData = () => apiInstance.get(`${selectedProductId}/styles`);
       getStyleData()
