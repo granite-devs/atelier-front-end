@@ -14,6 +14,7 @@ const StyleSelector = ({state, updateState}) => {
     }
 
     if (document.getElementById('style0') !== null && state.currentStyle.photos[0] !== undefined) {
+      console.log('hey');
       for (let i = 0; i < 8; i++) {
         if (document.getElementById(`style${i}`)) {
           // document.getElementById(`style${i}`).style.border = 'none'; //border makes the icon moves
@@ -22,6 +23,8 @@ const StyleSelector = ({state, updateState}) => {
       }
       // document.getElementById(`style${selectedStyleIndex}`).style.borderStyle = 'outset';
       document.getElementById(`style${selectedStyleIndex}`).style.opacity = '0.3';
+    } else {
+      console.log('what');
     }
   }, [state]);
 
@@ -55,7 +58,7 @@ const StyleSelector = ({state, updateState}) => {
     <>
       <div id='styleSelector'>
         <div id='styleTitle'>
-          STYLE : <b>{state.currentStyle.name}</b>
+          Style: <b>{state.currentStyle.name}</b>
         </div>
         <div id='styleSelection'>
           <div id='styleTop'>
