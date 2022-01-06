@@ -21,6 +21,11 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 
 body {
   font-family: $primary-font;
+  margin: 0;
+}
+
+.components {
+  padding: 8px;
 }
 
 .heavy {
@@ -38,7 +43,7 @@ body {
   width: 100%;
   height: 70px;
   background-color: rgba(189, 189, 189, 0.137);
-  border-bottom: 1px solid rgba(85, 85, 85, 0.26);
+  // border-bottom: 1px solid rgba(85, 85, 85, 0.26);
 }
 
 
