@@ -9,12 +9,6 @@ const AddAnswerModal = (props) => {
     <div className='modal'>
       <div className='form'>
         <div className='field-item'>
-          <button
-            className='btn'
-            onClick={() => {
-              props.toggleAnswerView('main')
-            }}> Close
-          </button>
           <h1>Submit Your Answer</h1>
         </div>
         <div className='field-item'>
@@ -56,7 +50,7 @@ const AddAnswerModal = (props) => {
             multiple
           />
         </div>
-        <div className='field-item'>
+        <div className='button-container'>
           <button
             id='submit-answer-btn'
             onClick={() => {
@@ -75,6 +69,12 @@ const AddAnswerModal = (props) => {
             className='btn'
             type='button'>
             SUBMIT
+          </button>
+          <button
+            className='btn'
+            onClick={() => {
+              props.toggleAnswerView('main')
+            }}> Close
           </button>
         </div>
       </div>

@@ -13,13 +13,7 @@ const AddQuestionModal = (props) => {
     <div className='modal'>
       <div className='form'>
         <div className='field-item'>
-          <button
-            className='btn'
-            onClick={() => {
-              props.toggleQuestionsModal('main')
-            }}> Close
-          </button>
-          <h1> Ask your question about our { name } </h1>
+          <h1> Ask your question about our <br/>{ name } </h1>
         </div>
         <div className='field-item'>
           <label name='question-body'>Ask your question!</label>
@@ -54,7 +48,7 @@ const AddQuestionModal = (props) => {
             required
           />
         </div>
-        <div className='field-item'>
+        <div className='button-container'>
           <button
             onClick={() => {
 
@@ -73,6 +67,12 @@ const AddQuestionModal = (props) => {
             className='btn'
             type='button'>
             SUBMIT
+          </button>
+          <button
+            className='btn'
+            onClick={() => {
+              props.toggleQuestionsModal('main')
+            }}> Close
           </button>
         </div>
       </div>
