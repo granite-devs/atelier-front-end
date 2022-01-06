@@ -116,7 +116,7 @@ class RelatedProductsList extends React.Component {
 
   render() {
     const { productId, productCardId, updateAppProductId,
-      currentList, removeItemFromOutfit, checkCache } = this.props;
+      currentList, removeItemFromOutfit } = this.props;
     const { showLeftArrow, indexesToShow, relatedIds } = this.state;
     let { showRightArrow } = this.state;
 
@@ -135,7 +135,6 @@ class RelatedProductsList extends React.Component {
                 productId={productId}
                 productCardId={relatedId}
                 updateAppProductId={updateAppProductId}
-                checkCache={checkCache}
                 cardData={JSON.parse(window.localStorage.getItem(relatedId))}
                 currentProductData={JSON.parse(window.localStorage.getItem(productId))} />
             })}

@@ -7,8 +7,6 @@ import Related from './components/related/Related.jsx';
 
 import API_KEY from './config.js';
 
-// window.localStorage.clear(); //TODO: delete!!!
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +19,6 @@ class App extends React.Component {
     this.updateAppProductId = this.updateAppProductId.bind(this);
     this.addItemToOutfit = this.addItemToOutfit.bind(this);
     this.removeItemFromOutfit = this.removeItemFromOutfit.bind(this);
-    this.checkCache = this.checkCache.bind(this);
     this.fetchProductDetails = this.fetchProductDetails.bind(this);
   }
 
@@ -75,10 +72,6 @@ class App extends React.Component {
         });
       });
     }
-  }
-
-  checkCache(productIdToCheck, callback) {
-    return JSON.parse(window.localStorage.getItem(productIdToCheck));
   }
 
   fetchProductDetails(productIdToGet) {
@@ -157,7 +150,6 @@ class App extends React.Component {
             <Related
               key={`${productId}-2`}
               productId={productId}
-              checkCache={this.checkCache}
               updateAppProductId={this.updateAppProductId}
               addItemToOutfit={this.addItemToOutfit}
               removeItemFromOutfit={this.removeItemFromOutfit}
