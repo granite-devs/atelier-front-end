@@ -73,6 +73,9 @@ class App extends React.Component {
 
     return (
       <div>
+        <div id='navBar'>
+          <div id='logo'>LOGO</div>
+        </div>
         <Overview key={`${productId}-1`} productId={productId} />
         <Related
           key={`${productId}-2`}
