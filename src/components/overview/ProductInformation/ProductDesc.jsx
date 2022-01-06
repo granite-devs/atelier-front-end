@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SocialMedia from './SocialMedia.jsx';
 
 const ProductDesc = ({state, updateState}) => {
 
@@ -22,6 +23,7 @@ const ProductDesc = ({state, updateState}) => {
       </div>
       <div id='productFeature'>
         {productFeature}
+        <SocialMedia/>
       </div>
     </>
   );

@@ -126,7 +126,7 @@ const Overview = ({productId}) => {
 
   return (
     <>
-      <div id='announce'><b>FREE SHIPPING</b>&nbsp;+&nbsp;<b>RETURNS</b>,&nbsp;<b> SAVE UP TO 30% ON THE SELECTED ITEMS</b></div>
+      <div id='announce'><b>&nbsp;FREE SHIPPING&nbsp;+&nbsp;RETURNS,&nbsp; SAVE UP TO 30% ON THE SELECTED ITEMS</b></div>
       <div id='overview'>
         <div id='overviewTop'>
           <ImageGallery state={state} updateState={updateState}/>
@@ -134,7 +134,6 @@ const Overview = ({productId}) => {
             <ProductInformation state={state} updateState={updateState}/>
             <StyleSelector state={state} updateState={updateState}/>
             <AddToCart state={state} updateState={updateState}/>
-            <SocialMedia/>
           </div>
         </div>
         <div id='overviewBottom'>
