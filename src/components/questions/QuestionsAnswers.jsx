@@ -149,49 +149,52 @@ class QuestionsAnswers extends React.Component {
 
 
     const QuestionsAnswersComponent = (
-      <div className="question-answers-container">
-        <SearchBar filterQuestionsList={this.filterQuestionsList} />
-        <QuestionsList
-          questions={questionsList}
-          handleYesQuestionClick={this.voteHelpfulQuestion}
-          changeView={this.changeView}
-        />
-        <div className="button-container">
-          {
-            (numberOfVisibleQuestions < 3) ?
-              (<button
-                id="load-question-button"
-                type="button"
-                className="big-btn"
-                onClick={() => {
-                  this.loadMoreQuestions();
-                }}
-              >
-                MORE QUESTIONS
-              </button>)
-              :
-              (<button
-                id="load-question-button"
-                type="button"
-                className="big-btn"
-                onClick={() => {
-                  const newState = this.setTwoQuestionsVisable(questionsList);
-                  this.setState({questionsList: newState})
-                }}
-              >
-                LESS QUESTIONS
-              </button>)
-          }
-          <button
-            id="add-question-button"
-            className="big-btn"
-            type="button"
-            onClick={() => {
-              this.toggleQuestionsModal("AddQuestionModal");
-            }}
-          >
-            ADD QUESTION
-          </button>
+      <div id='questions'>
+        <h3>QUESTION & ANSWERS</h3>
+        <div className='questions-container'>
+          <SearchBar filterQuestionsList={this.filterQuestionsList} />
+          <QuestionsList
+            questions={questionsList}
+            handleYesQuestionClick={this.voteHelpfulQuestion}
+            changeView={this.changeView}
+          />
+          <div className="button-container">
+            {
+              (numberOfVisibleQuestions < 3) ?
+                (<button
+                  id="load-question-button"
+                  type="button"
+                  className="big-btn"
+                  onClick={() => {
+                    this.loadMoreQuestions();
+                  }}
+                >
+                  MORE QUESTIONS
+                </button>)
+                :
+                (<button
+                  id="load-question-button"
+                  type="button"
+                  className="big-btn"
+                  onClick={() => {
+                    const newState = this.setTwoQuestionsVisable(questionsList);
+                    this.setState({questionsList: newState})
+                  }}
+                >
+                  LESS QUESTIONS
+                </button>)
+            }
+            <button
+              id="add-question-button"
+              className="big-btn"
+              type="button"
+              onClick={() => {
+                this.toggleQuestionsModal("AddQuestionModal");
+              }}
+            >
+              ADD QUESTION
+            </button>
+          </div>
         </div>
       </div>
     );
