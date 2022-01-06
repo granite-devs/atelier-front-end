@@ -2,37 +2,64 @@ import React from 'react';
 import timeAgo from "../../utils/timeAgo.js";
 
 
-const Answer = ({ answer, voteHelpfulAnswer }) => {
+const Answer = ({ answer, voteHelpfulAnswer, toggleAnswerView }) => {
+
+  const {
+    body,
+    answerer_name,
+    answer_id, date,
+    photos,
+    helpfulness
+  } = answer;
+
   return (
     <li>
-      <span>{answer.body}</span>
+      <span className='answer-body'>{body}</span>
       <div className="help-container">
         <span>
           {
-            (answer.answerer_name === 'Seller') ?
-              (<strong>by: {answer.answerer_name}</strong>)
+            (answerer_name === 'Seller') ?
+              (<strong>by: {answerer_name}</strong>)
               :
-              (<>by: {answer.answerer_name}</>)
+              (<>by: {answerer_name}</>)
           }
         </span>
-        <span>{timeAgo(answer.date)}</span>
-        <span> | </span>
-        <span> Helpful ?
-          <button
-          id={`vote-helpful-answer-${answer.answer_id}`}
-          onClick={() => {
-            voteHelpfulAnswer(answer.answer_id)
-          }}> Yes {answer.helpfulness}
-          </button>
+        <span>{timeAgo(date)}</span>
+        <span>|    Helpful ?
+          {
+            (window.localStorage.getItem(`${answer_id}`)) ? (
+              <button
+                id={`vote-helpful-answer-${answer_id}`}
+                disabled
+              > Yes {helpfulness}
+              </button>
+            )
+              :
+              (
+                <button
+                  id={`vote-helpful-answer-${answer_id}`}
+                  onClick={() => {
+                    voteHelpfulAnswer(answer_id)
+                  }}> Yes {helpfulness}
+                </button>
+              )
+
+          }
         </span>
-        <span> | </span>
-        <a> Report </a>
       </div>
       <div className="photo-container">
         {
-          (answer.photos) && (
-            answer.photos.map((photo) => {
-              return <img key={photo.id} src={photo.url} />;
+          (photos) && (
+            photos.map((photo) => {
+              return (
+                <img className='test'
+                  key={photo.id}
+                  src={photo.url}
+                  onClick={() => {
+                    toggleAnswerView('viewPhotoModal', photo)
+                  }}
+                />
+              )
             })
           )
         }

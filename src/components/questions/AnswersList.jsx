@@ -1,7 +1,14 @@
-import React from "react";
-import Answer from "./Answer.jsx";
+import React from 'react';
+import Answer from './Answer.jsx';
 
-const AnswersList = ({ answers, loadMoreAnswers, voteHelpfulAnswer }) => {
+const AnswersList = (props) => {
+
+  const { answers,
+    loadMoreAnswers,
+    voteHelpfulAnswer,
+    questionId,
+    toggleAnswerView
+  } = props;
   const arrayOfVisibleAnswers = answers.filter((answer) =>
     answer.isVisible ? answer : null
   );
@@ -19,22 +26,26 @@ const AnswersList = ({ answers, loadMoreAnswers, voteHelpfulAnswer }) => {
                 key={answer.answer_id}
                 answer={answer}
                 voteHelpfulAnswer={voteHelpfulAnswer}
+                toggleAnswerView={toggleAnswerView}
               />
             );
           })}
         </div>
       </div>
       <br></br>
-      {answers.length > 2 && (
-        <a
-          id="see-more-answers-btn"
-          onClick={() => {
-            loadMoreAnswers();
-          }}
-        >
-          LOAD MORE ANSWERS
-        </a>
-      )}
+      {
+        (answers.length > 2) && (
+          <a
+            id={`see-answers-${questionId}`}
+            className='see-more-answers'
+            onClick={() => {
+              loadMoreAnswers(questionId);
+            }}
+          >
+            LOAD MORE ANSWERS
+          </a>
+        )
+      }
     </div>
   );
 };

@@ -838,6 +838,7 @@ b {
         }
 
         button {
+          cursor: pointer;
           text-decoration: underline;
           border: none;
           background-color: inherit;
@@ -845,6 +846,7 @@ b {
         }
 
         button:disabled {
+          cursor: default;
           font-weight: 500;
         }
       }
@@ -854,6 +856,7 @@ b {
       display: flex;
       flex-direction: row;
       margin-top: .75rem;
+
 
         a {
           cursor: pointer;
@@ -872,10 +875,17 @@ b {
           list-style-type: none;
           margin-bottom: .5rem;
 
+          .answer-body {
+            min-width: auto;
+            max-width: auto;
+            font-size: $smallfont;
+          }
+
           .help-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             font-size: .75rem;
+            max-width: 40rem;
 
             a {
               cursor: pointer;
@@ -884,15 +894,17 @@ b {
               text-decoration: underline;
             }
 
+            span {
+              min-width: 8rem;
+            }
+
+
             button {
+              cursor: pointer;
               text-decoration: underline;
               border: none;
               background-color: inherit;
               font-size: inherit;
-            }
-
-            button:disabled {
-              font-weight: 500;
             }
 
             span {
@@ -907,20 +919,22 @@ b {
           margin: auto;
 
           img {
+            cursor: pointer;
             border: .1rem solid black;
             margin-top: .5rem;
             margin-left: 1rem;
             margin-right: 1rem;
             max-height: 4rem;
-            max-width: auto;
+            max-width: 4rem;
           }
 
         }
       }
-      #see-more-answers-btn {
+      .see-more-answers {
         font-size: .65rem;
         font-weight: 600;
       }
+
     }
   }
 
@@ -962,52 +976,50 @@ b {
     text-align: center;
   }
 
-  .question-form {
+  .image-modal {
+    display: flex;
+    flex-direction: column;
+    max-height: 80%;
+    max-width: 80%;
+    padding: 2rem;
+    background-color: $container-bg;
+    border-radius: .5rem;
+
+    img {
+      cursor: pointer;
+      max-height: 95%;
+      max-width: 100%;
+    }
+
+  }
+
+  .form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin: auto;
     background-color: white;
-    height: 90%;
-    width: 90%;
+    height: auto;
+    padding: 1rem;
+    border-radius: .5rem;
+    width: 50%;
 
     .field-item {
       display: flex;
       justify-content: center;
       flex-direction: column;
-      margin: 1rem;
-      font-size: $largefont;
+      margin: .25rem;
 
       input {
         font-size: 1rem;
-        font-size: $largefont;
       }
     }
-  }
 
-  .answer-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: auto;
-    background-color: white;
-    height: 90%;
-    width: 90%;
-
-    .field-item {
+    .button-container {
       display: flex;
-      justify-content: center;
-      flex-direction: column;
-      margin: .5rem;
-      font-size: $largefont;
-
-      input {
-        font-size: 1rem;
-        font-size: $largefont;
-      }
+      justify-content: space-evenly;
     }
   }
-
 
 }
 
@@ -1228,21 +1240,6 @@ b {
   margin: 4px;
 }
 
-.imageModal {
-  max-height: 80%;
-  max-width: 80%;
-  padding: 2rem;
-  padding-top: 0.5rem;
-  background-color: $container-bg;
-  border-radius: 10px;
-  button {
-    position: absolute;
-  }
-  img {
-    max-height: 100%;
-    max-width: 100%;
-  }
-}
 
 .attachImage {
   width: 20rem;
