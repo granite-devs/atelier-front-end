@@ -25,9 +25,6 @@ class ReviewsList extends React.Component {
     };
 
     axios(postConfig)
-      .then((response) => {
-        this.props.onReviewSubmitted();
-      })
       .catch((error) => {
         console.log(error);
       });

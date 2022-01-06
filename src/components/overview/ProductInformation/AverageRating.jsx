@@ -20,7 +20,7 @@ const AverageRating = ({state, updateState}) => {
         <StarRating rating={avgRating} />
       </div>
       <div onClick={scrollToReview} id='readReview'>
-        Read all [{reviewCount}]review(s)
+        Read all [{reviewCount}] review(s)
       </div>
     </>
   );

@@ -13,7 +13,7 @@ class Reviews extends React.Component {
       reviewsList: [],
       filteredReviewsList: [],
       filter: () => true, // Default "filter": displays all reviews.
-      reviewsPerLoad: 2,
+      reviewsPerLoad: 100,
       reviewCount: null,
       reviewsLoaded: 0,
       moreToLoad: true,
@@ -41,26 +41,8 @@ class Reviews extends React.Component {
 
   fetchReviewMetaData(callback = null) {
     const { productId } = this.props;
-    if (productId) {
-      const intializationConfig = {
-        method: 'get',
-        url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta',
-        headers: {
-          Authorization: API_KEY,
-        },
-        params: {
-          'product_id': this.props.productId
-        }
-      };
-
-      axios(intializationConfig)
-        .then((response) => {
-          this.setState({ reviewsMetaData: response.data }, callback);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    const reviewsMetaData = JSON.parse(window.localStorage.getItem(productId)).reviews;
+    this.setState({ reviewsMetaData }, callback);
   }
 
   fetchReviews(page, count, reviewsList = [], callback = null) {
@@ -196,6 +178,7 @@ class Reviews extends React.Component {
           Ratings &amp; Reviews {name}
         </h3>
         <ReviewsBreakdown
+          setFilter={this.setFilter}
           reviewsMetaData={this.state.reviewsMetaData}
         />
         <span className='reviewsHeader'>{reviewCount} reviews, sorted by </span>

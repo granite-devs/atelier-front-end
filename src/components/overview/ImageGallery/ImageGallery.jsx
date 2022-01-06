@@ -51,7 +51,7 @@ const ImageGallery = ({state, updateState}) => {
 
     if (currentImgIndex !== state.currentStyle.photos.length - 1) {
       updateState((preValues) => {
-        return {...preValues, mainImage: state.currentStyle.photos[currentImgIndex + 1].url};
+        return {...preValues, mainImage: state.currentStyle.photos[currentImgIndex + 1].thumbnail_url};
       });
       updateClickedImageIndex(currentImgIndex + 1);
     }
@@ -63,7 +63,7 @@ const ImageGallery = ({state, updateState}) => {
 
     if (currentImgIndex !== 0) {
       updateState((preValues) => {
-        return {...preValues, mainImage: state.currentStyle.photos[currentImgIndex - 1].url};
+        return {...preValues, mainImage: state.currentStyle.photos[currentImgIndex - 1].thumbnail_url};
       });
       updateClickedImageIndex(currentImgIndex - 1);
     }

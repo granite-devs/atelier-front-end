@@ -2,11 +2,11 @@ import React from 'react';
 
 const BreakdownBar = (props) => {
 
-  const { stars, reviews, total } = props;
+  const { stars, reviews, total, onClick } = props;
   const fraction = (reviews / total) * 100;
 
   return (
-    <div className='breakdownBar'>
+    <div className='breakdownBar' onClick={() => onClick(stars)}>
       <span className='leftSpan'>{`${stars} Stars`}</span>
       <svg width="200" height="10">
         <defs>

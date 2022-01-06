@@ -91,7 +91,7 @@ class YourOutfitList extends React.Component {
 
   render() {
     const { productId, productCardId, updateAppProductId,
-      outfitItems, currentList, removeItemFromOutfit } = this.props;
+      outfitItems, currentList, removeItemFromOutfit, checkCache } = this.props;
 
     const { showLeftArrow, indexesToShow } = this.state;
     let { showRightArrow } = this.state;
@@ -122,6 +122,7 @@ class YourOutfitList extends React.Component {
                 currentList={currentList}
                 productId={productId}
                 productCardId={outfitItemId}
+                checkCache={checkCache}
                 updateAppProductId={updateAppProductId}
                 removeItemFromOutfit={removeItemFromOutfit} />
             })}

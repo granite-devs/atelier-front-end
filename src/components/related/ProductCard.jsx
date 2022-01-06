@@ -139,7 +139,6 @@ class ProductCard extends React.Component {
   }
 
   actionBtnClick(buttonLocation) {
-    console.log('clicky');
     if (buttonLocation === 'relatedList') {
       this.setState({displayModal: !this.state.displayModal});
     }
@@ -150,39 +149,47 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { productCardId, updateAppProductId, currentList, hidden } = this.props;
+    const { productCardId, updateAppProductId, currentList, hidden, currentProductData,
+      cardData } = this.props;
     const { name, category, price, salePrice, rating,
-      features, currentItemFeatures, displayModal } = this.state;
+      features, displayModal } = this.state;
 
-    let primaryImg = this.state.primaryImg;
-    if (!primaryImg) { primaryImg = 'https://tinyurl.com/5nur3x7w'; }
+    if (cardData) {
 
-    let compareModal;
-    if (currentList === 'related') {
-      compareModal = <CompareModal relatedItemName={name}
-          relatedItemFeatures={features}
-          displayModal={displayModal}
-          currentItemFeatures={currentItemFeatures}
-          actionBtnClick={this.actionBtnClick} /> ;
-    }
+      let primaryImg = this.state.primaryImg;
+      if (!primaryImg) { primaryImg = 'https://tinyurl.com/5nur3x7w'; }
 
-    return (
-      <div>{compareModal}
-        <div className={hidden ? 'product-card hidden' : 'product-card'}>
-          <ActionButton actionBtnClick={this.actionBtnClick}
-            currentList={currentList}/>
-            <img className='card-img' src={primaryImg}
-              onClick={() => { updateAppProductId(productCardId); }}></img>
-            <div className='card-info' onClick={() => { updateAppProductId(productCardId); }}>
-              <p className='card-category'>{category}</p>
-              <p className='card-name'>{name}</p>
-              <p className='card-price'>{'$'}{price}</p>
-              <p className='card-sale'>{salePrice}</p>
-            </div>
-            <StarRating className='card-rating' rating={rating}/>
+      let compareModal;
+      if (currentList === 'related') {
+        compareModal = <CompareModal relatedItemName={name}
+            cardData={cardData}
+            displayModal={displayModal}
+            currentProductData={currentProductData}
+            actionBtnClick={this.actionBtnClick} /> ;
+      }
+
+      return (
+        <div>
+          {/* {compareModal} //TODO: Fix Compare Modal
+           */}
+          <div className={hidden ? 'product-card hidden' : 'product-card'}>
+            <ActionButton actionBtnClick={this.actionBtnClick}
+              currentList={currentList}/>
+              <img className='card-img' src={primaryImg}
+                onClick={() => { updateAppProductId(productCardId); }}></img>
+              <div className='card-info' onClick={() => { updateAppProductId(productCardId); }}>
+                <p className='card-category'>{category}</p>
+                <p className='card-name'>{name}</p>
+                <p className='card-price'>{'$'}{price}</p>
+                <p className='card-sale'>{salePrice}</p>
+              </div>
+              <StarRating className='card-rating' rating={rating}/>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return ( <div></div> );
+    }
   }
 }
 
