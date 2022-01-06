@@ -127,10 +127,26 @@ class Reviews extends React.Component {
         }
       };
     } else if (sortOrder === 'relevant') { // not sure how to sort for relevancy?
-      return (a, b) => {};
+      return (a, b) => {
+        const timeDiff = Math.abs(new Date(a.date) - new Date(b.date)) / (1000 * 60 * 60 * 24 * 7);
+        const helpfulnessDiff = Math.abs(a.helpfulness - b.helpfulness);
+        if (timeDiff > helpfulnessDiff) {
+          if (new Date(a.date) < new Date(b.date)) {
+            return 1;
+          } else {
+            return -1;
+          }
+        } else {
+          if (a.helpfulness < b.helpfulness) {
+            return 1;
+          } else {
+            return -1;
+          }
+        }
+      };
     } else if (sortOrder === 'helpful') {
       return (a, b) => {
-        if (new Date(a.helpfulness) < new Date(b.helpfulness)) {
+        if (a.helpfulness < b.helpfulness) {
           return 1;
         } else {
           return -1;

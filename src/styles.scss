@@ -14,7 +14,8 @@ $container-bg: whitesmoke;
 $related-gradient: linear-gradient(rgb(245, 245, 245), rgb(224, 224, 224));
 $related-shadow: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.26));
 $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
-
+$related-listbg: rgb(230,230,230);
+$related-listgradient: linear-gradient(90deg, rgba(230,230,230,1) 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 80%, rgba(230,230,230,1) 100%);
 
 
 //util
@@ -428,33 +429,41 @@ b {
 /* Related ---------------------(start) */
 .related-module {
   width: auto;
-  border-top: 1px solid rgb(168, 168, 168);
-  border-bottom: 1px solid rgb(168, 168, 168);
 }
 
 .related-module h3 {
   margin: 0;
-  padding-top: 1rem;
+  margin-top: .5rem;
+  padding-top: .5rem;
   font-weight: $heavy;
+  background: $related-listbg;
+  background: $related-listgradient;
+  border-top: 1px solid rgb(168, 168, 168);
 }
 
 #related-list, #outfit-list {
-  padding-top: 1rem;
+  padding-top: .5rem;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  width: 95vw;
+  width: 100%;
+  background: $related-listbg;
+  background: $related-listgradient;
+  border-bottom: 1px solid rgb(168, 168, 168);
 }
 
 .product-card-list {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
+  align-items: center;
   width: 90vw;
-  overflow-y: hidden;
+  overflow: hidden;
   position: relative;
   z-index: 1;
-  height: 22rem;
+  height: 18rem;
+  padding: 0;
+  margin: 0;
 }
 
 .related-arrow {
@@ -490,9 +499,11 @@ b {
   background-position: center;
   background-size: 100% 100%;
 
-  height: 20rem;
-  width: 12rem;
-  margin: 5px;
+  width: 11rem;
+  height: 17rem;
+  overflow-y: hidden;
+
+  margin-left: 1rem;
 
   border: 1px solid black;
   transition-duration: 0.5s;
@@ -503,7 +514,28 @@ b {
   filter: $related-shadow;
 }
 .product-card.hidden {
-  display: none;
+  opacity: 0;
+  width: 0rem;
+  height: 0rem;
+  transition-duration: 0.5s;
+}
+
+.add-outfit-card {
+  background: transparent;
+  border: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 7rem;
+  min-width: 7rem;
+  height: 8rem;
+  padding-left: 0;
+  margin-left: 0;
+
+  border: 1px solid gray;
+  transition-duration: 0.5s;
 }
 
 .card-img {
@@ -520,31 +552,32 @@ b {
 .card-info {
   display: flex;
   flex-direction: column;
-  padding: 3px;
+  justify-content: space-between;
+  height: 30%;
+  padding: .3rem;
 }
 .card-category {
   margin: 0px;
   text-transform: uppercase;
-  font-size: 1.5vh;
+  font-size: .7rem;
 }
 .card-name {
   margin: 0px;
-  font-size: 2.2vh;
+  font-size: 1rem;
   font-weight: bold;
 }
 .card-price {
   margin: 0px;
+  font-size: .9rem;
 }
 .card-sale {
   margin: 0px;
-}
-.card-rating {
-  align-self: flex-end;
+  font-size: .9rem;
 }
 
 .action-btn {
   position: absolute;
-  left: 10rem;
+  left: 81%;
   padding-top: .6rem;
   z-index: 6;
   filter: $related-shadow-white;
@@ -566,13 +599,12 @@ b {
   min-width: 20rem;
   left: 25vw;
   top: .3rem;
+  height: 14rem;
 
   position: absolute;
   display: block;
   margin-top: .5rem;
   padding: 1rem;
-  height: 17rem;
-  overflow-y: scroll;
   background-color: $container-bg;
   border: 1px solid gray;
   transition-duration: .5s;
@@ -605,6 +637,45 @@ b {
   color: rgb(71, 71, 71);
 }
 
+.compare-container {
+  height: 78%;
+  overflow-y: scroll;
+}
+
+.compare-container::-webkit-scrollbar {
+  width: .5rem;
+  height: .5rem;
+}
+.compare-container::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+.compare-container::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+.compare-container::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+.compare-container::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+.compare-container::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+.compare-container::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+.compare-container::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+.compare-container::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 .compare-table {
   text-align: center;
   margin-left: auto;
@@ -627,24 +698,6 @@ b {
 
 .td-feature {
   width: 8rem;
-}
-
-.add-outfit-card {
-  background: transparent;
-  border: none;
-  min-width: 12rem;
-  margin: 0rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  height: 20rem;
-  width: 12rem;
-  margin: 5px;
-
-  border: 1px solid gray;
-  transition-duration: 0.5s;
 }
 
 .add-outfit-icon {
