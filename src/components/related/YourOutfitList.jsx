@@ -34,7 +34,7 @@ class YourOutfitList extends React.Component {
     const numberOfCardsToShow = Math.floor(visibleWidth / cardWidth);
     let indexesArray = [0];
 
-    for (let i = 1; i < numberOfCardsToShow - 1; i++) {
+    for (let i = 1; i < numberOfCardsToShow - 2; i++) {
       indexesArray.push(i);
     }
 
@@ -91,7 +91,7 @@ class YourOutfitList extends React.Component {
 
   render() {
     const { productId, productCardId, updateAppProductId,
-      outfitItems, currentList, removeItemFromOutfit, checkCache } = this.props;
+      outfitItems, currentList, removeItemFromOutfit } = this.props;
 
     const { showLeftArrow, indexesToShow } = this.state;
     let { showRightArrow } = this.state;
@@ -113,7 +113,7 @@ class YourOutfitList extends React.Component {
           <div className='product-card-list'>
           <div className='product-card add-outfit-card'
             onClick={() => { this.handleAddToOutfitClick(productId) }}>
-            <img className='add-outfit-icon' src='https://tinyurl.com/3hspumek'></img>
+            <img className='add-outfit-icon' src='https://gcdn.pbrd.co/images/pP7Ot4WmrM2q.png?o=1'></img>
             <span className='add-outfit-text'>Add to Outfit</span>
           </div>
             {outfitItems.map((outfitItemId, i) => {
@@ -122,9 +122,10 @@ class YourOutfitList extends React.Component {
                 currentList={currentList}
                 productId={productId}
                 productCardId={outfitItemId}
-                checkCache={checkCache}
                 updateAppProductId={updateAppProductId}
-                removeItemFromOutfit={removeItemFromOutfit} />
+                removeItemFromOutfit={removeItemFromOutfit}
+                cardData={JSON.parse(window.localStorage.getItem(outfitItemId))}
+                currentProductData={JSON.parse(window.localStorage.getItem(productId))} />
             })}
           </div>
 
