@@ -64,14 +64,21 @@ const SizeAndQuantitySelector = ({state, updateState}) => {
           <option id='SizeDefault' value='default' key='size'>Select Size</option>
           {sizeAndQuantity !== null && (
             Object.keys(sizeAndQuantity).map((element, index) => {
-              return <option id={`size${element}`} key={index}>{element}</option>;
+              return <option
+                id={`size${element}`}
+                key={index}>{element}
+              </option>;
             })
           )}
         </select>
         <select id='quantity'>
           {quantity[0] !== undefined ?
             quantity.map((element, index) => {
-              return <option id={`quantity${element}`} value={`quantity${element}`} key={index}>{element}</option>;
+              return <option
+                id={`quantity${element}`}
+                value={`quantity${element}`}
+                key={index}>{element}
+              </option>;
             }) :
             <option id='QuantityDefault' value='default' key='default'>-</option>
           }
