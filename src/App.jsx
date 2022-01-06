@@ -121,7 +121,7 @@ class App extends React.Component {
 
   addItemToOutfit(productToAdd) {
     const outfitItems = this.state.outfitItems;
-
+    console.log('addy item', productToAdd);
     if (!outfitItems.includes(productToAdd)) {
       this.setState({outfitItems: [...this.state.outfitItems, productToAdd]});
     }

@@ -100,6 +100,8 @@ class YourOutfitList extends React.Component {
       showRightArrow = false;
     }
 
+    console.log(outfitItems);
+
     return (
       <>
         <h3>Your Outfit</h3>
