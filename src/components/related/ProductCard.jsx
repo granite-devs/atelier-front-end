@@ -182,8 +182,10 @@ class ProductCard extends React.Component {
                 <p className='card-name'>{name}</p>
                 <p className='card-price'>{'$'}{price}</p>
                 <p className='card-sale'>{salePrice}</p>
+              <div className='card-rating'>
+                <StarRating rating={rating}/>
               </div>
-              <StarRating className='card-rating' rating={rating}/>
+              </div>
           </div>
         </div>
       );

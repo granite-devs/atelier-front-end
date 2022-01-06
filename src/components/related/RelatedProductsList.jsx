@@ -22,7 +22,7 @@ class RelatedProductsList extends React.Component {
   componentDidMount() {
     const { relatedIds } = this.state.relatedIds;
 
-    //this.computeIndexesToShow();
+    this.computeIndexesToShow();
     this.fetchRelatedIds(this.props.productId);
   }
 

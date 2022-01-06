@@ -452,7 +452,7 @@ b {
   overflow: hidden;
   position: relative;
   z-index: 1;
-  height: 17rem;
+  height: 17.5rem;
 }
 
 .related-arrow {
@@ -489,7 +489,8 @@ b {
   background-size: 100% 100%;
 
   width: 11rem;
-  height: 16rem;
+  height: 17rem;
+  overflow-y: hidden;
 
   margin-left: 1rem;
 
@@ -519,7 +520,9 @@ b {
 .card-info {
   display: flex;
   flex-direction: column;
-  padding: 3px;
+  justify-content: space-between;
+  height: 30%;
+  padding: .3rem;
 }
 .card-category {
   margin: 0px;
@@ -538,9 +541,6 @@ b {
 .card-sale {
   margin: 0px;
   font-size: .9rem;
-}
-.card-rating {
-  align-self: flex-end;
 }
 
 .action-btn {
