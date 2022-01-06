@@ -19,7 +19,7 @@ class ProductCard extends React.Component {
       primaryImg: null,
       features: [],
       displayModal: false,
-      currentItemFeatures: {name: '', features: []},
+      currentProductFeatures: {name: '', features: []},
       initialRequestMade: false
     }
     this.actionBtnClick = this.actionBtnClick.bind(this);
@@ -28,7 +28,7 @@ class ProductCard extends React.Component {
   componentDidMount() {
     const { productCardId, productId } = this.props;
     this.fetchProductInfo(productCardId, 'currentRelatedItem');
-    this.fetchProductInfo(productId, 'currentItem');
+    this.fetchProductInfo(productId, 'currentProduct');
     this.fetchProductPricePics(productCardId);
     this.fetchProductRating(productCardId);
   }
@@ -62,13 +62,13 @@ class ProductCard extends React.Component {
             });
           }
 
-          if (stateToUpdate === 'currentItem') {
+          if (stateToUpdate === 'currentProduct') {
             features.forEach(feature => {
-              feature['belongsTo'] = 'currentItem';
+              feature['belongsTo'] = 'currentProduct';
             });
 
             this.setState({
-              currentItemFeatures: {name: name, features: features}
+              currentProductFeatures: {name: name, features: features}
             });
           }
         })
@@ -96,7 +96,7 @@ class ProductCard extends React.Component {
           this.setState({
             price: data.original_price,
             salePrice: data.sale_price,
-            primaryImg: data.photos[0].url
+            primaryImg: data.photos[0].thumbnail_url
           });
         })
         .catch((error) => {
@@ -149,29 +149,29 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { productCardId, updateAppProductId, currentList, hidden, currentProductData,
-      cardData } = this.props;
+    const { productCardId, updateAppProductId, currentList,
+      hidden, cardData } = this.props;
+
     const { name, category, price, salePrice, rating,
-      features, displayModal } = this.state;
+      features, displayModal, currentProductFeatures } = this.state;
 
     if (cardData) {
-
       let primaryImg = this.state.primaryImg;
       if (!primaryImg) { primaryImg = 'https://tinyurl.com/5nur3x7w'; }
 
       let compareModal;
       if (currentList === 'related') {
-        compareModal = <CompareModal relatedItemName={name}
-            cardData={cardData}
-            displayModal={displayModal}
-            currentProductData={currentProductData}
-            actionBtnClick={this.actionBtnClick} /> ;
+        compareModal = <CompareModal
+          displayModal={displayModal}
+          relatedItemName={name}
+          currentProductFeatures={currentProductFeatures}
+          relatedProductFeatures={features}
+          actionBtnClick={this.actionBtnClick} /> ;
       }
 
       return (
         <div>
-          {/* {compareModal} //TODO: Fix Compare Modal
-           */}
+          {compareModal}
           <div className={hidden ? 'product-card hidden' : 'product-card'}>
             <ActionButton actionBtnClick={this.actionBtnClick}
               currentList={currentList}/>
@@ -182,8 +182,10 @@ class ProductCard extends React.Component {
                 <p className='card-name'>{name}</p>
                 <p className='card-price'>{'$'}{price}</p>
                 <p className='card-sale'>{salePrice}</p>
+              <div className='card-rating'>
+                <StarRating rating={rating}/>
               </div>
-              <StarRating className='card-rating' rating={rating}/>
+              </div>
           </div>
         </div>
       );
