@@ -4,6 +4,13 @@ import { configure, shallow, render } from 'enzyme';
 import initialState from './questionTestData.js'
 import QuestionsAnswers from '../src/components/questions/QuestionsAnswers.jsx';
 import SearchBar from '../src/components/questions/SearchBar.jsx';
+import QuestionsList from '../src/components/questions/QuestionsList.jsx';
+import Question from '../src/components/questions/Question.jsx';
+import AnswerList from '../src/components/questions/AnswerList.jsx';
+import Answer from '../src/components/questions/Answer.jsx';
+import AddQuestionModal from  '../src/components/questions/modals/AddQuestionModal.jsx';
+import AddAnswerModal from '../src/components/questions/modals/AddAnswerModal.jsx';
+
 
 configure({ adapter: new Adapter() });
 
@@ -55,8 +62,9 @@ describe('Question and answers component', () => {
     expect(howManyAreVisible.length).toBe(1);
   });
 
-  //TODO
-  test.todo('Should have questions list component');
+  test('Should have questions list component', () => {
+    expect(questionsAnswersShallow.exists('#questions-list-component')).toBe(true);
+  });
 
   test('questionsAnswersShallow should have an load more questions button', () => {
     expect(questionsAnswersShallow.exists('#load-question-button')).toBe(true);
@@ -73,8 +81,18 @@ describe('Question and answers component', () => {
   });
 
 
-  test.todo('filterQuestionsList should filter by the input search term');
 
-  //questionsListCompg
-  test.todo('should have an add answer button');
+  //questionsListComp
+  test.todo('Should have two question components');
+  test.todo('should have "ADD QUESTOIN" button');
+  test.todo(' "LOAD MORE QUESTIONS" should render all questions');
+
+  //Question Comp
+  test.todo('Should have a question body');
+  test.todo('Should have helpful vote button');
+
+
+  //AnswerList Comp
+
+  //Answer
 })
