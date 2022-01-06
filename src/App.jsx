@@ -147,24 +147,22 @@ class App extends React.Component {
           <div>
             <div id='navBar'>
               <div id='logo'>LOGO</div>
-              <div id='search'>
-                <input id='textBox' type="text" placeholder="Search"/>
-                <i id='navSearchButton' class="fas fa-search"></i>
-              </div>
             </div>
-            <Overview key={`${productId}-1`} productId={productId} />
-            <Related
-              key={`${productId}-2`}
-              productId={productId}
-              updateAppProductId={this.updateAppProductId}
-              addItemToOutfit={this.addItemToOutfit}
-              removeItemFromOutfit={this.removeItemFromOutfit}
-              outfitItems={outfitItems}
-              fetchProductDetails={this.fetchProductDetails}
-              renderer={renderer}
-            />
-            <QuestionsAnswers key={`${productId}-3`} productId={productId} />
-            <Reviews key={`${productId}-4`} productId={productId} />
+            <div className='components'>
+              <Overview key={`${productId}-1`} productId={productId} />
+              <Related
+                key={`${productId}-2`}
+                productId={productId}
+                updateAppProductId={this.updateAppProductId}
+                addItemToOutfit={this.addItemToOutfit}
+                removeItemFromOutfit={this.removeItemFromOutfit}
+                outfitItems={outfitItems}
+                fetchProductDetails={this.fetchProductDetails}
+                renderer={renderer}
+              />
+              <QuestionsAnswers key={`${productId}-3`} productId={productId} />
+              <Reviews key={`${productId}-4`} productId={productId} />
+            </div>
           </div>
         )}
       </>
