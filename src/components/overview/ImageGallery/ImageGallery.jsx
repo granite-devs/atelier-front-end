@@ -40,7 +40,7 @@ const ImageGallery = ({state, updateState}) => {
   const updateCurrentStylePhotosUrl = () => {
     let urlOnlyArray = [];
     for (let i = 0; i < state.currentStyle.photos.length; i++) {
-      urlOnlyArray.push(state.currentStyle.photos[i].url);
+      urlOnlyArray.push(state.currentStyle.photos[i].thumbnail_url);
     }
     updateStylePhotos(urlOnlyArray);
   };
@@ -93,17 +93,15 @@ const ImageGallery = ({state, updateState}) => {
 
   return (
     <>
-      {state !== undefined && (
-        <DefaultView
-          state={state}
-          updateState={updateState}
-          handleToExpand={handleToExpand}
-          handleRightArrow={handleRightArrow}
-          handleLeftArrow={handleLeftArrow}
-          updateCurrentStylePhotosUrl={updateCurrentStylePhotosUrl}
-          updateMainImage={updateMainImage}
-        />
-      )}
+      <DefaultView
+        state={state}
+        updateState={updateState}
+        handleToExpand={handleToExpand}
+        handleRightArrow={handleRightArrow}
+        handleLeftArrow={handleLeftArrow}
+        updateCurrentStylePhotosUrl={updateCurrentStylePhotosUrl}
+        updateMainImage={updateMainImage}
+      />
     </>
   );
 };

@@ -8,7 +8,7 @@ const StyleSelector = ({state, updateState}) => {
     let defaultStylePhotoArray = [];
     if (state.selectedProductStyle[0] !== undefined) {
       state.selectedProductStyle.forEach ((eachStyle) => {
-        defaultStylePhotoArray.push(eachStyle.photos[0].url);
+        defaultStylePhotoArray.push(eachStyle.photos[0].thumbnail_url);
       });
       updateDefaultPhoto(defaultStylePhotoArray);
     }
@@ -35,7 +35,7 @@ const StyleSelector = ({state, updateState}) => {
       return {
         ...preValues,
         currentStyle: selectedStyle,
-        mainImage: selectedStyle.photos[0].url
+        mainImage: selectedStyle.photos[0].thumbnail_url
       };
     });
 
@@ -53,31 +53,39 @@ const StyleSelector = ({state, updateState}) => {
 
   return (
     <>
-      {state !== undefined && theFirstPhotoOfEachStyle[0] !== undefined && (
-        <>
-          <div id='styleSelector'>
-            <div id='styleTitle'>
-              STYLE : <b>{state.currentStyle.name}</b>
-            </div>
-            <div id='styleSelection'>
-              <div id='styleTop'>
-                {theFirstPhotoOfEachStyle.map((element, index) => {
-                  if (index < 4) {
-                    return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={index} id={`style${index}`} src={element}></img>;
-                  }
-                })}
-              </div>
-              <div id='styleBottom'>
-                {theFirstPhotoOfEachStyle.map((element, index) => {
-                  if (index > 3 && index < 8) {
-                    return <img onClick={updateCurrentStyle} className='eachStyleSelection' key={index} id={`style${index}`} src={element}></img>;
-                  }
-                })}
-              </div>
-            </div>
+      <div id='styleSelector'>
+        <div id='styleTitle'>
+          Style: <b>{state.currentStyle.name}</b>
+        </div>
+        <div id='styleSelection'>
+          <div id='styleTop'>
+            {theFirstPhotoOfEachStyle.map((element, index) => {
+              if (index < 4) {
+                return <img
+                  onClick={updateCurrentStyle}
+                  className='eachStyleSelection'
+                  key={index}
+                  id={`style${index}`}
+                  src={element}>
+                </img>;
+              }
+            })}
           </div>
-        </>
-      )}
+          <div id='styleBottom'>
+            {theFirstPhotoOfEachStyle.map((element, index) => {
+              if (index > 3 && index < 8) {
+                return <img
+                  onClick={updateCurrentStyle}
+                  className='eachStyleSelection'
+                  key={index}
+                  id={`style${index}`}
+                  src={element}>
+                </img>;
+              }
+            })}
+          </div>
+        </div>
+      </div>
     </>
   );
 };
