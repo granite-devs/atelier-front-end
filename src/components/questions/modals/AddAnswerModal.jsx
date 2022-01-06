@@ -7,7 +7,7 @@ const AddAnswerModal = (props) => {
 
   return (
     <div className='modal'>
-      <div className='answer-form'>
+      <div className='form'>
         <div className='field-item'>
           <button
             className='btn'

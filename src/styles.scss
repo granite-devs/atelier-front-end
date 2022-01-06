@@ -912,53 +912,48 @@ b {
     text-align: center;
   }
 
-  .question-form {
+  .image-modal {
+    max-height: 80%;
+    max-width: 80%;
+    padding: 2rem;
+    padding-top: 0.5rem;
+    background-color: $container-bg;
+    border-radius: 10px;
+
+    button {
+      position: absolute;
+    }
+
+    img {
+      cursor: pointer;
+      max-height: 100%;
+      max-width: 100%;
+    }
+
+  }
+
+  .form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin: auto;
     background-color: white;
-    height: 90%;
-    width: 90%;
+    height: auto;
+    padding: 1rem;
+    border-radius: .5rem;
+    width: 50%;
 
     .field-item {
       display: flex;
       justify-content: center;
       flex-direction: column;
-      margin: 1rem;
-      font-size: $largefont;
+      margin: .25rem;
 
       input {
         font-size: 1rem;
-        font-size: $largefont;
       }
     }
   }
-
-  .answer-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: auto;
-    background-color: white;
-    height: 90%;
-    width: 90%;
-
-    .field-item {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      margin: .5rem;
-      font-size: $largefont;
-
-      input {
-        font-size: 1rem;
-        font-size: $largefont;
-      }
-    }
-  }
-
-
 }
 
 /* Questions ---------------------(end) */
@@ -1168,21 +1163,6 @@ b {
   margin: 4px;
 }
 
-.imageModal {
-  max-height: 80%;
-  max-width: 80%;
-  padding: 2rem;
-  padding-top: 0.5rem;
-  background-color: $container-bg;
-  border-radius: 10px;
-  button {
-    position: absolute;
-  }
-  img {
-    max-height: 100%;
-    max-width: 100%;
-  }
-}
 
 .attachImage {
   width: 20rem;

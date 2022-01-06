@@ -9,11 +9,9 @@ const AddQuestionModal = (props) => {
   const product = JSON.parse(localStorage.getItem(`${productId}`))
   const { name } = product.details;
 
-  console.log(product)
-
   return (
     <div className='modal'>
-      <div className='question-form'>
+      <div className='form'>
         <div className='field-item'>
           <button
             className='btn'
