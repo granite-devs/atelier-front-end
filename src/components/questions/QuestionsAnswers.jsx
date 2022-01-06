@@ -47,15 +47,16 @@ class QuestionsAnswers extends React.Component {
   toggleQuestionsModal(viewChange) {
     this.setState({
       questionsList: this.state.questionsList,
-      view: viewChange
+      view: viewChange,
     });
   }
 
   filterQuestionsList(term) {
     if (term.length >= 3) {
+      const search = term.toLowerCase();
+
       const filteredList = this.state.questionsList.map((question) => {
         const questionBody = question.question_body.toLowerCase();
-        const search = term.toLowerCase();
         if (questionBody.includes(search)) {
           question.isVisible = true;
           return question;
@@ -64,7 +65,7 @@ class QuestionsAnswers extends React.Component {
           return question;
         }
       });
-      this.setState({ questionsList: filteredList });
+      this.setState({ questionsList: filteredList});
     } else {
       const unfilteredList = this.setTwoQuestionsVisable(
         this.state.questionsList
@@ -82,40 +83,34 @@ class QuestionsAnswers extends React.Component {
 
     if (!window.localStorage[targetQuestionId]) {
       putHelpfulQuestion(targetQuestionId)
-      .then(()=> {
-        button.disabled = true;
-        window.localStorage[targetQuestionId] = true;
-        const updatedQuestions = questionsList.map((question) => {
-          if (targetQuestionId == question.question_id) {
-            question.question_helpfulness += 1
-          }
-          return question;
+        .then(() => {
+          button.disabled = true;
+          window.localStorage[targetQuestionId] = true;
+          const updatedQuestions = questionsList.map((question) => {
+            if (targetQuestionId == question.question_id) {
+              question.question_helpfulness += 1
+            }
+            return question;
+          })
+          this.setState({
+            questionsList: updatedQuestions,
+            view: this.state.view,
+
+          })
         })
-        this.setState({ questionsList: updatedQuestions })
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+        .catch((error) => {
+          console.error(error)
+        })
     }
   }
 
   loadMoreQuestions() {
-    const button = document.querySelector('#load-question-button');
-
-    if (button.innerHTML.includes('MORE QUESTIONS')) {
-      button.innerHTML = 'LESS QUESTIONS';
-      const entireQuestionList = this.state.questionsList.map((question) => {
-        question.isVisible = true;
-        return question;
-      });
-      this.setState({ questionsList: entireQuestionList });
-    } else {
-      button.innerHTML = 'MORE QUESTIONS';
-      const unfilteredList = this.setTwoQuestionsVisable(
-        this.state.questionsList
-      );
-      this.setState({ questionsList: unfilteredList });
-    }
+    const { questionsList } = this.state;
+    const arrayOfAllVisible = questionsList.map((question) => {
+      question.isVisible = true;
+      return question;
+    })
+    this.setState({ questionsList: arrayOfAllVisible })
   }
 
   setTwoQuestionsVisable(array) {
@@ -139,24 +134,21 @@ class QuestionsAnswers extends React.Component {
         const mappedQuestions = this.setTwoQuestionsVisable(response);
         this.setState({
           questionsList: mappedQuestions,
-          view: "main",
+          view: 'main',
         });
       });
     }
   }
 
-  ComponentDidUpdate() {
-
-    const {questionsList, view} = this.state;
-    this.setState({
-      questionsList,
-      view
-    })
-  }
-
   render() {
 
+    let numberOfVisibleQuestions = 0;
     const { questionsList, view } = this.state;
+    const howManyAreVisible = questionsList.forEach((question) => {
+      (question.isVisible) ? numberOfVisibleQuestions += 1 : null;
+    })
+
+
     const QuestionsAnswersComponent = (
       <div className="question-answers-container">
         <SearchBar filterQuestionsList={this.filterQuestionsList} />
@@ -167,16 +159,16 @@ class QuestionsAnswers extends React.Component {
         />
         <div className="button-container">
           {
-            questionsList.length > 2 && (
+            (numberOfVisibleQuestions < 3) && (
               <button
                 id="load-question-button"
                 type="button"
                 className="big-btn"
-                onClick={(e) => {
+                onClick={() => {
                   this.loadMoreQuestions();
                 }}
               >
-                MORE QUESTIONS
+                MORE QUESTION
               </button>
             )
           }

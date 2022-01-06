@@ -50,7 +50,7 @@ export function getAnswers(questionId) {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/${questionId}/answers?count=100`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/${questionId}/answers?count=50`,
       headers: {
         'Authorization': API_KEY
       }

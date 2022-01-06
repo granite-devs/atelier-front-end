@@ -68,7 +68,7 @@ class Question extends React.Component {
     }
   }
 
-  loadMoreAnswers() {
+  loadMoreAnswers(questionId) {
 
     const button = document.querySelector('#see-more-answers-btn');
 

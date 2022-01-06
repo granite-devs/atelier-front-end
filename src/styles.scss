@@ -714,7 +714,10 @@ body {
               text-decoration: underline;
             }
 
+
+
             button {
+              cursor: pointer;
               text-decoration: underline;
               border: none;
               background-color: inherit;
@@ -723,6 +726,7 @@ body {
 
             button:disabled {
               font-weight: 500;
+
             }
 
             span {

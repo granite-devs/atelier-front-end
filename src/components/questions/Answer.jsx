@@ -26,7 +26,14 @@ const Answer = ({ answer, voteHelpfulAnswer }) => {
           </button>
         </span>
         <span> | </span>
-        <a> Report </a>
+        <button
+        id={`report-${answer.answer_id}`}
+        className='report-btn'
+        onClick={() => {
+          const button = document.querySelector(`#report-${answer.answer_id}`);
+          button.disabled = true;
+          button.innerHTML = 'Reported';
+        }}> Report </button>
       </div>
       <div className="photo-container">
         {
