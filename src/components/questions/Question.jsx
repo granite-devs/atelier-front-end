@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import AnswersList from './AnswersList.jsx';
 import AddAnswerModal from './modals/AddAnswerModal.jsx';
-import { getAnswers, postAnswer } from "../../utils/questionsUtils.js";
+import { getAnswers, postAnswer, putHelpfulAnswer } from "../../utils/questionsUtils.js";
 
 
 class Question extends React.Component {
@@ -21,7 +21,7 @@ class Question extends React.Component {
   addAnswer(answer) {
 
     answer.photos = [];
-    const { question_id } = this.props.question
+    const { question_id } = this.props.question;
     postAnswer(answer, question_id)
       .then((response) => {
         if (response.status === 201) {
@@ -51,24 +51,35 @@ class Question extends React.Component {
 
   }
 
-  voteHelpfulAnswer(targetId) {
+  voteHelpfulAnswer(answerId) {
 
-    const button = document.querySelector(`#vote-helpful-answer-${targetId}`)
+    const button = document.querySelector(`#vote-helpful-answer-${answerId}`)
+    const { answersList } = this.state;
+    const { question_id } = this.props.question;
+
+
 
     if (!button.disable) {
-      const { answersList } = this.state;
-      const alteredAnswerList = answersList.map((answer) => {
-        if (answer.answer_id === targetId) {
-          answer.helpfulness += 1
-        }
-        return answer
-      })
+      putHelpfulAnswer(answerId)
+        .then(() => {
+          const alteredAnswers = answersList.map((answer) => {
+            if (answer.answer_id === answerId) {
+              answer.helpfulness += 1
+            }
+            return answer
+          })
+          this.setState({answersList : alteredAnswers})
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+
+      window.localStorage.setItem(`${answerId}`, true)
       button.disabled = true;
-      this.setState({ answersList: alteredAnswerList })
     }
   }
 
-  loadMoreAnswers() {
+  loadMoreAnswers(questionId) {
 
     const button = document.querySelector('#see-more-answers-btn');
 
@@ -129,11 +140,11 @@ class Question extends React.Component {
           <div className='help-container'>
             <span> Helpful? </span>
             {
-              (window.localStorage[question_id]) ?
+              (window.localStorage.getItem(`${question_id}`)) ?
                 (<button
                   id={`vote-helpful-question-${question.question_id}`}
                   disabled
-                  > Yes {question.question_helpfulness}
+                > Yes {question.question_helpfulness}
                 </button>)
                 :
                 (<button

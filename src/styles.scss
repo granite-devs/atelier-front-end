@@ -820,7 +820,10 @@ b {
               text-decoration: underline;
             }
 
+
+
             button {
+              cursor: pointer;
               text-decoration: underline;
               border: none;
               background-color: inherit;
@@ -829,6 +832,7 @@ b {
 
             button:disabled {
               font-weight: 500;
+
             }
 
             span {
