@@ -13,9 +13,10 @@ class Reviews extends React.Component {
       reviewsList: [],
       filteredReviewsList: [],
       filter: () => true, // Default "filter": displays all reviews.
-      reviewsPerLoad: 100,
+      reviewsPerLoad: 2,
       reviewCount: null,
       reviewsLoaded: 0,
+      reviewsDisplayed: 2,
       moreToLoad: true,
       isLoading: false,
       sortOrder: 'relevant',
@@ -35,7 +36,7 @@ class Reviews extends React.Component {
         reviewCount += parseInt(reviewsMetaData.ratings[rating]);
       }
       this.setState({ reviewCount });
-      this.fetchReviews(1, reviewsPerLoad);
+      this.fetchReviews(1, reviewCount);
     });
   }
 
@@ -75,9 +76,10 @@ class Reviews extends React.Component {
   }
 
   loadMoreReviews(callback = null) {
-    const { reviewsLoaded, reviewsList, reviewsPerLoad } = this.state;
-    const page = (reviewsLoaded + reviewsPerLoad) / reviewsPerLoad;
-    this.fetchReviews(page, reviewsPerLoad, reviewsList, callback);
+    const { reviewsDisplayed, reviewsPerLoad } = this.state;
+    this.setState({ reviewsDisplayed: reviewsDisplayed + reviewsPerLoad }, () => {
+      this.setAndFilterReviews(this.state.reviewsList, [], callback);
+    });
   }
 
   // setFilter ( function `filter` )
@@ -89,6 +91,7 @@ class Reviews extends React.Component {
   }
 
   setAndFilterReviews(oldReviews, newReviews, callback = null) {
+    const { reviewsDisplayed, reviewCount } = this.state;
     const reviewIds = {}; // keep track of IDs already in the list to eliminte duplicates
     const reviewsList = [];
     for (let review of oldReviews) {
@@ -101,15 +104,16 @@ class Reviews extends React.Component {
       }
     }
     const reviewsLoaded = reviewsList.length;
-    const moreToLoad = !(newReviews.length < this.state.reviewsPerLoad);
+    const moreToLoad = reviewsDisplayed < reviewCount;
+    const sortedList = reviewsList.slice();
+    sortedList.sort(this.getSortFunction());
     const filter = this.state.filter;
     const filteredReviewsList = [];
-    for (let review of reviewsList) {
-      if (filter(review)) {
+    for (let review of sortedList) {
+      if (filteredReviewsList.length < reviewsDisplayed && filter(review)) {
         filteredReviewsList.push(review);
       }
     }
-    filteredReviewsList.sort(this.getSortFunction());
     this.setState(
       { reviewsList, filteredReviewsList, reviewsLoaded, moreToLoad, isLoading: false },
       callback
