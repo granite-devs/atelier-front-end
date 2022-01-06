@@ -31,7 +31,7 @@ class QuestionsAnswers extends React.Component {
               const mappedQuestions = this.setTwoQuestionsVisable(response);
               this.setState({
                 questionsList: mappedQuestions,
-                view: "main",
+                view: 'main',
               });
             })
             .catch((err) => {
@@ -39,7 +39,7 @@ class QuestionsAnswers extends React.Component {
             });
         }
       })
-      .catch((error) => {
+      .catch((err) => {
         console.error("Error posting one question!", err);
       });
   }
@@ -54,7 +54,6 @@ class QuestionsAnswers extends React.Component {
   filterQuestionsList(term) {
     if (term.length >= 3) {
       const search = term.toLowerCase();
-
       const filteredList = this.state.questionsList.map((question) => {
         const questionBody = question.question_body.toLowerCase();
         if (questionBody.includes(search)) {
@@ -94,12 +93,12 @@ class QuestionsAnswers extends React.Component {
           })
           this.setState({
             questionsList: updatedQuestions,
-            view: this.state.view,
+            view: view
 
           })
         })
-        .catch((error) => {
-          console.error(error)
+        .catch((err) => {
+          console.error(err)
         })
     }
   }

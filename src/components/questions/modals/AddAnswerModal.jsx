@@ -12,7 +12,7 @@ const AddAnswerModal = (props) => {
           <button
             className='btn'
             onClick={() => {
-              props.toggleAddAnswerModal('main')
+              props.toggleAnswerView('main')
             }}> Close
           </button>
           <h1>Submit Your Answer</h1>

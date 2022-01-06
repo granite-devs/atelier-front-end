@@ -4,6 +4,13 @@ import API_KEY from '../../../config.js'
 
 const AddQuestionModal = (props) => {
 
+  const { productId } = props;
+  const { localStorage } = window;
+  const product = JSON.parse(localStorage.getItem(`${productId}`))
+  const { name } = product.details;
+
+  console.log(product)
+
   return (
     <div className='modal'>
       <div className='question-form'>
@@ -14,7 +21,7 @@ const AddQuestionModal = (props) => {
               props.toggleQuestionsModal('main')
             }}> Close
           </button>
-          <h1>Ask your question about {props.productId}</h1>
+          <h1> Ask your question about our { name } </h1>
         </div>
         <div className='field-item'>
           <label name='question-body'>Ask your question!</label>
