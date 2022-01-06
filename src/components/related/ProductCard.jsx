@@ -190,7 +190,6 @@ class ProductCard extends React.Component {
     } else {
       return ( <div></div> );
     }
-
   }
 }
 
