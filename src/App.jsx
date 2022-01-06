@@ -55,7 +55,7 @@ class App extends React.Component {
       .catch((error) => {
         console.log(error);
       });
-    }
+  }
 
   updateAppProductId(newProductId, productObject) {
     const productIsCached = window.localStorage.getItem(newProductId);
@@ -109,21 +109,21 @@ class App extends React.Component {
     axios.all([productRequest, stylesRequest, reviewsRequest])
       .then(axios.spread((...responses) => {
         const productResponse = responses[0];
-          const stylesResponse = responses[1];
-          const reviewsResponse = responses[2];
+        const stylesResponse = responses[1];
+        const reviewsResponse = responses[2];
 
-          let productObjectToCache = {
-            details: productResponse.data,
-            styles: stylesResponse.data,
-            reviews: reviewsResponse.data
-          }
+        let productObjectToCache = {
+          details: productResponse.data,
+          styles: stylesResponse.data,
+          reviews: reviewsResponse.data
+        };
 
-          window.localStorage.setItem(productIdToGet, JSON.stringify(productObjectToCache))
-          this.setState({ renderer: Math.random() });
-        }))
-        .catch(errors => {
-          console.log(errors);
-        })
+        window.localStorage.setItem(productIdToGet, JSON.stringify(productObjectToCache))
+        this.setState({ renderer: Math.random() });
+      }))
+      .catch(errors => {
+        console.log(errors);
+      });
   }
 
   addItemToOutfit(productToAdd) {
@@ -146,35 +146,31 @@ class App extends React.Component {
   render() {
     const { productId, outfitItems, initialRequestMade, renderer } = this.state;
 
-    if (initialRequestMade) {
-      return (
-        <div>
-          <div id='navBar'>
-            <div id='logo'>LOGO</div>
+    return (
+      <>
+        {window.localStorage.length > 0 && (
+          <div>
+            <div id='navBar'>
+              <div id='logo'>LOGO</div>
+            </div>
+            <Overview key={`${productId}-1`} productId={productId} />
+            <Related
+              key={`${productId}-2`}
+              productId={productId}
+              checkCache={this.checkCache}
+              updateAppProductId={this.updateAppProductId}
+              addItemToOutfit={this.addItemToOutfit}
+              removeItemFromOutfit={this.removeItemFromOutfit}
+              outfitItems={outfitItems}
+              fetchProductDetails={this.fetchProductDetails}
+              renderer={renderer}
+            />
+            <QuestionsAnswers key={`${productId}-3`} productId={productId} />
+            <Reviews key={`${productId}-4`} productId={productId} />
           </div>
-          <Overview key={`${productId}-1`} productId={productId} />
-          <Related
-            key={`${productId}-2`}
-            productId={productId}
-            checkCache={this.checkCache}
-            updateAppProductId={this.updateAppProductId}
-            addItemToOutfit={this.addItemToOutfit}
-            removeItemFromOutfit={this.removeItemFromOutfit}
-            outfitItems={outfitItems}
-            fetchProductDetails={this.fetchProductDetails}
-            renderer={renderer}
-          />
-          <QuestionsAnswers key={`${productId}-3`} productId={productId} />
-          <Reviews key={`${productId}-4`} productId={productId} />
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <Overview key={`${productId}-1`} productId={productId} />
-        </div>
-      );
-    }
+        )}
+      </>
+    );
   }
 }
 
