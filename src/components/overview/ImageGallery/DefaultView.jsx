@@ -27,11 +27,19 @@ const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handl
       <div className='defaultView'>
         {displayStyleImages}
         <div className='mainImage' id='mainImage'>
-          <img onClick={handleLeftArrow} className='btnFloating' id='left' src ='https://img.icons8.com/ios-filled/50/000000/long-arrow-left.png'></img>
+          <img onClick={handleLeftArrow}
+            className='btnFloating'
+            id='left'
+            src ='https://i.ibb.co/r0GN44X/image.png'>
+          </img>
           <div onClick={handleToExpand} id='wrap'>
             {displayMainImage}
           </div>
-          <img onClick={handleRightArrow} className='btnFloating' id='right' src ='https://img.icons8.com/ios-filled/50/000000/long-arrow-right.png'></img>
+          <img onClick={handleRightArrow}
+            className='btnFloating'
+            id='right'
+            src ='https://i.ibb.co/k3GTgnr/arrow-icon-1177.png'>
+          </img>
         </div>
       </div>
     </>
