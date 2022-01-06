@@ -118,7 +118,7 @@ class App extends React.Component {
           reviews: reviewsResponse.data
         };
 
-        window.localStorage.setItem(productIdToGet, JSON.stringify(productObjectToCache))
+        window.localStorage.setItem(productIdToGet, JSON.stringify(productObjectToCache));
         this.setState({ renderer: Math.random() });
       }))
       .catch(errors => {
