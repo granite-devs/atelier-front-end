@@ -3,7 +3,7 @@ import axios from "axios";
 import SearchBar from "./SearchBar.jsx";
 import QuestionsList from "./QuestionsList.jsx";
 import AddQuestionModal from "./modals/AddQuestionModal.jsx";
-import { getQuestions, postQuestion } from "../../utils/questionsUtils.js";
+import { getQuestions, postQuestion, putHelpfulQuestion } from "../../utils/questionsUtils.js";
 
 class QuestionsAnswers extends React.Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class QuestionsAnswers extends React.Component {
   toggleQuestionsModal(viewChange) {
     this.setState({
       questionsList: this.state.questionsList,
-      view: viewChange,
+      view: viewChange
     });
   }
 
@@ -74,19 +74,28 @@ class QuestionsAnswers extends React.Component {
   }
 
   voteHelpfulQuestion(questionToUpdate) {
-    const newState = this.state.questionsList;
-    const button = document.querySelector(
-      `#vote-helpful-question-${questionToUpdate.question_id}`
-    );
 
-    if (!button.disable) {
-      newState.forEach((question) => {
-        if (questionToUpdate.question_id === question.question_id) {
-          questionToUpdate.question_helpfulness += 1;
-        }
-      });
-      this.setState({ questionsList: newState });
-      button.disabled = true;
+    const { questionsList, view } = this.state;
+    const { productId } = this.props;
+    const targetQuestionId = questionToUpdate.question_id;
+    const button = document.querySelector(`#vote-helpful-question-${targetQuestionId}`);
+
+    if (!window.localStorage[targetQuestionId]) {
+      putHelpfulQuestion(targetQuestionId)
+      .then(()=> {
+        button.disabled = true;
+        window.localStorage[targetQuestionId] = true;
+        const updatedQuestions = questionsList.map((question) => {
+          if (targetQuestionId == question.question_id) {
+            question.question_helpfulness += 1
+          }
+          return question;
+        })
+        this.setState({ questionsList: updatedQuestions })
+      })
+      .catch((error) => {
+        console.error(error)
+      })
     }
   }
 
@@ -136,29 +145,41 @@ class QuestionsAnswers extends React.Component {
     }
   }
 
+  ComponentDidUpdate() {
+
+    const {questionsList, view} = this.state;
+    this.setState({
+      questionsList,
+      view
+    })
+  }
+
   render() {
+
+    const { questionsList, view } = this.state;
     const QuestionsAnswersComponent = (
       <div className="question-answers-container">
         <SearchBar filterQuestionsList={this.filterQuestionsList} />
         <QuestionsList
-          questions={this.state.questionsList}
+          questions={questionsList}
           handleYesQuestionClick={this.voteHelpfulQuestion}
           changeView={this.changeView}
         />
         <div className="button-container">
-          {this.state.questionsList.length > 2 && (
-            <button
-              id="load-question-button"
-              type="button"
-              className="big-btn"
-              onClick={(e) => {
-                this.loadMoreQuestions();
-              }}
-            >
-              {" "}
-              MORE QUESTIONS
-            </button>
-          )}
+          {
+            questionsList.length > 2 && (
+              <button
+                id="load-question-button"
+                type="button"
+                className="big-btn"
+                onClick={(e) => {
+                  this.loadMoreQuestions();
+                }}
+              >
+                MORE QUESTIONS
+              </button>
+            )
+          }
           <button
             id="add-question-button"
             className="big-btn"
@@ -167,14 +188,13 @@ class QuestionsAnswers extends React.Component {
               this.toggleQuestionsModal("AddQuestionModal");
             }}
           >
-            {" "}
             ADD QUESTION
           </button>
         </div>
       </div>
     );
 
-    switch (this.state.view) {
+    switch (view) {
       case "AddQuestionModal":
         return (
           <>

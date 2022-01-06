@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import AnswerList from './AnswerList.jsx';
+import AnswersList from './AnswersList.jsx';
 import AddAnswerModal from './modals/AddAnswerModal.jsx';
 import { getAnswers, postAnswer } from "../../utils/questionsUtils.js";
 
@@ -9,7 +9,7 @@ class Question extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      answersList: []
+      answersList: [],
     }
     this.setTwoAnswersVisible = this.setTwoAnswersVisible.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
@@ -23,21 +23,21 @@ class Question extends React.Component {
     answer.photos = [];
     const { question_id } = this.props.question
     postAnswer(answer, question_id)
-    .then((response) => {
-      if (response.status === 201) {
-        getAnswers(question_id)
-        .then((response) => {
-          const answersList = this.setTwoAnswersVisible(response)
-          this.setState({answersList, questionView: 'main'})
-        })
-        .catch((err) => {
-          console.error(err)
-        })
-      }
-    })
-    .catch((err) => {
-      console.error(err)
-    })
+      .then((response) => {
+        if (response.status === 201) {
+          getAnswers(question_id)
+            .then((response) => {
+              const answersList = this.setTwoAnswersVisible(response)
+              this.setState({ answersList, questionView: 'main' })
+            })
+            .catch((err) => {
+              console.error(err)
+            })
+        }
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   }
 
   toggleAddAnswerModal(viewChange) {
@@ -54,22 +54,25 @@ class Question extends React.Component {
   voteHelpfulAnswer(targetId) {
 
     const button = document.querySelector(`#vote-helpful-answer-${targetId}`)
+
     if (!button.disable) {
       const { answersList } = this.state;
-      const alteredAnswerList = answersList.forEach((answer) => {
+      const alteredAnswerList = answersList.map((answer) => {
         if (answer.answer_id === targetId) {
           answer.helpfulness += 1
         }
+        return answer
       })
       button.disabled = true;
-      this.setState({ answerList: alteredAnswerList })
+      this.setState({ answersList: alteredAnswerList })
     }
   }
 
   loadMoreAnswers() {
 
     const button = document.querySelector('#see-more-answers-btn');
-    const answersList = this.state.answersList
+
+    const { answersList } = this.state
 
     if (button.innerHTML.includes('LOAD MORE')) {
       const allAnswersVisible = answersList.map((answer) => {
@@ -77,11 +80,11 @@ class Question extends React.Component {
         return answer;
       })
       button.innerHTML = 'SEE LESS ANSWERS'
-      this.setState({ answerList: allAnswersVisible })
+      this.setState({ answersList: allAnswersVisible })
     } else {
       const twoVisibleAnwers = this.setTwoAnswersVisible(answersList)
       button.innerHTML = 'LOAD MORE ANSWERS'
-      this.setState({ answerList: twoVisibleAnwers })
+      this.setState({ answersList: twoVisibleAnwers })
     }
   }
 
@@ -103,19 +106,21 @@ class Question extends React.Component {
     const { question_id } = this.props.question;
 
     getAnswers(question_id)
-    .then((response) => {
-      const answersList = this.setTwoAnswersVisible(response)
-
-      this.setState({answersList})
-    })
-    .catch((err) => {
-      console.error(err)
-    })
+      .then((response) => {
+        const answersList = this.setTwoAnswersVisible(response)
+        this.setState({
+          answersList: answersList
+        })
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   }
 
   render() {
 
-    const question = this.props.question;
+    const { question, handleYesQuestionClick } = this.props;
+    const { question_id } = question;
 
     const questionComponent = (
       <div className='question-container'>
@@ -123,12 +128,21 @@ class Question extends React.Component {
           <span className='heavy'> Q: {question.question_body}</span>
           <div className='help-container'>
             <span> Helpful? </span>
-            <button
-              id={`vote-helpful-question-${question.question_id}`}
-              onClick={() => {
-                this.props.handleYesQuestionClick(this.props.question)
-              }}> Yes {question.question_helpfulness}
-            </button>
+            {
+              (window.localStorage[question_id]) ?
+                (<button
+                  id={`vote-helpful-question-${question.question_id}`}
+                  disabled
+                  > Yes {question.question_helpfulness}
+                </button>)
+                :
+                (<button
+                  id={`vote-helpful-question-${question.question_id}`}
+                  onClick={() => {
+                    this.props.handleYesQuestionClick(this.props.question)
+                  }}> Yes {question.question_helpfulness}
+                </button>)
+            }
             <span>|</span>
             <a
               onClick={() => {
@@ -137,14 +151,13 @@ class Question extends React.Component {
           </div>
         </div>
         <div className='answer-list-container'>
-          <AnswerList
+          <AnswersList
             answers={this.state.answersList}
             loadMoreAnswers={this.loadMoreAnswers}
             voteHelpfulAnswer={this.voteHelpfulAnswer}
           />
-
         </div>
-      </div>
+      </div >
     )
 
     switch (this.state.questionView) {

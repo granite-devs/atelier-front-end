@@ -93,9 +93,31 @@ export function postAnswer(answer, questionId) {
   })
 }
 
+export function putHelpfulQuestion(question_id) {
+  return new Promise((resolve, reject) => {
+    const config = {
+      method: 'put',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/319493/helpful?question_id=${question_id}`,
+      headers: {
+        'Authorization': API_KEY,
+        'Content-Type': 'Application/json'
+      }
+    };
+
+    axios(config)
+      .then((response) => {
+        resolve(response.data.results);
+      })
+      .catch((error) => {
+        reject(error);
+      })
+  })
+}
+
 export default {
   getQuestions,
   postQuestion,
+  putHelpfulQuestion,
   getAnswers,
   postAnswer
 };
