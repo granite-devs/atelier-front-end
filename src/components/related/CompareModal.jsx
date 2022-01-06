@@ -1,5 +1,13 @@
-const CompareModal = ({relatedItemFeatures, relatedItemName,
-  displayModal, currentItemFeatures, actionBtnClick}) => {
+const CompareModal = ({
+  displayModal,
+  cardData,
+  currentProductData,
+  actionBtnClick
+}) => {
+
+  if (currentProductData && cardData) {
+    const relatedItemFeatures = cardData.details.features;
+
     return (
       <div className={displayModal ? 'compare modal-show' : 'compare modal-hide'}
         onClick={() => { actionBtnClick('relatedList') } }>
@@ -10,17 +18,17 @@ const CompareModal = ({relatedItemFeatures, relatedItemName,
         <table className='compare-table'>
           <thead>
             <tr>
-              <th>{currentItemFeatures.name}</th>
+              <th>{currentProductData.details.name}</th>
               <th></th>
-              <th>{relatedItemName}</th>
+              <th>{relatedItemFeatures[0].name}</th>
             </tr>
           </thead>
           <tbody>
-              {relatedItemFeatures.concat(currentItemFeatures.features)
+              {relatedItemFeatures.concat(currentProductData.details.features)
                 .map((feature, i) => {
                   return <tr key={i}>
                     <td>
-                      {feature.belongsTo === 'currentItem' ? '✔' : ''}
+                      {feature.belongsTo === 'currentProduct' ? '✔' : ''}
                     </td>
                     <td className='td-feature'>{feature.feature}
                       {feature.value ? ': ' + feature.value : ''}</td>
@@ -33,7 +41,9 @@ const CompareModal = ({relatedItemFeatures, relatedItemName,
         </table>
       </div>
     );
-
+  } else {
+    return <div></div>
+  }
 }
 
 export default CompareModal;

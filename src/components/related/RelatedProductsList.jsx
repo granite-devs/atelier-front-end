@@ -13,37 +13,48 @@ class RelatedProductsList extends React.Component {
     this.state = {
       relatedIds: [],
       initialRequestMade: false,
-      indexesToShow: [0],
+      indexesToShow: [0, 1, 2],
       showLeftArrow: false,
       showRightArrow: true
     }
   }
 
   componentDidMount() {
-    this.computeIndexesToShow();
+    const { relatedIds } = this.state.relatedIds;
+
+    //this.computeIndexesToShow();
     this.fetchRelatedIds(this.props.productId);
   }
 
   fetchRelatedIds(productIdToGet) {
     const { initialRequestMade } = this.state;
 
-    if (productIdToGet && !initialRequestMade) {
-      this.setState({initialRequestMade: true});
+      if (productIdToGet && !initialRequestMade) {
+        this.setState({initialRequestMade: true});
 
-      const relatedIdsRequestConfig = {
-        method: 'get',
-        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/related`,
-        headers: {Authorization: API_KEY}
-      };
+        const relatedIdsRequestConfig = {
+          method: 'get',
+          url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productIdToGet}/related`,
+          headers: {Authorization: API_KEY}
+        };
 
-      axios(relatedIdsRequestConfig)
-        .then((response) => {
-          this.setState({relatedIds: response.data});
-        })
-        .catch((error) => {
-          console.log('HTTP request to fetch related product IDs failed');
-        });
-    }
+        axios(relatedIdsRequestConfig)
+          .then((response) => {
+            const relatedIds = response.data;
+
+            this.setState({relatedIds: response.data});
+
+              relatedIds.forEach(relatedId => {
+                if (!window.localStorage.getItem(relatedId)) {
+                  this.props.fetchProductDetails(relatedId);
+                }
+              })
+
+          })
+          .catch((error) => {
+            console.log('HTTP request to fetch related product IDs failed');
+          });
+      }
   }
 
   computeIndexesToShow() {
@@ -105,12 +116,30 @@ class RelatedProductsList extends React.Component {
 
   render() {
     const { productId, productCardId, updateAppProductId,
-      currentList, removeItemFromOutfit } = this.props;
+      currentList, removeItemFromOutfit, checkCache } = this.props;
     const { showLeftArrow, indexesToShow, relatedIds } = this.state;
     let { showRightArrow } = this.state;
 
     if (relatedIds.length <= indexesToShow.length) {
       showRightArrow = false;
+    }
+
+    let productCard = null;
+
+    if (window.localStorage.length > 0) {
+      productCard = <div className='product-card-list'>
+            {this.state.relatedIds.map((relatedId, i) => {
+              return <ProductCard key={i}
+                hidden={!indexesToShow.includes(i)}
+                currentList={currentList}
+                productId={productId}
+                productCardId={relatedId}
+                updateAppProductId={updateAppProductId}
+                checkCache={checkCache}
+                cardData={JSON.parse(window.localStorage.getItem(relatedId))}
+                currentProductData={JSON.parse(window.localStorage.getItem(productId))} />
+            })}
+      </div>
     }
 
     return (
@@ -122,16 +151,7 @@ class RelatedProductsList extends React.Component {
               src='https://i.ibb.co/r0GN44X/image.png'
               onClick={() => { this.handleLeftArrowClick() }}></img>
           </div>
-          <div className='product-card-list'>
-            {this.state.relatedIds.map((relatedId, i) => {
-              return <ProductCard key={i}
-                hidden={!indexesToShow.includes(i)}
-                currentList={currentList}
-                productId={productId}
-                productCardId={relatedId}
-                updateAppProductId={updateAppProductId} />
-            })}
-          </div>
+          {productCard}
           <div className='related-arrow'>
             <img className={showRightArrow ? 'related-right-arrow' : 'related-right-arrow hide'}
               src='https://i.ibb.co/k3GTgnr/arrow-icon-1177.png'
