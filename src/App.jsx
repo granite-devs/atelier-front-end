@@ -7,6 +7,8 @@ import Related from './components/related/Related.jsx';
 
 import API_KEY from './config.js';
 
+// window.localStorage.clear(); //TODO: delete!!!
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -121,7 +123,7 @@ class App extends React.Component {
 
   addItemToOutfit(productToAdd) {
     const outfitItems = this.state.outfitItems;
-    console.log('addy item', productToAdd);
+
     if (!outfitItems.includes(productToAdd)) {
       this.setState({outfitItems: [...this.state.outfitItems, productToAdd]});
     }
