@@ -10,12 +10,18 @@ class ImageModal extends React.Component {
 
     return (
       <div className='modal'>
-        <div className='imageModal'>
+        <div className='image-modal'>
+          <img
+            onClick={() => {
+              window.location.replace(`${image.url}`)
+            }}
+            src={image.url}
+          />
           <button onClick={closeFn}>
             Close
           </button>
-          <img src={image.url}></img>
         </div>
+
       </div>
     );
   }
