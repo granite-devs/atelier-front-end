@@ -24,10 +24,6 @@ body {
   margin: 0;
 }
 
-.components {
-  padding: 8px;
-}
-
 .heavy {
   font-weight: 600;
 }
@@ -42,10 +38,17 @@ body {
   align-items: center;
   width: 100%;
   height: 70px;
-  background-color: rgba(189, 189, 189, 0.137);
+  background-color: rgb(202, 202, 202);
+  position: fixed;
+  z-index: 2;
   // border-bottom: 1px solid rgba(85, 85, 85, 0.26);
 }
 
+.components {
+  padding: 8px;
+  position: relative;
+  top: 70px;
+}
 
 /* Overview ---------------------(start) */
 
@@ -920,7 +923,7 @@ b {
 
   .reviewsList {
     min-height: 100px;
-    max-height: 85vh;
+    max-height: 80vh;
     overflow-y: auto;
   }
 }
