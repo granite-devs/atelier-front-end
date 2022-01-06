@@ -65,7 +65,7 @@ class QuestionsAnswers extends React.Component {
           return question;
         }
       });
-      this.setState({ questionsList: filteredList});
+      this.setState({ questionsList: filteredList });
     } else {
       const unfilteredList = this.setTwoQuestionsVisable(
         this.state.questionsList
@@ -159,8 +159,8 @@ class QuestionsAnswers extends React.Component {
         />
         <div className="button-container">
           {
-            (numberOfVisibleQuestions < 3) && (
-              <button
+            (numberOfVisibleQuestions < 3) ?
+              (<button
                 id="load-question-button"
                 type="button"
                 className="big-btn"
@@ -168,9 +168,20 @@ class QuestionsAnswers extends React.Component {
                   this.loadMoreQuestions();
                 }}
               >
-                MORE QUESTION
-              </button>
-            )
+                MORE QUESTIONS
+              </button>)
+              :
+              (<button
+                id="load-question-button"
+                type="button"
+                className="big-btn"
+                onClick={() => {
+                  const newState = this.setTwoQuestionsVisable(questionsList);
+                  this.setState({questionsList: newState})
+                }}
+              >
+                LESS QUESTIONS
+              </button>)
           }
           <button
             id="add-question-button"
