@@ -22,6 +22,7 @@ $related-listgradient: linear-gradient(90deg, rgba(230,230,230,1) 0%, rgba(255,2
 
 body {
   font-family: $primary-font;
+  margin: 0;
 }
 
 .heavy {
@@ -38,10 +39,17 @@ body {
   align-items: center;
   width: 100%;
   height: 70px;
-  background-color: rgba(189, 189, 189, 0.137);
-  border-bottom: 1px solid rgba(85, 85, 85, 0.26);
+  background-color: rgb(202, 202, 202);
+  position: fixed;
+  z-index: 2;
+  // border-bottom: 1px solid rgba(85, 85, 85, 0.26);
 }
 
+.components {
+  padding: 8px;
+  position: relative;
+  top: 70px;
+}
 
 /* Overview ---------------------(start) */
 
@@ -968,7 +976,7 @@ b {
 
   .reviewsList {
     min-height: 100px;
-    max-height: 450px;
+    max-height: 80vh;
     overflow-y: auto;
   }
 }
