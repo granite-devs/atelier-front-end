@@ -10,6 +10,7 @@ import Reviews from '../src/components/reviews/Reviews';
 import ReviewsList from '../src/components/reviews/ReviewsList';
 import ReviewTile from '../src/components/reviews/ReviewTile';
 import BreakdownBar from '../src/components/reviews/BreakdownBar';
+import ReviewsBreakdown from '../src/components/reviews/ReviewsBreakdown';
 
 describe('Reviews component', () => {
   test('`setFilter` method should filter reviews based on the supplied filter function', () => {
@@ -100,7 +101,7 @@ describe('ReviewTile component', () => {
     expect(component.find('.showMoreBtn')).toHaveLength(0);
   });
 
-  test('if the body is longer than 250 charcaters and the \'Show More\' button has not been pressed, the length of the displayed body should be 253 charcters (250 + "...")', () => {
+  test('if the body is longer than 250 charcaters and the \'Show More\' button has not been pressed, the length of the displayed body should be 253 charcters (250 + \'...\')', () => {
     const component = shallow( // mounts a `shallow` render of the component (does not render children)
       <ReviewTile review={{ // provide a sample review
         'review_id': 1094839,
@@ -138,7 +139,7 @@ describe('ReviewTile component', () => {
   });
 });
 
-describe('BreakdownBar component', () => {
+describe('ReviewsBreakdown component', () => {
   test('the ratio between green and gray on the bar should equal the ratio between the supplied rating count and the total rating count', () => {
     for (let i = 0; i < 101; i++) {
       const component = shallow( // mounts a `shallow` render of the component (does not render children)
@@ -151,5 +152,28 @@ describe('BreakdownBar component', () => {
       );
       expect(component.containsMatchingElement(<stop offset={`${(i / 100) * 100}%`}></stop>)).toBe(true);
     }
+  });
+});
+
+describe('BreakdownBar component', () => {
+  test('should attempt to filter reviews when the breakdown bars are clicked', () => {
+    const reviewsMetaData = {
+      'product_id': '39333',
+      'ratings': {'5': '43'},
+      'recommended': {'false': '16', 'true': '67'},
+      'characteristics': {
+        'Fit': {id: 131838, value: '3.7571428571428571'},
+        'Length': {id: 131839, value: '4.0166666666666667'},
+        'Comfort': {id: 131840, value: '3.9661016949152542'},
+        'Quality': {id: 131841, value: '3.9850746268656716'}
+      }
+    };
+
+    const setFilter = jest.fn();
+    const component = shallow(
+      <ReviewsBreakdown setFilter={setFilter} reviewsMetaData={reviewsMetaData}/>
+    ); // mounts a `shallow` render of the component (does not render children)
+    component.find('BreakdownBar').simulate('click');
+    expect(setFilter).toHaveBeenCalled();
   });
 });
