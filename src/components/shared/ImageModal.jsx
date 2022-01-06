@@ -13,7 +13,7 @@ class ImageModal extends React.Component {
         <div className='image-modal'>
           <img
             onClick={() => {
-              window.location.replace(`${image.url}`)
+              window.open(`${image.url}`)
             }}
             src={image.url}
           />

@@ -77,6 +77,7 @@ class ReviewsBreakdown extends React.Component {
       };
       return (
         <div className='reviewsBreakdown'>
+          <div className='reviewsStars'>
           <span className='avgRating'>{avgRating}</span>
           <StarRating rating={avgRating} />
           <br></br>
@@ -107,17 +108,20 @@ class ReviewsBreakdown extends React.Component {
               onClick={this.toggleRatingFilter}
             />
           ))}
-          {characteristicsNames.map((name, i) => (
-            <CharacteristicBar
-              key={i}
-              name={name}
-              value={characteristics[name].value}
-              meanings={characteristicsText[name]}
-            />
-          ))}
-          <span className='recommendations'>
-            {recommendPercentage}% of reviews recommend this product
-          </span>
+          </div>
+          <div className='characteristicsContainer'>
+            {characteristicsNames.map((name, i) => (
+              <CharacteristicBar
+                key={i}
+                name={name}
+                value={characteristics[name].value}
+                meanings={characteristicsText[name]}
+              />
+            ))}
+            <span className='recommendations'>
+              {recommendPercentage}% of reviews recommend this product
+            </span>
+          </div>
         </div>
       );
     } else {

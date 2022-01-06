@@ -146,22 +146,27 @@ class App extends React.Component {
         {window.localStorage.length > 0 && (
           <div>
             <div id='navBar'>
-              <div id='logo'>LOGO</div>
+              <img className='logo' src='./images/logo-small-white.png'></img>
             </div>
-            <div className='components'>
-              <Overview key={`${productId}-1`} productId={productId} />
-              <Related
-                key={`${productId}-2`}
-                productId={productId}
-                updateAppProductId={this.updateAppProductId}
-                addItemToOutfit={this.addItemToOutfit}
-                removeItemFromOutfit={this.removeItemFromOutfit}
-                outfitItems={outfitItems}
-                fetchProductDetails={this.fetchProductDetails}
-                renderer={renderer}
-              />
-              <QuestionsAnswers key={`${productId}-3`} productId={productId} />
-              <Reviews key={`${productId}-4`} productId={productId} />
+            <div id='componentWrapper'>
+              <div className='components'>
+                <Overview key={`${productId}-1`} productId={productId} />
+                <Related
+                  key={`${productId}-2`}
+                  productId={productId}
+                  updateAppProductId={this.updateAppProductId}
+                  addItemToOutfit={this.addItemToOutfit}
+                  removeItemFromOutfit={this.removeItemFromOutfit}
+                  outfitItems={outfitItems}
+                  fetchProductDetails={this.fetchProductDetails}
+                  renderer={renderer}
+                />
+                <QuestionsAnswers key={`${productId}-3`} productId={productId} />
+                <Reviews key={`${productId}-4`} productId={productId} />
+              <div id='footer'>
+                <div className='credits'>Granite Devs: ByungChan Lee | Andrew Carnero | Bryan Ramirez | Johannes Niemelä</div>
+              </div>
+              </div>
             </div>
           </div>
         )}

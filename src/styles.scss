@@ -15,8 +15,10 @@ $related-gradient: linear-gradient(rgb(245, 245, 245), rgb(224, 224, 224));
 $related-shadow: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.26));
 $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 $related-listbg: rgb(230,230,230);
-$related-listgradient: linear-gradient(90deg, rgba(230,230,230,1) 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 80%, rgba(230,230,230,1) 100%);
+$related-listgradient: linear-gradient(90deg, rgb(230, 230, 230) 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 80%, rgba(230,230,230,1) 100%);
 
+$header-blue: #2690ce;
+$accent-blue: rgb(27, 125, 182);
 
 //util
 
@@ -38,17 +40,84 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 70px;
-  background-color: rgb(202, 202, 202);
+  height: 8vh;
+  min-height: 50px;
+  background-color: $header-blue;
   position: fixed;
   z-index: 2;
-  // border-bottom: 1px solid rgba(85, 85, 85, 0.26);
+  filter: $related-shadow;
+}
+
+.logo {
+  height: 90%;
+}
+
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $header-blue;
+  width: 100%;
+  height: 2rem;
+}
+
+.credits {
+  font-size: .9rem;
+}
+
+#componentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .components {
-  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  top: 70px;
+  top: 50px;
+  background:$container-bg;
+  max-width: 60rem;
+}
+
+h3 {
+  text-transform: uppercase;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: $accent-blue;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #48b2f4;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+::-webkit-scrollbar-track {
+  background: #707070;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 /* Overview ---------------------(start) */
@@ -58,12 +127,13 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 45px;
-  background-color: black;
+  height: 1.5rem;
+  background-color: rgb(184, 184, 184);
+  margin-top: 4px;
 
   b {
     font-size: 12px;
-    color: white;
+    color: rgb(0, 0, 0);
   }
 }
 
@@ -79,23 +149,24 @@ body {
 #overview {
   display: flex;
   flex-direction: column;
-  width: 95%;
+  width: 100%;
   height: 95%;
 }
 
 #overviewTop {
   display: flex;
   flex-direction: row;
-  height: 440px;
-  width: 95%;
+  height: 60%;
+  width: 100%;
+  padding-top: 1rem;
 }
 
 #overviewBottom {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 95%;
-  height: 5%;
+  width: 100%;
+  height: 40%;
 }
 
 #slogan {
@@ -112,39 +183,33 @@ body {
 
 #productDesc {
   width: 60%;
-  margin-top: 1%;
-  margin-left: 1.5%;
-  border-right: 5px solid rgba(238, 236, 236, 0.459);
-  margin-bottom: 1%;
-}
-
-#checkMark {
-  width: 18px;
-  height: 18px;
+  padding: 1rem 2rem 1rem 2rem;
 }
 
 #productFeature {
   width: 40%;
-  margin-left: 2.5%;
-  margin-top: 4%;
-  margin-bottom: 2%;
   font-size: 16px;
 }
 
 .defaultView {
   display: flex;
   width: 60%;
-  height: 25rem;
-  background-color: rgba(253, 247, 247, 0.541);
-  padding-top: 1.6rem;
-  border-right: transparent;
-  border-right: 5px solid rgba(238, 236, 236, 0.459);
-  border-bottom: 5px solid rgba(238, 236, 236, 0.459);
+  height: auto;
+  min-height: 25rem;
+  background-color: white;
+  border-left: 1px solid $container-bg;
 }
 
 #styleTitle {
   font-size: 15px;
-  margin-top: 20px;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: row;
+}
+
+#styleTitle p {
+  margin: 1rem .3rem .5rem 0;
+  padding: 0;
 }
 
 .styleImages {
@@ -154,27 +219,37 @@ body {
   max-height: 100%;
   overflow-y: scroll;
   width: 20%;
+  background: $container-bg;
+}
+
+.styleImages::-webkit-scrollbar-track {
+  display: none;
 }
 
 .eachStyleImage {
   margin-bottom: 5px;
   border-radius: 12px;
-  width: 65px;
-  height: 60px;
+  width: 70%;
+  min-height: 50px;
+  max-height: 65px;
+  height: 40%;
   cursor: pointer;
+  transition-duration: .5s;
 }
 
 .eachStyleImage:hover {
-  height: 75px;
-  width: 75px;
+  height: 45%;
+  width: 75%;
   opacity: 0.35;
 }
 
 #mainImage {
   display: flex;
-  margin-left: 50px;
+  justify-content: center;
+  align-items: center;
   width: 80%;
   height: auto;
+  border: 1px solid $accent-blue;
 }
 
 #wrap {
@@ -189,14 +264,12 @@ body {
 #main {
   width: 300px;
   height: 320px;
-  margin-top: 25px;
   cursor: zoom-in;
 }
 
 .btnFloating {
   width: auto;
   height: auto;
-  margin-top: 175px;
   cursor: pointer;
 }
 
@@ -217,24 +290,22 @@ body {
 #productInformationSection {
   display: flex;
   flex-direction: column;
-  align-self: center;
   width: 40%;
+  min-width: 22rem;
   height: 26rem;
-  margin-left: 20px;
 }
 
 #productinfo {
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
-  height: 40%;
+  margin: 0 0 1rem 1rem;
   width: 80%;
 }
 
 #rating {
   display: flex;
   flex-direction: row;
-  width: 95%;
+  width: 100%;
   align-items: center;
 }
 
@@ -262,9 +333,9 @@ b {
 }
 
 #category {
-  margin-top: 1rem;
-  color: #f95402;
+  color: $accent-blue;
   margin-left: -2px;
+  text-transform: uppercase;
 
   b {
     font-size: 14px;
@@ -279,8 +350,9 @@ b {
 }
 
 #price {
-  margin-top: 25px;
   font-weight: 900;
+  font-size: 1.5em;
+  padding-top: 1rem;
 }
 
 #socialMedia {
@@ -296,15 +368,15 @@ b {
 #styleSelector {
   display: flex;
   flex-direction: column;
-  height: 45%;
   width: 100%;
-  margin-top: -20px;
+  margin-left: 1rem;
 }
 
 #styleSelection {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
+  min-width: 5rem;
   height: 90%;
 }
 
@@ -323,6 +395,7 @@ b {
   justify-content: center;
   width: 90%;
   height: 25%;
+  margin-left: 1rem;
 }
 
 #sizeAndQuantitySelector {
@@ -356,7 +429,7 @@ b {
   height: 40%;
   width: 50%;
   border-radius: 25px;
-  background-color: black;
+  background-color: $accent-blue;
   color: white;
   cursor: pointer;
 }
@@ -406,39 +479,95 @@ b {
   font-weight: bold;
 }
 
-@media (max-width: 950px) {
-  #rating {
-    display: none;
+@media (max-width: 850px) {
+
+  .components {
+    width: 85%;
   }
 
-}
+  #overviewTop {
+    flex-direction: column;
+    align-items: center;
+  }
 
-@media (max-width: 850px) {
-  #productinfo, #addToCart, #socialMedia, #productFeature {
-    display: none;
+  #defaultView {
+    width: 100%;
+    padding-bottom: 1rem;
+  }
+
+  #productInformationSection {
+    margin-top: 2rem;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  #productinfo {
+    width: 45%;
+    height: 10rem;
+    margin: 0;
+  }
+
+  #styleSelector {
+    width: 40%;
+    height: 10rem;
+    align-items: center;
+  }
+
+  #addToCart {
+    height: 10rem;
+    min-width: 10rem;
+    align-items: center;
   }
 
   #styleTop, #styleBottom {
+    width: 15.5rem;
+  }
+
+  .reviews-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem 1rem 2rem;
+  }
+
+  /*The following 3 need to be fixed.. they don't seem to be working */
+  .reviews-left {
+    width: auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .reviewsBreakdown {
+    flex-direction: row;
+  }
+
+  .reviews-right {
+    width: auto;
   }
 }
 
 /* Overview ---------------------(end) */
 
 /* Related ---------------------(start) */
-.related-module {
-  width: auto;
-}
-
-.related-module h3 {
+#related {
+  width: 100%;
   margin: 0;
-  margin-top: .5rem;
-  padding-top: .5rem;
-  font-weight: $heavy;
   background: $related-listbg;
   background: $related-listgradient;
-  border-top: 1px solid rgb(168, 168, 168);
+  border-top: 1px solid $accent-blue;
+  border-bottom: 1px solid $accent-blue;
+}
+
+#related h3 {
+  margin: .5rem 0 0 1rem;
+  padding-top: .5rem;
+  font-weight: $heavy;
+  padding-left: .25rem;
 }
 
 #related-list, #outfit-list {
@@ -447,9 +576,6 @@ b {
   flex-wrap: nowrap;
   align-items: center;
   width: 100%;
-  background: $related-listbg;
-  background: $related-listgradient;
-  border-bottom: 1px solid rgb(168, 168, 168);
 }
 
 .product-card-list {
@@ -457,7 +583,7 @@ b {
   flex-wrap: nowrap;
   flex-direction: row;
   align-items: center;
-  width: 90vw;
+  width: 100%;
   overflow: hidden;
   position: relative;
   z-index: 1;
@@ -642,40 +768,6 @@ b {
   overflow-y: scroll;
 }
 
-.compare-container::-webkit-scrollbar {
-  width: .5rem;
-  height: .5rem;
-}
-.compare-container::-webkit-scrollbar-button {
-  width: 0px;
-  height: 0px;
-}
-.compare-container::-webkit-scrollbar-thumb {
-  background: #e1e1e1;
-  border: 0px none #ffffff;
-  border-radius: 50px;
-}
-.compare-container::-webkit-scrollbar-thumb:hover {
-  background: #ffffff;
-}
-.compare-container::-webkit-scrollbar-thumb:active {
-  background: #000000;
-}
-.compare-container::-webkit-scrollbar-track {
-  background: #666666;
-  border: 0px none #ffffff;
-  border-radius: 50px;
-}
-.compare-container::-webkit-scrollbar-track:hover {
-  background: #666666;
-}
-.compare-container::-webkit-scrollbar-track:active {
-  background: #333333;
-}
-.compare-container::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
 .compare-table {
   text-align: center;
   margin-left: auto;
@@ -721,32 +813,47 @@ b {
 
 /* Questions ---------------------(start) */
 
-.question-answers-container {
-  padding: .25rem;
+#questions {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 90%;
+  align-items: center;
+  width: 100%;
   margin: auto;
+  border-bottom: 1px solid $accent-blue;
+
+  .questions-container {
+    width: 90%;
+  }
+
+  h3 {
+    align-self: flex-start;
+    padding-left: 1rem;
+  }
 
   #search-bar-container{
     display:flex;
     justify-content: center;
     flex-direction: column;
 
-    label {
-      font-family: $primary-font;
-      margin-top: .5rem;
-      margin-bottom: .5rem;
-    }
-
     #search-input{
       height: 2.5rem;
       width: 99%;
       font-size: 1rem;
-      margin:0;
+      margin: 0 0 1rem 0;
       font-family: 600;
+      border: 1px solid $accent-blue;
+
     }
+
+  }
+
+  #questions-list-component {
+    height: auto;
+    max-height: 28rem;
+    overflow-y: scroll;
+  }
+  #questions-list-component::-webkit-scrollbar-track {
+    display: none;
   }
 
   .question-container {
@@ -861,7 +968,7 @@ b {
             margin-left: 1rem;
             margin-right: 1rem;
             max-height: 4rem;
-            max-width: auto;
+            max-width: 4rem;
           }
 
         }
@@ -963,7 +1070,39 @@ b {
 
 
 /* Reviews ---------------------(start) */
+
+#reviews {
+  width: 100%;
+}
+
+.reviews-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 2rem 1rem 2rem;
+}
+
+.reviews-left {
+  width: 35%;
+}
+
+.reviews-right {
+  width: 65%;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
+
 .reviews {
+
+  h3 {
+    margin-left: 1rem;
+  }
+
   .moreReviewsBtn {
     width: 120px;
     height: 40px;
@@ -979,9 +1118,18 @@ b {
 }
 
 .reviewsHeader {
-  margin-left: 60px;
   font-weight: bold;
   font-size: 18px;
+  margin-top: .3rem;
+}
+
+.custom-select select {
+  width: 150px;
+  padding: .2rem;
+  margin-left: 1rem;
+  font-size: 16px;
+  border: 1px solid #CCC;
+  height: 2rem;
 }
 
 .reviewsListContainer {
@@ -990,7 +1138,19 @@ b {
     min-height: 100px;
     max-height: 80vh;
     overflow-y: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
+
+  ::-webkit-scrollbar-track {
+    display: none;
+  }
+}
+
+.reviewButtons {
+  display: flex;
+  justify-content: center;
+  align-items: space-around;
 }
 
 .reviewTile {
@@ -1047,8 +1207,9 @@ b {
 }
 
 .reviewsBreakdown {
-  float: left;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .avgRating {
     font-size: 40px;
