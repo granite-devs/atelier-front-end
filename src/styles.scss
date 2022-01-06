@@ -33,12 +33,28 @@ body {
 
 #navBar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 70px;
   background-color: rgba(189, 189, 189, 0.137);
   border-bottom: 1px solid rgba(85, 85, 85, 0.26);
+
+  #textBox {
+    margin-right: 5px;
+    border-radius: 40px;
+    cursor: pointer;
+  }
+
+  #navSearchButton {
+    border-radius: 40px;
+    cursor: pointer;
+  }
+
+  #search {
+    display: flex;
+    margin-right: 10px;
+  }
 }
 
 

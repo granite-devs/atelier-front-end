@@ -152,6 +152,10 @@ class App extends React.Component {
           <div>
             <div id='navBar'>
               <div id='logo'>LOGO</div>
+              <div id='search'>
+                <input id='textBox' type="text" placeholder="Search"/>
+                <i id='navSearchButton' class="fas fa-search"></i>
+              </div>
             </div>
             <Overview key={`${productId}-1`} productId={productId} />
             <Related
