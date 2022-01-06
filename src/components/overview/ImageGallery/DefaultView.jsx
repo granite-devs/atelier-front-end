@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handleRightArrow, handleLeftArrow}) => {
 
   let displayStyleImages, displayMainImage;
-  if (state.currentStyle) {
+  if (state.currentStyle.photos) {
     displayStyleImages =
       <div className='styleImages'>
         {state.currentStyle.photos.map((element, index) => { //render all style photos
@@ -12,11 +12,11 @@ const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handl
             key={index}
             className='eachStyleImage'
             onClick={updateMainImage}
-            src={element.url}/>;
+            src={element.thumbnail_url}/>;
         })}
       </div>;
     if (state.mainImage === '') {
-      displayMainImage = <img id ='main' src ={state.currentStyle.photos[0].url}/>;
+      displayMainImage = <img id ='main' src ={state.currentStyle.photos[0].thumbnail_url}/>;
     } else {
       displayMainImage = <img id ='main' src ={state.mainImage}/>;
     }

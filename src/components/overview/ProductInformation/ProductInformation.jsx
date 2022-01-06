@@ -13,27 +13,25 @@ const ProductInformation = ({state, updateState}) => {
 
   return (
     <>
-      {state !== undefined && (
-        <div id='productinfo'>
-          <div id='rating'>
-            <div id='star'>
-              <AverageRating state={state} updateState={updateState}/>
-            </div>
-          </div>
-          <div id='category'>
-            Category - [{state.selectedProductCategory}]
-          </div>
-          <div id='productName'>
-            {state.selectedProductName}
-          </div>
-          <div id='price'>
-            {(state.currentPrice && state.currentStyle.sale_price !== null) ?
-              <b>{state.currentPrice}</b> :
-              state.selectedProductDefaultPrice
-            }
+      <div id='productinfo'>
+        <div id='rating'>
+          <div id='star'>
+            <AverageRating state={state} updateState={updateState}/>
           </div>
         </div>
-      )}
+        <div id='productName'>
+          {state.selectedProductName}
+        </div>
+        <div id='price'>
+          {(state.currentPrice && state.currentStyle.sale_price !== null) ?
+            state.currentPrice :
+            state.selectedProductDefaultPrice
+          }
+        </div>
+        <div id='category'>
+          Category: <b>{state.selectedProductCategory}</b>
+        </div>
+      </div>
     </>
   );
 };

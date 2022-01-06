@@ -149,6 +149,9 @@ class App extends React.Component {
     if (initialRequestMade) {
       return (
         <div>
+          <div id='navBar'>
+            <div id='logo'>LOGO</div>
+          </div>
           <Overview key={`${productId}-1`} productId={productId} />
           <Related
             key={`${productId}-2`}
@@ -172,9 +175,7 @@ class App extends React.Component {
         </div>
       );
     }
-
   }
-
 }
 
 export default App;
