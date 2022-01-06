@@ -17,6 +17,7 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 $related-listbg: rgb(230,230,230);
 $related-listgradient: linear-gradient(90deg, rgba(230,230,230,1) 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 80%, rgba(230,230,230,1) 100%);
 
+$accent-blue: rgb(27, 125, 182);
 
 //util
 
@@ -42,13 +43,62 @@ body {
   background-color: rgb(202, 202, 202);
   position: fixed;
   z-index: 2;
-  // border-bottom: 1px solid rgba(85, 85, 85, 0.26);
+}
+
+#componentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .components {
-  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   top: 70px;
+  background:$container-bg;
+  max-width: 60rem;
+}
+
+h3 {
+  text-transform: uppercase;
+}
+
+/* Scrollbars */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: $accent-blue;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #48b2f4;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+::-webkit-scrollbar-track {
+  background: #707070;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 /* Overview ---------------------(start) */
@@ -79,23 +129,24 @@ body {
 #overview {
   display: flex;
   flex-direction: column;
-  width: 95%;
+  width: 100%;
   height: 95%;
 }
 
 #overviewTop {
   display: flex;
   flex-direction: row;
-  height: 440px;
-  width: 95%;
+  height: 60%;
+  width: 100%;
+  padding-top: 1rem;
 }
 
 #overviewBottom {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 95%;
-  height: 5%;
+  width: 100%;
+  height: 40%;
 }
 
 #slogan {
@@ -112,39 +163,33 @@ body {
 
 #productDesc {
   width: 60%;
-  margin-top: 1%;
-  margin-left: 1.5%;
-  border-right: 5px solid rgba(238, 236, 236, 0.459);
-  margin-bottom: 1%;
-}
-
-#checkMark {
-  width: 18px;
-  height: 18px;
+  padding: 1rem 2rem 1rem 2rem;
 }
 
 #productFeature {
   width: 40%;
-  margin-left: 2.5%;
-  margin-top: 4%;
-  margin-bottom: 2%;
   font-size: 16px;
 }
 
 .defaultView {
   display: flex;
   width: 60%;
-  height: 25rem;
-  background-color: rgba(253, 247, 247, 0.541);
-  padding-top: 1.6rem;
-  border-right: transparent;
-  border-right: 5px solid rgba(238, 236, 236, 0.459);
-  border-bottom: 5px solid rgba(238, 236, 236, 0.459);
+  height: auto;
+  min-height: 25rem;
+  background-color: white;
+  border-left: 1px solid $container-bg;
 }
 
 #styleTitle {
   font-size: 15px;
-  margin-top: 20px;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: row;
+}
+
+#styleTitle p {
+  margin: 1rem .3rem .5rem 0;
+  padding: 0;
 }
 
 .styleImages {
@@ -154,27 +199,37 @@ body {
   max-height: 100%;
   overflow-y: scroll;
   width: 20%;
+  background: $container-bg;
+}
+
+.styleImages::-webkit-scrollbar-track {
+  display: none;
 }
 
 .eachStyleImage {
   margin-bottom: 5px;
   border-radius: 12px;
-  width: 65px;
-  height: 60px;
+  width: 70%;
+  min-height: 50px;
+  max-height: 65px;
+  height: 40%;
   cursor: pointer;
+  transition-duration: .5s;
 }
 
 .eachStyleImage:hover {
-  height: 75px;
-  width: 75px;
+  height: 45%;
+  width: 75%;
   opacity: 0.35;
 }
 
 #mainImage {
   display: flex;
-  margin-left: 50px;
+  justify-content: center;
+  align-items: center;
   width: 80%;
   height: auto;
+  border: 1px solid $accent-blue;
 }
 
 #wrap {
@@ -189,14 +244,12 @@ body {
 #main {
   width: 300px;
   height: 320px;
-  margin-top: 25px;
   cursor: zoom-in;
 }
 
 .btnFloating {
   width: auto;
   height: auto;
-  margin-top: 175px;
   cursor: pointer;
 }
 
@@ -217,17 +270,15 @@ body {
 #productInformationSection {
   display: flex;
   flex-direction: column;
-  align-self: center;
   width: 40%;
+  min-width: 22rem;
   height: 26rem;
-  margin-left: 20px;
 }
 
 #productinfo {
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
-  height: 40%;
+  margin: 0 0 1rem 1rem;
   width: 80%;
 }
 
@@ -262,9 +313,9 @@ b {
 }
 
 #category {
-  margin-top: 1rem;
-  color: #f95402;
+  color: $accent-blue;
   margin-left: -2px;
+  text-transform: uppercase;
 
   b {
     font-size: 14px;
@@ -279,8 +330,9 @@ b {
 }
 
 #price {
-  margin-top: 25px;
   font-weight: 900;
+  font-size: 1.5em;
+  padding-top: 1rem;
 }
 
 #socialMedia {
@@ -296,15 +348,16 @@ b {
 #styleSelector {
   display: flex;
   flex-direction: column;
-  height: 45%;
   width: 100%;
-  margin-top: -20px;
+  margin-left: 1rem;
 }
 
 #styleSelection {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  background: red;
+  width: 90%;
+  min-width: 5rem;
   height: 90%;
 }
 
@@ -323,6 +376,7 @@ b {
   justify-content: center;
   width: 90%;
   height: 25%;
+  margin-left: 1rem;
 }
 
 #sizeAndQuantitySelector {
@@ -356,7 +410,7 @@ b {
   height: 40%;
   width: 50%;
   border-radius: 25px;
-  background-color: black;
+  background-color: $accent-blue;
   color: white;
   cursor: pointer;
 }
@@ -421,24 +475,27 @@ b {
   #styleTop, #styleBottom {
     display: flex;
     flex-direction: column;
+    width: auto;
   }
 }
 
 /* Overview ---------------------(end) */
 
 /* Related ---------------------(start) */
-.related-module {
-  width: auto;
+#related {
+  width: 100%;
+  margin: 0;
 }
 
-.related-module h3 {
+#related h3 {
   margin: 0;
   margin-top: .5rem;
   padding-top: .5rem;
   font-weight: $heavy;
   background: $related-listbg;
   background: $related-listgradient;
-  border-top: 1px solid rgb(168, 168, 168);
+  border-top: 1px solid $accent-blue;
+  padding-left: .25rem;
 }
 
 #related-list, #outfit-list {
@@ -449,7 +506,7 @@ b {
   width: 100%;
   background: $related-listbg;
   background: $related-listgradient;
-  border-bottom: 1px solid rgb(168, 168, 168);
+  border-bottom: 1px solid $accent-blue;
 }
 
 .product-card-list {
@@ -457,7 +514,7 @@ b {
   flex-wrap: nowrap;
   flex-direction: row;
   align-items: center;
-  width: 90vw;
+  width: 100%;
   overflow: hidden;
   position: relative;
   z-index: 1;
@@ -642,40 +699,6 @@ b {
   overflow-y: scroll;
 }
 
-.compare-container::-webkit-scrollbar {
-  width: .5rem;
-  height: .5rem;
-}
-.compare-container::-webkit-scrollbar-button {
-  width: 0px;
-  height: 0px;
-}
-.compare-container::-webkit-scrollbar-thumb {
-  background: #e1e1e1;
-  border: 0px none #ffffff;
-  border-radius: 50px;
-}
-.compare-container::-webkit-scrollbar-thumb:hover {
-  background: #ffffff;
-}
-.compare-container::-webkit-scrollbar-thumb:active {
-  background: #000000;
-}
-.compare-container::-webkit-scrollbar-track {
-  background: #666666;
-  border: 0px none #ffffff;
-  border-radius: 50px;
-}
-.compare-container::-webkit-scrollbar-track:hover {
-  background: #666666;
-}
-.compare-container::-webkit-scrollbar-track:active {
-  background: #333333;
-}
-.compare-container::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
 .compare-table {
   text-align: center;
   margin-left: auto;
@@ -721,32 +744,46 @@ b {
 
 /* Questions ---------------------(start) */
 
-.question-answers-container {
-  padding: .25rem;
+#questions {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 90%;
+  align-items: center;
+  width: 100%;
   margin: auto;
+
+  .questions-container {
+    width: 90%;
+  }
+
+  h3 {
+    align-self: flex-start;
+    padding-left: 1rem;
+  }
 
   #search-bar-container{
     display:flex;
     justify-content: center;
     flex-direction: column;
 
-    label {
-      font-family: $primary-font;
-      margin-top: .5rem;
-      margin-bottom: .5rem;
-    }
-
     #search-input{
       height: 2.5rem;
       width: 99%;
       font-size: 1rem;
-      margin:0;
+      margin: 0 0 1rem 0;
       font-family: 600;
+      border: 1px solid $accent-blue;
+
     }
+
+  }
+
+  #questions-list-component {
+    height: auto;
+    max-height: 28rem;
+    overflow-y: scroll;
+  }
+  #questions-list-component::-webkit-scrollbar-track {
+    display: none;
   }
 
   .question-container {
