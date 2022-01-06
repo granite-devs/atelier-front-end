@@ -5,7 +5,7 @@ export function getQuestions(productId) {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions?product_id=${productId}&count=100`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions?product_id=${productId}&count=50`,
       headers: {
         Authorization: API_KEY,
       },
@@ -44,6 +44,28 @@ export function postQuestion(question, productId) {
         reject(error);
       })
   });
+}
+
+
+export function putHelpfulQuestion(question_id) {
+  return new Promise((resolve, reject) => {
+    const config = {
+      method: 'put',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/${question_id}/helpful`,
+      headers: {
+        'Authorization': API_KEY,
+        'Content-Type': 'Application/json'
+      }
+    };
+
+    axios(config)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      })
+  })
 }
 
 export function getAnswers(questionId) {
@@ -93,11 +115,11 @@ export function postAnswer(answer, questionId) {
   })
 }
 
-export function putHelpfulQuestion(question_id) {
+export function putHelpfulAnswer(answerId) {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'put',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/319493/helpful?question_id=${question_id}`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/answers/${answerId}/helpful`,
       headers: {
         'Authorization': API_KEY,
         'Content-Type': 'Application/json'
@@ -106,7 +128,7 @@ export function putHelpfulQuestion(question_id) {
 
     axios(config)
       .then((response) => {
-        resolve(response.data.results);
+        resolve(response);
       })
       .catch((error) => {
         reject(error);
@@ -114,10 +136,14 @@ export function putHelpfulQuestion(question_id) {
   })
 }
 
+
+
+
 export default {
   getQuestions,
   postQuestion,
   putHelpfulQuestion,
   getAnswers,
-  postAnswer
+  postAnswer,
+  putHelpfulAnswer
 };

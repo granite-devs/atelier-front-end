@@ -85,7 +85,7 @@ class QuestionsAnswers extends React.Component {
       putHelpfulQuestion(targetQuestionId)
         .then(() => {
           button.disabled = true;
-          window.localStorage[targetQuestionId] = true;
+          window.localStorage.setItem(`${targetQuestionId}`, true)
           const updatedQuestions = questionsList.map((question) => {
             if (targetQuestionId == question.question_id) {
               question.question_helpfulness += 1
