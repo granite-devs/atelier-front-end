@@ -1,18 +1,17 @@
-import React from "react";
-import Answer from "./Answer.jsx";
+import React from 'react';
+import Answer from './Answer.jsx';
 
 const AnswersList = (props) => {
 
   const { answers,
     loadMoreAnswers,
     voteHelpfulAnswer,
-    questionId
+    questionId,
+    toggleAnswerView
   } = props;
   const arrayOfVisibleAnswers = answers.filter((answer) =>
     answer.isVisible ? answer : null
   );
-
-
 
   return (
     <div className="answer-item">
@@ -27,6 +26,7 @@ const AnswersList = (props) => {
                 key={answer.answer_id}
                 answer={answer}
                 voteHelpfulAnswer={voteHelpfulAnswer}
+                toggleAnswerView={toggleAnswerView}
               />
             );
           })}

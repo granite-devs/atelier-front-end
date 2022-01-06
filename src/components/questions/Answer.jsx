@@ -2,7 +2,7 @@ import React from 'react';
 import timeAgo from "../../utils/timeAgo.js";
 
 
-const Answer = ({ answer, voteHelpfulAnswer }) => {
+const Answer = ({ answer, voteHelpfulAnswer, toggleAnswerView }) => {
 
   const {
     body,
@@ -45,13 +45,21 @@ const Answer = ({ answer, voteHelpfulAnswer }) => {
               )
 
           }
-          </span>
+        </span>
       </div>
       <div className="photo-container">
         {
           (photos) && (
             photos.map((photo) => {
-              return <img key={photo.id} src={photo.url} />;
+              return (
+                <img
+                  key={photo.id}
+                  src={photo.url}
+                  onClick={() => {
+                    toggleAnswerView('viewPhotoModal', photo)
+                  }}
+                />
+              )
             })
           )
         }
