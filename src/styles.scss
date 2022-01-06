@@ -17,6 +17,7 @@ $related-shadow-white: drop-shadow(0 0 0.2rem rgba(247, 247, 247, 0.829));
 $related-listbg: rgb(230,230,230);
 $related-listgradient: linear-gradient(90deg, rgb(230, 230, 230) 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 80%, rgba(230,230,230,1) 100%);
 
+$header-blue: #2690ce;
 $accent-blue: rgb(27, 125, 182);
 
 //util
@@ -39,10 +40,29 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 70px;
-  background-color: rgb(202, 202, 202);
+  height: 8vh;
+  min-height: 50px;
+  background-color: $header-blue;
   position: fixed;
   z-index: 2;
+  filter: $related-shadow;
+}
+
+.logo {
+  height: 90%;
+}
+
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $header-blue;
+  width: 100%;
+  height: 2rem;
+}
+
+.credits {
+  font-size: .9rem;
 }
 
 #componentWrapper {
@@ -56,7 +76,7 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
-  top: 70px;
+  top: 50px;
   background:$container-bg;
   max-width: 60rem;
 }
@@ -66,7 +86,6 @@ h3 {
 }
 
 /* Scrollbars */
-
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -108,12 +127,13 @@ h3 {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 45px;
-  background-color: black;
+  height: 1.5rem;
+  background-color: rgb(184, 184, 184);
+  margin-top: 4px;
 
   b {
     font-size: 12px;
-    color: white;
+    color: rgb(0, 0, 0);
   }
 }
 
@@ -505,6 +525,29 @@ b {
 
   #styleTop, #styleBottom {
     width: 15.5rem;
+  }
+
+  .reviews-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem 1rem 2rem;
+  }
+
+  /*The following 3 need to be fixed.. they don't seem to be working */
+  .reviews-left {
+    width: auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .reviewsBreakdown {
+    flex-direction: row;
+  }
+
+  .reviews-right {
+    width: auto;
   }
 }
 
@@ -1032,6 +1075,28 @@ b {
   width: 100%;
 }
 
+.reviews-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 2rem 1rem 2rem;
+}
+
+.reviews-left {
+  width: 35%;
+}
+
+.reviews-right {
+  width: 65%;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
+
 .reviews {
 
   h3 {
@@ -1053,9 +1118,18 @@ b {
 }
 
 .reviewsHeader {
-  margin-left: 60px;
   font-weight: bold;
   font-size: 18px;
+  margin-top: .3rem;
+}
+
+.custom-select select {
+  width: 150px;
+  padding: .2rem;
+  margin-left: 1rem;
+  font-size: 16px;
+  border: 1px solid #CCC;
+  height: 2rem;
 }
 
 .reviewsListContainer {
@@ -1064,7 +1138,19 @@ b {
     min-height: 100px;
     max-height: 80vh;
     overflow-y: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
+
+  ::-webkit-scrollbar-track {
+    display: none;
+  }
+}
+
+.reviewButtons {
+  display: flex;
+  justify-content: center;
+  align-items: space-around;
 }
 
 .reviewTile {
@@ -1121,8 +1207,9 @@ b {
 }
 
 .reviewsBreakdown {
-  float: left;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .avgRating {
     font-size: 40px;

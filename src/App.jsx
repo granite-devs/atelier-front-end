@@ -146,7 +146,7 @@ class App extends React.Component {
         {window.localStorage.length > 0 && (
           <div>
             <div id='navBar'>
-              <div id='logo'>LOGO</div>
+              <img className='logo' src='./images/logo-small-white.png'></img>
             </div>
             <div id='componentWrapper'>
               <div className='components'>
@@ -163,6 +163,9 @@ class App extends React.Component {
                 />
                 <QuestionsAnswers key={`${productId}-3`} productId={productId} />
                 <Reviews key={`${productId}-4`} productId={productId} />
+              <div id='footer'>
+                <div className='credits'>Granite Devs: ByungChan Lee | Andrew Carnero | Bryan Ramirez | Johannes Niemelä</div>
+              </div>
               </div>
             </div>
           </div>

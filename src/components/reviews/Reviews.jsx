@@ -193,28 +193,40 @@ class Reviews extends React.Component {
         <h3>
           Ratings &amp; Reviews {name}
         </h3>
-        <ReviewsBreakdown
-          setFilter={this.setFilter}
-          reviewsMetaData={this.state.reviewsMetaData}
-        />
-        <span className='reviewsHeader'>{reviewCount} reviews, sorted by </span>
-        <select name='sortOrder' onChange={this.handleSortChange}>
-          <option value='relevant'>relevance</option>
-          <option value='newest'>newest</option>
-          <option value='helpful'>helpfulness</option>
-        </select>
-        <ReviewsList
-          reviews={this.state.filteredReviewsList}
-        />
-        {moreToLoad ? <button
-          className='moreReviewsBtn'
-          onClick={() => this.loadMoreReviews()}
-        >More Reviews</button> : null}
-        <button
-          className='addReviewBtn'
-          onClick={() => this.setState({creatingReview: true})}
-        >Add Review</button>
-        {createReviewModal}
+        <div className='reviews-container'>
+          <div className='reviews-left'>
+          <ReviewsBreakdown
+            setFilter={this.setFilter}
+            reviewsMetaData={this.state.reviewsMetaData}
+          />
+        </div>
+        <div className='reviews-right'>
+          <div className='header-container'>
+            <span className='reviewsHeader'>{reviewCount} reviews, sorted by </span>
+            <div className='custom-select'>
+              <select name='sortOrder' onChange={this.handleSortChange}>
+                <option value='relevant'>relevance</option>
+                <option value='newest'>newest</option>
+                <option value='helpful'>helpfulness</option>
+              </select>
+            </div>
+          </div>
+          <ReviewsList
+            reviews={this.state.filteredReviewsList}
+          />
+          <div className='reviewButtons'>
+            {moreToLoad ? <button
+              className='moreReviewsBtn'
+              onClick={() => this.loadMoreReviews()}
+            >More Reviews</button> : null}
+            <button
+              className='addReviewBtn'
+              onClick={() => this.setState({creatingReview: true})}
+            >Add Review</button>
+            {createReviewModal}
+          </div>
+        </div>
+        </div>
       </div>
     );
   }
