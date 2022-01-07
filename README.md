@@ -4,13 +4,19 @@ An outdated client-facing retail web-portal has become significantly outdated an
 ## Scope
 The main focus of this project will encompass the details page which will be comprimises of four different modules:
 
-- Overview - [ByungChan Lee](https://github.com/lbc1013)
-- Related Products - [Andrew Carnero](https://github.com/anerolabs)
-- Questions & Answers - [Bryan Ramirez](https://github.com/brynrmrzz)
-- Ratings & Reviews - [Johannes Niemelä](https://github.com/Heine574)
-## Module Information
+<table align="center">
+    <th colspan="4">Team Granite's Front-End Capstone Members</th>
+  <tr>
+      <td align="center">1. Overview Detail<a href="https://github.com/lbc1013"><br/><sub><b>[ByungChan Lee]</b></sub></a<br /></td>
+      <td align="center">2. Related Products<a href="https://github.com/anerolabs"><br/><sub><b>[Andrew Carnero]</b></sub></a<br /></td>
+      <td align="center">3. Questions & Answers<a href="https://github.com/brynrmrzz"><br/><sub><b>[Bryan Ramirez]</b></sub></a<br /></td>
+      <td align="center">4. Ratings & Reviews<a href="https://github.com/Heine574"><br/><sub><b>[Johannes Niemelä]</b></sub></a<br /></td>
+  </tr>
+</table>
 
-### Related Product
+## Module Detail
+
+### 2. Related Product
 
 The related items section displays two lists of product cards. When the product cards do not fit on the screen, the list becomes a carousel that the user can scroll through to view all the images.
 
@@ -23,7 +29,7 @@ Each product information card should display information about the product using
 In the Related Items List, the action button opens a compare modal window to compare the current page's item to the product card that was clicked. In the Your Outfit List, the action button removes the card from the user's list.
 
 ![related preview demo gif]('./dist/images/RelatedPreview.gif)
-### Questions &amp; Answers
+### 3. Questions &amp; Answers
 Questions and answers will all allow asking and answering of questions for the product selected.  The functionality contained could be describe in four components.
 - View questions
 The view questions component will have a questions list where the questions will be visible in a collapsing accordian style. They will each have their own respective answers list. Each answer should have a answerer's name, the date answers and any attached photos. It should also have a more questions button that will display all the available questions and an add answer button that will an answer to the list. Each question should have an option to vote whether or not the question was helpful.
