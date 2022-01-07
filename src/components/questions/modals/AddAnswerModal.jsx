@@ -10,7 +10,7 @@ const AddAnswerModal = ({ toggleAnswerView, addAnswer }) => {
       className='modal'>
       <div className='form'>
         <div className='field-item'>
-          <h1>Submit Your Answer</h1>
+          <h3>Submit Your Answer</h3>
         </div>
         <div className='field-item'>
           <label name='answer-body'>Your Answer</label>

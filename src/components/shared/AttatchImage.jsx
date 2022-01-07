@@ -58,19 +58,20 @@ class AttatchImage extends React.Component {
       return (
         <div className='modal'>
           <div className='attachImage'>
-            <button onClick={() => this.setState({ modalOpen: false })}>
-              Close
-            </button><br></br>
             {imageLinks.map((link, i) => (
               <div className='imgPreview' key={i}>
                 <img src={link} height={50}></img>
                 <input id={`image${i}`} type='hidden' value={link}></input>
               </div>
             ))}
-            <div>
-              <button onClick={this.uploadImage}>Upload Image</button>
-              <button onClick={this.linkImage}>Link to Image</button>
+            <div id='attach-image-btn-container'>
+              <button className='big-btn' onClick={this.uploadImage}>Upload Image</button>
+              <button className='big-btn' onClick={this.linkImage}>Link to Image</button>
+              <button className='big-btn' onClick={() => this.setState({ modalOpen: false })}>
+              Close
+            </button>
             </div>
+
             {message}
           </div>
         </div>
@@ -86,7 +87,7 @@ class AttatchImage extends React.Component {
           ))}
           <br></br>
           {imageLinks.length < this.props.maxImages ? (
-            <button onClick={() => this.setState({ modalOpen: true })}>
+            <button className='big-btn' onClick={() => this.setState({ modalOpen: true })}>
               Attatch Image
             </button>
           ) : null}

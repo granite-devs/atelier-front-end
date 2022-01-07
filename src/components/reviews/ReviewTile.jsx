@@ -73,6 +73,7 @@ class ReviewTile extends React.Component {
         {review.photos.map((image, i) => (
           <div className='imgPreview' key={i}>
             <img
+              className='thumbnail'
               src={image.url}
               height={65}
               onClick={() => this.setState({ imageInModal: image })}
