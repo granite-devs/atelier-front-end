@@ -115,8 +115,8 @@ class YourOutfitList extends React.Component {
 
     this.setState({
       indexesToShow: endOfListIndexes,
-      showLeftArrow: false,
-      showRightArrow: true
+      showLeftArrow: true,
+      showRightArrow: false
     });
   }
 
