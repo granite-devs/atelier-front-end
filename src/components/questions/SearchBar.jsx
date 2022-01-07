@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchBar = (props) => {
+const SearchBar = ({ filterQuestionsList }) => {
   return (
     <div id="search-bar-container">
       <input
@@ -8,8 +8,8 @@ const SearchBar = (props) => {
         type='text'
         placeholder='Need an answer? Search here!'
         onChange={() => {
-          let searchTerm = document.getElementById('search-input').value;
-          props.filterQuestionsList(searchTerm)
+          let searchTerm = document.querySelector('#search-input').value;
+          filterQuestionsList(searchTerm)
         }}
       ></input>
     </div>

@@ -11,9 +11,6 @@ const AddQuestionModal = (props) => {
 
   return (
     <div
-      onClick={() => {
-        toggleQuestionsModal('main');
-      }}
       className='modal'>
       <div className='form'>
         <div className='field-item'>

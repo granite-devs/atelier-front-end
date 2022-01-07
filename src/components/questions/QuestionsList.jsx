@@ -1,9 +1,9 @@
 import React from 'react';
 import Question from './Question.jsx';
 
-const QuestionsList = (props) => {
+const QuestionsList = ({ questions, handleYesQuestionClick}) => {
 
-  const filteredQuestions = props.questions.filter((question) => question.isVisible)
+  const filteredQuestions = questions.filter((question) => question.isVisible)
 
   return (
     <div id='questions-list-component'>
@@ -13,7 +13,7 @@ const QuestionsList = (props) => {
             <Question
               key={question.question_id}
               question={question}
-              handleYesQuestionClick={props.handleYesQuestionClick}
+              handleYesQuestionClick={handleYesQuestionClick}
             />
           )
         })

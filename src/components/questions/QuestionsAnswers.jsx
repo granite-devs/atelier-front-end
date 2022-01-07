@@ -144,6 +144,7 @@ class QuestionsAnswers extends React.Component {
 
     let numberOfVisibleQuestions = 0;
     const { questionsList, view } = this.state;
+    const { filterQuestionsList, voteHelpfulQuestion, toggleQuestionsModal } = this;
     const howManyAreVisible = questionsList.forEach((question) => {
       (question.isVisible) ? numberOfVisibleQuestions += 1 : null;
     })
@@ -153,11 +154,10 @@ class QuestionsAnswers extends React.Component {
       <div id='questions'>
         <h3>QUESTION &amp; ANSWERS</h3>
         <div className='questions-container'>
-          <SearchBar filterQuestionsList={this.filterQuestionsList} />
+          <SearchBar filterQuestionsList={filterQuestionsList} />
           <QuestionsList
             questions={questionsList}
-            handleYesQuestionClick={this.voteHelpfulQuestion}
-            changeView={this.changeView}
+            handleYesQuestionClick={voteHelpfulQuestion}
           />
           <div className="button-container">
             {

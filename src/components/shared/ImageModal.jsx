@@ -10,7 +10,6 @@ class ImageModal extends React.Component {
 
     return (
       <div
-        onClick={closeFn}
         className='modal'>
         <div className='image-modal'>
           <img

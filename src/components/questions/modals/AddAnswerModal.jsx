@@ -7,9 +7,6 @@ const AddAnswerModal = ({ toggleAnswerView, addAnswer }) => {
 
   return (
     <div
-      onClick={() => {
-        toggleAnswerView('main')
-      }}
       className='modal'>
       <div className='form'>
         <div className='field-item'>

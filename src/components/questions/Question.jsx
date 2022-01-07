@@ -84,7 +84,7 @@ class Question extends React.Component {
     const button = document.querySelector(`#see-answers-${questionId}`);
     const { answersList } = this.state
 
-    if (button.innerHTML.includes('Load More')) {
+    if (button.innerHTML.includes('More Answers')) {
       const allAnswersVisible = answersList.map((answer) => {
         answer.isVisible = true;
         return answer;
@@ -93,7 +93,7 @@ class Question extends React.Component {
       this.setState({ answersList: allAnswersVisible })
     } else {
       const twoVisibleAnwers = this.setTwoAnswersVisible(answersList)
-      button.innerHTML = 'Load More Answers'
+      button.innerHTML = 'More Answers'
       this.setState({ answersList: twoVisibleAnwers })
     }
 
