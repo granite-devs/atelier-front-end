@@ -40,6 +40,8 @@ class YourOutfitList extends React.Component {
       numberOfCardsToShow: numberOfCardsToShow,
       indexesToShow: indexesArray
     });
+
+    return numberOfCardsToShow;
   }
 
   buildIndexesToShow(numberOfCards) {
@@ -93,13 +95,17 @@ class YourOutfitList extends React.Component {
   }
 
   handleAddToOutfitClick(productToAdd) {
+    const { indexesToShow } = this.state;
+
     this.props.addItemToOutfit(productToAdd);
-    this.computeIndexesToShow();
+    const numberOfCardsToShow = this.computeIndexesToShow();
+    const newIndexesToShow = this.buildIndexesToShow(numberOfCardsToShow);
 
-    const indexesToShow = this.buildIndexesToShow(numberOfCardsToShow);
-    this.setState({indexesToShow: indexesToShow});
-
-    // EVALUATE IF ARROWS ARE VALID FUNCTIONS
+    this.setState({
+      indexesToShow: newIndexesToShow,
+      showLeftArrow: false,
+      showRightArrow: true
+    });
   }
 
   render() {
