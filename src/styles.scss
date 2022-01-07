@@ -257,7 +257,6 @@ h3 {
 }
 
 #main {
-  width: 300px;
   height: 320px;
   cursor: zoom-in;
 }
@@ -1171,9 +1170,6 @@ b {
 }
 
 .reviewsBreakdown {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
   .avgRating {
     font-size: 40px;
@@ -1378,6 +1374,7 @@ b {
   }
 
   .reviewsBreakdown {
+    display: flex;
     flex-direction: row;
     align-items: flex-start;
     padding-bottom: 1rem;
@@ -1394,7 +1391,6 @@ b {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
   }
 }
 
@@ -1550,6 +1546,10 @@ b {
   #styleTop, #styleBottom {
     width: 100%;
   }
+
+  .reviewsBreakdown {
+    display: block;
+  }
 }
 
 
@@ -1586,10 +1586,6 @@ b {
     width: auto;
     flex-direction: row;
     flex-wrap: nowrap;
-  }
-
-  .reviewsBreakdown {
-    flex-direction: row;
   }
 
   .reviews-right {
