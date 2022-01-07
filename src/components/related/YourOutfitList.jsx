@@ -29,10 +29,9 @@ class YourOutfitList extends React.Component {
     const arrowsWidth = document.getElementsByClassName('related-arrow')[0].offsetWidth * 2;
     const cardWidth = document.getElementsByClassName('product-card')[0].offsetWidth + 10;
     const addCardWidth = document.getElementsByClassName('add-outfit-card')[0].offsetWidth + 10;
-    const visibleWidth = listWidth - addCardWidth - arrowsWidth;
 
+    const visibleWidth = listWidth - addCardWidth - arrowsWidth;
     const numberOfCardsToShow = Math.floor(visibleWidth / cardWidth);
-    console.log(numberOfCardsToShow);
 
     const indexesArray = this.buildIndexesToShow(numberOfCardsToShow);
 
