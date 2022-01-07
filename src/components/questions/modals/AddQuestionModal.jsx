@@ -4,16 +4,17 @@ import API_KEY from '../../../config.js'
 
 const AddQuestionModal = (props) => {
 
-  const { productId } = props;
+  const { productId, addQuestion, toggleQuestionsModal } = props;
   const { localStorage } = window;
   const product = JSON.parse(localStorage.getItem(`${productId}`))
   const { name } = product.details;
 
   return (
-    <div className='modal'>
+    <div
+      className='modal'>
       <div className='form'>
         <div className='field-item'>
-          <h1> Ask your question about our <br/>{ name } </h1>
+          <h1> Ask your question about {name} </h1>
         </div>
         <div className='field-item'>
           <label name='question-body'>Ask your question!</label>
@@ -57,21 +58,22 @@ const AddQuestionModal = (props) => {
               const questionText = document.querySelector('#question-input').value;
 
               if (username && email && questionText) {
-                props.addQuestion({
+                addQuestion({
                   name: username,
                   body: questionText,
                   email: email
-                })
-              }
+                });
+              };
+
             }}
-            className='btn'
+            className='big-btn'
             type='button'>
-            SUBMIT
+            Submit
           </button>
           <button
-            className='btn'
+            className='big-btn'
             onClick={() => {
-              props.toggleQuestionsModal('main')
+              toggleQuestionsModal('main')
             }}> Close
           </button>
         </div>

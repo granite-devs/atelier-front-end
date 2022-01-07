@@ -196,10 +196,9 @@ h3 {
 .defaultView {
   display: flex;
   width: 60%;
-  height: auto;
-  min-height: 25rem;
-  background-color: white;
-  border-left: 1px solid $container-bg;
+  height: 25rem;
+  background-color: #F5F5F5;
+  border-left: 1px solid whitesmoke;
 }
 
 #styleTitle {
@@ -218,9 +217,11 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 100%;
   overflow-y: scroll;
-  width: 20%;
+  height: 350px;
+  width: 15%;
+  margin-left: 5px;
+  margin-top: 1rem;
   background: $container-bg;
 }
 
@@ -230,19 +231,11 @@ h3 {
 
 .eachStyleImage {
   margin-bottom: 5px;
-  border-radius: 12px;
-  width: 70%;
-  min-height: 50px;
-  max-height: 65px;
-  height: 40%;
+  border-radius: 10px;
+  width: 52px;
+  height: 52px;
   cursor: pointer;
   transition-duration: .5s;
-}
-
-.eachStyleImage:hover {
-  height: 45%;
-  width: 75%;
-  opacity: 0.35;
 }
 
 #mainImage {
@@ -252,6 +245,7 @@ h3 {
   width: 80%;
   height: auto;
   border: 1px solid $accent-blue;
+  background-color: white;
 }
 
 #wrap {
@@ -341,6 +335,7 @@ b {
 
   b {
     font-size: 14px;
+    font-weight: bolder;
   }
 }
 
@@ -437,19 +432,6 @@ b {
   font-weight: bolder;
 }
 
-#addToCartButton {
-  border: solid;
-  height: 40%;
-  width: 50%;
-  border-radius: 25px;
-  background-color: $accent-blue;
-  color: white;
-  cursor: pointer;
-}
-
-#addToCartButton:hover {
-  opacity: 0.4;
-}
 
 #addToCartModal, #addToCartModalOverlay {
   width: 100vw;
@@ -488,7 +470,7 @@ b {
 }
 
 #addToCartModalnotSelected, #addToCartModalSelected {
-  color: rgba(252, 101, 101, 0.589);
+  color: rgb(27, 125, 182);
   font-weight: bold;
 }
 
@@ -832,7 +814,6 @@ b {
 
         button:disabled {
           cursor: default;
-          font-weight: 500;
         }
       }
     }
@@ -883,13 +864,16 @@ b {
               min-width: 8rem;
             }
 
-
             button {
               cursor: pointer;
               text-decoration: underline;
               border: none;
               background-color: inherit;
               font-size: inherit;
+            }
+
+            button:disabled {
+              cursor: default;
             }
 
             span {
@@ -929,13 +913,23 @@ b {
     justify-content: space-evenly;
   }
 
-  .big-btn {
-    cursor: pointer;
-    border: .1rem solid black;
-    padding: 1rem;
-  };
-
 }
+
+.big-btn {
+  cursor: pointer;
+  border: solid;
+  min-height: 3rem;
+  height: 40%;
+  width: 50%;
+  border-radius: 2rem;
+  background-color: $accent-blue;
+  color: white;
+}
+
+.big-btn:hover {
+  opacity: 0.4;
+}
+
 
 /* Question Modals */
 
@@ -963,6 +957,7 @@ b {
 
   .image-modal {
     display: flex;
+    align-items: center;
     flex-direction: column;
     max-height: 80%;
     max-width: 80%;
@@ -976,6 +971,10 @@ b {
       max-width: 100%;
     }
 
+    button {
+      margin-top: auto;
+    }
+
   }
 
   .form {
@@ -987,7 +986,7 @@ b {
     height: auto;
     padding: 1rem;
     border-radius: .5rem;
-    width: 50%;
+    width: 30rem;
 
     .field-item {
       display: flex;
@@ -997,6 +996,7 @@ b {
 
       input {
         font-size: 1rem;
+        border: .1rem solid black
       }
     }
 
@@ -1205,11 +1205,17 @@ b {
   }
 }
 
+#close-review-btn {
+  align-self: center;
+  max-height: 3rem;
+}
+
 .createReview {
   background-color: $container-bg;
   margin: 50px;
   padding: 0px 50px;
   overflow-y: scroll;
+  border-radius: 10px;
 
   button {
     margin-top: 20px;
@@ -1293,7 +1299,7 @@ b {
     align-items: center;
   }
 
-  #defaultView {
+  .defaultView {
     width: 100%;
     padding-bottom: 1rem;
     margin-left: 1rem;
@@ -1352,7 +1358,7 @@ b {
   }
 }
 
-@media (max-width: 765px) {
+@media (max-width: 840px) {
   .eachStyleSelection {
     padding: .2rem;
     margin: 0;
@@ -1414,33 +1420,26 @@ b {
 
 }
 
-@media (max-width: 600px) {
-
-  .components {
-    width: 85%;
-  }
+@media (max-width: 750px) {
 
   #overviewTop {
     flex-direction: column;
     align-items: center;
   }
 
-  #defaultView {
-    width: 100%;
-    padding-bottom: 1rem;
+  .defaultView {
+    width: 90%;
   }
 
   #productInformationSection {
-    margin-top: 2rem;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
 
   #productinfo {
+    align-items: center;
     width: 50%;
     min-width: 8rem;
     height: 80%;
@@ -1449,12 +1448,13 @@ b {
 
   #styleSelector {
     width: 80%;
-    height: 10rem;
+    min-height: 10rem;
     align-items: center;
     padding-bottom: 1rem;
   }
 
   #styleSelection {
+    align-items: center;
     margin-left: 10%;
     height: 4rem;
   }
@@ -1465,14 +1465,15 @@ b {
   }
 
   .eachStyleSelection {
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
     padding: .5rem;
   }
 
   #productName {
     font-size: 2em;
   }
+
   #price {
     font-size: 1.5em;
     width: 100%;
@@ -1509,6 +1510,30 @@ b {
   #styleTop, #styleBottom {
     width: 100%;
   }
+}
+
+
+@media (max-width: 600px) {
+
+  .components {
+    width: 85%;
+  }
+
+  .defaultView {
+    width: 90%;
+    padding-bottom: 1rem;
+    margin: 0;
+  }
+
+  #productInformationSection {
+    margin-top: 2rem;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
   .reviews-container {
     display: flex;
@@ -1529,6 +1554,10 @@ b {
 
   .reviews-right {
     width: auto;
+  }
+
+  .reviewsList {
+    overflow-x: hidden;
   }
 
   .question-container {
