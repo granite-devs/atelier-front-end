@@ -11,7 +11,7 @@ class YourOutfitList extends React.Component {
     super(props);
 
     this.state = {
-      initialRequestMade: false,
+      numberOfCardsToShow: 0,
       indexesToShow: [0],
       showLeftArrow: false,
       showRightArrow: true
@@ -25,22 +25,30 @@ class YourOutfitList extends React.Component {
   }
 
   computeIndexesToShow() {
+    const listWidth = document.getElementById('related').offsetWidth;
     const arrowsWidth = document.getElementsByClassName('related-arrow')[0].offsetWidth * 2;
-    const listWidth = document.getElementById('outfit-list').offsetWidth;
-    const cardWidth = document.getElementsByClassName('product-card')[0].offsetWidth + 20;
+    const cardWidth = document.getElementsByClassName('product-card')[0].offsetWidth + 10;
     const addCardWidth = document.getElementsByClassName('add-outfit-card')[0].offsetWidth + 10;
-    const visibleWidth = addCardWidth + listWidth - arrowsWidth;
+    const visibleWidth = listWidth - addCardWidth - arrowsWidth;
 
     const numberOfCardsToShow = Math.floor(visibleWidth / cardWidth);
-    let indexesArray = [0];
+    console.log(numberOfCardsToShow);
 
-    for (let i = 1; i < numberOfCardsToShow - 2; i++) {
-      indexesArray.push(i);
-    }
+    const indexesArray = this.buildIndexesToShow(numberOfCardsToShow);
 
     this.setState({
+      numberOfCardsToShow: numberOfCardsToShow,
       indexesToShow: indexesArray
     });
+  }
+
+  buildIndexesToShow(numberOfCards) {
+    let indexesArray = [0];
+
+    for (let i = 1; i < numberOfCards; i++) {
+      indexesArray.push(i);
+    }
+    return indexesArray;
   }
 
   handleLeftArrowClick() {
@@ -87,6 +95,11 @@ class YourOutfitList extends React.Component {
   handleAddToOutfitClick(productToAdd) {
     this.props.addItemToOutfit(productToAdd);
     this.computeIndexesToShow();
+
+    const indexesToShow = this.buildIndexesToShow(numberOfCardsToShow);
+    this.setState({indexesToShow: indexesToShow});
+
+    // EVALUATE IF ARROWS ARE VALID FUNCTIONS
   }
 
   render() {
