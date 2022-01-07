@@ -101,10 +101,20 @@ class YourOutfitList extends React.Component {
 
     this.props.addItemToOutfit(productToAdd);
     const numberOfCardsToShow = this.computeIndexesToShow();
-    const newIndexesToShow = this.buildIndexesToShow(numberOfCardsToShow);
+    const newIndexes = this.buildIndexesToShow(numberOfCardsToShow);
+
+    const outfitItemCount = this.props.outfitItems.length + 1;
+    let indexShift = outfitItemCount - newIndexes.length;
+    if (indexShift < 0) { indexShift = 0 }
+
+    let endOfListIndexes = newIndexes.map((index) => {
+      return index += indexShift;
+    });
+
+    console.log(endOfListIndexes);
 
     this.setState({
-      indexesToShow: newIndexesToShow,
+      indexesToShow: endOfListIndexes,
       showLeftArrow: false,
       showRightArrow: true
     });
