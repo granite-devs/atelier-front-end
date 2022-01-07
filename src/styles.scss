@@ -568,7 +568,7 @@ b {
 
   width: 11rem;
   height: 17rem;
-  overflow-y: hidden;
+  overflow: hidden;
 
   margin-left: 1rem;
 
@@ -664,7 +664,8 @@ b {
 .modal-show {
   width: 40vw;
   min-width: 20rem;
-  left: 25vw;
+  max-width: 26rem;
+  left: 25%;
   top: .3rem;
   height: 14rem;
 
