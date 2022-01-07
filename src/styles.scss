@@ -521,7 +521,7 @@ b {
   padding-bottom: 7rem;
   height: 2.5rem;
   width: 2.1rem;
-  transition-duration: 0.2s;
+  transition-duration: 0.4s;
 }
 
 .related-left-arrow, .related-right-arrow {
@@ -534,7 +534,9 @@ b {
   cursor: pointer;
 }
 .related-left-arrow.hide, .related-right-arrow.hide {
-  display: none;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .product-card {
@@ -555,7 +557,7 @@ b {
   margin-left: 1rem;
 
   border: 1px solid black;
-  transition-duration: 0.5s;
+  transition-duration: 1s;
 }
 .product-card:hover {
   cursor: pointer;
@@ -566,7 +568,7 @@ b {
   opacity: 0;
   width: 0rem;
   height: 0rem;
-  transition-duration: 0.5s;
+  margin-left: -1px;
 }
 
 .add-outfit-card {
@@ -577,14 +579,18 @@ b {
   flex-direction: column;
   justify-content: center;
 
-  width: 7rem;
-  min-width: 7rem;
+  width: 6.2rem;
+  min-width: 6.2rem;
   height: 8rem;
   padding-left: 0;
   margin-left: 0;
 
   border: 1px solid gray;
   transition-duration: 0.5s;
+}
+.add-outfit-card:hover {
+  background: whitesmoke;
+  filter: none;
 }
 
 .card-img {
@@ -720,16 +726,21 @@ b {
   background-color:rgb(209, 209, 209);
   background: $related-gradient;
   border: 1px solid gray;
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 2.2rem;
+  width: 2.2rem;
   padding: .5rem;
   filter: $related-shadow;
   align-self: center;
+  transition: 1s;
+}
+.add-outfit-icon:hover {
+  background: whitesmoke;
 }
 
 .add-outfit-text {
   align-self: center;
   margin-top: 1rem;
+  font-size: .9em;
 }
 
 
