@@ -22,7 +22,7 @@ class ReviewTile extends React.Component {
   }
 
   render() {
-    const { review, hasVotedHelpul, voteReviewHelpful } = this.props;
+    const { review, hasVotedHelpul, voteReviewHelpful, voteReviewUnhelpful } = this.props;
     const { displayFullBody, imageInModal } = this.state;
     const bodyToDisplay = displayFullBody ? review.body : review.body.substr(0, 250);
     const moreToDisplay = bodyToDisplay.length < review.body.length;
@@ -42,7 +42,11 @@ class ReviewTile extends React.Component {
           voteReviewHelpful(review.review_id);
         }}>
           Yes ({review.helpfulness})
-        </a><span> / </span><a>
+        </a>
+        <span> / </span>
+        <a onClick={() => {
+          voteReviewUnhelpful(review.review_id);
+        }}>
           No
         </a>
       </div>
