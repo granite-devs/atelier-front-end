@@ -35,6 +35,12 @@ const ImageGallery = ({state, updateState}) => {
 
   }, [state]);
 
+  useEffect(() => {
+    if (state.currentStyle.photos !== undefined) {
+      updateClickedImageIndex(0);
+    }
+  }, [state.currentStyle]);
+
   //arrow click function//
   const updateCurrentStylePhotosUrl = () => {
     let urlOnlyArray = [];
