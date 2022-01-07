@@ -26,6 +26,7 @@ body {
   font-family: $primary-font;
   margin: 0;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .heavy {
@@ -256,7 +257,7 @@ h3 {
   display: flex;
   justify-content: center;
   align-content: center;
-  width: 75%;
+  width: 300px;
   height: auto;
   overflow: hidden;
 }

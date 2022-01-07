@@ -10,6 +10,8 @@ class ReviewsList extends React.Component {
       votedHelpful: {}
     };
     this.voteReviewHelpful = this.voteReviewHelpful.bind(this);
+    this.voteReviewUnhelpful = this.voteReviewUnhelpful.bind(this);
+
   }
 
   voteReviewHelpful(id) {
@@ -30,6 +32,12 @@ class ReviewsList extends React.Component {
       });
   }
 
+  voteReviewUnhelpful(id) {
+    const { votedHelpful } = this.state;
+    votedHelpful[id] = true;
+    this.setState({ votedHelpful });
+  }
+
   render() {
     const { reviews, loadMoreReviews } = this.props;
     const { votedHelpful } = this.state;
@@ -43,6 +51,7 @@ class ReviewsList extends React.Component {
                 review={review}
                 hasVotedHelpul={review.review_id in votedHelpful}
                 voteReviewHelpful={this.voteReviewHelpful}
+                voteReviewUnhelpful={this.voteReviewUnhelpful}
               />
             ))}
           </ul>
