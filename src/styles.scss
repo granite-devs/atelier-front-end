@@ -480,113 +480,6 @@ b {
   font-weight: bold;
 }
 
-@media (max-width: 765px) {
-  .eachStyleSelection {
-    padding: .2rem;
-    margin: 0;
-    height: 30px;
-    width: 30px;
-  }
-
-  #productName {
-    font-size: 1.2rem;
-  }
-  #price {
-    font-size: 1rem;
-  }
-
-  #productinfo, #styleSelector, #addToCart {
-    margin: 0;
-  }
-
-  #addToCartButton {
-    height: 2.2rem;
-  }
-
-  #overviewStar {
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    width: 100%;
-  }
-
-  #readReview {
-    margin: 0;
-  }
-
-}
-
-@media (max-width: 850px) {
-
-  .components {
-    width: 85%;
-  }
-
-  #overviewTop {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #defaultView {
-    width: 100%;
-    padding-bottom: 1rem;
-  }
-
-  #productInformationSection {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-
-  }
-
-  #productinfo {
-    height: 10rem;
-  }
-
-  #styleSelector {
-    width: 40%;
-    height: 10rem;
-  }
-
-  #addToCart {
-    height: 10rem;
-    min-width: 10rem;
-  }
-
-  #styleTop, #styleBottom {
-    width: 15.5rem;
-  }
-
-  .reviews-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 2rem 1rem 2rem;
-  }
-
-  /*The following 3 need to be fixed.. they don't seem to be working */
-  .reviews-left {
-    width: auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
-
-  .reviewsBreakdown {
-    flex-direction: row;
-  }
-
-  .reviews-right {
-    width: auto;
-  }
-
-  .reviewsList {
-    padding-right: 1rem;
-  }
-}
-
-
-
 /* Overview ---------------------(end) */
 
 /* Related ---------------------(start) */
@@ -1166,7 +1059,6 @@ b {
 }
 
 .reviewsListContainer {
-
   .reviewsList {
     min-height: 100px;
     max-height: 80vh;
@@ -1187,10 +1079,10 @@ b {
 }
 
 .reviewTile {
-  margin: 16px auto;
+  margin: 16px;
   padding: 10px 12px;
   width: 80%;
-  min-width: 30.5em;
+  min-width: 15.5em;
   border: 1px solid black;
   border-radius: 10px;
   background-color: whitesmoke;
@@ -1437,9 +1329,67 @@ b {
   .reviews-right {
     width: auto;
   }
+
+  .reviewsList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 765px) {
+  .eachStyleSelection {
+    padding: .2rem;
+    margin: 0;
+    height: 30px;
+    width: 30px;
+  }
+
+  #productName {
+    font-size: 1.2rem;
+  }
+  #price {
+    font-size: 1rem;
+  }
+
+  #productinfo, #styleSelector, #addToCart {
+    margin: 0;
+  }
+
+  #styleSelector {
+    width: 60%;
+  }
+
+  #addToCartButton {
+    height: 2.2rem;
+  }
+
+  #overviewStar {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    width: 100%;
+  }
+
+  #readReview {
+    margin: 0;
+  }
+
+  .reviewsListContainer {
+    width: 95%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .reviewTile {
+    width: 85%;
+  }
+
+}
+
+@media (max-width: 600px) {
 
   .components {
     width: 85%;
@@ -1457,34 +1407,80 @@ b {
 
   #productInformationSection {
     margin-top: 2rem;
-    width: 90%;
+    width: 100%;
+    height: auto;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
   }
 
   #productinfo {
-    width: 45%;
-    height: 10rem;
+    width: 50%;
+    min-width: 8rem;
+    height: 80%;
     margin: 0;
   }
 
   #styleSelector {
-    width: 40%;
-    height: 10rem;
+    width: 80%;
+    height: 5rem;
     align-items: center;
+    padding-bottom: 1rem;
+  }
+
+  #styleSelection {
+    margin-left: 10%;
+    height: 4rem;
+  }
+
+  #styleTitle {
+    font-size: 1em;
+    margin-left: -10px;
+  }
+
+  .eachStyleSelection {
+    height: 60px;
+    width: 60px;
+  }
+
+  #productName {
+    font-size: 2em;
+  }
+  #price {
+    font-size: 2em;
+  }
+
+  #addToCartButton {
+    height: 2.2rem;
+  }
+
+  #overviewStar {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    width: 100%;
+  }
+
+  #readReview {
+    margin: 0;
+    font-size: 1rem;
   }
 
   #addToCart {
-    height: 10rem;
+    height: 60%;
     min-width: 10rem;
     align-items: center;
+    padding: 1rem;
+  }
+
+  #addToCartButton {
+    height: 3rem;
+    margin: 1rem;
   }
 
   #styleTop, #styleBottom {
-    width: 15.5rem;
+    width: 100%;
   }
 
   .reviews-container {
@@ -1494,8 +1490,6 @@ b {
     align-items: center;
     padding: 1rem 2rem 1rem 2rem;
   }
-
-  /*The following 3 need to be fixed.. they don't seem to be working */
   .reviews-left {
     width: auto;
     flex-direction: row;
@@ -1509,4 +1503,14 @@ b {
   .reviews-right {
     width: auto;
   }
+
+  .question-container {
+    overflow-x: hidden;
+  }
+
+  .question-container::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+
 }
