@@ -11,6 +11,7 @@ const AddAnswerModal = ({ toggleAnswerView, addAnswer }) => {
       <div className='form'>
         <div className='field-item'>
           <h3>Submit Your Answer</h3>
+          <span id='alert'></span>
         </div>
         <div className='field-item'>
           <label name='answer-body'>Your Answer</label>
@@ -47,7 +48,9 @@ const AddAnswerModal = ({ toggleAnswerView, addAnswer }) => {
         </div>
         <div className='field-item'>
           <input
+            id='img-upload'
             type='file'
+            accept='image/png, image/jpeg, image/jpg'
             multiple
           />
         </div>
@@ -56,16 +59,26 @@ const AddAnswerModal = ({ toggleAnswerView, addAnswer }) => {
             id='submit-answer-btn'
             onClick={() => {
 
+              const alert = document.querySelector('#alert')
               const body = document.querySelector('#answer-input').value;
               const name = document.querySelector('#answer-user-input').value;
               const email = document.querySelector('#answer-email-input').value;
+              const images = document.querySelector('#img-upload').files;
+              const photos = Object.values(images).map((image) => {
+                let url = URL.createObjectURL(image)
+                return url;
+              })
 
-              const answer = { body, name, email }
+              const answer = { body, name, email, photos };
 
               if (body && name && email) {
                 addAnswer(answer)
+              } else {
+                alert.innerHTML = 'Invalid Inputs!'
+                setTimeout(() => {
+                  alert.innerHTML = '';
+                }, 2000)
               }
-
             }}
             className='big-btn'
             type='button'>

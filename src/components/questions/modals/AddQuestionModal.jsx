@@ -15,6 +15,7 @@ const AddQuestionModal = (props) => {
       <div className='form'>
         <div className='field-item'>
           <h3> Ask your question about {name} </h3>
+          <span id='alert'> </span>
         </div>
         <div className='field-item'>
           <label name='question-body'>Your question: </label>
@@ -53,6 +54,7 @@ const AddQuestionModal = (props) => {
           <button
             onClick={() => {
 
+              const alert = document.querySelector('#alert');
               const username = document.querySelector('#question-username-input').value;
               const email = document.querySelector('#question-email-input').value;
               const questionText = document.querySelector('#question-input').value;
@@ -63,7 +65,12 @@ const AddQuestionModal = (props) => {
                   body: questionText,
                   email: email
                 });
-              };
+              } else {
+                alert.innerHTML = 'Invalid Inputs!';
+                setTimeout(() => {
+                  alert.innerHTML = '';
+                }, 2000);
+              }
 
             }}
             className='big-btn'
