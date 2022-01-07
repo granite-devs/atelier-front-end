@@ -18,7 +18,7 @@ class YourOutfitList extends React.Component {
     }
 
     this.handleAddToOutfitClick = this.handleAddToOutfitClick.bind(this);
-  }
+    }
 
   componentDidMount() {
     this.computeIndexesToShow();
@@ -101,29 +101,13 @@ class YourOutfitList extends React.Component {
 
     this.props.addItemToOutfit(productToAdd);
     const numberOfCardsToShow = this.computeIndexesToShow();
-    const newIndexes = this.buildIndexesToShow(numberOfCardsToShow);
+    const newIndexesToShow = this.buildIndexesToShow(numberOfCardsToShow);
 
-    const outfitItemCount = this.props.outfitItems.length + 1;
-    let indexShift = outfitItemCount - newIndexes.length;
-    if (indexShift < 0) { indexShift = 0 }
-
-    if (indexShift > 0) {
-      let endOfListIndexes = newIndexes.map((index) => {
-        return index += indexShift;
-      });
-
-      this.setState({
-        indexesToShow: endOfListIndexes,
-        showLeftArrow: true,
-        showRightArrow: false
-      });
-    } else {
-      this.setState({
-        indexesToShow: newIndexes,
-        showLeftArrow: false,
-        showRightArrow: true
-      });
-    }
+    this.setState({
+      indexesToShow: newIndexesToShow,
+      showLeftArrow: false,
+      showRightArrow: true
+    });
   }
 
   render() {
