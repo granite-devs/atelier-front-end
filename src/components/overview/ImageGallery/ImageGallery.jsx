@@ -25,12 +25,11 @@ const ImageGallery = ({state, updateState}) => {
       const currentImageElement = document.getElementById(clickedImageIndex);
       if (currentImageElement !== null) {
         for (let i = 0; i < state.currentStyle.photos.length; i++) {
-          document.getElementById(i).style.borderStyle = 'none';
+          document.getElementById(i).style.border = 'none';
           document.getElementById(i).style.opacity = '1';
         }
-        currentImageElement.style.borderBottom = 'solid';
+        currentImageElement.style.border = '1px solid black';
         currentImageElement.style.opacity = '0.4';
-        currentImageElement.style.borderWidth = '6px';
       }
     }
 
