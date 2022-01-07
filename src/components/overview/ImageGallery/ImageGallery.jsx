@@ -74,8 +74,8 @@ const ImageGallery = ({state, updateState}) => {
     const mainImageWrapElement = document.getElementById('wrap');
     const mainImageElement = document.getElementById('main');
     mainImageWrapElement.addEventListener('mousemove', (event) => {
-      let X = event.clientX - mainImageWrapElement.offsetLeft;
-      let Y = event.clientY - mainImageWrapElement.offsetTop;
+      let X = event.clientX - mainImageWrapElement.offsetLeft - mainImageWrapElement.offsetParent.offsetLeft;
+      let Y = event.clientY - mainImageWrapElement.offsetTop - 50;
 
       let mWidth = mainImageWrapElement.offsetWidth;
       let mHeight = mainImageWrapElement.offsetHeight;
