@@ -80,10 +80,13 @@ const ImageGallery = ({state, updateState}) => {
       let mWidth = mainImageWrapElement.offsetWidth;
       let mHeight = mainImageWrapElement.offsetHeight;
 
-      X = X / mWidth * 100;
-      Y = Y / mHeight * 100;
+      X -= mWidth / 2;
+      Y -= mHeight / 2;
 
-      mainImageElement.style.transform = `translate(-${X}%, -${Y}%) scale(1.8)`;
+      X = -X / mWidth * 100;
+      Y = -Y / mHeight * 100;
+
+      mainImageElement.style.transform = `translate(${X}%, ${Y}%) scale(2)`;
     });
 
     mainImageWrapElement.addEventListener('mouseleave', () => {
