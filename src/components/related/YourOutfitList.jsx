@@ -107,17 +107,23 @@ class YourOutfitList extends React.Component {
     let indexShift = outfitItemCount - newIndexes.length;
     if (indexShift < 0) { indexShift = 0 }
 
-    let endOfListIndexes = newIndexes.map((index) => {
-      return index += indexShift;
-    });
+    if (indexShift > 0) {
+      let endOfListIndexes = newIndexes.map((index) => {
+        return index += indexShift;
+      });
 
-    console.log(endOfListIndexes);
-
-    this.setState({
-      indexesToShow: endOfListIndexes,
-      showLeftArrow: true,
-      showRightArrow: false
-    });
+      this.setState({
+        indexesToShow: endOfListIndexes,
+        showLeftArrow: true,
+        showRightArrow: false
+      });
+    } else {
+      this.setState({
+        indexesToShow: newIndexes,
+        showLeftArrow: false,
+        showRightArrow: true
+      });
+    }
   }
 
   render() {
