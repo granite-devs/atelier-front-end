@@ -39,7 +39,7 @@ const AddToCart = ({state, updateState}) => {
             <p id='addToCartModalSelected'>
               Item Added To Cart
             </p>
-            <button onClick={addToCartModal} id='addToCartModalClose'>CLOSE</button>
+            <button id='close-cart-btn' className='big-btn' onClick={addToCartModal} > Close </button>
           </div>
         </div>
       )}
