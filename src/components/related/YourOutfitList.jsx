@@ -25,10 +25,13 @@ class YourOutfitList extends React.Component {
   }
 
   computeIndexesToShow() {
-    const listWidth = document.getElementById('related').offsetWidth;
-    const arrowsWidth = document.getElementsByClassName('related-arrow')[0].offsetWidth * 2;
-    const cardWidth = document.getElementsByClassName('product-card')[0].offsetWidth + 10;
-    const addCardWidth = document.getElementsByClassName('add-outfit-card')[0].offsetWidth + 10;
+    const windowWidth = window.innerWidth;
+    let listWidth = 960;
+    const cardWidth = 178 + 10;
+    const arrowsWidth = 31 * 2;
+    const addCardWidth = 114 + 10;
+    if (windowWidth <= 980) { listWidth = (windowWidth * .85) - 5; }
+    if (windowWidth <= 600) { listWidth = windowWidth - 8; }
 
     const visibleWidth = listWidth - addCardWidth - arrowsWidth;
     const numberOfCardsToShow = Math.floor(visibleWidth / cardWidth);

@@ -59,17 +59,14 @@ class RelatedProductsList extends React.Component {
 
   computeIndexesToShow() {
     const windowWidth = window.innerWidth;
-    const arrowsWidth = 31 * 2;
     let listWidth = 960;
     const cardWidth = 178 + 10;
-
+    const arrowsWidth = 31 * 2;
     if (windowWidth <= 980) { listWidth = (windowWidth * .85) - 5; }
     if (windowWidth <= 600) { listWidth = windowWidth - 8; }
 
     const visibleWidth = listWidth - arrowsWidth;
-
     const numberOfCardsToShow = Math.floor(visibleWidth / cardWidth);
-    console.log(listWidth, numberOfCardsToShow);
 
     let indexesArray = [0];
 
@@ -80,9 +77,6 @@ class RelatedProductsList extends React.Component {
     this.setState({
       indexesToShow: indexesArray
     });
-
-
-
   }
 
   handleLeftArrowClick() {
@@ -121,7 +115,6 @@ class RelatedProductsList extends React.Component {
       showRightArrow: showRightArrow,
       indexesToShow: indexesToShow.map(index => { return index + 1; })
     });
-
   }
 
   render() {
