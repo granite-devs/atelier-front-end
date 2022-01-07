@@ -5,13 +5,12 @@ An outdated client-facing retail web-portal has become significantly outdated an
 The main focus of this project will encompass the details page which will be comprimises of four different modules:
 
 - Overview - [ByungChan Lee](https://github.com/lbc1013)
-- Ratings & Reviews - [Andrew Carnero](https://github.com/anerolabs)
+- Related Products - [Andrew Carnero](https://github.com/anerolabs)
 - Questions & Answers - [Bryan Ramirez](https://github.com/brynrmrzz)
-- Related Products - [Johannes Niemelä](https://github.com/Heine574)
-
+- Ratings & Reviews - [Johannes Niemelä](https://github.com/Heine574)
 ## Module Information
 
-### Related Module
+### Related Product
 
 The related items section displays two lists of product cards. When the product cards do not fit on the screen, the list becomes a carousel that the user can scroll through to view all the images.
 
