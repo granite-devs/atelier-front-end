@@ -37,7 +37,7 @@ body {
 
 #navBar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 8vh;
@@ -194,10 +194,9 @@ h3 {
 .defaultView {
   display: flex;
   width: 60%;
-  height: auto;
-  min-height: 25rem;
-  background-color: white;
-  border-left: 1px solid $container-bg;
+  height: 25rem;
+  background-color: #F5F5F5;
+  border-left: 1px solid whitesmoke;
 }
 
 #styleTitle {
@@ -216,9 +215,11 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 100%;
   overflow-y: scroll;
-  width: 20%;
+  height: 350px;
+  width: 15%;
+  margin-left: 5px;
+  margin-top: 1rem;
   background: $container-bg;
 }
 
@@ -228,19 +229,11 @@ h3 {
 
 .eachStyleImage {
   margin-bottom: 5px;
-  border-radius: 12px;
-  width: 70%;
-  min-height: 50px;
-  max-height: 65px;
-  height: 40%;
+  border-radius: 10px;
+  width: 52px;
+  height: 52px;
   cursor: pointer;
   transition-duration: .5s;
-}
-
-.eachStyleImage:hover {
-  height: 45%;
-  width: 75%;
-  opacity: 0.35;
 }
 
 #mainImage {
@@ -250,6 +243,7 @@ h3 {
   width: 80%;
   height: auto;
   border: 1px solid $accent-blue;
+  background-color: white;
 }
 
 #wrap {
@@ -339,6 +333,7 @@ b {
 
   b {
     font-size: 14px;
+    font-weight: bolder;
   }
 }
 
@@ -462,7 +457,7 @@ b {
 }
 
 #addToCartModalnotSelected, #addToCartModalSelected {
-  color: rgba(252, 101, 101, 0.589);
+  color: rgb(27, 125, 182);
   font-weight: bold;
 }
 
@@ -477,35 +472,39 @@ b {
     align-items: center;
   }
 
-  #defaultView {
+  .defaultView {
     width: 100%;
     padding-bottom: 1rem;
   }
 
   #productInformationSection {
-    margin-top: 2rem;
     width: 90%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
   }
 
   #productinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 45%;
-    height: 10rem;
+    height: 30%;
     margin: 0;
   }
 
   #styleSelector {
+    display: flex;
+    flex-direction: column;
     width: 40%;
-    height: 10rem;
+    height: 40%;
     align-items: center;
   }
 
   #addToCart {
-    height: 10rem;
+    height: 30%;
     min-width: 10rem;
     align-items: center;
   }
