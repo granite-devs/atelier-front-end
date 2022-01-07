@@ -11,36 +11,48 @@ class YourOutfitList extends React.Component {
     super(props);
 
     this.state = {
-      initialRequestMade: false,
+      numberOfCardsToShow: 0,
       indexesToShow: [0],
       showLeftArrow: false,
       showRightArrow: true
     }
 
     this.handleAddToOutfitClick = this.handleAddToOutfitClick.bind(this);
-  }
+    }
 
   componentDidMount() {
     this.computeIndexesToShow();
   }
 
   computeIndexesToShow() {
-    const arrowsWidth = document.getElementsByClassName('related-arrow')[0].offsetWidth * 2;
-    const listWidth = document.getElementById('outfit-list').offsetWidth;
-    const cardWidth = document.getElementsByClassName('product-card')[0].offsetWidth + 20;
-    const addCardWidth = document.getElementsByClassName('add-outfit-card')[0].offsetWidth + 10;
-    const visibleWidth = addCardWidth + listWidth - arrowsWidth;
+    const windowWidth = window.innerWidth;
+    let listWidth = 960;
+    const cardWidth = 178 + 10;
+    const arrowsWidth = 31 * 2;
+    const addCardWidth = 114 + 10;
+    if (windowWidth <= 980) { listWidth = (windowWidth * .85) - 5; }
+    if (windowWidth <= 600) { listWidth = windowWidth - 8; }
 
+    const visibleWidth = listWidth - addCardWidth - arrowsWidth;
     const numberOfCardsToShow = Math.floor(visibleWidth / cardWidth);
-    let indexesArray = [0];
 
-    for (let i = 1; i < numberOfCardsToShow - 2; i++) {
-      indexesArray.push(i);
-    }
+    const indexesArray = this.buildIndexesToShow(numberOfCardsToShow);
 
     this.setState({
+      numberOfCardsToShow: numberOfCardsToShow,
       indexesToShow: indexesArray
     });
+
+    return numberOfCardsToShow;
+  }
+
+  buildIndexesToShow(numberOfCards) {
+    let indexesArray = [0];
+
+    for (let i = 1; i < numberOfCards; i++) {
+      indexesArray.push(i);
+    }
+    return indexesArray;
   }
 
   handleLeftArrowClick() {
@@ -85,8 +97,17 @@ class YourOutfitList extends React.Component {
   }
 
   handleAddToOutfitClick(productToAdd) {
+    const { indexesToShow } = this.state;
+
     this.props.addItemToOutfit(productToAdd);
-    this.computeIndexesToShow();
+    const numberOfCardsToShow = this.computeIndexesToShow();
+    const newIndexesToShow = this.buildIndexesToShow(numberOfCardsToShow);
+
+    this.setState({
+      indexesToShow: newIndexesToShow,
+      showLeftArrow: false,
+      showRightArrow: true
+    });
   }
 
   render() {
@@ -100,6 +121,9 @@ class YourOutfitList extends React.Component {
       showRightArrow = false;
     }
 
+    let showMessage;
+    outfitItems.length === 0 ? showMessage = true : showMessage = false;
+
     return (
       <>
         <h3>Your Outfit</h3>
@@ -107,14 +131,20 @@ class YourOutfitList extends React.Component {
         <div className='related-arrow'>
           <img className={showLeftArrow ? 'related-left-arrow' : 'related-left-arrow hide'}
               src='./images/leftarrow.png'
+              alt='Left facing arrow'
               onClick={() => { this.handleLeftArrowClick() }}></img>
           </div>
 
           <div className='product-card-list'>
           <div className='product-card add-outfit-card'
             onClick={() => { this.handleAddToOutfitClick(productId) }}>
-            <img className='add-outfit-icon' src='./images/plussign.png'></img>
+            <img className='add-outfit-icon'
+              src='./images/plussign.png'
+              alt='Plus sign icon'></img>
             <span className='add-outfit-text'>Add to Outfit</span>
+          </div>
+          <div className={showMessage ? 'outfit-message' : 'outfit-message-hidden'}>
+            You haven't added any items to your outfit yet!
           </div>
             {outfitItems.map((outfitItemId, i) => {
               return <ProductCard key={i}
@@ -132,6 +162,7 @@ class YourOutfitList extends React.Component {
           <div className='related-arrow'>
             <img className={showRightArrow ? 'related-right-arrow' : 'related-right-arrow hide'}
               src='./images/rightarrow.png'
+              alt='Right facing arrow'
               onClick={() => { this.handleRightArrowClick() }}></img>
           </div>
         </div>

@@ -20,7 +20,8 @@ class ProductCard extends React.Component {
       features: [],
       displayModal: false,
       currentProductFeatures: {name: '', features: []},
-      initialRequestMade: false
+      initialRequestMade: false,
+      hideOverwrite: false
     }
     this.actionBtnClick = this.actionBtnClick.bind(this);
   }
@@ -152,7 +153,7 @@ class ProductCard extends React.Component {
     const { productCardId, updateAppProductId, currentList,
       hidden, cardData } = this.props;
 
-    const { name, category, price, salePrice, rating,
+    const { name, category, price, salePrice, rating, hideOverwrite,
       features, displayModal, currentProductFeatures } = this.state;
 
     if (cardData) {
@@ -169,13 +170,17 @@ class ProductCard extends React.Component {
           actionBtnClick={this.actionBtnClick} /> ;
       }
 
+      let hideCard = hidden;
+      if (hideOverwrite) { hideCard = true; }
+
       return (
         <div>
           {compareModal}
-          <div className={hidden ? 'product-card hidden' : 'product-card'}>
+          <div className={hideCard ? 'product-card hidden' : 'product-card'}>
             <ActionButton actionBtnClick={this.actionBtnClick}
               currentList={currentList}/>
               <img className='card-img' src={primaryImg}
+                alt={`Product thumbnail image for ${name}`}
                 onClick={() => { updateAppProductId(productCardId); }}></img>
               <div className='card-info' onClick={() => { updateAppProductId(productCardId); }}>
                 <p className='card-category'>{category}</p>

@@ -58,12 +58,16 @@ class RelatedProductsList extends React.Component {
   }
 
   computeIndexesToShow() {
-    const arrowsWidth = document.getElementsByClassName('related-arrow')[0].offsetWidth * 2;
-    const listWidth = document.getElementById('related-list').offsetWidth;
-    const cardWidth = document.getElementsByClassName('product-card')[0].offsetWidth + 20;
-    const visibleWidth = listWidth - arrowsWidth;
+    const windowWidth = window.innerWidth;
+    let listWidth = 960;
+    const cardWidth = 178 + 10;
+    const arrowsWidth = 31 * 2;
+    if (windowWidth <= 980) { listWidth = (windowWidth * .85) - 5; }
+    if (windowWidth <= 600) { listWidth = windowWidth - 8; }
 
+    const visibleWidth = listWidth - arrowsWidth;
     const numberOfCardsToShow = Math.floor(visibleWidth / cardWidth);
+
     let indexesArray = [0];
 
     for (let i = 1; i < numberOfCardsToShow; i++) {
@@ -111,7 +115,6 @@ class RelatedProductsList extends React.Component {
       showRightArrow: showRightArrow,
       indexesToShow: indexesToShow.map(index => { return index + 1; })
     });
-
   }
 
   render() {
@@ -147,13 +150,15 @@ class RelatedProductsList extends React.Component {
         <div id='related-list'>
           <div className='related-arrow'>
             <img className={showLeftArrow ? 'related-left-arrow' : 'related-left-arrow hide'}
-              src='https://i.ibb.co/r0GN44X/image.png'
+              src='./images/leftarrow.png'
+              alt='Left facing arrow'
               onClick={() => { this.handleLeftArrowClick() }}></img>
           </div>
           {productCard}
           <div className='related-arrow'>
             <img className={showRightArrow ? 'related-right-arrow' : 'related-right-arrow hide'}
-              src='https://i.ibb.co/k3GTgnr/arrow-icon-1177.png'
+              src='./images/rightarrow.png'
+              alt='Right facing arrow'
               onClick={() => { this.handleRightArrowClick() }}></img>
           </div>
         </div>
