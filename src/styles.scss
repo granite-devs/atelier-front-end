@@ -1260,6 +1260,11 @@ b {
   }
 }
 
+#close-review-btn {
+  align-self: center;
+  max-height: 3rem;
+}
+
 .createReview {
   background-color: $container-bg;
   margin: 50px;
