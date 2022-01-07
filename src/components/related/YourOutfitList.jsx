@@ -121,6 +121,9 @@ class YourOutfitList extends React.Component {
       showRightArrow = false;
     }
 
+    let showMessage;
+    outfitItems.length === 0 ? showMessage = true : showMessage = false;
+
     return (
       <>
         <h3>Your Outfit</h3>
@@ -136,6 +139,9 @@ class YourOutfitList extends React.Component {
             onClick={() => { this.handleAddToOutfitClick(productId) }}>
             <img className='add-outfit-icon' src='./images/plussign.png'></img>
             <span className='add-outfit-text'>Add to Outfit</span>
+          </div>
+          <div className={showMessage ? 'outfit-message' : 'outfit-message-hidden'}>
+            You haven't added any items to your outfit yet!
           </div>
             {outfitItems.map((outfitItemId, i) => {
               return <ProductCard key={i}

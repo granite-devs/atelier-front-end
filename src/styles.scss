@@ -593,6 +593,19 @@ b {
   filter: none;
 }
 
+.outfit-message {
+  transition: 1s;
+  margin-left: 1rem;
+  transition-duration: .5s;
+  color: gray;
+  text-align: center;
+}
+.outfit-message-hidden {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
 .card-img {
   position: relative;
   width: 100%;
