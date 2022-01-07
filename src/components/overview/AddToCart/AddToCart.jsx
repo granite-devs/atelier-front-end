@@ -25,7 +25,7 @@ const AddToCart = ({state, updateState}) => {
     <>
       <div id='addToCart'>
         <SizeAndQuantitySelector state={state} updateState={updateState}/>
-        <button onClick={addToCartModal} id='addToCartButton'>Add To Cart</button>
+        <button onClick={addToCartModal} id='addToCartButton' className='big-btn'>Add To Cart</button>
       </div>
 
       {toggleForModal && (

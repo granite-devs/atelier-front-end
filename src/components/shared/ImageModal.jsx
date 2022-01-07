@@ -9,7 +9,9 @@ class ImageModal extends React.Component {
     const { image, closeFn } = this.props;
 
     return (
-      <div className='modal'>
+      <div
+        onClick={closeFn}
+        className='modal'>
         <div className='image-modal'>
           <img
             onClick={() => {
@@ -17,7 +19,9 @@ class ImageModal extends React.Component {
             }}
             src={image.url}
           />
-          <button onClick={closeFn}>
+          <button
+            className='big-btn'
+            onClick={closeFn}>
             Close
           </button>
         </div>

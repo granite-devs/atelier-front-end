@@ -9,7 +9,7 @@ class QuestionsAnswers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionsList: [],
+      questionsList: []
     };
     this.filterQuestionsList = this.filterQuestionsList.bind(this);
     this.voteHelpfulQuestion = this.voteHelpfulQuestion.bind(this);
@@ -126,6 +126,7 @@ class QuestionsAnswers extends React.Component {
   }
 
   componentDidMount() {
+
     const { productId } = this.props;
 
     if (productId) {
@@ -133,7 +134,7 @@ class QuestionsAnswers extends React.Component {
         const mappedQuestions = this.setTwoQuestionsVisable(response);
         this.setState({
           questionsList: mappedQuestions,
-          view: 'main',
+          view: 'main'
         });
       });
     }
@@ -150,7 +151,7 @@ class QuestionsAnswers extends React.Component {
 
     const QuestionsAnswersComponent = (
       <div id='questions'>
-        <h3>QUESTION & ANSWERS</h3>
+        <h3>QUESTION &amp; ANSWERS</h3>
         <div className='questions-container'>
           <SearchBar filterQuestionsList={this.filterQuestionsList} />
           <QuestionsList
@@ -169,7 +170,7 @@ class QuestionsAnswers extends React.Component {
                     this.loadMoreQuestions();
                   }}
                 >
-                  MORE QUESTIONS
+                  More Questions
                 </button>)
                 :
                 (<button
@@ -181,7 +182,7 @@ class QuestionsAnswers extends React.Component {
                     this.setState({questionsList: newState})
                   }}
                 >
-                  LESS QUESTIONS
+                  Less Questions
                 </button>)
             }
             <button
@@ -192,7 +193,7 @@ class QuestionsAnswers extends React.Component {
                 this.toggleQuestionsModal("AddQuestionModal");
               }}
             >
-              ADD QUESTION
+              Add Question
             </button>
           </div>
         </div>
