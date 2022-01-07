@@ -351,7 +351,7 @@ b {
 
 #price {
   font-weight: 900;
-  font-size: 1.5em;
+  font-size: 1.2em;
   padding-top: 1rem;
 }
 
@@ -362,6 +362,7 @@ b {
 #eachSocialMedia {
   height: 25px;
   width: 25px;
+  padding: .5rem .2rem .2rem .2rem;
   cursor: pointer;
 }
 
@@ -1106,14 +1107,11 @@ b {
   .moreReviewsBtn {
     width: 120px;
     height: 40px;
-    margin-left: 540px;
-    margin-right: 6px;
   }
 
   .addReviewBtn {
     width: 120px;
     height: 40px;
-    margin-left: 6px;
   }
 }
 
@@ -1149,8 +1147,8 @@ b {
 
 .reviewButtons {
   display: flex;
-  justify-content: center;
-  align-items: space-around;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .reviewTile {
@@ -1340,3 +1338,140 @@ b {
   }
 }
 /* Shared ---------------------(end) */
+
+
+/* Breakpoints ---------------------(start) */
+
+@media (max-width: 979px) {
+
+  .components {
+    width: 85%;
+  }
+
+  #overviewTop {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #defaultView {
+    width: 100%;
+    padding-bottom: 1rem;
+    margin-left: 1rem;
+  }
+
+  #productInformationSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #productinfo, #styleSelector, #addToCart  {
+    height: 10rem;
+    padding-left: 1rem;
+  }
+
+  #addToCart {
+    min-width: 10rem;
+  }
+
+  #styleTop, #styleBottom {
+    width: 15.5rem;
+  }
+
+  .reviews-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem 1rem 2rem;
+  }
+  .reviews-left {
+    width: auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .reviewsBreakdown {
+    flex-direction: row;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid $accent-blue;
+  }
+
+  .reviews-right {
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .components {
+    width: 85%;
+  }
+
+  #overviewTop {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #defaultView {
+    width: 100%;
+    padding-bottom: 1rem;
+  }
+
+  #productInformationSection {
+    margin-top: 2rem;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  #productinfo {
+    width: 45%;
+    height: 10rem;
+    margin: 0;
+  }
+
+  #styleSelector {
+    width: 40%;
+    height: 10rem;
+    align-items: center;
+  }
+
+  #addToCart {
+    height: 10rem;
+    min-width: 10rem;
+    align-items: center;
+  }
+
+  #styleTop, #styleBottom {
+    width: 15.5rem;
+  }
+
+  .reviews-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem 1rem 2rem;
+  }
+
+  /*The following 3 need to be fixed.. they don't seem to be working */
+  .reviews-left {
+    width: auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .reviewsBreakdown {
+    flex-direction: row;
+  }
+
+  .reviews-right {
+    width: auto;
+  }
+}
