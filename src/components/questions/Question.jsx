@@ -22,7 +22,6 @@ class Question extends React.Component {
   addAnswer(answer) {
 
     const { question_id } = this.props.question;
-    answer.photos = [];
 
     postAnswer(answer, question_id)
       .then((response) => {
