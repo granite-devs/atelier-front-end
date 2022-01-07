@@ -68,6 +68,7 @@ const AddAnswerModal = ({ toggleAnswerView, addAnswer }) => {
                 let url = URL.createObjectURL(image)
                 return url;
               })
+
               const answer = { body, name, email, photos };
 
               if (body && name && email) {
