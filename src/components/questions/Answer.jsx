@@ -52,7 +52,9 @@ const Answer = ({ answer, voteHelpfulAnswer, toggleAnswerView }) => {
           (photos) && (
             photos.map((photo) => {
               return (
-                <img className='test'
+                <img
+                  alt={`picture with id-${photo.id}`}
+                  className='thumbnail'
                   key={photo.id}
                   src={photo.url}
                   onClick={() => {
