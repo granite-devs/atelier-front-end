@@ -1424,7 +1424,7 @@ b {
 
   #styleSelector {
     width: 80%;
-    height: 5rem;
+    height: 10rem;
     align-items: center;
     padding-bottom: 1rem;
   }
@@ -1442,13 +1442,15 @@ b {
   .eachStyleSelection {
     height: 60px;
     width: 60px;
+    padding: .5rem;
   }
 
   #productName {
     font-size: 2em;
   }
   #price {
-    font-size: 2em;
+    font-size: 1.5em;
+    width: 100%;
   }
 
   #addToCartButton {
