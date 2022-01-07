@@ -14,10 +14,10 @@ const AddQuestionModal = (props) => {
       className='modal'>
       <div className='form'>
         <div className='field-item'>
-          <h1> Ask your question about {name} </h1>
+          <h3> Ask your question about {name} </h3>
         </div>
         <div className='field-item'>
-          <label name='question-body'>Ask your question!</label>
+          <label name='question-body'>Your question: </label>
           <textarea
             id='question-input'
             name='question-body'
