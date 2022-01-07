@@ -418,19 +418,6 @@ b {
   font-weight: bolder;
 }
 
-#addToCartButton {
-  border: solid;
-  height: 40%;
-  width: 50%;
-  border-radius: 25px;
-  background-color: $accent-blue;
-  color: white;
-  cursor: pointer;
-}
-
-#addToCartButton:hover {
-  opacity: 0.4;
-}
 
 #addToCartModal, #addToCartModalOverlay {
   width: 100vw;
@@ -883,7 +870,6 @@ b {
 
         button:disabled {
           cursor: default;
-          font-weight: 500;
         }
       }
     }
@@ -934,13 +920,16 @@ b {
               min-width: 8rem;
             }
 
-
             button {
               cursor: pointer;
               text-decoration: underline;
               border: none;
               background-color: inherit;
               font-size: inherit;
+            }
+
+            button:disabled {
+              cursor: default;
             }
 
             span {
@@ -980,13 +969,23 @@ b {
     justify-content: space-evenly;
   }
 
-  .big-btn {
-    cursor: pointer;
-    border: .1rem solid black;
-    padding: 1rem;
-  };
-
 }
+
+.big-btn {
+  cursor: pointer;
+  border: solid;
+  min-height: 3rem;
+  height: 40%;
+  width: 50%;
+  border-radius: 2rem;
+  background-color: $accent-blue;
+  color: white;
+}
+
+.big-btn:hover {
+  opacity: 0.4;
+}
+
 
 /* Question Modals */
 
@@ -1014,6 +1013,7 @@ b {
 
   .image-modal {
     display: flex;
+    align-items: center;
     flex-direction: column;
     max-height: 80%;
     max-width: 80%;
@@ -1027,6 +1027,10 @@ b {
       max-width: 100%;
     }
 
+    button {
+      margin-top: auto;
+    }
+
   }
 
   .form {
@@ -1038,7 +1042,7 @@ b {
     height: auto;
     padding: 1rem;
     border-radius: .5rem;
-    width: 50%;
+    width: 30rem;
 
     .field-item {
       display: flex;
@@ -1048,6 +1052,7 @@ b {
 
       input {
         font-size: 1rem;
+        border: .1rem solid black
       }
     }
 
@@ -1096,18 +1101,6 @@ b {
     margin-left: 1rem;
   }
 
-  .moreReviewsBtn {
-    width: 120px;
-    height: 40px;
-    margin-left: 540px;
-    margin-right: 6px;
-  }
-
-  .addReviewBtn {
-    width: 120px;
-    height: 40px;
-    margin-left: 6px;
-  }
 }
 
 .reviewsHeader {
@@ -1258,6 +1251,11 @@ b {
     margin: 8px 5px;
     color: $gray-text-color;
   }
+}
+
+#close-review-btn {
+  align-self: center;
+  max-height: 3rem;
 }
 
 .createReview {

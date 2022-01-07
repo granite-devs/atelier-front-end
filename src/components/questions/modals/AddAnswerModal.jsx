@@ -3,10 +3,11 @@ import axios from 'axios';
 import API_KEY from '../../../config.js';
 
 
-const AddAnswerModal = (props) => {
+const AddAnswerModal = ({ toggleAnswerView, addAnswer }) => {
 
   return (
-    <div className='modal'>
+    <div
+      className='modal'>
       <div className='form'>
         <div className='field-item'>
           <h1>Submit Your Answer</h1>
@@ -59,21 +60,21 @@ const AddAnswerModal = (props) => {
               const name = document.querySelector('#answer-user-input').value;
               const email = document.querySelector('#answer-email-input').value;
 
-              const answer = {body, name, email}
+              const answer = { body, name, email }
 
               if (body && name && email) {
-                props.addAnswer(answer)
-               }
+                addAnswer(answer)
+              }
 
             }}
-            className='btn'
+            className='big-btn'
             type='button'>
-            SUBMIT
+            Submit
           </button>
           <button
-            className='btn'
+            className='big-btn'
             onClick={() => {
-              props.toggleAnswerView('main')
+              toggleAnswerView('main')
             }}> Close
           </button>
         </div>

@@ -208,11 +208,10 @@ class CreateReview extends React.Component {
     } = this.state;
     return (
       <div className='createReview'>
-        <button onClick={this.props.closeFn}>Close</button>
         <form onSubmit={this.onSubmit} onChange={this.onChange}>
           <h2>Write a new review</h2>
           <label>Overall rating: *</label>
-          <StarInput rating={rating} setRating={this.setRating}/>
+          <StarInput rating={rating} setRating={this.setRating} />
           <br></br>
           <label>Do you recommend this product? *</label>
           <div>
@@ -263,7 +262,9 @@ class CreateReview extends React.Component {
           <small>For authentication reasons, you will not be emailed</small>
           <br></br>
           <br></br>
-          <input type='submit'></input>
+          <input className='big-btn' type='submit'></input>
+          <button id='close-review-btn' className='big-btn' onClick={this.props.closeFn}>Close</button>
+
           <br></br>
           <br></br>
         </form>
