@@ -25,6 +25,7 @@ $accent-blue: rgb(27, 125, 182);
 body {
   font-family: $primary-font;
   margin: 0;
+  overflow-x: hidden;
 }
 
 .heavy {
@@ -37,11 +38,12 @@ body {
 
 #navBar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
-  height: 8vh;
+  height: 9vh;
   min-height: 50px;
+  max-height: 55px;
   background-color: $header-blue;
   position: fixed;
   z-index: 2;
@@ -100,10 +102,10 @@ h3 {
   border-radius: 50px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #48b2f4;
+  background: #1e8ed3;
 }
 ::-webkit-scrollbar-thumb:active {
-  background: #000000;
+  background: #1573ad;
 }
 ::-webkit-scrollbar-track {
   background: #707070;
@@ -114,7 +116,7 @@ h3 {
   background: #666666;
 }
 ::-webkit-scrollbar-track:active {
-  background: #333333;
+  background: #5c5c5c;
 }
 ::-webkit-scrollbar-corner {
   background: transparent;
@@ -129,7 +131,7 @@ h3 {
   width: 100%;
   height: 1.5rem;
   background-color: rgb(184, 184, 184);
-  margin-top: 4px;
+  padding-top: .1rem;
 
   b {
     font-size: 12px;
@@ -292,7 +294,7 @@ h3 {
 #productinfo {
   display: flex;
   flex-direction: column;
-  margin: 0 0 1rem 1rem;
+  margin: 0 0 1rem 2rem;
   width: 80%;
 }
 
@@ -346,7 +348,7 @@ b {
 
 #price {
   font-weight: 900;
-  font-size: 1.5em;
+  font-size: 1.2em;
   padding-top: 1rem;
 }
 
@@ -357,6 +359,7 @@ b {
 #eachSocialMedia {
   height: 25px;
   width: 25px;
+  padding: .5rem .2rem .2rem .2rem;
   cursor: pointer;
 }
 
@@ -364,7 +367,7 @@ b {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-left: 1rem;
+  margin-left: 2rem;
 }
 
 #styleSelection {
@@ -390,7 +393,7 @@ b {
   justify-content: center;
   width: 90%;
   height: 25%;
-  margin-left: 1rem;
+  margin-left: 2rem;
 }
 
 #sizeAndQuantitySelector {
@@ -398,6 +401,16 @@ b {
   width: 50%;
   flex-direction: row;
   height: 30%;
+  margin-bottom: .5rem;
+}
+
+#sizeAndQuantitySelector select {
+  width: 150px;
+  padding: .2rem;
+  margin-left: 1rem;
+  font-size: 16px;
+  border: 1px solid #CCC;
+  height: 2rem;
 }
 
 #size {
@@ -459,82 +472,6 @@ b {
 #addToCartModalnotSelected, #addToCartModalSelected {
   color: rgb(27, 125, 182);
   font-weight: bold;
-}
-
-@media (max-width: 850px) {
-
-  .components {
-    width: 85%;
-  }
-
-  #overviewTop {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .defaultView {
-    width: 100%;
-    padding-bottom: 1rem;
-  }
-
-  #productInformationSection {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #productinfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 45%;
-    height: 30%;
-    margin: 0;
-  }
-
-  #styleSelector {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    height: 40%;
-    align-items: center;
-  }
-
-  #addToCart {
-    height: 30%;
-    min-width: 10rem;
-    align-items: center;
-  }
-
-  #styleTop, #styleBottom {
-    width: 15.5rem;
-  }
-
-  .reviews-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem 2rem 1rem 2rem;
-  }
-
-  /*The following 3 need to be fixed.. they don't seem to be working */
-  .reviews-left {
-    width: auto;
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
-
-  .reviewsBreakdown {
-    flex-direction: row;
-  }
-
-  .reviews-right {
-    width: auto;
-  }
 }
 
 /* Overview ---------------------(end) */
@@ -613,7 +550,7 @@ b {
 
   width: 11rem;
   height: 17rem;
-  overflow-y: hidden;
+  overflow: hidden;
 
   margin-left: 1rem;
 
@@ -709,7 +646,8 @@ b {
 .modal-show {
   width: 40vw;
   min-width: 20rem;
-  left: 25vw;
+  max-width: 26rem;
+  left: 25%;
   top: .3rem;
   height: 14rem;
 
@@ -1107,6 +1045,15 @@ b {
     margin-left: 1rem;
   }
 
+  .moreReviewsBtn {
+    width: 120px;
+    height: 40px;
+  }
+
+  .addReviewBtn {
+    width: 120px;
+    height: 40px;
+  }
 }
 
 .reviewsHeader {
@@ -1125,7 +1072,6 @@ b {
 }
 
 .reviewsListContainer {
-
   .reviewsList {
     min-height: 100px;
     max-height: 80vh;
@@ -1141,15 +1087,15 @@ b {
 
 .reviewButtons {
   display: flex;
-  justify-content: center;
-  align-items: space-around;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .reviewTile {
-  margin: 16px auto;
+  margin: 16px;
   padding: 10px 12px;
   width: 80%;
-  min-width: 30.5em;
+  min-width: 15.5em;
   border: 1px solid black;
   border-radius: 10px;
   background-color: whitesmoke;
@@ -1269,6 +1215,7 @@ b {
   margin: 50px;
   padding: 0px 50px;
   overflow-y: scroll;
+  border-radius: 10px;
 
   button {
     margin-top: 20px;
@@ -1337,3 +1284,289 @@ b {
   }
 }
 /* Shared ---------------------(end) */
+
+
+/* Breakpoints ---------------------(start) */
+
+@media (max-width: 980px) {
+
+  .components {
+    width: 85%;
+  }
+
+  #overviewTop {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .defaultView {
+    width: 100%;
+    padding-bottom: 1rem;
+    margin-left: 1rem;
+  }
+
+  #productInformationSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #productinfo, #styleSelector, #addToCart  {
+    height: 10rem;
+    padding-left: 1rem;
+  }
+
+  #addToCart {
+    min-width: 10rem;
+  }
+
+  #styleTop, #styleBottom {
+    width: 15.5rem;
+  }
+
+  .reviews-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem 1rem 2rem;
+  }
+  .reviews-left {
+    width: auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .reviewsBreakdown {
+    flex-direction: row;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid $accent-blue;
+  }
+
+  .reviews-right {
+    width: auto;
+  }
+
+  .reviewsList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 840px) {
+  .eachStyleSelection {
+    padding: .2rem;
+    margin: 0;
+    height: 30px;
+    width: 30px;
+  }
+
+  #productName {
+    font-size: 1.2rem;
+  }
+  #price {
+    font-size: 1rem;
+  }
+
+  #productinfo, #styleSelector, #addToCart {
+    margin: 0;
+  }
+
+  #styleSelector {
+    width: 60%;
+  }
+
+  #addToCartButton {
+    height: 2.2rem;
+  }
+
+  #overviewStar {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    width: 100%;
+  }
+
+  #readReview {
+    margin: 0;
+  }
+
+  .reviewsListContainer {
+    width: 95%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .reviewTile {
+    width: 85%;
+  }
+
+  #sizeAndQuantitySelector select {
+    padding: .1rem;
+    margin-left: 1rem;
+    font-size: 16px;
+    border: 1px solid #CCC;
+    height: 1.5rem;
+  }
+
+  #size {
+    margin: 0;
+  }
+
+}
+
+@media (max-width: 750px) {
+
+  #overviewTop {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .defaultView {
+    width: 90%;
+  }
+
+  #productInformationSection {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: auto;
+  }
+
+  #productinfo {
+    align-items: center;
+    width: 50%;
+    min-width: 8rem;
+    height: 80%;
+    margin: 0;
+  }
+
+  #styleSelector {
+    width: 80%;
+    min-height: 10rem;
+    align-items: center;
+    padding-bottom: 1rem;
+  }
+
+  #styleSelection {
+    align-items: center;
+    margin-left: 10%;
+    height: 4rem;
+  }
+
+  #styleTitle {
+    font-size: 1em;
+    margin-left: -10px;
+  }
+
+  .eachStyleSelection {
+    height: 50px;
+    width: 50px;
+    padding: .5rem;
+  }
+
+  #productName {
+    font-size: 2em;
+  }
+
+  #price {
+    font-size: 1.5em;
+    width: 100%;
+  }
+
+  #addToCartButton {
+    height: 2.2rem;
+  }
+
+  #overviewStar {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    width: 100%;
+  }
+
+  #readReview {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  #addToCart {
+    height: 60%;
+    min-width: 10rem;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  #addToCartButton {
+    height: 3rem;
+    margin: 1rem;
+  }
+
+  #styleTop, #styleBottom {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .components {
+    width: 85%;
+  }
+
+  .defaultView {
+    width: 90%;
+    padding-bottom: 1rem;
+    margin: 0;
+  }
+
+  #productInformationSection {
+    margin-top: 2rem;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .reviews-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem 1rem 2rem;
+  }
+  .reviews-left {
+    width: auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .reviewsBreakdown {
+    flex-direction: row;
+  }
+
+  .reviews-right {
+    width: auto;
+  }
+
+  .reviewsList {
+    overflow-x: hidden;
+  }
+
+  .question-container {
+    overflow-x: hidden;
+  }
+
+  .question-container::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+
+}
