@@ -298,7 +298,7 @@ h3 {
 #productinfo {
   display: flex;
   flex-direction: column;
-  margin: 0 0 1rem 1rem;
+  margin: 0 0 1rem 2rem;
   width: 80%;
 }
 
@@ -370,7 +370,7 @@ b {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-left: 1rem;
+  margin-left: 2rem;
 }
 
 #styleSelection {
@@ -396,7 +396,7 @@ b {
   justify-content: center;
   width: 90%;
   height: 25%;
-  margin-left: 1rem;
+  margin-left: 2rem;
 }
 
 #sizeAndQuantitySelector {
@@ -1342,7 +1342,7 @@ b {
 
 /* Breakpoints ---------------------(start) */
 
-@media (max-width: 979px) {
+@media (max-width: 980px) {
 
   .components {
     width: 85%;
