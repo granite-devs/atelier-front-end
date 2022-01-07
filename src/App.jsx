@@ -144,7 +144,7 @@ class App extends React.Component {
         {window.localStorage.length > 0 && (
           <div>
             <div id='navBar'>
-              <img className='logo' src='./images/logo-small-white.png'></img>
+              <img className='logo' src='./images/logo-small-white-shadow.png'></img>
             </div>
             <div id='componentWrapper'>
               <div className='components'>
