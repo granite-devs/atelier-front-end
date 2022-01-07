@@ -262,6 +262,7 @@ h3 {
 }
 
 #main {
+  width: 300px;
   height: 320px;
   cursor: zoom-in;
 }
@@ -399,18 +400,20 @@ b {
   margin-left: 2rem;
 }
 
+#addToCartButton {
+  margin-top: 0.2rem;
+}
+
 #sizeAndQuantitySelector {
   display: flex;
   width: 50%;
   flex-direction: row;
   height: 30%;
-  margin-bottom: .5rem;
 }
 
 #sizeAndQuantitySelector select {
   width: 150px;
   padding: .2rem;
-  margin-left: 1rem;
   font-size: 16px;
   border: 1px solid #CCC;
   height: 2rem;
@@ -1175,6 +1178,9 @@ b {
 }
 
 .reviewsBreakdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .avgRating {
     font-size: 40px;
@@ -1379,7 +1385,6 @@ b {
   }
 
   .reviewsBreakdown {
-    display: flex;
     flex-direction: row;
     align-items: flex-start;
     padding-bottom: 1rem;
@@ -1396,6 +1401,7 @@ b {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 }
 
@@ -1496,13 +1502,11 @@ b {
 
   #styleSelection {
     align-items: center;
-    margin-left: 10%;
     height: 4rem;
   }
 
   #styleTitle {
     font-size: 1em;
-    margin-left: -10px;
   }
 
   .eachStyleSelection {
@@ -1516,6 +1520,8 @@ b {
   }
 
   #price {
+    display: flex;
+    justify-content: center;
     font-size: 1.5em;
     width: 100%;
   }
@@ -1527,8 +1533,12 @@ b {
   #overviewStar {
     display: flex;
     flex-direction: column;
-    align-items: baseline;
+    align-items: center;
     width: 100%;
+
+    #starRating {
+      margin-bottom: 5px;;
+    }
   }
 
   #readReview {
@@ -1549,11 +1559,9 @@ b {
   }
 
   #styleTop, #styleBottom {
+    display: flex;
+    justify-content: center;
     width: 100%;
-  }
-
-  .reviewsBreakdown {
-    display: block;
   }
 }
 
@@ -1591,6 +1599,10 @@ b {
     width: auto;
     flex-direction: row;
     flex-wrap: nowrap;
+  }
+
+  .reviewsBreakdown {
+    flex-direction: row;
   }
 
   .reviews-right {

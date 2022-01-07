@@ -63,6 +63,7 @@ const StyleSelector = ({state, updateState}) => {
               if (index < 4) {
                 return <img
                   onClick={updateCurrentStyle}
+                  alt='topStyle'
                   className='eachStyleSelection'
                   key={index}
                   id={`style${index}`}
@@ -76,6 +77,7 @@ const StyleSelector = ({state, updateState}) => {
               if (index > 3 && index < 8) {
                 return <img
                   onClick={updateCurrentStyle}
+                  alt='bottomStyle'
                   className='eachStyleSelection'
                   key={index}
                   id={`style${index}`}

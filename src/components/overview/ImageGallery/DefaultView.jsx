@@ -10,15 +10,16 @@ const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handl
           return <img
             id={index}
             key={index}
+            alt='eachStyleImage'
             className='eachStyleImage'
             onClick={updateMainImage}
             src={element.thumbnail_url}/>;
         })}
       </div>;
     if (state.mainImage === '') {
-      displayMainImage = <img id ='main' src ={state.currentStyle.photos[0].thumbnail_url}/>;
+      displayMainImage = <img id ='main' alt='mainImage' src ={state.currentStyle.photos[0].thumbnail_url}/>;
     } else {
-      displayMainImage = <img id ='main' src ={state.mainImage}/>;
+      displayMainImage = <img id ='main' alt='mainImage' src ={state.mainImage}/>;
     }
   }
 
@@ -28,6 +29,7 @@ const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handl
         {displayStyleImages}
         <div className='mainImage' id='mainImage'>
           <img onClick={handleLeftArrow}
+            alt='leftArrow'
             className='btnFloating'
             id='left'
             src ='https://i.ibb.co/r0GN44X/image.png'>
@@ -36,6 +38,7 @@ const DefaultView = ({state, updateState, updateMainImage, handleToExpand, handl
             {displayMainImage}
           </div>
           <img onClick={handleRightArrow}
+            alt='rightArrow'
             className='btnFloating'
             id='right'
             src ='https://i.ibb.co/k3GTgnr/arrow-icon-1177.png'>
