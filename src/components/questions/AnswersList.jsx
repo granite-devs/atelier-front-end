@@ -42,7 +42,7 @@ const AnswersList = (props) => {
               loadMoreAnswers(questionId);
             }}
           >
-            LOAD MORE ANSWERS
+            More Answers
           </a>
         )
       }

@@ -220,11 +220,11 @@ class Reviews extends React.Component {
           />
           <div className='reviewButtons'>
             {moreToLoad ? <button
-              className='moreReviewsBtn'
+              className='big-btn'
               onClick={() => this.loadMoreReviews()}
             >More Reviews</button> : null}
             <button
-              className='addReviewBtn'
+              className='big-btn'
               onClick={() => this.setState({creatingReview: true})}
             >Add Review</button>
             {createReviewModal}
