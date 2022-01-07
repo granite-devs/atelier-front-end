@@ -150,13 +150,15 @@ class RelatedProductsList extends React.Component {
         <div id='related-list'>
           <div className='related-arrow'>
             <img className={showLeftArrow ? 'related-left-arrow' : 'related-left-arrow hide'}
-              src='https://i.ibb.co/r0GN44X/image.png'
+              src='./images/leftarrow.png'
+              alt='Left facing arrow'
               onClick={() => { this.handleLeftArrowClick() }}></img>
           </div>
           {productCard}
           <div className='related-arrow'>
             <img className={showRightArrow ? 'related-right-arrow' : 'related-right-arrow hide'}
-              src='https://i.ibb.co/k3GTgnr/arrow-icon-1177.png'
+              src='./images/rightarrow.png'
+              alt='Right facing arrow'
               onClick={() => { this.handleRightArrowClick() }}></img>
           </div>
         </div>

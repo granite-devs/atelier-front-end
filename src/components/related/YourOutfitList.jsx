@@ -131,13 +131,16 @@ class YourOutfitList extends React.Component {
         <div className='related-arrow'>
           <img className={showLeftArrow ? 'related-left-arrow' : 'related-left-arrow hide'}
               src='./images/leftarrow.png'
+              alt='Left facing arrow'
               onClick={() => { this.handleLeftArrowClick() }}></img>
           </div>
 
           <div className='product-card-list'>
           <div className='product-card add-outfit-card'
             onClick={() => { this.handleAddToOutfitClick(productId) }}>
-            <img className='add-outfit-icon' src='./images/plussign.png'></img>
+            <img className='add-outfit-icon'
+              src='./images/plussign.png'
+              alt='Plus sign icon'></img>
             <span className='add-outfit-text'>Add to Outfit</span>
           </div>
           <div className={showMessage ? 'outfit-message' : 'outfit-message-hidden'}>
@@ -159,6 +162,7 @@ class YourOutfitList extends React.Component {
           <div className='related-arrow'>
             <img className={showRightArrow ? 'related-right-arrow' : 'related-right-arrow hide'}
               src='./images/rightarrow.png'
+              alt='Right facing arrow'
               onClick={() => { this.handleRightArrowClick() }}></img>
           </div>
         </div>

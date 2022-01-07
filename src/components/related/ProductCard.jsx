@@ -176,6 +176,7 @@ class ProductCard extends React.Component {
             <ActionButton actionBtnClick={this.actionBtnClick}
               currentList={currentList}/>
               <img className='card-img' src={primaryImg}
+                alt={`Product thumbnail image for ${name}`}
                 onClick={() => { updateAppProductId(productCardId); }}></img>
               <div className='card-info' onClick={() => { updateAppProductId(productCardId); }}>
                 <p className='card-category'>{category}</p>
