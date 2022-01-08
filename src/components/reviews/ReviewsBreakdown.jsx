@@ -78,36 +78,36 @@ class ReviewsBreakdown extends React.Component {
       return (
         <div className='reviewsBreakdown'>
           <div className='reviewsStars'>
-          <span className='avgRating'>{avgRating}</span>
-          <StarRating rating={avgRating} />
-          <br></br>
-          {filteredRatingsArray.length > 0 ? (
-            <>
-              <span>Filters: </span>
-              <span className='filterSpan' onClick={() => this.clearAllFilters()}>
-                Clear all
+            <span className='avgRating'>{avgRating}</span>
+            <StarRating rating={avgRating} />
+            <br></br>
+            {filteredRatingsArray.length > 0 ? (
+              <>
+                <span>Filters: </span>
+                <span className='filterSpan' onClick={() => this.clearAllFilters()}>
+                  Clear all
+                </span>
+                <br></br>
+              </>
+            ) : null}
+            {filteredRatingsArray.map((stars) => (
+              <span
+                key={stars}
+                className='filterSpan'
+                onClick={() => this.toggleRatingFilter(stars)}
+              >
+                {stars} Stars
               </span>
-              <br></br>
-            </>
-          ) : null}
-          {filteredRatingsArray.map((stars) => (
-            <span
-              key={stars}
-              className='filterSpan'
-              onClick={() => this.toggleRatingFilter(stars)}
-            >
-              {stars} Stars
-            </span>
-          ))}
-          {ratingsArray.map((stars, i) => (
-            <BreakdownBar
-              key={i}
-              stars={stars}
-              reviews={ratings[stars]}
-              total={reviewCount}
-              onClick={this.toggleRatingFilter}
-            />
-          ))}
+            ))}
+            {ratingsArray.map((stars, i) => (
+              <BreakdownBar
+                key={i}
+                stars={stars}
+                reviews={ratings[stars]}
+                total={reviewCount}
+                onClick={this.toggleRatingFilter}
+              />
+            ))}
           </div>
           <div className='characteristicsContainer'>
             {characteristicsNames.map((name, i) => (
