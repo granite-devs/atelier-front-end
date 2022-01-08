@@ -72,6 +72,10 @@ To submit a question a user has to input a name, email, and a question body befo
 - Answering a question
 Answering a question should be the same as posting but with the option to upload photos as well.
 
+## 4. Ratings & Reviews
+
+[High level overview here]
+
 # Technologies
 - Built in Node.js using React
 - Styled with Sass
