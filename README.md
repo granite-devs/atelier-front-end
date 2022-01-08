@@ -15,8 +15,12 @@ The main focus of this project will encompass the details page which will be com
 </table>
 
 ## Module Detail
+### 1. Overview Detail
+<img src="https://media3.giphy.com/media/GiDnUj6hmrDQTAM3jJ/giphy.gif?cid=790b7611eb59f8a899b1f21438ce62ea90bbdb59589a1e32&rid=giphy.gif&ct=g" width="650"/>
 
 ### 2. Related Product
+
+![related preview demo gif]('./dist/images/RelatedPreview.gif)
 
 The related items section displays two lists of product cards. When the product cards do not fit on the screen, the list becomes a carousel that the user can scroll through to view all the images.
 
@@ -28,7 +32,6 @@ Each product information card should display information about the product using
 
 In the Related Items List, the action button opens a compare modal window to compare the current page's item to the product card that was clicked. In the Your Outfit List, the action button removes the card from the user's list.
 
-![related preview demo gif]('./dist/images/RelatedPreview.gif)
 ### 3. Questions &amp; Answers
 Questions and answers will all allow asking and answering of questions for the product selected.  The functionality contained could be describe in four components.
 - View questions
