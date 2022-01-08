@@ -31,14 +31,22 @@ The main focus of this project will encompass the product detail page which will
 [jn]:https://github.com/Heine574
 
 </div>
-
-## Team Granite
+- Our project management / ticketing system :
+<a href='https://trello.com/b/UydJTCdd/atelier-front-end'>https://trello.com/b/UydJTCdd/atelier-front-end</a>
 
 # Module Detail
 
-## 1. Overview Detail
+## 1. Overview (Product Detail)
 
 ![Overview module animated image demo](./admin/overview-demo.webp)
+
+The overview module is to guide the customer through selecting a specific style and size to add to their cart. As such, portions of the Overview module, such as the image gallery and cart selection, will be specific to a SKU(Stock keeping unit) chosen as opposed to the overarching product.
+
+The functionality contained within this module can be divided into several pieces:
+  1. Image gallery
+  2. Product information
+  3. Style selector
+  4. Add to cart
 
 ## 2. Related Product
 
