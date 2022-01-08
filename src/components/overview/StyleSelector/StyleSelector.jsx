@@ -16,11 +16,9 @@ const StyleSelector = ({state, updateState}) => {
     if (document.getElementById('style0') !== null && state.currentStyle.photos[0] !== undefined) {
       for (let i = 0; i < 8; i++) {
         if (document.getElementById(`style${i}`)) {
-          // document.getElementById(`style${i}`).style.border = 'none'; //border makes the icon moves
           document.getElementById(`style${i}`).style.opacity = '1';
         }
       }
-      // document.getElementById(`style${selectedStyleIndex}`).style.borderStyle = 'outset';
       document.getElementById(`style${selectedStyleIndex}`).style.opacity = '0.3';
     }
   }, [state]);
