@@ -1,26 +1,48 @@
 # atelier-front-end
-## Project Overview
-An outdated client-facing retail web-portal has become significantly outdated and it has been hurting sales numbers. The task is to redesign the site and refresh its features.
-## Scope
-The main focus of this project will encompass the details page which will be comprimises of four different modules:
 
-<table align="center">
-    <th colspan="4">Team Granite's Front-End Capstone Members</th>
-  <tr>
-      <td align="center">1. Overview Detail<a href="https://github.com/lbc1013"><br/><sub><b>[ByungChan Lee]</b></sub></a<br /></td>
-      <td align="center">2. Related Products<a href="https://github.com/anerolabs"><br/><sub><b>[Andrew Carnero]</b></sub></a<br /></td>
-      <td align="center">3. Questions & Answers<a href="https://github.com/brynrmrzz"><br/><sub><b>[Bryan Ramirez]</b></sub></a<br /></td>
-      <td align="center">4. Ratings & Reviews<a href="https://github.com/Heine574"><br/><sub><b>[Johannes Niemelä]</b></sub></a<br /></td>
-  </tr>
-</table>
+![Atelier-Logo](./admin/logos/logo-color-bg.png)
 
-## Module Detail
-### 1. Overview Detail
-<img src="https://media3.giphy.com/media/GiDnUj6hmrDQTAM3jJ/giphy.gif?cid=790b7611eb59f8a899b1f21438ce62ea90bbdb59589a1e32&rid=giphy.gif&ct=g" width="650"/>
+# Project Overview
+A client-facing retail web-portal has become significantly outdated and it has been hurting sales numbers. The task is to redesign the site and refresh its features.
 
-### 2. Related Product
+<div align="center">
 
-![related preview demo gif]('./dist/images/RelatedPreview.gif)
+[Scope](#scope) |
+[Module Detail](#module-detail) |
+[Technologies](#technologies) |
+[Getting Started](#getting-started)
+
+</div>
+
+# Scope
+The main focus of this project will encompass the product detail page which will be comprimised of four different modules.
+
+<div align="center">
+
+### **Team Granite's Front-End Capstone Members**
+
+|Overview Detail | Related Products | Questions & Answers | Ratings & Reviews |
+| ------------- | ---------------- | ------------------- | --------- |
+|[ByungChan Lee][bl] | [Andrew Carnero][ac] | [Bryan Ramirez][br] | [Johannes Niemelä][jn] |
+
+[bl]:https://github.com/lbc1013
+[ac]:https://github.com/anerolabs
+[br]:https://github.com/brynrmrzz
+[jn]:https://github.com/Heine574
+
+</div>
+
+## Team Granite
+
+# Module Detail
+
+## 1. Overview Detail
+
+![Overview module animated image demo](./admin/overview-demo.webp)
+
+## 2. Related Product
+
+![Related module preview animated image demo](./admin/related-demo.gif)
 
 The related items section displays two lists of product cards. When the product cards do not fit on the screen, the list becomes a carousel that the user can scroll through to view all the images.
 
@@ -32,7 +54,12 @@ Each product information card should display information about the product using
 
 In the Related Items List, the action button opens a compare modal window to compare the current page's item to the product card that was clicked. In the Your Outfit List, the action button removes the card from the user's list.
 
-### 3. Questions &amp; Answers
+## 3. Questions &amp; Answers
+
+![Questions module preview animated image demo](./admin/questions-demo-1.gif)
+
+![Questions module preview animated image demo 2](./admin/questions-demo-2.gif)
+
 Questions and answers will all allow asking and answering of questions for the product selected.  The functionality contained could be describe in four components.
 - View questions
 The view questions component will have a questions list where the questions will be visible in a collapsing accordian style. They will each have their own respective answers list. Each answer should have a answerer's name, the date answers and any attached photos. It should also have a more questions button that will display all the available questions and an add answer button that will an answer to the list. Each question should have an option to vote whether or not the question was helpful.
@@ -43,15 +70,24 @@ To submit a question a user has to input a name, email, and a question body befo
 - Answering a question
 Answering a question should be the same as posting but with the option to upload photos as well.
 
-## Technologies
-- Built using React with Sass
+## 4. Ratings & Reviews
 
-## Getting Started
-### - To run app on local machine:
+[High level overview here]
+
+# Technologies
+- Built in Node.js using React
+- Styled with Sass
+- Compiled using Webpack and Babel
+- Tested using Jest and enzyme
+
+# Getting Started
+To run the app on your local machine:
 
 1. Open terminal on local machine.
 2. Run `git clone git@github.com:granite-devs/atelier-front-end.git`.
-3. Change `src/config.ex.js` file to `src/config.js`.
-4. Assign 'your_key' to your auth token.
-5. Install dependencies `npm install`.
-6. Start the server `npm run start`.
+3. Rename `src/config.ex.js` file to `src/config.js`.
+4. Assign 'your_key' to be your own github [Personal Auth Token][token].
+5. Install dependencies: `npm install`.
+6. Start the server: `npm start`.
+
+[token]: https://github.com/settings/tokens
