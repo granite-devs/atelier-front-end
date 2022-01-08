@@ -34,8 +34,6 @@ The main focus of this project will encompass the product detail page which will
 
 ## Team Granite
 
-
-
 # Module Detail
 
 ## 1. Overview Detail
