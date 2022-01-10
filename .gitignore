@@ -1,0 +1,4 @@
+node_modules
+dist/bundle.js
+src/config.js
+package-lock.json

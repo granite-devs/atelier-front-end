@@ -1,0 +1,70 @@
+<mxfile host="65bd71144e">
+    <diagram id="wm55HPN1U-g9LiwkY5EH" name="Page-1">
+        <mxGraphModel dx="1222" dy="755" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="Product ID&lt;br&gt;questionsList&lt;br&gt;outfitList&lt;br&gt;productList" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="80" width="90" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Overview" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="430" y="310" width="135" height="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="App / Details Page" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="780" y="120" width="135" height="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Ratings" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="670" y="310" width="135" height="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Questions" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="890" y="310" width="135" height="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.013;exitY=0.615;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="4" target="3" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="640" y="400" as="sourcePoint"/>
+                        <mxPoint x="504.6368600150754" y="279.1847184845476" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="" style="endArrow=classic;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="4" target="5" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="865.5" y="235" as="sourcePoint"/>
+                        <mxPoint x="850" y="409" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="9" value="" style="endArrow=classic;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=1;exitDx=0;exitDy=0;" parent="1" source="4" target="6" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="879" y="251" as="sourcePoint"/>
+                        <mxPoint x="856" y="580" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" value="Related" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="1145" y="310" width="135" height="135" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="" style="endArrow=classic;html=1;exitX=0.991;exitY=0.573;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="4" target="10" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="864.5" y="565" as="sourcePoint"/>
+                        <mxPoint x="864.5" y="590" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="13" value="Product ID" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="430" y="280" width="110" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="Product ID&lt;br&gt;reviewList" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="280" width="110" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="productList&lt;br&gt;outfitList" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="1080" y="280" width="110" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="Will be able to change the current product_id" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#2D7600;fillColor=#60a917;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="1100" y="445" width="250" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="Product_ID&lt;br&gt;questionsList" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="925" y="280" width="110" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="- On mounting our app should load&amp;nbsp; a relevant product list&lt;br&gt;- Also request current product information&lt;br&gt;- Set state to the retrieved list, and information" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#2D7600;fillColor=#60a917;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="80" width="320" height="50" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
