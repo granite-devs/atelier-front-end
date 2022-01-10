@@ -16,9 +16,7 @@ const BreakdownBar = (props) => {
           </linearGradient>
         </defs>
         <rect x="0" y="0" rx="5" ry="5" width="200" height="10" style={{
-          stroke: 'gray',
           fill: `url(#lineGrad${fraction})`,
-          strokeWidth: 0,
         }} />
       </svg>
       <span className='rightSpan'>{reviews}</span>

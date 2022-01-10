@@ -11,7 +11,6 @@ const CharacteristicBar = (props) => {
       <svg width="200" height="20">
         <rect x="8" y="0" rx="5" ry="5" width="184" height="10" style={{
           fill: 'lightgray',
-          strokeWidth: 0,
         }} />
         <polygon
           points={`
@@ -21,7 +20,6 @@ const CharacteristicBar = (props) => {
           `}
           style={{
             fill: 'gray',
-            strokeWidth: 0,
             fillRule: 'evenodd'
           }} />
       </svg>

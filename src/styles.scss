@@ -10,6 +10,7 @@ $tinyfont: .75rem;
 $smallfont: .9rem;
 $largefont: 1.2rem;
 $gray-text-color: rgb(69, 69, 69);
+$error-text-color: rgb(226, 67, 27);
 $container-bg: whitesmoke;
 $related-gradient: linear-gradient(rgb(245, 245, 245), rgb(224, 224, 224));
 $related-shadow: drop-shadow(0 0 0.2rem rgba(0, 0, 0, 0.26));
@@ -968,7 +969,6 @@ b {
 /* Question Modals */
 
 .modal {
-  z-index: 1;
   overflow-y: scroll;
   display: flex;
   position: fixed;
@@ -1264,14 +1264,18 @@ b {
 
 
 
-
-
 .createReview {
   background-color: $container-bg;
   margin: 50px;
   padding: 0px 50px;
   overflow-y: scroll;
   border-radius: 10px;
+
+  .formError {
+    font-size: $smallfont;
+    color: $error-text-color;
+    margin-bottom: 0;
+  }
 
   button {
     margin-top: 20px;

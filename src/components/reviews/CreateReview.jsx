@@ -15,7 +15,8 @@ class CreateReview extends React.Component {
       body: null,
       photoLinks: [],
       username: null,
-      email: null
+      email: null,
+      validation: {}
     };
     this.setRating = this.setRating.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -78,12 +79,15 @@ class CreateReview extends React.Component {
       fails.body = 'Please write a review body';
       fails.failed = true;
     }
-    if (username === null) {
+    if (!username) {
       fails.username = 'Please enter a name';
       fails.failed = true;
     }
-    if (email === null) {
+    if (!email) {
       fails.email = 'Please enter an email';
+      fails.failed = true;
+    } else if (email.search('@') === -1 || email.search('.') === -1) {
+      fails.email = 'Please enter a valid email';
       fails.failed = true;
     }
     return fails;
@@ -109,7 +113,8 @@ class CreateReview extends React.Component {
 
     const validation = this.validateState();
     if (validation.failed) {
-
+      console.error('Form validation failed');
+      this.setState({ validation });
     } else {
       const characteristicsData = {};
       for (let name in characteristicsObj) {
@@ -147,7 +152,7 @@ class CreateReview extends React.Component {
   }
 
   onChange({ target: { form } }) {
-    const rating = form[0].value;
+    const rating = parseInt(form[0].value);
     const recommended = form.yes.checked;
 
     const { characteristics: characteristicsObj } = this.props.reviewsMetaData;
@@ -204,7 +209,8 @@ class CreateReview extends React.Component {
       recommended,
       characteristics,
       imageModalOpen,
-      photoLinks
+      photoLinks,
+      validation
     } = this.state;
     return (
       <div className='createReview'>
@@ -212,6 +218,7 @@ class CreateReview extends React.Component {
           <h2>Write a new review</h2>
           <label>Overall rating: *</label>
           <StarInput rating={rating} setRating={this.setRating} />
+          {validation.rating ? <p className='formError'>{validation.rating}</p> : null}
           <br></br>
           <label>Do you recommend this product? *</label>
           <div>
@@ -220,30 +227,36 @@ class CreateReview extends React.Component {
             <label>No</label>
             <input type="radio" id="no" name="recommend" value="no"></input><br></br>
           </div>
+          {validation.recommended ? <p className='formError'>{validation.recommended}</p> : null}
           <br></br>
           <label>Characteristics: *</label>
           {characteristicsNames.map((name, i) => (
-            <table key={i}>
-              <caption><b>{name}</b> - {characteristicsText[name][characteristics[name] - 1]}</caption>
-              <tbody>
-                <tr>
-                  <td><span>{characteristicsText[name][0]}</span></td>
-                  <td><input id={`${name}1`} type="radio" name={`${name}`} value="1"></input><br></br></td>
-                  <td><input id={`${name}2`} type="radio" name={`${name}`} value="2"></input><br></br></td>
-                  <td><input id={`${name}3`} type="radio" name={`${name}`} value="3"></input><br></br></td>
-                  <td><input id={`${name}4`} type="radio" name={`${name}`} value="4"></input><br></br></td>
-                  <td><input id={`${name}5`} type="radio" name={`${name}`} value="5"></input><br></br></td>
-                  <td><span>{characteristicsText[name][4]}</span></td>
-                </tr>
-              </tbody>
-            </table>
+            <div key={i}>
+              <table>
+                <caption><b>{name}</b> - {characteristicsText[name][characteristics[name] - 1]}</caption>
+                <tbody>
+                  <tr>
+                    <td><span>{characteristicsText[name][0]}</span></td>
+                    <td><input id={`${name}1`} type="radio" name={`${name}`} value="1"></input><br></br></td>
+                    <td><input id={`${name}2`} type="radio" name={`${name}`} value="2"></input><br></br></td>
+                    <td><input id={`${name}3`} type="radio" name={`${name}`} value="3"></input><br></br></td>
+                    <td><input id={`${name}4`} type="radio" name={`${name}`} value="4"></input><br></br></td>
+                    <td><input id={`${name}5`} type="radio" name={`${name}`} value="5"></input><br></br></td>
+                    <td><span>{characteristicsText[name][4]}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              {validation[name] ? <p className='formError'>{validation[name]}</p> : null}
+            </div>
           ))}
+          <br></br>
           <label>Review summary:</label>
           <input type='text' id='summary'></input>
           <br></br>
           <label>Review body: *</label>
           <br></br>
           <textarea id='body' maxLength={1000}></textarea>
+          {validation.body ? <p className='formError'>{validation.body}</p> : null}
           <br></br>
           <AttatchImage
             maxImages={5}
@@ -255,12 +268,14 @@ class CreateReview extends React.Component {
           <br></br>
           <small>For privacy reasons, do not use your full name or email address</small>
           <br></br>
+          {validation.username ? <p className='formError'>{validation.username}</p> : null}
           <br></br>
           <label>Your email: *</label>
           <input type='email' id='email' placeholder='Example:  jackson11@email.com' maxLength={60}></input>
           <br></br>
           <small>For authentication reasons, you will not be emailed</small>
           <br></br>
+          {validation.email ? <p className='formError'>{validation.email}</p> : null}
           <br></br>
           <input className='big-btn' type='submit'></input>
           <button id='close-review-btn' className='big-btn' onClick={this.props.closeFn}>Close</button>
