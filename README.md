@@ -31,8 +31,7 @@ The main focus of this project will encompass the product detail page which will
 [jn]:https://github.com/Heine574
 
 </div>
-- Our project management / ticketing system :
-<a href='https://trello.com/b/UydJTCdd/atelier-front-end'>https://trello.com/b/UydJTCdd/atelier-front-end</a>
+###### *Our project management / ticketing system : <a href='https://trello.com/b/UydJTCdd/atelier-front-end'>https://trello.com/b/UydJTCdd/atelier-front-end</a>
 
 # Module Detail
 
